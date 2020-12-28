@@ -5,6 +5,7 @@ type Country struct {
 	ID           uint   `json:"id" gorm:"primary_key"`
 	Name         string `json:"name" gorm:"not null"`
 	Abbreviation string `json:"abbreviation" gorm:"not null"`
+	Creation     string `json:"creation"`
 }
 
 // CreateCountryInput type for country POST with automatic ID.

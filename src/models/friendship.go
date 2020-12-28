@@ -1,7 +1,7 @@
 package models
 
-// WordCategory is a category in which a set of words fall into.
-type WordCategory struct {
+// Friendship represents the type of friendship two users have.
+type Friendship struct {
 	ID       uint   `json:"id" gorm:"primary_key"`
 	Name     string `json:"name" gorm:"not null"`
 	Creation string `json:"creation"`

@@ -7,7 +7,7 @@ import (
 // DB is a gorm database
 var DB *gorm.DB
 
-// ConnectDataBase Initializes a conection to the desired DB through gorm and migrates the data.
+// ConnectDatabase Initializes a conection to the desired DB through gorm and migrates the data.
 func ConnectDatabase() {
 	database, err := gorm.Open("mysql", "signaMundi.db")
 

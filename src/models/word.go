@@ -1,11 +1,13 @@
 package models
 
-// Word represents an atomic unit of a spoken language.
+// Word represents a coherent spoken language set of words.
 type Word struct {
-	ID           uint   `json:"id" gorm:"primary_key"`
-	Text         string `json:"name" gorm:"not null"`
-	Media        string `json:"media"`
-	Definition   string `json:"definition"`
-	Context      string `json:"context"`
-	WordCategory uint   `json:"wordCategoryID" gorm:"not null"`
+	ID             uint   `json:"id" gorm:"primary_key"`
+	LocaleID       uint   `json:"locale_ID" gorm:"not null"`
+	MediaID        uint   `json:"media_ID" gorm:"not null"`
+	WordCategoryID uint   `json:"word_category_ID" gorm:"not null"`
+	Text           string `json:"name" gorm:"not null"`
+	Context        string `json:"context"`
+	Definition     string `json:"definition"`
+	Creation       string `json:"creation"`
 }
