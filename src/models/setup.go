@@ -28,6 +28,7 @@ func ConnectDatabase() {
 		&Friendship{},
 		// Related objects
 		&Region{},
+		&User{},
 	)
 
 	DB = database
