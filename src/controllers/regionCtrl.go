@@ -47,8 +47,8 @@ func FindRegion(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": region})
 }
 
-// UpdateRegion updates a region
-func UpdateRegion(c *gin.Context) {
+// PatchRegion updates a region
+func PatchRegion(c *gin.Context) {
 
 	// Get model if exist
 	var region models.Region

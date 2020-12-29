@@ -45,8 +45,8 @@ func FindWordCategory(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": wordCategory})
 }
 
-// UpdateWordCategory updates a wordCategory
-func UpdateWordCategory(c *gin.Context) {
+// PatchWordCategory updates a wordCategory
+func PatchWordCategory(c *gin.Context) {
 	// Get model if exist
 	var wordCategory models.WordCategory
 	if err := models.DB.Where("id = ?", c.Param("id")).First(&wordCategory).Error; err != nil {

@@ -46,8 +46,8 @@ func FindAdCategory(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": adCategory})
 }
 
-// UpdateAdCategory updates a adCategory
-func UpdateAdCategory(c *gin.Context) {
+// PatchAdCategory updates a adCategory
+func PatchAdCategory(c *gin.Context) {
 
 	// Get model if exist
 	var adCategory models.AdCategory

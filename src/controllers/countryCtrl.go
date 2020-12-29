@@ -46,8 +46,8 @@ func FindCountry(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": country})
 }
 
-// UpdateCountry updates a country
-func UpdateCountry(c *gin.Context) {
+// PatchCountry updates a country
+func PatchCountry(c *gin.Context) {
 
 	// Get model if exist
 	var country models.Country

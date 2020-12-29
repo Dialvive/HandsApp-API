@@ -46,8 +46,8 @@ func FindSignLanguage(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": signLanguage})
 }
 
-// UpdateSignLanguage updates a signLanguage
-func UpdateSignLanguage(c *gin.Context) {
+// PatchSignLanguage updates a signLanguage
+func PatchSignLanguage(c *gin.Context) {
 
 	// Get model if exist
 	var signLanguage models.SignLanguage

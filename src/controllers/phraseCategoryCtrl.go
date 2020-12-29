@@ -45,8 +45,8 @@ func FindPhraseCategory(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": phraseCategory})
 }
 
-// UpdatePhraseCategory updates a phraseCategory
-func UpdatePhraseCategory(c *gin.Context) {
+// PatchPhraseCategory updates a phraseCategory
+func PatchPhraseCategory(c *gin.Context) {
 
 	// Get model if exist
 	var phraseCategory models.PhraseCategory

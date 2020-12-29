@@ -45,8 +45,8 @@ func FindFriendship(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": friendship})
 }
 
-// UpdateFriendship updates a friendship
-func UpdateFriendship(c *gin.Context) {
+// PatchFriendship updates a friendship
+func PatchFriendship(c *gin.Context) {
 
 	// Get model if exist
 	var friendship models.Friendship

@@ -46,8 +46,8 @@ func FindSpokenLanguage(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": spokenLanguage})
 }
 
-// UpdateSpokenLanguage updates a spokenLanguage
-func UpdateSpokenLanguage(c *gin.Context) {
+// PatchSpokenLanguage updates a spokenLanguage
+func PatchSpokenLanguage(c *gin.Context) {
 
 	// Get model if exist
 	var spokenLanguage models.SpokenLanguage
