@@ -13,9 +13,3 @@ type CreateCountryInput struct {
 	Name         string `json:"name" binding:"required"`
 	Abbreviation string `json:"abbreviation" binding:"required"`
 }
-
-// UpdateCountryInput type for country POST without bindings.
-type UpdateCountryInput struct {
-	Name         string `json:"name"`
-	Abbreviation string `json:"abbreviation"`
-}

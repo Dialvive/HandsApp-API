@@ -57,7 +57,7 @@ func UpdateCountry(c *gin.Context) {
 		return
 	}
 	println("no error")
-	var input models.UpdateCountryInput
+	var input models.CreateCountryInput
 	println("models.UpdateCountryInput")
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
