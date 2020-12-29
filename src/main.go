@@ -12,7 +12,7 @@ func main() {
 
 	models.ConnectDatabase()
 
-	// SIMPLE TABLE ROUTES
+	// SIMPLE TABLES ROUTES /////////////////////////////////////////
 
 	// Routes for countries
 	r.GET("/countries", controllers.GetCountries)
@@ -62,6 +62,15 @@ func main() {
 	r.GET("/friendship/:id", controllers.FindFriendship)
 	r.PATCH("/friendship/:id", controllers.UpdateFriendship)
 	r.DELETE("/friendship/:id", controllers.DeleteFriendship)
+
+	// RELATED TABLES ROUTES ////////////////////////////////////////
+
+	// Routes for regions
+	r.GET("/regions", controllers.GetRegions)
+	r.POST("/region", controllers.CreateRegion)
+	r.GET("/region/:id", controllers.FindRegion)
+	r.PATCH("/region/:id", controllers.UpdateRegion)
+	r.DELETE("/region/:id", controllers.DeleteRegion)
 
 	r.Run(":8080")
 }

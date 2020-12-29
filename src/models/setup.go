@@ -26,6 +26,8 @@ func ConnectDatabase() {
 		&PhraseCategory{},
 		&AdCategory{},
 		&Friendship{},
+		// Related objects
+		&Region{},
 	)
 
 	DB = database

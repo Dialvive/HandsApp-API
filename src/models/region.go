@@ -7,3 +7,9 @@ type Region struct {
 	CountryID uint   `json:"country_ID" gorm:"TINYINT NOT NULL"`
 	Creation  string `json:"creation" gorm:"TIMESTAMP"`
 }
+
+// CreateRegionInput represents an administrative division of a country.
+type CreateRegionInput struct {
+	Name      string `json:"name" binding:"required"`
+	CountryID int    `json:"country_ID" binding:"required"`
+}
