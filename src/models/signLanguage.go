@@ -2,8 +2,14 @@ package models
 
 // SignLanguage represents a Sign Language such as Mexican Sign Language.
 type SignLanguage struct {
-	ID           uint   `json:"id" gorm:"primary_key"`
-	Name         string `json:"name" gorm:"not null"`
-	Abbreviation string `json:"abbreviation" gorm:"not null"`
-	Creation     string `json:"creation"`
+	ID           uint   `json:"id" gorm:"TINYINT AUTO_INCREMENT; primaryKey"`
+	Name         string `json:"name" gorm:"TEXT NOT NULL"`
+	Abbreviation string `json:"abbreviation" gorm:"VARCHAR(6) NOT NULL"`
+	Creation     string `json:"creation" gorm:"TIMESTAMP"`
+}
+
+// CreateSignLanguageInput type with automatic ID.
+type CreateSignLanguageInput struct {
+	Name         string `json:"name" binding:"required"`
+	Abbreviation string `json:"abbreviation" binding:"required"`
 }

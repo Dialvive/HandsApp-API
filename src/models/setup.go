@@ -20,6 +20,7 @@ func ConnectDatabase() {
 	database.AutoMigrate(
 		&Country{},
 		&SpokenLanguage{},
+		&SignLanguage{},
 	)
 
 	DB = database
