@@ -105,22 +105,6 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`locale`(
     FOREIGN KEY (`sign_language_ID`) REFERENCES `signa_mundi`.`sign_language`(`ID`)
 );
 
-CREATE TABLE IF NOT EXISTS `signa_mundi`.`phrase_media`(
-	`ID` INT AUTO_INCREMENT NOT NULL,
-    `url` TEXT,
-    `description` TEXT NOT NULL,
-    `creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (`ID`)
-);
-
-CREATE TABLE IF NOT EXISTS `signa_mundi`.`word_media`(
-	`ID` INT AUTO_INCREMENT NOT NULL,
-    `url` TEXT,
-    `description` TEXT NOT NULL,
-    `creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (`ID`)
-);
-
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`phrase_category`(
 	`ID` TINYINT AUTO_INCREMENT NOT NULL,
     `name` TEXT NOT NULL,
@@ -138,21 +122,18 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`word_category`(
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`phrase`(
 	`ID` INT AUTO_INCREMENT NOT NULL,
     `locale_ID` SMALLINT NOT NULL,
-    `media_ID` INT NOT NULL,
     `phrase_category_ID` TINYINT NOT NULL,
     `text` TEXT NOT NULL,
     `context` TEXT,
     `creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`ID`),
     FOREIGN KEY (`locale_ID`) REFERENCES `signa_mundi`.`locale`(`ID`),
-    FOREIGN KEY (`media_ID`) REFERENCES `signa_mundi`.`phrase_media`(`ID`),
     FOREIGN KEY (`phrase_category_ID`) REFERENCES `signa_mundi`.`phrase_category`(`ID`)
 );
 
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`word`(
 	`ID` INT AUTO_INCREMENT NOT NULL,
     `locale_ID` SMALLINT NOT NULL,
-    `media_ID` INT NOT NULL,
     `word_category_ID` TINYINT NOT NULL,
     `text` TEXT NOT NULL,
     `context` TEXT,
@@ -160,7 +141,6 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`word`(
     `creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`ID`),
     FOREIGN KEY (`locale_ID`) REFERENCES `signa_mundi`.`locale`(`ID`),
-    FOREIGN KEY (`media_ID`) REFERENCES `signa_mundi`.`word_media`(`ID`),
     FOREIGN KEY (`word_category_ID`) REFERENCES `signa_mundi`.`word_category`(`ID`)
 );
 
