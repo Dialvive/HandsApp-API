@@ -24,6 +24,7 @@ func ConnectDatabase() {
 		&SignLanguage{},
 		&WordCategory{},
 		&PhraseCategory{},
+		&AdCategory{},
 	)
 
 	DB = database

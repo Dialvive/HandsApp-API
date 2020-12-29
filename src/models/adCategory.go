@@ -7,3 +7,9 @@ type AdCategory struct {
 	Cost     uint   `json:"cost" gorm:"INT NOT NULL"`
 	Creation string `json:"creation" gorm:"TIMESTAMP"`
 }
+
+// CreateAdCategoryInput type for ad_category POST with automatic ID.
+type CreateAdCategoryInput struct {
+	Name string `json:"name" binding:"required"`
+	Cost uint   `json:"cost" binding:"required"`
+}

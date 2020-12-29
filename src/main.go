@@ -12,7 +12,7 @@ func main() {
 
 	models.ConnectDatabase()
 
-	// SIMPLE TABLES ROUTES
+	// SIMPLE TABLE ROUTES
 
 	// Routes for countries
 	r.GET("/countries", controllers.GetCountries)
@@ -48,6 +48,13 @@ func main() {
 	r.GET("/word_category/:id", controllers.FindWordCategory)
 	r.PATCH("/word_category/:id", controllers.UpdateWordCategory)
 	r.DELETE("/word_category/:id", controllers.DeleteWordCategory)
+
+	// Routes for ad_categories
+	r.GET("/ad_categories", controllers.GetAdCategories)
+	r.POST("/ad_category", controllers.CreateAdCategory)
+	r.GET("/ad_category/:id", controllers.FindAdCategory)
+	r.PATCH("/ad_category/:id", controllers.UpdateAdCategory)
+	r.DELETE("/ad_category/:id", controllers.DeleteAdCategory)
 
 	r.Run(":8080")
 }
