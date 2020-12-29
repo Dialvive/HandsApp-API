@@ -56,5 +56,12 @@ func main() {
 	r.PATCH("/ad_category/:id", controllers.UpdateAdCategory)
 	r.DELETE("/ad_category/:id", controllers.DeleteAdCategory)
 
+	// Routes for friendships
+	r.GET("/friendships", controllers.GetFriendships)
+	r.POST("/friendship", controllers.CreateFriendship)
+	r.GET("/friendship/:id", controllers.FindFriendship)
+	r.PATCH("/friendship/:id", controllers.UpdateFriendship)
+	r.DELETE("/friendship/:id", controllers.DeleteFriendship)
+
 	r.Run(":8080")
 }

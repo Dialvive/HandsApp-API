@@ -6,3 +6,8 @@ type Friendship struct {
 	Name     string `json:"name" gorm:"TEXT NOT NULL"`
 	Creation string `json:"creation" gorm:"TIMESTAMP"`
 }
+
+// CreateFriendshipInput represents the type of friendship two users have.
+type CreateFriendshipInput struct {
+	Name string `json:"cost" binding:"required"`
+}
