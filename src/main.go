@@ -12,6 +12,8 @@ func main() {
 
 	models.ConnectDatabase()
 
+	// SIMPLE TABLES ROUTES
+
 	// Routes for countries
 	r.GET("/countries", controllers.GetCountries)
 	r.POST("/country", controllers.CreateCountry)
@@ -25,6 +27,13 @@ func main() {
 	r.GET("/spoken_language/:id", controllers.FindSpokenLanguage)
 	r.PATCH("/spoken_language/:id", controllers.UpdateSpokenLanguage)
 	r.DELETE("/spoken_language/:id", controllers.DeleteSpokenLanguage)
+
+	// Routes for spokenLanguages
+	r.GET("/sign_languages", controllers.GetSignLanguages)
+	r.POST("/sign_language", controllers.CreateSignLanguage)
+	r.GET("/sign_language/:id", controllers.FindSignLanguage)
+	r.PATCH("/sign_language/:id", controllers.UpdateSignLanguage)
+	r.DELETE("/sign_language/:id", controllers.DeleteSignLanguage)
 
 	r.Run(":8080")
 }
