@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`spoken_language`(
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`sign_language`(
 	`ID` TINYINT AUTO_INCREMENT NOT NULL,
     `name` TEXT NOT NULL,
-    `abbreviation` VARCHAR(2) NOT NULL,
+    `abbreviation` VARCHAR(6) NOT NULL,
     `creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`ID`)
 );
