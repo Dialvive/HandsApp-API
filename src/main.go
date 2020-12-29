@@ -28,12 +28,26 @@ func main() {
 	r.PATCH("/spoken_language/:id", controllers.UpdateSpokenLanguage)
 	r.DELETE("/spoken_language/:id", controllers.DeleteSpokenLanguage)
 
-	// Routes for spokenLanguages
+	// Routes for signLanguages
 	r.GET("/sign_languages", controllers.GetSignLanguages)
 	r.POST("/sign_language", controllers.CreateSignLanguage)
 	r.GET("/sign_language/:id", controllers.FindSignLanguage)
 	r.PATCH("/sign_language/:id", controllers.UpdateSignLanguage)
 	r.DELETE("/sign_language/:id", controllers.DeleteSignLanguage)
+
+	// Routes for phraseCategories
+	r.GET("/phrase_categories", controllers.GetPhraseCategories)
+	r.POST("/phrase_category", controllers.CreatePhraseCategory)
+	r.GET("/phrase_category/:id", controllers.FindPhraseCategory)
+	r.PATCH("/phrase_category/:id", controllers.UpdatePhraseCategory)
+	r.DELETE("/phrase_category/:id", controllers.DeletePhraseCategory)
+
+	// Routes for wordCategories
+	r.GET("/word_categories", controllers.GetWordCategories)
+	r.POST("/word_category", controllers.CreateWordCategory)
+	r.GET("/word_category/:id", controllers.FindWordCategory)
+	r.PATCH("/word_category/:id", controllers.UpdateWordCategory)
+	r.DELETE("/word_category/:id", controllers.DeleteWordCategory)
 
 	r.Run(":8080")
 }

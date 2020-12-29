@@ -18,9 +18,12 @@ func ConnectDatabase() {
 	}
 
 	database.AutoMigrate(
+		// Simple objects
 		&Country{},
 		&SpokenLanguage{},
 		&SignLanguage{},
+		&WordCategory{},
+		&PhraseCategory{},
 	)
 
 	DB = database
