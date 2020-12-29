@@ -14,7 +14,10 @@ func main() {
 
 	// Routes for countries
 	r.GET("/countries", controllers.GetCountries)
-	r.POST("/countires", controllers.CreateCountry)
+	r.POST("/country", controllers.CreateCountry)
+	r.GET("/country/:id", controllers.FindCountry)
+	r.PUT("/country/:id", controllers.UpdateCountry)
+	r.DELETE("/country/:id", controllers.DeleteCountry)
 
 	r.Run(":8080")
 }

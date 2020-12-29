@@ -3,6 +3,7 @@ package controllers
 import (
 	"API/models"
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -23,8 +24,69 @@ func CreateCountry(c *gin.Context) {
 		return
 	}
 
-	country := models.Country{Name: input.Name, Abbreviation: input.Abbreviation}
+	t := time.Now().UTC().Format("2006-01-02 15:04:05")
+	country := models.Country{
+		Name:         input.Name,
+		Abbreviation: input.Abbreviation,
+		Creation:     t}
 	models.DB.Create(&country)
 
 	c.JSON(http.StatusOK, gin.H{"data": country})
+}
+
+// FindCountry recieves an id, and returns an specific country with that id.
+func FindCountry(c *gin.Context) {
+	var country models.Country
+
+	if err := models.DB.Where("id = ?", c.Param("id")).First(&country).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Country not found!"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": country})
+}
+
+// UpdateCountry updates a country
+func UpdateCountry(c *gin.Context) {
+	println("UpdateCountry")
+	// Get model if exist
+	var country models.Country
+	println("models.Country")
+	if err := models.DB.Where("id = ?", c.Param("id")).First(&country).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Country not found!"})
+		return
+	}
+	println("no error")
+	var input models.UpdateCountryInput
+	println("models.UpdateCountryInput")
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	println("no error")
+	t := time.Now().UTC().Format("2006-01-02 15:04:05")
+	models.DB.Model(&country).Updates(
+		models.Country{
+			ID:           country.ID,
+			Name:         input.Name,
+			Abbreviation: input.Abbreviation,
+			Creation:     t,
+		})
+	println("Update")
+
+	c.JSON(http.StatusOK, gin.H{"data": country})
+}
+
+// DeleteCountry deletes a country
+func DeleteCountry(c *gin.Context) {
+	// Get model if exist
+	var country models.Country
+	if err := models.DB.Where("id = ?", c.Param("id")).First(&country).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
+		return
+	}
+
+	models.DB.Delete(&country)
+
+	c.JSON(http.StatusOK, gin.H{"data": true})
 }
