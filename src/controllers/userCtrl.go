@@ -106,7 +106,7 @@ func PatchUser(c *gin.Context) {
 		return
 	}
 
-	var input models.CreateUserInput
+	var input models.PatchUserInput
 
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
