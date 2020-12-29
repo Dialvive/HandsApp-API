@@ -48,22 +48,22 @@ func FindSignLanguage(c *gin.Context) {
 
 // UpdateSignLanguage updates a signLanguage
 func UpdateSignLanguage(c *gin.Context) {
-	println("UpdateSignLanguage")
+
 	// Get model if exist
 	var signLanguage models.SignLanguage
-	println("models.SignLanguage")
+
 	if err := models.DB.Where("id = ?", c.Param("id")).First(&signLanguage).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "SignLanguage not found!"})
 		return
 	}
-	println("no error")
+
 	var input models.CreateSignLanguageInput
-	println("models.UpdateSignLanguageInput")
+
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	println("no error")
+
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	models.DB.Model(&signLanguage).Updates(
 		models.SignLanguage{
@@ -72,7 +72,6 @@ func UpdateSignLanguage(c *gin.Context) {
 			Abbreviation: input.Abbreviation,
 			Creation:     t,
 		})
-	println("Update")
 
 	c.JSON(http.StatusOK, gin.H{"data": signLanguage})
 }

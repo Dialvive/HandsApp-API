@@ -47,22 +47,22 @@ func FindPhraseCategory(c *gin.Context) {
 
 // UpdatePhraseCategory updates a phraseCategory
 func UpdatePhraseCategory(c *gin.Context) {
-	println("UpdatePhraseCategory")
+
 	// Get model if exist
 	var phraseCategory models.PhraseCategory
-	println("models.PhraseCategory")
+
 	if err := models.DB.Where("id = ?", c.Param("id")).First(&phraseCategory).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "PhraseCategory not found!"})
 		return
 	}
-	println("no error")
+
 	var input models.CreatePhraseCategoryInput
-	println("models.UpdatePhraseCategoryInput")
+
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	println("no error")
+
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	models.DB.Model(&phraseCategory).Updates(
 		models.PhraseCategory{
@@ -70,7 +70,6 @@ func UpdatePhraseCategory(c *gin.Context) {
 			Name:     input.Name,
 			Creation: t,
 		})
-	println("Update")
 
 	c.JSON(http.StatusOK, gin.H{"data": phraseCategory})
 }

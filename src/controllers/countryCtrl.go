@@ -48,22 +48,22 @@ func FindCountry(c *gin.Context) {
 
 // UpdateCountry updates a country
 func UpdateCountry(c *gin.Context) {
-	println("UpdateCountry")
+
 	// Get model if exist
 	var country models.Country
-	println("models.Country")
+
 	if err := models.DB.Where("id = ?", c.Param("id")).First(&country).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Country not found!"})
 		return
 	}
-	println("no error")
+
 	var input models.CreateCountryInput
-	println("models.UpdateCountryInput")
+
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	println("no error")
+
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	models.DB.Model(&country).Updates(
 		models.Country{
@@ -72,7 +72,6 @@ func UpdateCountry(c *gin.Context) {
 			Abbreviation: input.Abbreviation,
 			Creation:     t,
 		})
-	println("Update")
 
 	c.JSON(http.StatusOK, gin.H{"data": country})
 }

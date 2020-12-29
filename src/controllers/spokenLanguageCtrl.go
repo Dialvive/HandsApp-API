@@ -48,22 +48,22 @@ func FindSpokenLanguage(c *gin.Context) {
 
 // UpdateSpokenLanguage updates a spokenLanguage
 func UpdateSpokenLanguage(c *gin.Context) {
-	println("UpdateSpokenLanguage")
+
 	// Get model if exist
 	var spokenLanguage models.SpokenLanguage
-	println("models.SpokenLanguage")
+
 	if err := models.DB.Where("id = ?", c.Param("id")).First(&spokenLanguage).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "SpokenLanguage not found!"})
 		return
 	}
-	println("no error")
+
 	var input models.CreateSpokenLanguageInput
-	println("models.UpdateSpokenLanguageInput")
+
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	println("no error")
+
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	models.DB.Model(&spokenLanguage).Updates(
 		models.SpokenLanguage{
@@ -72,7 +72,6 @@ func UpdateSpokenLanguage(c *gin.Context) {
 			Abbreviation: input.Abbreviation,
 			Creation:     t,
 		})
-	println("Update")
 
 	c.JSON(http.StatusOK, gin.H{"data": spokenLanguage})
 }

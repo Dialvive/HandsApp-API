@@ -47,22 +47,17 @@ func FindWordCategory(c *gin.Context) {
 
 // UpdateWordCategory updates a wordCategory
 func UpdateWordCategory(c *gin.Context) {
-	println("UpdateWordCategory")
 	// Get model if exist
 	var wordCategory models.WordCategory
-	println("models.WordCategory")
 	if err := models.DB.Where("id = ?", c.Param("id")).First(&wordCategory).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "WordCategory not found!"})
 		return
 	}
-	println("no error")
 	var input models.CreateWordCategoryInput
-	println("models.UpdateWordCategoryInput")
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	println("no error")
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	models.DB.Model(&wordCategory).Updates(
 		models.WordCategory{
@@ -70,7 +65,6 @@ func UpdateWordCategory(c *gin.Context) {
 			Name:     input.Name,
 			Creation: t,
 		})
-	println("Update")
 
 	c.JSON(http.StatusOK, gin.H{"data": wordCategory})
 }
