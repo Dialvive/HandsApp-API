@@ -16,3 +16,33 @@ type User struct {
 	RegionID  uint   `json:"region_id" gorm:"INT NOT NULL"`
 	Creation  string `json:"creation" gorm:"TIMESTAMP"`
 }
+
+// CreateUserInput represents a user of Signa Mundi set of services.
+type CreateUserInput struct {
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
+	UserName  string `json:"user_name" binding:"required"`
+	Mail      string `json:"mail" binding:"required"`
+	Password  string `json:"password" binding:"required"`
+	Biography string `json:"biography"`
+	Mailing   string `json:"mailing" binding:"required"`
+	Privilege uint   `json:"privilege" binding:"required"`
+	Points    uint   `json:"points"`
+	Credits   uint   `json:"credits"`
+	RegionID  uint   `json:"region_ID" binding:"required"`
+}
+
+// PatchUserInput represents a user of Signa Mundi set of services.
+type PatchUserInput struct {
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
+	UserName  string `json:"user_name"`
+	Mail      string `json:"mail"`
+	Password  string `json:"password"`
+	Biography string `json:"biography"`
+	Mailing   string `json:"mailing"`
+	Privilege uint   `json:"privilege"`
+	Points    uint   `json:"points"`
+	Credits   uint   `json:"credits"`
+	RegionID  uint   `json:"region_ID"`
+}
