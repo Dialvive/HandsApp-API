@@ -33,7 +33,7 @@ func CreateAdvertisement(c *gin.Context) {
 		Body:         input.Body,
 		Media:        input.Media,
 		Paid:         uint(input.Paid),
-		Creation:     t,
+		Modified:     t,
 	}
 	models.DB.Create(&advertisement)
 
@@ -81,7 +81,7 @@ func PatchAdvertisement(c *gin.Context) {
 			Body:         input.Body,
 			Media:        input.Media,
 			Paid:         uint(input.Paid),
-			Creation:     t,
+			Modified:     t,
 		})
 
 	c.JSON(http.StatusOK, gin.H{"data": advertisement})

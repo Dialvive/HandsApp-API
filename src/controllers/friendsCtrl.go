@@ -49,8 +49,8 @@ func FindFriend(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": friend})
 }
 
-// PatchFriend updates a friend
-func PatchFriend(c *gin.Context) {
+// PutFriend updates a friend
+func PutFriend(c *gin.Context) {
 
 	// Get model if exist
 	var friend models.Friend
@@ -67,12 +67,14 @@ func PatchFriend(c *gin.Context) {
 		return
 	}
 
+	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	models.DB.Model(&friend).Updates(
 		models.Friend{
 			User1ID:      input.User1ID,
 			User2ID:      input.User2ID,
 			FriendshipID: input.FriendshipID,
 			Facebook:     input.Facebook,
+			Modified:     t,
 		})
 
 	c.JSON(http.StatusOK, gin.H{"data": friend})

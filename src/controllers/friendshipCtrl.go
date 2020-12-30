@@ -27,7 +27,7 @@ func CreateFriendship(c *gin.Context) {
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	friendship := models.Friendship{
 		Name:     input.Name,
-		Creation: t}
+		Modified: t}
 	models.DB.Create(&friendship)
 
 	c.JSON(http.StatusOK, gin.H{"data": friendship})
@@ -68,7 +68,7 @@ func PatchFriendship(c *gin.Context) {
 		models.Friendship{
 			ID:       friendship.ID,
 			Name:     input.Name,
-			Creation: t,
+			Modified: t,
 		})
 
 	c.JSON(http.StatusOK, gin.H{"data": friendship})

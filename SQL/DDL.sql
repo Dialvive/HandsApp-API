@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`country`(
 	`ID` TINYINT AUTO_INCREMENT NOT NULL,
     `name` TEXT NOT NULL,
     `abbreviation` VARCHAR(2) NOT NULL,
-    `creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`ID`)
 );
 
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`region`(
 	`ID` INT AUTO_INCREMENT NOT NULL,
     `name` TEXT NOT NULL,
     `country_ID` TINYINT NOT NULL,
-    `creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`ID`),
     FOREIGN KEY (`country_ID`) REFERENCES `signa_mundi`.`country`(`ID`)
 );
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`user`(
     `points` INT DEFAULT 0,
     `credits` INT DEFAULT 0,
     `region_ID` INT NOT NULL,
-    `creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`ID`),
     FOREIGN KEY (`region_ID`) REFERENCES `signa_mundi`.`region`(`ID`)
 );
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`user`(
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`friendship`(
 	`ID` TINYINT AUTO_INCREMENT NOT NULL,
     `name` TEXT NOT NULL,
-    `creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`ID`)
 );
 
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`friend`(
     `user2_ID` INT NOT NULL,
     `friendship_ID` TINYINT NOT NULL,
     `facebook` BOOLEAN DEFAULT 0,
-    `creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (`user1_ID`) REFERENCES `signa_mundi`.`user`(`ID`),
     FOREIGN KEY (`user2_ID`) REFERENCES `signa_mundi`.`user`(`ID`),
     FOREIGN KEY (`friendship`) REFERENCES `signa_mundi`.`friendship`(`ID`)
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`ad_category`(
 	`ID` TINYINT AUTO_INCREMENT NOT NULL,
     `name` TEXT NOT NULL,
     `cost` INT NOT NULL,
-    `creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`ID`)
 );
 
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`advertisement`(
     `body` TEXT,
     `media` BOOLEAN DEFAULT 0,
     `paid` INT NOT NULL,
-    `creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`ID`),
     FOREIGN KEY (`user_ID`) REFERENCES `signa_mundi`.`user`(`ID`),
     FOREIGN KEY (`region_ID`) REFERENCES `signa_mundi`.`region`(`ID`),
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`spoken_language`(
 	`ID` TINYINT AUTO_INCREMENT NOT NULL,
     `name` TEXT NOT NULL,
     `abbreviation` VARCHAR(2) NOT NULL,
-    `creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`ID`)
 );
 
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`sign_language`(
 	`ID` TINYINT AUTO_INCREMENT NOT NULL,
     `name` TEXT NOT NULL,
     `abbreviation` VARCHAR(6) NOT NULL,
-    `creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`ID`)
 );
 
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`locale`(
     `country_ID` TINYINT NOT NULL,
     `spoken_language_ID` TINYINT NOT NULL,
     `sign_language_ID` TINYINT NOT NULL,
-    `creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`ID`),
     FOREIGN KEY (`country_ID`) REFERENCES `signa_mundi`.`country`(`ID`),
     FOREIGN KEY (`spoken_language_ID`) REFERENCES `signa_mundi`.`spoken_language`(`ID`),
@@ -108,14 +108,14 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`locale`(
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`phrase_category`(
 	`ID` TINYINT AUTO_INCREMENT NOT NULL,
     `name` TEXT NOT NULL,
-    `creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`ID`)
 );
 
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`word_category`(
 	`ID` TINYINT AUTO_INCREMENT NOT NULL,
     `name` TEXT NOT NULL,
-    `creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`ID`)
 );
 
@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`phrase`(
     `phrase_category_ID` TINYINT NOT NULL,
     `text` TEXT NOT NULL,
     `context` TEXT,
-    `creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`ID`),
     FOREIGN KEY (`locale_ID`) REFERENCES `signa_mundi`.`locale`(`ID`),
     FOREIGN KEY (`phrase_category_ID`) REFERENCES `signa_mundi`.`phrase_category`(`ID`)
@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`word`(
     `text` TEXT NOT NULL,
     `context` TEXT,
     `definition` TEXT,
-    `creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`ID`),
     FOREIGN KEY (`locale_ID`) REFERENCES `signa_mundi`.`locale`(`ID`),
     FOREIGN KEY (`word_category_ID`) REFERENCES `signa_mundi`.`word_category`(`ID`)
@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`words_by_regions`(
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`favorite_phrases`(
     `phrase_ID` INT NOT NULL,
     `user_ID` INT NOT NULL,
-    `creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (`phrase_ID`) REFERENCES `signa_mundi`.`phrase`(`ID`),
     FOREIGN KEY (`user_ID`) REFERENCES `signa_mundi`.`user`(`ID`)
 );
@@ -162,7 +162,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`favorite_phrases`(
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`favorite_words`(
     `word_ID` INT NOT NULL,
     `user_ID` INT NOT NULL,
-    `creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (`word_ID`) REFERENCES `signa_mundi`.`word`(`ID`),
     FOREIGN KEY (`user_ID`) REFERENCES `signa_mundi`.`user`(`ID`)
 );

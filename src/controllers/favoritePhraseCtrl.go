@@ -46,7 +46,7 @@ func FindFavoritePhrase(c *gin.Context) {
 }
 
 // PatchFavoritePhrase updates a favoritePhrase
-func PatchFavoritePhrase(c *gin.Context) {
+func PutFavoritePhrase(c *gin.Context) {
 
 	// Get model if exist
 	var favoritePhrase models.FavoritePhrase

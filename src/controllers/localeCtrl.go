@@ -29,7 +29,7 @@ func CreateLocale(c *gin.Context) {
 		CountryID:        uint(input.CountryID),
 		SpokenLanguageID: uint(input.SpokenLanguageID),
 		SignLanguageID:   uint(input.SignLanguageID),
-		Creation:         t,
+		Modified:         t,
 	}
 	models.DB.Create(&locale)
 
@@ -73,7 +73,7 @@ func PatchLocale(c *gin.Context) {
 			CountryID:        uint(input.CountryID),
 			SpokenLanguageID: uint(input.SpokenLanguageID),
 			SignLanguageID:   uint(input.SignLanguageID),
-			Creation:         t,
+			Modified:         t,
 		})
 
 	c.JSON(http.StatusOK, gin.H{"data": locale})

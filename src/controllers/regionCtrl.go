@@ -28,7 +28,7 @@ func CreateRegion(c *gin.Context) {
 	region := models.Region{
 		Name:      input.Name,
 		CountryID: uint(input.CountryID),
-		Creation:  t,
+		Modified:  t,
 	}
 	models.DB.Create(&region)
 
@@ -71,7 +71,7 @@ func PatchRegion(c *gin.Context) {
 			ID:        region.ID,
 			Name:      input.Name,
 			CountryID: uint(input.CountryID),
-			Creation:  t,
+			Modified:  t,
 		})
 
 	c.JSON(http.StatusOK, gin.H{"data": region})

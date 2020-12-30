@@ -27,7 +27,7 @@ func CreateWordCategory(c *gin.Context) {
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	wordCategory := models.WordCategory{
 		Name:     input.Name,
-		Creation: t}
+		Modified: t}
 	models.DB.Create(&wordCategory)
 
 	c.JSON(http.StatusOK, gin.H{"data": wordCategory})
@@ -63,7 +63,7 @@ func PatchWordCategory(c *gin.Context) {
 		models.WordCategory{
 			ID:       wordCategory.ID,
 			Name:     input.Name,
-			Creation: t,
+			Modified: t,
 		})
 
 	c.JSON(http.StatusOK, gin.H{"data": wordCategory})

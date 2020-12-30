@@ -30,7 +30,7 @@ func CreatePhrase(c *gin.Context) {
 		PhraseCategoryID: uint(input.PhraseCategoryID),
 		Text:             input.Text,
 		Context:          input.Context,
-		Creation:         t,
+		Modified:         t,
 	}
 	models.DB.Create(&phrase)
 
@@ -75,7 +75,7 @@ func PatchPhrase(c *gin.Context) {
 			PhraseCategoryID: uint(input.PhraseCategoryID),
 			Text:             input.Text,
 			Context:          input.Context,
-			Creation:         t,
+			Modified:         t,
 		})
 
 	c.JSON(http.StatusOK, gin.H{"data": phrase})

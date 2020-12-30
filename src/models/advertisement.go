@@ -10,7 +10,7 @@ type Advertisement struct {
 	Body         string `json:"body" gorm:"TEXT"`
 	Media        bool   `json:"media" gorm:"BOOLEAN; default: false"`
 	Paid         uint   `json:"paid" gorm:"INT NOT NULL"`
-	Creation     string `json:"creation" gorm:"TIMESTAMP"`
+	Modified     string `json:"modified" gorm:"TIMESTAMP"`
 }
 
 // CreateAdvertisementInput represents an ad.
@@ -22,5 +22,4 @@ type CreateAdvertisementInput struct {
 	Body         string `json:"body" binding:"required"`
 	Media        bool   `json:"media" binding:"required"`
 	Paid         uint   `json:"paid" binding:"required"`
-	Creation     string `json:"creation" binding:"required"`
 }

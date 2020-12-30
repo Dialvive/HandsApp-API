@@ -37,7 +37,7 @@ func CreateUser(c *gin.Context) {
 		Points:    input.Points,
 		Credits:   input.Credits,
 		RegionID:  input.RegionID,
-		Creation:  t,
+		Modified:  t,
 	}
 	models.DB.Create(&user)
 
@@ -89,7 +89,7 @@ func PutUser(c *gin.Context) {
 			Points:    input.Points,
 			Credits:   input.Credits,
 			RegionID:  input.RegionID,
-			Creation:  t,
+			Modified:  t,
 		})
 
 	c.JSON(http.StatusOK, gin.H{"data": user})
@@ -162,7 +162,7 @@ func PatchUser(c *gin.Context) {
 			Points:    user.Points,
 			Credits:   user.Credits,
 			RegionID:  user.RegionID,
-			Creation:  t,
+			Modified:  t,
 		})
 
 	c.JSON(http.StatusOK, gin.H{"data": user})

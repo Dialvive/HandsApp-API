@@ -28,7 +28,7 @@ func CreateAdCategory(c *gin.Context) {
 	adCategory := models.AdCategory{
 		Name:     input.Name,
 		Cost:     input.Cost,
-		Creation: t}
+		Modified: t}
 	models.DB.Create(&adCategory)
 
 	c.JSON(http.StatusOK, gin.H{"data": adCategory})
@@ -70,7 +70,7 @@ func PatchAdCategory(c *gin.Context) {
 			ID:       adCategory.ID,
 			Name:     input.Name,
 			Cost:     input.Cost,
-			Creation: t,
+			Modified: t,
 		})
 
 	c.JSON(http.StatusOK, gin.H{"data": adCategory})

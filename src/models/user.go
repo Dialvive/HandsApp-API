@@ -14,7 +14,7 @@ type User struct {
 	Points    uint   `json:"points" gorm:"INT; default:0"`
 	Credits   uint   `json:"credits" gorm:"INT; default:0"`
 	RegionID  uint   `json:"region_id" gorm:"INT NOT NULL"`
-	Creation  string `json:"creation" gorm:"TIMESTAMP"`
+	Modified  string `json:"modified" gorm:"TIMESTAMP"`
 }
 
 // CreateUserInput represents a user of Signa Mundi set of services.

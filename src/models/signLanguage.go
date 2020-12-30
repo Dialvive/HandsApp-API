@@ -5,7 +5,7 @@ type SignLanguage struct {
 	ID           uint   `json:"id" gorm:"TINYINT AUTO_INCREMENT; primaryKey"`
 	Name         string `json:"name" gorm:"TEXT NOT NULL"`
 	Abbreviation string `json:"abbreviation" gorm:"VARCHAR(6) NOT NULL"`
-	Creation     string `json:"creation" gorm:"TIMESTAMP"`
+	Modified     string `json:"modified" gorm:"TIMESTAMP"`
 }
 
 // CreateSignLanguageInput type with automatic ID.

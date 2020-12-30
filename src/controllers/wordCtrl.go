@@ -31,7 +31,7 @@ func CreateWord(c *gin.Context) {
 		Text:           input.Text,
 		Definition:     input.Definition,
 		Context:        input.Context,
-		Creation:       t,
+		Modified:       t,
 	}
 	models.DB.Create(&word)
 
@@ -77,7 +77,7 @@ func PatchWord(c *gin.Context) {
 			Text:           input.Text,
 			Definition:     input.Definition,
 			Context:        input.Context,
-			Creation:       t,
+			Modified:       t,
 		})
 
 	c.JSON(http.StatusOK, gin.H{"data": word})

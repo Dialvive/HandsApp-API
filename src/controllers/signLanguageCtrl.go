@@ -28,7 +28,7 @@ func CreateSignLanguage(c *gin.Context) {
 	signLanguage := models.SignLanguage{
 		Name:         input.Name,
 		Abbreviation: input.Abbreviation,
-		Creation:     t}
+		Modified:     t}
 	models.DB.Create(&signLanguage)
 
 	c.JSON(http.StatusOK, gin.H{"data": signLanguage})
@@ -70,7 +70,7 @@ func PatchSignLanguage(c *gin.Context) {
 			ID:           signLanguage.ID,
 			Name:         input.Name,
 			Abbreviation: input.Abbreviation,
-			Creation:     t,
+			Modified:     t,
 		})
 
 	c.JSON(http.StatusOK, gin.H{"data": signLanguage})

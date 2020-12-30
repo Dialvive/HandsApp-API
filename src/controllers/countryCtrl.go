@@ -28,7 +28,7 @@ func CreateCountry(c *gin.Context) {
 	country := models.Country{
 		Name:         input.Name,
 		Abbreviation: input.Abbreviation,
-		Creation:     t}
+		Modified:     t}
 	models.DB.Create(&country)
 
 	c.JSON(http.StatusOK, gin.H{"data": country})
@@ -70,7 +70,7 @@ func PatchCountry(c *gin.Context) {
 			ID:           country.ID,
 			Name:         input.Name,
 			Abbreviation: input.Abbreviation,
-			Creation:     t,
+			Modified:     t,
 		})
 
 	c.JSON(http.StatusOK, gin.H{"data": country})

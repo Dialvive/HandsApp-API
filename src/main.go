@@ -8,6 +8,7 @@ import (
 )
 
 func main() {
+	//TODO: MODIFY modified ATRIBUTE IN PATCH & PUT METHODS
 	r := gin.Default()
 
 	models.ConnectDatabase()

@@ -6,13 +6,12 @@ type Locale struct {
 	CountryID        uint   `json:"country_ID" gorm:"TINYINT NOT NULL"`
 	SpokenLanguageID uint   `json:"spoken_language_ID" gorm:"TINYINT NOT NULL"`
 	SignLanguageID   uint   `json:"sign_language_ID" gorm:"TINYINT NOT NULL"`
-	Creation         string `json:"creation" gorm:"TIMESTAMP"`
+	Modified         string `json:"modified" gorm:"TIMESTAMP"`
 }
 
 // CreateLocaleInput is a mix of location, spoken language, and sign language classification..
 type CreateLocaleInput struct {
-	CountryID        uint   `json:"country_ID" binding:"required"`
-	SpokenLanguageID uint   `json:"spoken_language_ID" binding:"required"`
-	SignLanguageID   uint   `json:"sign_language_ID" binding:"required"`
-	Creation         string `json:"creation" binding:"required"`
+	CountryID        uint `json:"country_ID" binding:"required"`
+	SpokenLanguageID uint `json:"spoken_language_ID" binding:"required"`
+	SignLanguageID   uint `json:"sign_language_ID" binding:"required"`
 }

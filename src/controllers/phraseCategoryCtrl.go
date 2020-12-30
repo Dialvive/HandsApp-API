@@ -27,7 +27,7 @@ func CreatePhraseCategory(c *gin.Context) {
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	phraseCategory := models.PhraseCategory{
 		Name:     input.Name,
-		Creation: t}
+		Modified: t}
 	models.DB.Create(&phraseCategory)
 
 	c.JSON(http.StatusOK, gin.H{"data": phraseCategory})
@@ -68,7 +68,7 @@ func PatchPhraseCategory(c *gin.Context) {
 		models.PhraseCategory{
 			ID:       phraseCategory.ID,
 			Name:     input.Name,
-			Creation: t,
+			Modified: t,
 		})
 
 	c.JSON(http.StatusOK, gin.H{"data": phraseCategory})

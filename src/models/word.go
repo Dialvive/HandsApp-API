@@ -8,7 +8,7 @@ type Word struct {
 	Text           string `json:"name" gorm:"TEXT NOT NULL"`
 	Context        string `json:"context" gorm:"TEXT"`
 	Definition     string `json:"definition" gorm:"TEXT"`
-	Creation       string `json:"creation" gorm:"TIMESTAMP"`
+	Modified       string `json:"modified" gorm:"TIMESTAMP"`
 }
 
 // CreateWordInput represents a coherent spoken word.
@@ -18,5 +18,4 @@ type CreateWordInput struct {
 	Text           string `json:"name" binding:"required"`
 	Definition     string `json:"definition" binding:"required"`
 	Context        string `json:"context" binding:"required"`
-	Creation       string `json:"creation" binding:"required"`
 }

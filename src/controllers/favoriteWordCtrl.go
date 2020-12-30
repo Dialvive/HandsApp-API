@@ -45,8 +45,8 @@ func FindFavoriteWord(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": favoriteWord})
 }
 
-// PatchFavoriteWord updates a favoriteWord
-func PatchFavoriteWord(c *gin.Context) {
+// PutFavoriteWord updates a favoriteWord
+func PutFavoriteWord(c *gin.Context) {
 
 	// Get model if exist
 	var favoriteWord models.FavoriteWord

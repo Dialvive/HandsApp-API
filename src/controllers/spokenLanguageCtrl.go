@@ -28,7 +28,7 @@ func CreateSpokenLanguage(c *gin.Context) {
 	spokenLanguage := models.SpokenLanguage{
 		Name:         input.Name,
 		Abbreviation: input.Abbreviation,
-		Creation:     t}
+		Modified:     t}
 	models.DB.Create(&spokenLanguage)
 
 	c.JSON(http.StatusOK, gin.H{"data": spokenLanguage})
@@ -70,7 +70,7 @@ func PatchSpokenLanguage(c *gin.Context) {
 			ID:           spokenLanguage.ID,
 			Name:         input.Name,
 			Abbreviation: input.Abbreviation,
-			Creation:     t,
+			Modified:     t,
 		})
 
 	c.JSON(http.StatusOK, gin.H{"data": spokenLanguage})
