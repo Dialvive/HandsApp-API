@@ -101,5 +101,19 @@ func main() {
 	r.PATCH("/phrase/:id", controllers.PatchPhrase)
 	r.DELETE("/phrase/:id", controllers.DeletePhrase)
 
+	// Routes for ad categories
+	r.GET("/ad_categories", controllers.GetAdCategories)
+	r.POST("/ad_category", controllers.CreateAdCategory)
+	r.GET("/ad_category/:id", controllers.FindAdCategory)
+	r.PATCH("/ad_category/:id", controllers.PatchAdCategory)
+	r.DELETE("/ad_category/:id", controllers.DeleteAdCategory)
+
+	// Routes for advertisements
+	r.GET("/advertisements", controllers.GetAdvertisements)
+	r.POST("/advertisement", controllers.CreateAdvertisement)
+	r.GET("/advertisement/:id", controllers.FindAdvertisement)
+	r.PATCH("/advertisement/:id", controllers.PatchAdvertisement)
+	r.DELETE("/advertisement/:id", controllers.DeleteAdvertisement)
+
 	r.Run(":8080")
 }

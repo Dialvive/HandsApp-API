@@ -32,6 +32,10 @@ func ConnectDatabase() {
 		&Locale{},
 		&Word{},
 		&Phrase{},
+		&AdCategory{},
+		&Advertisement{},
+		// Weak objects
+
 	)
 
 	DB = database
