@@ -80,5 +80,19 @@ func main() {
 	r.PUT("/user/:id", controllers.PutUser)
 	r.DELETE("/user/:id", controllers.DeleteUser)
 
+	// Routes for regions
+	r.GET("/words", controllers.GetWords)
+	r.POST("/word", controllers.CreateWord)
+	r.GET("/word/:id", controllers.FindWord)
+	r.PATCH("/word/:id", controllers.PatchWord)
+	r.DELETE("/word/:id", controllers.DeleteWord)
+
+	// Routes for regions
+	r.GET("/phrases", controllers.GetPhrases)
+	r.POST("/phrase", controllers.CreatePhrase)
+	r.GET("/phrase/:id", controllers.FindPhrase)
+	r.PATCH("/phrase/:id", controllers.PatchPhrase)
+	r.DELETE("/phrase/:id", controllers.DeletePhrase)
+
 	r.Run(":8080")
 }

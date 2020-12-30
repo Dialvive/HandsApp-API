@@ -29,6 +29,8 @@ func ConnectDatabase() {
 		// Related objects
 		&Region{},
 		&User{},
+		&Word{},
+		&Phrase{},
 	)
 
 	DB = database
