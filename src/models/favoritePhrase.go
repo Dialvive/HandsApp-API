@@ -4,5 +4,11 @@ package models
 type FavoritePhrase struct {
 	PhraseID uint   `json:"phrase_ID" gorm:"INT NOT NULL"`
 	UserID   string `json:"user_ID" gorm:"INT NOT NULL"`
-	Creation string `json:"creation" gorm:"TIMESTAMP"`
+	Modified string `json:"modified" gorm:"TIMESTAMP"`
+}
+
+// CreateFavoritePhraseInput is a classification of a phrase by a user.
+type CreateFavoritePhraseInput struct {
+	PhraseID uint   `json:"phrase_ID" binding:"required"`
+	UserID   string `json:"user_ID" binding:"required"`
 }

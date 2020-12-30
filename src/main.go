@@ -108,5 +108,36 @@ func main() {
 	r.PATCH("/advertisement/:id", controllers.PatchAdvertisement)
 	r.DELETE("/advertisement/:id", controllers.DeleteAdvertisement)
 
+	// Weak entities routes /////////////////////////////////////////
+	//TODO: FIX FIND METHODS IN WEAK ENTITIES
+
+	// Routes for friends
+	r.GET("/friends", controllers.GetFriends)
+	r.POST("/friend", controllers.CreateFriend)
+	r.GET("/friend/:id", controllers.FindFriend)
+	r.PUT("/friend/:id", controllers.PutFriend)
+	r.DELETE("/friend/:id", controllers.DeleteFriend)
+
+	// Routes for wordsByRegions
+	r.GET("/words_by_regions", controllers.GetWordsByRegions)
+	r.POST("/word_by_region", controllers.CreateWordByRegion)
+	r.GET("/word_by_region/:id", controllers.FindWordByRegion)
+	r.PUT("/word_by_region/:id", controllers.PutWordByRegion)
+	r.DELETE("/word_by_region/:id", controllers.DeleteWordByRegion)
+
+	// Routes for favorite_phrases
+	r.GET("/favorite_phrases", controllers.GetFavoritePhrases)
+	r.POST("/favorite_phrase", controllers.CreateFavoritePhrase)
+	r.GET("/favorite_phrase/:id", controllers.FindFavoritePhrase)
+	r.PUT("/favorite_phrase/:id", controllers.PutFavoritePhrase)
+	r.DELETE("/favorite_phrase/:id", controllers.DeleteFavoritePhrase)
+
+	// Routes for favorite_words
+	r.GET("/favorite_words", controllers.GetFavoriteWords)
+	r.POST("/favorite_word", controllers.CreateFavoriteWord)
+	r.GET("/favorite_word/:id", controllers.FindFavoriteWord)
+	r.PUT("/favorite_word/:id", controllers.PutFavoriteWord)
+	r.DELETE("/favorite_word/:id", controllers.DeleteFavoriteWord)
+
 	r.Run(":8080")
 }
