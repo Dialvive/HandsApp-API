@@ -12,7 +12,6 @@ type Phrase struct {
 
 // CreatePhraseInput represents a coherent spoken language set of words.
 type CreatePhraseInput struct {
-	ID               uint   `json:"id" binding:"required"`
 	LocaleID         uint   `json:"locale_ID" binding:"required"`
 	PhraseCategoryID uint   `json:"phrase_category_ID" binding:"required"`
 	Text             string `json:"name" binding:"required"`

@@ -13,7 +13,6 @@ type Word struct {
 
 // CreateWordInput represents a coherent spoken word.
 type CreateWordInput struct {
-	ID             uint   `json:"id" binding:"required"`
 	LocaleID       uint   `json:"locale_ID" binding:"required"`
 	WordCategoryID uint   `json:"phrase_category_ID" binding:"required"`
 	Text           string `json:"name" binding:"required"`
