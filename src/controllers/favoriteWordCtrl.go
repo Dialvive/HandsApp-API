@@ -24,9 +24,11 @@ func CreateFavoriteWord(c *gin.Context) {
 		return
 	}
 
+	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	favoriteWord := models.FavoriteWord{
-		WordID: input.WordID,
-		UserID: input.UserID,
+		WordID:   input.WordID,
+		UserID:   input.UserID,
+		Modified: t,
 	}
 	models.DB.Create(&favoriteWord)
 
