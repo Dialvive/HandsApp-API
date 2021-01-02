@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`friend`(
     `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (`user1_ID`) REFERENCES `signa_mundi`.`user`(`ID`),
     FOREIGN KEY (`user2_ID`) REFERENCES `signa_mundi`.`user`(`ID`),
-    FOREIGN KEY (`friendship`) REFERENCES `signa_mundi`.`friendship`(`ID`)
+    FOREIGN KEY (`friendship_ID`) REFERENCES `signa_mundi`.`friendship`(`ID`)
 );
 
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`ad_category`(
