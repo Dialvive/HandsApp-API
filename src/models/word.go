@@ -1,5 +1,7 @@
 package models
 
+import "github.com/dgrijalva/jwt-go"
+
 // Word represents a coherent spoken language set of words.
 type Word struct {
 	ID             uint   `json:"id" gorm:"INT; primaryKey"`
@@ -18,4 +20,10 @@ type CreateWordInput struct {
 	Text           string `json:"name" binding:"required"`
 	Definition     string `json:"definition" binding:"required"`
 	Context        string `json:"context" binding:"required"`
+}
+
+// WordClaim is  a claim that cointains Word as Data.
+type WordClaim struct {
+	Data Word `json:"data" binding:"required"`
+	jwt.StandardClaims
 }

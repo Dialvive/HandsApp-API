@@ -1,5 +1,7 @@
 package models
 
+import "github.com/dgrijalva/jwt-go"
+
 // Friend represents a friendship between two users.
 type Friend struct {
 	User1ID      uint   `json:"user1_ID" gorm:"INT NOT NULL;primaryKey;autoIncrement:false"`
@@ -15,4 +17,10 @@ type CreateFriendInput struct {
 	User2ID      uint `json:"user2_ID" binding:"required"`
 	FriendshipID uint `json:"friendship_ID" binding:"required"`
 	Facebook     bool `json:"facebook" binding:"required"`
+}
+
+// FriendClaim is a claim that cointains Friend as Data.
+type FriendClaim struct {
+	Data Friend `json:"data" binding:"required"`
+	jwt.StandardClaims
 }

@@ -1,5 +1,7 @@
 package models
 
+import "github.com/dgrijalva/jwt-go"
+
 // PhraseCategory is a category in which a set of phrases fall into.
 type PhraseCategory struct {
 	ID       uint   `json:"id" gorm:"INT; primaryKey"`
@@ -10,4 +12,10 @@ type PhraseCategory struct {
 // CreatePhraseCategoryInput is a category in which a set of phrases fall into.
 type CreatePhraseCategoryInput struct {
 	Name string `json:"name" binding:"required"`
+}
+
+// PhraseCategoryClaim is  a claim that cointains PhraseCategory as Data.
+type PhraseCategoryClaim struct {
+	Data PhraseCategory `json:"data" binding:"required"`
+	jwt.StandardClaims
 }

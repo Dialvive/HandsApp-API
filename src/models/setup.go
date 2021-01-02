@@ -34,10 +34,10 @@ func ConnectDatabase() {
 		&Phrase{},
 		&Advertisement{},
 		// Weak objects
+		&WordByRegion{},
+		&FavoriteWord{},
 		&Friend{},
 		&FavoritePhrase{},
-		&FavoriteWord{},
-		&WordByRegion{},
 	)
 
 	DB = database

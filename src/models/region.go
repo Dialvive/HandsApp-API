@@ -1,5 +1,7 @@
 package models
 
+import "github.com/dgrijalva/jwt-go"
+
 // Region represents an administrative division of a country.
 type Region struct {
 	ID        uint   `json:"id" gorm:"INT; primaryKey"`
@@ -12,4 +14,10 @@ type Region struct {
 type CreateRegionInput struct {
 	Name      string `json:"name" binding:"required"`
 	CountryID int    `json:"country_ID" binding:"required"`
+}
+
+// RegionClaim is  a claim that cointains Region as Data.
+type RegionClaim struct {
+	Data Region `json:"data" binding:"required"`
+	jwt.StandardClaims
 }

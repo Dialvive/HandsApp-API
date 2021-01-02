@@ -1,5 +1,7 @@
 package models
 
+import "github.com/dgrijalva/jwt-go"
+
 // WordByRegion is a classification of a word by region.
 type WordByRegion struct {
 	WordID   uint   `json:"word_ID" gorm:"INT NOT NULL"`
@@ -11,4 +13,10 @@ type WordByRegion struct {
 type CreateWordByRegionInput struct {
 	WordID   uint   `json:"word_ID" binding:"required"`
 	RegionID string `json:"region_ID" binding:"required"`
+}
+
+// WordByRegionClaim is  a claim that cointains WordByRegion as Data.
+type WordByRegionClaim struct {
+	Data WordByRegion `json:"data" binding:"required"`
+	jwt.StandardClaims
 }

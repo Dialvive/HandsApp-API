@@ -1,5 +1,7 @@
 package models
 
+import "github.com/dgrijalva/jwt-go"
+
 // Advertisement represents an ad.
 type Advertisement struct {
 	ID           uint   `json:"id" gorm:"INT AUTO_INCREMENT; primaryKey"`
@@ -22,4 +24,10 @@ type CreateAdvertisementInput struct {
 	Body         string `json:"body" binding:"required"`
 	Media        bool   `json:"media" binding:"required"`
 	Paid         uint   `json:"paid" binding:"required"`
+}
+
+// AdvertisementClaim is a claim that cointains Advertisement as Data.
+type AdvertisementClaim struct {
+	Data Advertisement `json:"data" binding:"required"`
+	jwt.StandardClaims
 }

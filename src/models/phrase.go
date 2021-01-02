@@ -1,5 +1,7 @@
 package models
 
+import "github.com/dgrijalva/jwt-go"
+
 // Phrase represents a coherent spoken language set of words.
 type Phrase struct {
 	ID               uint   `json:"id" gorm:"INT; primaryKey"`
@@ -16,4 +18,10 @@ type CreatePhraseInput struct {
 	PhraseCategoryID uint   `json:"phrase_category_ID" binding:"required"`
 	Text             string `json:"name" binding:"required"`
 	Context          string `json:"context" binding:"required"`
+}
+
+// PhraseClaim is  a claim that cointains Phrase as Data.
+type PhraseClaim struct {
+	Data Phrase `json:"data" binding:"required"`
+	jwt.StandardClaims
 }
