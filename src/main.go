@@ -151,7 +151,6 @@ func main() {
 	r.POST("/v1/favorite_word", controllers.CreateFavoriteWord)
 	r.GET("/v1/favorite_words_count/word/:wordId", controllers.CountFavoriteWordsP)
 	r.GET("/v1/favorite_words_count/user/:userId", controllers.CountFavoriteWordsU)
-	r.GET("/v1/favorite_word/:userId/:wordId", controllers.FindFavoriteWords)
 	r.GET("/v1/favorite_words/:userId", controllers.FindFavoriteWords)
 	r.PUT("/v1/favorite_word/:userId/:wordId", controllers.PutFavoriteWord)
 	r.DELETE("/v1/favorite_word/:userId/:wordId", controllers.DeleteFavoriteWord)
