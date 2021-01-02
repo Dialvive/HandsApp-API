@@ -37,16 +37,53 @@ func CreateFriend(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": friend})
 }
 
-// FindFriend recieves an id, and returns an specific friend with that id.
-func FindFriend(c *gin.Context) {
-	var friend models.Friend
+// FindFriends recieves an id, and returns as much friends as there are with that id.
+func FindFriends(c *gin.Context) {
+	var friends []models.Friend
 
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&friend).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Friend not found!"})
+	err1 := models.DB.Where("user1_ID = ?", c.Param("id")).Find(&friends).Error
+	err2 := models.DB.Where("user2_ID = ?", c.Param("id")).Find(&friends).Error
+
+	if err1 != nil && err2 != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Friends not found!"})
 		return
 	}
 
+	c.JSON(http.StatusOK, gin.H{"data": friends})
+}
+
+// FindFriend recieves two IDs, and returns an specific friend with that IDs.
+func FindFriend(c *gin.Context) {
+	var input models.FindFriendsInput
+
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	var friend models.Friend
+	if err1 := models.DB.Model(&friend).First(&input).Error; err1 != nil {
+		tupni := models.FindFriendsInput{
+			User1ID: input.User2ID,
+			User2ID: input.User1ID,
+		}
+		if err2 := models.DB.Model(&friend).First(&tupni).Error; err2 != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Friend not found!"})
+			return
+		}
+	}
+
 	c.JSON(http.StatusOK, gin.H{"data": friend})
+}
+
+// CountFriends recieves a user ID, returns the number of users that user has as friends.
+func CountFriends(c *gin.Context) {
+	var count int64
+	if err := models.DB.Model(&models.FavoritePhrase{}).Where("user1_ID = ?", c.Param("id")).Or("user2_ID = ?", c.Param("id")).Count(&count).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"data": count})
 }
 
 // PutFriend updates a friend
@@ -84,7 +121,7 @@ func PutFriend(c *gin.Context) {
 func DeleteFriend(c *gin.Context) {
 	// Get model if exist
 	var friend models.Friend
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&friend).Error; err != nil {
+	if err := models.DB.Where("user1_ID = ?", c.Param("id")).First(&friend).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}

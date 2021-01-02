@@ -16,3 +16,9 @@ type CreateFriendInput struct {
 	FriendshipID uint `json:"friendship_ID" binding:"required"`
 	Facebook     bool `json:"facebook" binding:"required"`
 }
+
+// FindFriendsInput represents a friendship between two users.
+type FindFriendsInput struct {
+	User1ID uint `json:"user1_ID" binding:"required"`
+	User2ID uint `json:"user2_ID" binding:"required"`
+}

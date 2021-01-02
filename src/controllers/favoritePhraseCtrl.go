@@ -23,7 +23,6 @@ func CreateFavoritePhrase(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	favoritePhrase := models.FavoritePhrase{
 		PhraseID: input.PhraseID,
@@ -31,20 +30,37 @@ func CreateFavoritePhrase(c *gin.Context) {
 		Modified: t,
 	}
 	models.DB.Create(&favoritePhrase)
-
 	c.JSON(http.StatusOK, gin.H{"data": favoritePhrase})
 }
 
-// FindFavoritePhrase recieves an id, and returns an specific favoritePhrase with that id.
-func FindFavoritePhrase(c *gin.Context) {
-	var favoritePhrase models.FavoritePhrase
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&favoritePhrase).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "FavoritePhrase not found!"})
+// FindFavoritePhrases recieves an user id, and returns all of its favorite phrases.
+func FindFavoritePhrases(c *gin.Context) {
+	var favorites []models.FavoritePhrase
+	if err := models.DB.Where("user_ID = ?", c.Param("id")).Find(&favorites).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Phrases not found!"})
 		return
 	}
+	c.JSON(http.StatusOK, gin.H{"data": favorites})
+}
 
-	c.JSON(http.StatusOK, gin.H{"data": favoritePhrase})
+// CountFavoritePhrasesP recieves a phrase ID, returns the number of users that user has marked it as favorite.
+func CountFavoritePhrasesP(c *gin.Context) {
+	var count int64
+	if err := models.DB.Model(&models.FavoritePhrase{}).Where("phrase_ID = ?", c.Param("phraseId")).Count(&count).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"data": count})
+}
+
+// CountFavoritePhrasesU recieves a user ID, returns the number of phrases that user has marked it as favorite.
+func CountFavoritePhrasesU(c *gin.Context) {
+	var count int64
+	if err := models.DB.Model(&models.FavoritePhrase{}).Where("user_ID = ?", c.Param("userId")).Count(&count).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"data": count})
 }
 
 // PutFavoritePhrase updates a favoritePhrase
@@ -52,19 +68,16 @@ func PutFavoritePhrase(c *gin.Context) {
 
 	// Get model if exist
 	var favoritePhrase models.FavoritePhrase
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&favoritePhrase).Error; err != nil {
+	if err := models.DB.Where("user_ID = ? AND phrase_ID = ?", c.Param("userId"), c.Param("phraseId")).First(&favoritePhrase).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "FavoritePhrase not found!"})
 		return
 	}
 
 	var input models.CreateFavoritePhraseInput
-
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	models.DB.Model(&favoritePhrase).Updates(
 		models.FavoritePhrase{
@@ -72,7 +85,6 @@ func PutFavoritePhrase(c *gin.Context) {
 			UserID:   input.UserID,
 			Modified: t,
 		})
-
 	c.JSON(http.StatusOK, gin.H{"data": favoritePhrase})
 }
 
@@ -80,12 +92,10 @@ func PutFavoritePhrase(c *gin.Context) {
 func DeleteFavoritePhrase(c *gin.Context) {
 	// Get model if exist
 	var favoritePhrase models.FavoritePhrase
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&favoritePhrase).Error; err != nil {
+	if err := models.DB.Where("user_ID = ? AND phrase_ID = ?", c.Param("userId"), c.Param("phrase_Id")).First(&favoritePhrase).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}
-
 	models.DB.Delete(&favoritePhrase)
-
 	c.JSON(http.StatusOK, gin.H{"data": true})
 }

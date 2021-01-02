@@ -116,40 +116,42 @@ func main() {
 	r.DELETE("/v1/advertisement/:id", controllers.DeleteAdvertisement)
 
 	// Weak entities routes /////////////////////////////////////////
-	//TODO: FIX FIND METHODS IN WEAK ENTITIES TAKING INTO ACCOUNT TWO ids
-	//TODO: IMPLEMENT FIND ALL WEAK ENTITIES RELATED TO ONE id
 
 	// Routes for friends
 	r.GET("/v1/friends", controllers.GetFriends)
 	r.POST("/v1/friend", controllers.CreateFriend)
 	r.GET("/v1/friend?id1=:id1&id2=:id2", controllers.FindFriend)
 	r.GET("/v1/friends/:id", controllers.FindFriends)
+	r.GET("/v1/friends_count/:id", controllers.CountFriends)
 	r.PUT("/v1/friend?id1=:id1&id2=:id2", controllers.PutFriend)
 	r.DELETE("/v1/friend?id1=:id1&id2=:id2", controllers.DeleteFriend)
 
 	// Routes for wordsByRegions
 	r.GET("/v1/words_by_regions", controllers.GetWordsByRegions)
 	r.POST("/v1/word_by_region", controllers.CreateWordByRegion)
-	r.GET("/v1/word_by_region?id1=:id1&id2=:id2", controllers.FindWordByRegion)
-	r.GET("/v1/words_of_region/:id", controllers.FindWordsOfRegion)
-	r.PUT("/v1/word_by_region?id1=:id1&id2=:id2", controllers.PutWordByRegion)
-	r.DELETE("/v1/word_by_region?id1=:id1&id2=:id2", controllers.DeleteWordByRegion)
+	r.GET("/v1/words_by_region_count/:regionId", controllers.CountWordsOfRegion)
+	r.GET("/v1/words_of_region/:regionId", controllers.FindWordsOfRegion)
+	r.PUT("/v1/word_by_region/:regionId/:wordId", controllers.PutWordByRegion)
+	r.DELETE("/v1/word_by_region/:regionId/:wordId", controllers.DeleteWordByRegion)
 
 	// Routes for favorite_phrases
 	r.GET("/v1/favorite_phrases", controllers.GetFavoritePhrases)
 	r.POST("/v1/favorite_phrase", controllers.CreateFavoritePhrase)
-	r.GET("/v1/favorite_phrase?id1=:id1&id2=:id2", controllers.FindFavoritePhrase)
-	r.GET("/v1/favorite_phrases/:id", controllers.FindFavoritePhrases)
-	r.PUT("/v1/favorite_phrase?id1=:id1&id2=:id2", controllers.PutFavoritePhrase)
-	r.DELETE("/v1/favorite_phrase?id1=:id1&id2=:id2", controllers.DeleteFavoritePhrase)
+	r.GET("/v1/favorite_phrases_count/phrase/:phraseId", controllers.CountFavoritePhrasesP)
+	r.GET("/v1/favorite_phrases_count/user/:userId", controllers.CountFavoritePhrasesU)
+	r.GET("/v1/favorite_phrases/:userId", controllers.FindFavoritePhrases)
+	r.PUT("/v1/favorite_phrase/:userId/:phraseId", controllers.PutFavoritePhrase)
+	r.DELETE("/v1/favorite_phrase/:userId/:phraseId", controllers.DeleteFavoritePhrase)
 
 	// Routes for favorite_words
 	r.GET("/v1/favorite_words", controllers.GetFavoriteWords)
 	r.POST("/v1/favorite_word", controllers.CreateFavoriteWord)
-	r.GET("/v1/favorite_word?id1=:id1&id2=:id2", controllers.FindFavoriteWord)
-	r.GET("/v1/favorite_words/:id", controllers.FindFavoriteWords)
-	r.PUT("/v1/favorite_word?id1=:id1&id2=:id2", controllers.PutFavoriteWord)
-	r.DELETE("/v1/favorite_word?id1=:id1&id2=:id2", controllers.DeleteFavoriteWord)
+	r.GET("/v1/favorite_words_count/word/:wordId", controllers.CountFavoriteWordsP)
+	r.GET("/v1/favorite_words_count/user/:userId", controllers.CountFavoriteWordsU)
+	r.GET("/v1/favorite_word/:userId/:wordId", controllers.FindFavoriteWords)
+	r.GET("/v1/favorite_words/:userId", controllers.FindFavoriteWords)
+	r.PUT("/v1/favorite_word/:userId/:wordId", controllers.PutFavoriteWord)
+	r.DELETE("/v1/favorite_word/:userId/:wordId", controllers.DeleteFavoriteWord)
 
 	r.Run(":8080")
 }
