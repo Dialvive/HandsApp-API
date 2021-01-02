@@ -8,7 +8,7 @@ type Advertisement struct {
 	AdCategoryID uint   `json:"ad_category_ID" gorm:"TINYINT NOT NULL"`
 	Title        string `json:"title" gorm:"VARCHAR(64) NOT NULL"`
 	Body         string `json:"body" gorm:"TEXT"`
-	Media        bool   `json:"media" gorm:"BOOLEAN; default: false"`
+	Media        bool   `json:"media" gorm:"BOOLEAN; default:0"`
 	Paid         uint   `json:"paid" gorm:"INT NOT NULL"`
 	Modified     string `json:"modified" gorm:"TIMESTAMP"`
 }

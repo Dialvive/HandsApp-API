@@ -4,7 +4,10 @@ import (
 	"API/controllers"
 	"API/models"
 
+	"log"
+
 	"github.com/gin-gonic/gin"
+	//"github.com/gin-gonic/autotls"
 )
 
 func main() {
@@ -120,11 +123,11 @@ func main() {
 	// Routes for friends
 	r.GET("/v1/friends", controllers.GetFriends)
 	r.POST("/v1/friend", controllers.CreateFriend)
-	r.GET("/v1/friend?id1=:id1&id2=:id2", controllers.FindFriend)
+	r.GET("/v1/friend/:id1/:id2", controllers.FindFriend)
 	r.GET("/v1/friends/:id", controllers.FindFriends)
 	r.GET("/v1/friends_count/:id", controllers.CountFriends)
-	r.PUT("/v1/friend?id1=:id1&id2=:id2", controllers.PutFriend)
-	r.DELETE("/v1/friend?id1=:id1&id2=:id2", controllers.DeleteFriend)
+	r.PUT("/v1/friend/:id1/:id2", controllers.PutFriend)
+	r.DELETE("/v1/friend/:id1/:id2", controllers.DeleteFriend)
 
 	// Routes for wordsByRegions
 	r.GET("/v1/words_by_regions", controllers.GetWordsByRegions)
@@ -153,5 +156,6 @@ func main() {
 	r.PUT("/v1/favorite_word/:userId/:wordId", controllers.PutFavoriteWord)
 	r.DELETE("/v1/favorite_word/:userId/:wordId", controllers.DeleteFavoriteWord)
 
-	r.Run(":8080")
+	//log.Fatal(autotls.Run(r, "api.signamundi.com"))
+	log.Fatal(r.Run(":8080"))
 }

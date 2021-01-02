@@ -54,32 +54,20 @@ func FindFriends(c *gin.Context) {
 
 // FindFriend recieves two IDs, and returns an specific friend with that IDs.
 func FindFriend(c *gin.Context) {
-	var input models.FindFriendsInput
-
-	if err := c.ShouldBindJSON(&input); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
 	var friend models.Friend
-	if err1 := models.DB.Model(&friend).First(&input).Error; err1 != nil {
-		tupni := models.FindFriendsInput{
-			User1ID: input.User2ID,
-			User2ID: input.User1ID,
-		}
-		if err2 := models.DB.Model(&friend).First(&tupni).Error; err2 != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Friend not found!"})
+	if err := models.DB.Where("user1_ID = ? AND user2_ID = ?", c.Param("id1"), c.Param("id2")).First(&friend).Error; err != nil {
+		if err := models.DB.Where("user1_ID = ? AND user2_ID = ?", c.Param("id2"), c.Param("id1")).First(&friend).Error; err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "FavoritePhrase not found!"})
 			return
 		}
 	}
-
 	c.JSON(http.StatusOK, gin.H{"data": friend})
 }
 
 // CountFriends recieves a user ID, returns the number of users that user has as friends.
 func CountFriends(c *gin.Context) {
 	var count int64
-	if err := models.DB.Model(&models.FavoritePhrase{}).Where("user1_ID = ?", c.Param("id")).Or("user2_ID = ?", c.Param("id")).Count(&count).Error; err != nil {
+	if err := models.DB.Model(&models.Friend{}).Where("user1_ID = ?", c.Param("id")).Or("user2_ID = ?", c.Param("id")).Count(&count).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
