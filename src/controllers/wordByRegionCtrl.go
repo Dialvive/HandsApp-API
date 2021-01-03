@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"API/models"
+	"API/security"
 	"net/http"
 	"time"
 
@@ -36,28 +37,28 @@ func CreateWordByRegion(c *gin.Context) {
 
 // FindWordsOfRegion recieves an user id, and returns all of its favorite words.
 func FindWordsOfRegion(c *gin.Context) {
-	var favorites []models.WordByRegion
-	if err := models.DB.Where("user_ID = ?", c.Param("id")).Find(&favorites).Error; err != nil {
+	var words []models.WordByRegion
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("regionID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("region_ID = ?", param).Find(&words).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Words not found!"})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"data": favorites})
+	c.JSON(http.StatusOK, gin.H{"data": words})
 }
 
 // CountWordsOfRegion recieves a word ID, returns the number of users that user has marked it as favorite.
 func CountWordsOfRegion(c *gin.Context) {
 	var count int64
-	if err := models.DB.Model(&models.WordByRegion{}).Where("word_ID = ?", c.Param("wordID")).Count(&count).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("regionID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
-	c.JSON(http.StatusOK, gin.H{"data": count})
-}
-
-// CountWordsByRegionU recieves a user ID, returns the number of words that user has marked it as favorite.
-func CountWordsByRegionU(c *gin.Context) {
-	var count int64
-	if err := models.DB.Model(&models.WordByRegion{}).Where("region_ID = ?", c.Param("regionID")).Count(&count).Error; err != nil {
+	if err := models.DB.Where("region_ID = ?", param).Count(&count).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -69,7 +70,15 @@ func PutWordByRegion(c *gin.Context) {
 
 	// Get model if exist
 	var wordByRegion models.WordByRegion
-	if err := models.DB.Where("region_ID = ? AND word_ID = ?", c.Param("regionID"), c.Param("word_ID")).First(&wordByRegion).Error; err != nil {
+	var param1, param2 uint64
+	var err error
+	if param1, err = security.SecureUint(c.Param("regionID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if param2, err = security.SecureUint(c.Param("wordID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("region_ID = ? AND word_ID = ?", param1, param2).First(&wordByRegion).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "WordByRegion not found!"})
 		return
 	}
@@ -93,7 +102,15 @@ func PutWordByRegion(c *gin.Context) {
 func DeleteWordByRegion(c *gin.Context) {
 	// Get model if exist
 	var wordByRegion models.WordByRegion
-	if err := models.DB.Where("region_ID = ? AND word_ID = ?", c.Param("regionID"), c.Param("word_ID")).First(&wordByRegion).Error; err != nil {
+	var param1, param2 uint64
+	var err error
+	if param1, err = security.SecureUint(c.Param("regionID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if param2, err = security.SecureUint(c.Param("wordID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("region_ID = ? AND word_ID = ?", param1, param2).First(&wordByRegion).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}

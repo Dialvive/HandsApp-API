@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"API/models"
+	"API/security"
 	"net/http"
 	"time"
 
@@ -40,9 +41,14 @@ func CreateFriend(c *gin.Context) {
 // FindFriends recieves an id, and returns as much friends as there are with that id.
 func FindFriends(c *gin.Context) {
 	var friends []models.Friend
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID1")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
 
-	err1 := models.DB.Where("user1_ID = ?", c.Param("id")).Find(&friends).Error
-	err2 := models.DB.Where("user2_ID = ?", c.Param("id")).Find(&friends).Error
+	err1 := models.DB.Where("user1_ID = ?", param).Find(&friends).Error
+	err2 := models.DB.Where("user2_ID = ?", param).Find(&friends).Error
 
 	if err1 != nil && err2 != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Friends not found!"})
@@ -55,8 +61,16 @@ func FindFriends(c *gin.Context) {
 // FindFriend recieves two IDs, and returns an specific friend with that IDs.
 func FindFriend(c *gin.Context) {
 	var friend models.Friend
-	if err := models.DB.Where("user1_ID = ? AND user2_ID = ?", c.Param("id1"), c.Param("id2")).First(&friend).Error; err != nil {
-		if err := models.DB.Where("user1_ID = ? AND user2_ID = ?", c.Param("id2"), c.Param("id1")).First(&friend).Error; err != nil {
+	var param1, param2 uint64
+	var err error
+	if param1, err = security.SecureUint(c.Param("ID1")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if param2, err = security.SecureUint(c.Param("ID2")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("user1_ID = ? AND user2_ID = ?", param1, param2).First(&friend).Error; err != nil {
+		if err := models.DB.Where("user1_ID = ? AND user2_ID = ?", param2, param1).First(&friend).Error; err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "FavoritePhrases not found!"})
 			return
 		}
@@ -64,13 +78,23 @@ func FindFriend(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": friend})
 }
 
-// CountFriends recieves a user ID, returns the numbe-r of users that user has as friends.
+// CountFriends recieves a user ID, returns the number of users that user has as friends.
 func CountFriends(c *gin.Context) {
 	var count int64
-	if err := models.DB.Model(&models.Friend{}).Where("user1_ID = ?", c.Param("id")).Or("user2_ID = ?", c.Param("id")).Count(&count).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+
+	err1 := models.DB.Where("user1_ID = ?", param).Count(&count).Error
+	err2 := models.DB.Where("user2_ID = ?", param).Count(&count).Error
+
+	if err1 != nil && err2 != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Friends not found!"})
 		return
 	}
+
 	c.JSON(http.StatusOK, gin.H{"data": count})
 }
 
@@ -79,8 +103,15 @@ func PutFriend(c *gin.Context) {
 
 	// Get model if exist
 	var friend models.Friend
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&friend).Error; err != nil {
+	var param1, param2 uint64
+	var err error
+	if param1, err = security.SecureUint(c.Param("ID1")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if param2, err = security.SecureUint(c.Param("ID2")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Model(&models.Friend{}).Where("user1_ID = ?", param1).Or("user2_ID = ?", param2).Save(&friend).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Friend not found!"})
 		return
 	}
@@ -109,7 +140,15 @@ func PutFriend(c *gin.Context) {
 func DeleteFriend(c *gin.Context) {
 	// Get model if exist
 	var friend models.Friend
-	if err := models.DB.Where("user1_ID = ?", c.Param("id")).First(&friend).Error; err != nil {
+	var param1, param2 uint64
+	var err error
+	if param1, err = security.SecureUint(c.Param("ID1")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if param2, err = security.SecureUint(c.Param("ID2")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Model(&models.Friend{}).Where("user1_ID = ?", param1).Or("user2_ID = ?", param2).First(&friend).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}

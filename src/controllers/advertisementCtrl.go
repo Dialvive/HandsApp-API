@@ -52,8 +52,12 @@ func CreateAdvertisement(c *gin.Context) {
 // FindAdvertisement recieves an id, and returns an specific advertisement with that id.
 func FindAdvertisement(c *gin.Context) {
 	var advertisement models.Advertisement
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&advertisement).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&advertisement).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Advertisement not found!"})
 		return
 	}
@@ -69,8 +73,12 @@ func PatchAdvertisement(c *gin.Context) {
 
 	// Get model if exist
 	var advertisement models.Advertisement
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&advertisement).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&advertisement).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Advertisement not found!"})
 		return
 	}
@@ -106,7 +114,12 @@ func PatchAdvertisement(c *gin.Context) {
 func DeleteAdvertisement(c *gin.Context) {
 	// Get model if exist
 	var advertisement models.Advertisement
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&advertisement).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&advertisement).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}

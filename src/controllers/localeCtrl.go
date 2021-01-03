@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"API/models"
+	"API/security"
 	"net/http"
 	"time"
 
@@ -39,8 +40,12 @@ func CreateLocale(c *gin.Context) {
 // FindLocale recieves an id, and returns an specific locale with that id.
 func FindLocale(c *gin.Context) {
 	var locale models.Locale
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&locale).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&locale).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Locale not found!"})
 		return
 	}
@@ -53,8 +58,12 @@ func PatchLocale(c *gin.Context) {
 
 	// Get model if exist
 	var locale models.Locale
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&locale).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&locale).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Locale not found!"})
 		return
 	}
@@ -83,7 +92,12 @@ func PatchLocale(c *gin.Context) {
 func DeleteLocale(c *gin.Context) {
 	// Get model if exist
 	var locale models.Locale
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&locale).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&locale).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}

@@ -46,8 +46,12 @@ func CreateCountry(c *gin.Context) {
 // FindCountry recieves an id, and returns an specific country with that id.
 func FindCountry(c *gin.Context) {
 	var country models.Country
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&country).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&country).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Country not found!"})
 		return
 	}
@@ -63,8 +67,12 @@ func PatchCountry(c *gin.Context) {
 
 	// Get model if exist
 	var country models.Country
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&country).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&country).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Country not found!"})
 		return
 	}
@@ -95,7 +103,12 @@ func PatchCountry(c *gin.Context) {
 func DeleteCountry(c *gin.Context) {
 	// Get model if exist
 	var country models.Country
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&country).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&country).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}

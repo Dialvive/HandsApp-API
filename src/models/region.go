@@ -4,7 +4,7 @@ import "github.com/dgrijalva/jwt-go"
 
 // Region represents an administrative division of a country.
 type Region struct {
-	ID        uint   `json:"id" gorm:"type:INT; primaryKey"`
+	ID        uint   `json:"ID" gorm:"type:INT; primaryKey"`
 	Name      string `json:"name" gorm:"type:TEXT NOT NULL"`
 	CountryID uint   `json:"country_ID" gorm:"type:TINYINT NOT NULL"`
 	Modified  string `json:"modified" gorm:"type:TIMESTAMP"`

@@ -49,8 +49,12 @@ func CreatePhrase(c *gin.Context) {
 // FindPhrase recieves an id, and returns an specific phrase with that id.
 func FindPhrase(c *gin.Context) {
 	var phrase models.Phrase
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&phrase).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&phrase).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Phrase not found!"})
 		return
 	}
@@ -66,8 +70,12 @@ func PatchPhrase(c *gin.Context) {
 
 	// Get model if exist
 	var phrase models.Phrase
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&phrase).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&phrase).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Phrase not found!"})
 		return
 	}
@@ -100,7 +108,12 @@ func PatchPhrase(c *gin.Context) {
 func DeletePhrase(c *gin.Context) {
 	// Get model if exist
 	var phrase models.Phrase
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&phrase).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&phrase).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}

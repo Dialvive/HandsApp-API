@@ -43,8 +43,12 @@ func CreateFriendship(c *gin.Context) {
 // FindFriendship recieves an id, and returns an specific friendship with that id.
 func FindFriendship(c *gin.Context) {
 	var friendship models.Friendship
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&friendship).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&friendship).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Friendship not found!"})
 		return
 	}
@@ -59,8 +63,12 @@ func PatchFriendship(c *gin.Context) {
 
 	// Get model if exist
 	var friendship models.Friendship
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&friendship).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&friendship).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Friendship not found!"})
 		return
 	}
@@ -89,7 +97,12 @@ func PatchFriendship(c *gin.Context) {
 func DeleteFriendship(c *gin.Context) {
 	// Get model if exist
 	var friendship models.Friendship
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&friendship).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&friendship).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}

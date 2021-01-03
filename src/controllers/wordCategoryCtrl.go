@@ -43,8 +43,12 @@ func CreateWordCategory(c *gin.Context) {
 // FindWordCategory recieves an id, and returns an specific wordCategory with that id.
 func FindWordCategory(c *gin.Context) {
 	var wordCategory models.WordCategory
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&wordCategory).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&wordCategory).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "WordCategory not found!"})
 		return
 	}
@@ -58,7 +62,12 @@ func FindWordCategory(c *gin.Context) {
 func PatchWordCategory(c *gin.Context) {
 	// Get model if exist
 	var wordCategory models.WordCategory
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&wordCategory).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&wordCategory).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "WordCategory not found!"})
 		return
 	}
@@ -84,7 +93,12 @@ func PatchWordCategory(c *gin.Context) {
 func DeleteWordCategory(c *gin.Context) {
 	// Get model if exist
 	var wordCategory models.WordCategory
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&wordCategory).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&wordCategory).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}

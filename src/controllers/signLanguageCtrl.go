@@ -46,8 +46,12 @@ func CreateSignLanguage(c *gin.Context) {
 // FindSignLanguage recieves an id, and returns an specific signLanguage with that id.
 func FindSignLanguage(c *gin.Context) {
 	var signLanguage models.SignLanguage
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&signLanguage).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&signLanguage).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "SignLanguage not found!"})
 		return
 	}
@@ -63,8 +67,12 @@ func PatchSignLanguage(c *gin.Context) {
 
 	// Get model if exist
 	var signLanguage models.SignLanguage
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&signLanguage).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&signLanguage).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "SignLanguage not found!"})
 		return
 	}
@@ -95,7 +103,12 @@ func PatchSignLanguage(c *gin.Context) {
 func DeleteSignLanguage(c *gin.Context) {
 	// Get model if exist
 	var signLanguage models.SignLanguage
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&signLanguage).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&signLanguage).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}

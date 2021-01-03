@@ -46,8 +46,12 @@ func CreateSpokenLanguage(c *gin.Context) {
 // FindSpokenLanguage recieves an id, and returns an specific spokenLanguage with that id.
 func FindSpokenLanguage(c *gin.Context) {
 	var spokenLanguage models.SpokenLanguage
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&spokenLanguage).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&spokenLanguage).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "SpokenLanguage not found!"})
 		return
 	}
@@ -62,8 +66,12 @@ func PatchSpokenLanguage(c *gin.Context) {
 
 	// Get model if exist
 	var spokenLanguage models.SpokenLanguage
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&spokenLanguage).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&spokenLanguage).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "SpokenLanguage not found!"})
 		return
 	}
@@ -94,7 +102,12 @@ func PatchSpokenLanguage(c *gin.Context) {
 func DeleteSpokenLanguage(c *gin.Context) {
 	// Get model if exist
 	var spokenLanguage models.SpokenLanguage
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&spokenLanguage).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&spokenLanguage).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}

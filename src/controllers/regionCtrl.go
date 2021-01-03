@@ -45,8 +45,12 @@ func CreateRegion(c *gin.Context) {
 // FindRegion recieves an id, and returns an specific region with that id.
 func FindRegion(c *gin.Context) {
 	var region models.Region
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&region).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&region).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Region not found!"})
 		return
 	}
@@ -61,8 +65,12 @@ func PatchRegion(c *gin.Context) {
 
 	// Get model if exist
 	var region models.Region
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&region).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&region).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Region not found!"})
 		return
 	}
@@ -92,7 +100,12 @@ func PatchRegion(c *gin.Context) {
 func DeleteRegion(c *gin.Context) {
 	// Get model if exist
 	var region models.Region
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&region).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&region).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}

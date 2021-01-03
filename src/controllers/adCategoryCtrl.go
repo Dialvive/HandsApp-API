@@ -44,8 +44,13 @@ func CreateAdCategory(c *gin.Context) {
 // FindAdCategory recieves an id, and returns an specific adCategory with that id.
 func FindAdCategory(c *gin.Context) {
 	var adCategory models.AdCategory
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
 
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&adCategory).Error; err != nil {
+	if err := models.DB.Where("id = ?", param).First(&adCategory).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "AdCategory not found!"})
 		return
 	}
@@ -60,8 +65,13 @@ func PatchAdCategory(c *gin.Context) {
 
 	// Get model if exist
 	var adCategory models.AdCategory
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
 
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&adCategory).Error; err != nil {
+	if err := models.DB.Where("id = ?", param).First(&adCategory).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "AdCategory not found!"})
 		return
 	}
@@ -91,7 +101,12 @@ func PatchAdCategory(c *gin.Context) {
 func DeleteAdCategory(c *gin.Context) {
 	// Get model if exist
 	var adCategory models.AdCategory
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&adCategory).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&adCategory).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}

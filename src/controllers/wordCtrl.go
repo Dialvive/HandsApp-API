@@ -52,8 +52,12 @@ func CreateWord(c *gin.Context) {
 // FindWord recieves an id, and returns an specific word with that id.
 func FindWord(c *gin.Context) {
 	var word models.Word
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&word).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&word).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Word not found!"})
 		return
 	}
@@ -70,8 +74,12 @@ func PatchWord(c *gin.Context) {
 
 	// Get model if exist
 	var word models.Word
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&word).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&word).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Word not found!"})
 		return
 	}
@@ -106,7 +114,12 @@ func PatchWord(c *gin.Context) {
 func DeleteWord(c *gin.Context) {
 	// Get model if exist
 	var word models.Word
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&word).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&word).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}

@@ -43,8 +43,12 @@ func CreatePhraseCategory(c *gin.Context) {
 // FindPhraseCategory recieves an id, and returns an specific phraseCategory with that id.
 func FindPhraseCategory(c *gin.Context) {
 	var phraseCategory models.PhraseCategory
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&phraseCategory).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&phraseCategory).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "PhraseCategory not found!"})
 		return
 	}
@@ -59,8 +63,12 @@ func PatchPhraseCategory(c *gin.Context) {
 
 	// Get model if exist
 	var phraseCategory models.PhraseCategory
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&phraseCategory).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&phraseCategory).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "PhraseCategory not found!"})
 		return
 	}
@@ -89,7 +97,12 @@ func PatchPhraseCategory(c *gin.Context) {
 func DeletePhraseCategory(c *gin.Context) {
 	// Get model if exist
 	var phraseCategory models.PhraseCategory
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&phraseCategory).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&phraseCategory).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}

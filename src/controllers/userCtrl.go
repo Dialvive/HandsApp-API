@@ -68,8 +68,12 @@ func CreateUser(c *gin.Context) {
 // FindUser recieves an id, and returns an specific user with that id.
 func FindUser(c *gin.Context) {
 	var user models.User
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&user).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&user).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "User not found!"})
 		return
 	}
@@ -90,8 +94,12 @@ func PutUser(c *gin.Context) {
 
 	// Get model if exist
 	var user models.User
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&user).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&user).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "User not found!"})
 		return
 	}
@@ -136,8 +144,12 @@ func PatchUser(c *gin.Context) {
 
 	// Get model if exist
 	var user models.User
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&user).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&user).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "User not found!"})
 		return
 	}
@@ -215,7 +227,12 @@ func PatchUser(c *gin.Context) {
 func DeleteUser(c *gin.Context) {
 	// Get model if exist
 	var user models.User
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&user).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&user).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}

@@ -1,8 +1,11 @@
 package security
 
 import (
+	"errors"
 	"log"
+	"strconv"
 	"strings"
+	"unicode"
 
 	"github.com/sethvargo/go-password/password"
 )
@@ -55,6 +58,17 @@ func GenPassword256() (string, error) {
 	res := res1 + res2
 
 	return res, err
+}
+
+//SecureUint safely processes a string parameter and casts it into a uint
+func SecureUint(s string) (uint64, error) {
+	for _, c := range s {
+		if !unicode.IsDigit(c) {
+			err := errors.New("Not a valid input")
+			return 0, err
+		}
+	}
+	return strconv.ParseUint(s, 10, 64)
 }
 
 //SecureString checks for SQL injection strings and characters and returns a

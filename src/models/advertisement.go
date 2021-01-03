@@ -4,7 +4,7 @@ import "github.com/dgrijalva/jwt-go"
 
 // Advertisement represents an ad.
 type Advertisement struct {
-	ID           uint   `json:"id" gorm:"type:INT AUTO_INCREMENT; primaryKey"`
+	ID           uint   `json:"ID" gorm:"type:INT AUTO_INCREMENT; primaryKey"`
 	UserID       uint   `json:"user_ID" gorm:"type:INT NOT NULL"`
 	RegionID     uint   `json:"region_ID" gorm:"type:INT NOT NULL"`
 	AdCategoryID uint   `json:"ad_category_ID" gorm:"type:TINYINT NOT NULL"`
