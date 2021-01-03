@@ -11,6 +11,7 @@ import (
 )
 
 func main() {
+	//TODO: 0) HASH & SALT PASSWORDS
 	//TODO: 1) USE SSL/TSL
 	//TODO: 2) USE JWT
 	//TODO: 3) PREVENT SQL INJECTION STRINGS
@@ -132,28 +133,28 @@ func main() {
 	// Routes for wordsByRegions
 	r.GET("/v1/words_by_regions", controllers.GetWordsByRegions)
 	r.POST("/v1/word_by_region", controllers.CreateWordByRegion)
-	r.GET("/v1/words_by_region_count/:regionId", controllers.CountWordsOfRegion)
-	r.GET("/v1/words_of_region/:regionId", controllers.FindWordsOfRegion)
-	r.PUT("/v1/word_by_region/:regionId/:wordId", controllers.PutWordByRegion)
-	r.DELETE("/v1/word_by_region/:regionId/:wordId", controllers.DeleteWordByRegion)
+	r.GET("/v1/words_by_region_count/:regionID", controllers.CountWordsOfRegion)
+	r.GET("/v1/words_of_region/:regionID", controllers.FindWordsOfRegion)
+	r.PUT("/v1/word_by_region/:regionID/:wordID", controllers.PutWordByRegion)
+	r.DELETE("/v1/word_by_region/:regionID/:wordID", controllers.DeleteWordByRegion)
 
 	// Routes for favorite_phrases
 	r.GET("/v1/favorite_phrases", controllers.GetFavoritePhrases)
-	r.POST("/v1/favorite_phrase", controllers.CreateFavoritePhrase)
-	r.GET("/v1/favorite_phrases_count/phrase/:phraseId", controllers.CountFavoritePhrasesP)
-	r.GET("/v1/favorite_phrases_count/user/:userId", controllers.CountFavoritePhrasesU)
-	r.GET("/v1/favorite_phrases/:userId", controllers.FindFavoritePhrases)
-	r.PUT("/v1/favorite_phrase/:userId/:phraseId", controllers.PutFavoritePhrase)
-	r.DELETE("/v1/favorite_phrase/:userId/:phraseId", controllers.DeleteFavoritePhrase)
+	r.POST("/v1/favorite_phrase", controllers.CreateFavoritePhrases)
+	r.GET("/v1/favorite_phrases_count/phrase/:phraseID", controllers.CountFavoritePhrasesP)
+	r.GET("/v1/favorite_phrases_count/user/:userID", controllers.CountFavoritePhrasesU)
+	r.GET("/v1/favorite_phrases/:userID", controllers.FindFavoritePhrases)
+	r.PUT("/v1/favorite_phrase/:userID/:phraseID", controllers.PutFavoritePhrases)
+	r.DELETE("/v1/favorite_phrase/:userID/:phraseID", controllers.DeleteFavoritePhrases)
 
 	// Routes for favorite_words
 	r.GET("/v1/favorite_words", controllers.GetFavoriteWords)
-	r.POST("/v1/favorite_word", controllers.CreateFavoriteWord)
-	r.GET("/v1/favorite_words_count/word/:wordId", controllers.CountFavoriteWordsP)
-	r.GET("/v1/favorite_words_count/user/:userId", controllers.CountFavoriteWordsU)
-	r.GET("/v1/favorite_words/:userId", controllers.FindFavoriteWords)
-	r.PUT("/v1/favorite_word/:userId/:wordId", controllers.PutFavoriteWord)
-	r.DELETE("/v1/favorite_word/:userId/:wordId", controllers.DeleteFavoriteWord)
+	r.POST("/v1/favorite_word", controllers.CreateFavoriteWords)
+	r.GET("/v1/favorite_words_count/word/:wordID", controllers.CountFavoriteWordsP)
+	r.GET("/v1/favorite_words_count/user/:userID", controllers.CountFavoriteWordsU)
+	r.GET("/v1/favorite_words/:userID", controllers.FindFavoriteWords)
+	r.PUT("/v1/favorite_word/:userID/:wordID", controllers.PutFavoriteWords)
+	r.DELETE("/v1/favorite_word/:userID/:wordID", controllers.DeleteFavoriteWords)
 
 	//log.Fatal(autotls.Run(r, "api.signamundi.com"))
 	log.Fatal(r.Run(":8080"))

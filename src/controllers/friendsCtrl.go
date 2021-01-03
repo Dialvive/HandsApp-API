@@ -57,14 +57,14 @@ func FindFriend(c *gin.Context) {
 	var friend models.Friend
 	if err := models.DB.Where("user1_ID = ? AND user2_ID = ?", c.Param("id1"), c.Param("id2")).First(&friend).Error; err != nil {
 		if err := models.DB.Where("user1_ID = ? AND user2_ID = ?", c.Param("id2"), c.Param("id1")).First(&friend).Error; err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "FavoritePhrase not found!"})
+			c.JSON(http.StatusBadRequest, gin.H{"error": "FavoritePhrases not found!"})
 			return
 		}
 	}
 	c.JSON(http.StatusOK, gin.H{"data": friend})
 }
 
-// CountFriends recieves a user ID, returns the number of users that user has as friends.
+// CountFriends recieves a user ID, returns the numbe-r of users that user has as friends.
 func CountFriends(c *gin.Context) {
 	var count int64
 	if err := models.DB.Model(&models.Friend{}).Where("user1_ID = ?", c.Param("id")).Or("user2_ID = ?", c.Param("id")).Count(&count).Error; err != nil {

@@ -47,7 +47,7 @@ func FindWordsOfRegion(c *gin.Context) {
 // CountWordsOfRegion recieves a word ID, returns the number of users that user has marked it as favorite.
 func CountWordsOfRegion(c *gin.Context) {
 	var count int64
-	if err := models.DB.Model(&models.WordByRegion{}).Where("word_ID = ?", c.Param("wordId")).Count(&count).Error; err != nil {
+	if err := models.DB.Model(&models.WordByRegion{}).Where("word_ID = ?", c.Param("wordID")).Count(&count).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -57,7 +57,7 @@ func CountWordsOfRegion(c *gin.Context) {
 // CountWordsByRegionU recieves a user ID, returns the number of words that user has marked it as favorite.
 func CountWordsByRegionU(c *gin.Context) {
 	var count int64
-	if err := models.DB.Model(&models.WordByRegion{}).Where("region_ID = ?", c.Param("regionId")).Count(&count).Error; err != nil {
+	if err := models.DB.Model(&models.WordByRegion{}).Where("region_ID = ?", c.Param("regionID")).Count(&count).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -69,7 +69,7 @@ func PutWordByRegion(c *gin.Context) {
 
 	// Get model if exist
 	var wordByRegion models.WordByRegion
-	if err := models.DB.Where("region_ID = ? AND word_ID = ?", c.Param("regionId"), c.Param("word_Id")).First(&wordByRegion).Error; err != nil {
+	if err := models.DB.Where("region_ID = ? AND word_ID = ?", c.Param("regionID"), c.Param("word_ID")).First(&wordByRegion).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "WordByRegion not found!"})
 		return
 	}
@@ -93,7 +93,7 @@ func PutWordByRegion(c *gin.Context) {
 func DeleteWordByRegion(c *gin.Context) {
 	// Get model if exist
 	var wordByRegion models.WordByRegion
-	if err := models.DB.Where("region_ID = ? AND word_ID = ?", c.Param("regionId"), c.Param("word_Id")).First(&wordByRegion).Error; err != nil {
+	if err := models.DB.Where("region_ID = ? AND word_ID = ?", c.Param("regionID"), c.Param("word_ID")).First(&wordByRegion).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}
