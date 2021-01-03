@@ -4,11 +4,11 @@ import "github.com/dgrijalva/jwt-go"
 
 // Friend represents a friendship between two users.
 type Friend struct {
-	User1ID      uint   `json:"user1_ID" gorm:"INT NOT NULL;primaryKey;autoIncrement:false"`
-	User2ID      uint   `json:"user2_ID" gorm:"INT NOT NULL;primaryKey;autoIncrement:false"`
-	FriendshipID uint   `json:"friendship_ID" gorm:"TINYINT NOT NULL"`
+	User1ID      uint   `json:"user1_ID" gorm:"type:INT NOT NULL;primaryKey;autoIncrement:false"`
+	User2ID      uint   `json:"user2_ID" gorm:"type:INT NOT NULL;primaryKey;autoIncrement:false"`
+	FriendshipID uint   `json:"friendship_ID" gorm:"type:TINYINT NOT NULL"`
 	Facebook     bool   `json:"facebook" gorm:"BOOLEAN; default:0"`
-	Modified     string `json:"modified" gorm:"TIMESTAMP"`
+	Modified     string `json:"modified" gorm:"type:TIMESTAMP"`
 }
 
 // CreateFriendInput represents a friendship between two users.

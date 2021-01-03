@@ -4,10 +4,10 @@ import "github.com/dgrijalva/jwt-go"
 
 // Country represents a real world country.
 type Country struct {
-	ID           uint   `json:"id" gorm:"TINYINT; primaryKey"`
-	Name         string `json:"name" gorm:"TEXT NOT NULL"`
-	Abbreviation string `json:"abbreviation" gorm:"VARCHAR(2) NOT NULL"`
-	Modified     string `json:"modified" gorm:"TIMESTAMP"`
+	ID           uint   `json:"id" gorm:"type:TINYINT; primaryKey"`
+	Name         string `json:"name" gorm:"type:TEXT NOT NULL"`
+	Abbreviation string `json:"abbreviation" gorm:"type:VARCHAR(2) NOT NULL"`
+	Modified     string `json:"modified" gorm:"type:TIMESTAMP"`
 }
 
 // CreateCountryInput type for country POST with automatic ID.

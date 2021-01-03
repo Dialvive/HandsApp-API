@@ -4,9 +4,9 @@ import "github.com/dgrijalva/jwt-go"
 
 // PhraseCategory is a category in which a set of phrases fall into.
 type PhraseCategory struct {
-	ID       uint   `json:"id" gorm:"INT; primaryKey"`
-	Name     string `json:"name" gorm:"TEXT NOT NULL"`
-	Modified string `json:"modified" gorm:"TIMESTAMP"`
+	ID       uint   `json:"id" gorm:"type:INT; primaryKey"`
+	Name     string `json:"name" gorm:"type:TEXT NOT NULL"`
+	Modified string `json:"modified" gorm:"type:TIMESTAMP"`
 }
 
 // CreatePhraseCategoryInput is a category in which a set of phrases fall into.

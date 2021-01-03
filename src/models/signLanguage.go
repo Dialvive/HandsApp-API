@@ -4,10 +4,10 @@ import "github.com/dgrijalva/jwt-go"
 
 // SignLanguage represents a Sign Language such as Mexican Sign Language.
 type SignLanguage struct {
-	ID           uint   `json:"id" gorm:"TINYINT AUTO_INCREMENT; primaryKey"`
-	Name         string `json:"name" gorm:"TEXT NOT NULL"`
-	Abbreviation string `json:"abbreviation" gorm:"VARCHAR(6) NOT NULL"`
-	Modified     string `json:"modified" gorm:"TIMESTAMP"`
+	ID           uint   `json:"id" gorm:"type:TINYINT AUTO_INCREMENT; primaryKey"`
+	Name         string `json:"name" gorm:"type:TEXT NOT NULL"`
+	Abbreviation string `json:"abbreviation" gorm:"type:VARCHAR(6) NOT NULL"`
+	Modified     string `json:"modified" gorm:"type:TIMESTAMP"`
 }
 
 // CreateSignLanguageInput type with automatic ID.

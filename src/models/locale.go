@@ -4,11 +4,11 @@ import "github.com/dgrijalva/jwt-go"
 
 // Locale is a mix of location, spoken language, and sign language classification..
 type Locale struct {
-	ID               uint   `json:"id" gorm:"SMALLINT; primaryKey"`
-	CountryID        uint   `json:"country_ID" gorm:"TINYINT NOT NULL"`
-	SpokenLanguageID uint   `json:"spoken_language_ID" gorm:"TINYINT NOT NULL"`
-	SignLanguageID   uint   `json:"sign_language_ID" gorm:"TINYINT NOT NULL"`
-	Modified         string `json:"modified" gorm:"TIMESTAMP"`
+	ID               uint   `json:"id" gorm:"type:SMALLINT; primaryKey"`
+	CountryID        uint   `json:"country_ID" gorm:"type:TINYINT NOT NULL"`
+	SpokenLanguageID uint   `json:"spoken_language_ID" gorm:"type:TINYINT NOT NULL"`
+	SignLanguageID   uint   `json:"sign_language_ID" gorm:"type:TINYINT NOT NULL"`
+	Modified         string `json:"modified" gorm:"type:TIMESTAMP"`
 }
 
 // CreateLocaleInput is a mix of location, spoken language, and sign language classification..

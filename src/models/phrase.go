@@ -4,12 +4,12 @@ import "github.com/dgrijalva/jwt-go"
 
 // Phrase represents a coherent spoken language set of words.
 type Phrase struct {
-	ID               uint   `json:"id" gorm:"INT; primaryKey"`
-	LocaleID         uint   `json:"locale_ID" gorm:"TINYINT NOT NULL"`
+	ID               uint   `json:"id" gorm:"type:INT; primaryKey"`
+	LocaleID         uint   `json:"locale_ID" gorm:"type:TINYINT NOT NULL"`
 	PhraseCategoryID uint   `json:"phrase_category_ID" gorm:" TINYINT NOT NULL"`
-	Text             string `json:"name" gorm:"TEXT NOT NULL"`
-	Context          string `json:"context" gorm:"TEXT"`
-	Modified         string `json:"modified" gorm:"TIMESTAMP"`
+	Text             string `json:"name" gorm:"type:TEXT NOT NULL"`
+	Context          string `json:"context" gorm:"type:TEXT"`
+	Modified         string `json:"modified" gorm:"type:TIMESTAMP"`
 }
 
 // CreatePhraseInput represents a coherent spoken language set of words.

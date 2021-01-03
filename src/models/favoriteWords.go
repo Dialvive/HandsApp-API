@@ -6,7 +6,7 @@ import "github.com/dgrijalva/jwt-go"
 type FavoriteWords struct {
 	WordID   uint   `json:"word_ID" gorm:"column:word_ID;type:INT NOT NULL;primaryKey;autoIncrement:false"`
 	UserID   uint   `json:"user_ID" gorm:"column:user_ID;type:INT NOT NULL;primaryKey;autoIncrement:false"`
-	Modified string `json:"modified" gorm:"TIMESTAMP"`
+	Modified string `json:"modified" gorm:"type:TIMESTAMP"`
 }
 
 // CreateFavoriteWordsInput is a classification of a word by a user.

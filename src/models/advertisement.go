@@ -4,15 +4,15 @@ import "github.com/dgrijalva/jwt-go"
 
 // Advertisement represents an ad.
 type Advertisement struct {
-	ID           uint   `json:"id" gorm:"INT AUTO_INCREMENT; primaryKey"`
-	UserID       uint   `json:"user_ID" gorm:"INT NOT NULL"`
-	RegionID     uint   `json:"region_ID" gorm:"INT NOT NULL"`
-	AdCategoryID uint   `json:"ad_category_ID" gorm:"TINYINT NOT NULL"`
-	Title        string `json:"title" gorm:"VARCHAR(64) NOT NULL"`
-	Body         string `json:"body" gorm:"TEXT"`
+	ID           uint   `json:"id" gorm:"type:INT AUTO_INCREMENT; primaryKey"`
+	UserID       uint   `json:"user_ID" gorm:"type:INT NOT NULL"`
+	RegionID     uint   `json:"region_ID" gorm:"type:INT NOT NULL"`
+	AdCategoryID uint   `json:"ad_category_ID" gorm:"type:TINYINT NOT NULL"`
+	Title        string `json:"title" gorm:"type:VARCHAR(64) NOT NULL"`
+	Body         string `json:"body" gorm:"type:TEXT"`
 	Media        bool   `json:"media" gorm:"BOOLEAN; default:0"`
-	Paid         uint   `json:"paid" gorm:"INT NOT NULL"`
-	Modified     string `json:"modified" gorm:"TIMESTAMP"`
+	Paid         uint   `json:"paid" gorm:"type:INT NOT NULL"`
+	Modified     string `json:"modified" gorm:"type:TIMESTAMP"`
 }
 
 // CreateAdvertisementInput represents an ad.
