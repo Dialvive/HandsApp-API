@@ -25,8 +25,8 @@ func CreateWordByRegion(c *gin.Context) {
 	}
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	wordByRegion := models.WordByRegion{
-		WordID:   input.WordID,
-		RegionID: input.RegionID,
+		WordID:   uint(input.WordID),
+		RegionID: uint(input.RegionID),
 		Modified: t,
 	}
 	models.DB.Create(&wordByRegion)
@@ -82,8 +82,8 @@ func PutWordByRegion(c *gin.Context) {
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	models.DB.Model(&wordByRegion).Updates(
 		models.WordByRegion{
-			WordID:   input.WordID,
-			RegionID: input.RegionID,
+			WordID:   uint(input.WordID),
+			RegionID: uint(input.RegionID),
 			Modified: t,
 		})
 	c.JSON(http.StatusOK, gin.H{"data": wordByRegion})

@@ -2,6 +2,7 @@ package security
 
 import (
 	"log"
+	"strings"
 
 	"github.com/sethvargo/go-password/password"
 )
@@ -54,4 +55,38 @@ func GenPassword256() (string, error) {
 	res := res1 + res2
 
 	return res, err
+}
+
+//SecureString checks for SQL injection strings and characters and returns a
+// secure string.
+func SecureString(s string) string {
+	str := (mysqlEscapeString(strings.ToValidUTF8(s, "")))
+	str = "`" + str + "`"
+	return str
+}
+
+// RemoveBackticks removes every backtick from a given string
+func RemoveBackticks(s string) string {
+	replace := map[string]string{
+		"`": "",
+	}
+	for b, a := range replace {
+		s = strings.Replace(s, b, a, -1)
+	}
+	return s
+}
+
+func mysqlEscapeString(s string) string {
+	replace := map[string]string{
+		"\\":   "",
+		"`":    "'",
+		"\\0":  "",
+		"\n":   "",
+		"\r":   "",
+		"\x1a": "",
+	}
+	for b, a := range replace {
+		s = strings.Replace(s, b, a, -1)
+	}
+	return s
 }

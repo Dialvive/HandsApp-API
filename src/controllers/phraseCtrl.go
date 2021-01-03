@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"API/models"
+	"API/security"
 	"net/http"
 	"time"
 
@@ -12,6 +13,11 @@ import (
 func GetPhrases(c *gin.Context) {
 	var phrases []models.Phrase
 	models.DB.Find(&phrases)
+
+	for i := range phrases {
+		phrases[i].Text = security.RemoveBackticks(phrases[i].Text)
+		phrases[i].Context = security.RemoveBackticks(phrases[i].Context)
+	}
 
 	c.JSON(http.StatusOK, gin.H{"data": phrases})
 }
@@ -28,11 +34,14 @@ func CreatePhrase(c *gin.Context) {
 	phrase := models.Phrase{
 		LocaleID:         uint(input.LocaleID),
 		PhraseCategoryID: uint(input.PhraseCategoryID),
-		Text:             input.Text,
-		Context:          input.Context,
+		Text:             security.SecureString(input.Text),
+		Context:          security.SecureString(input.Context),
 		Modified:         t,
 	}
 	models.DB.Create(&phrase)
+
+	phrase.Text = security.RemoveBackticks(phrase.Text)
+	phrase.Context = security.RemoveBackticks(phrase.Context)
 
 	c.JSON(http.StatusOK, gin.H{"data": phrase})
 }
@@ -45,6 +54,9 @@ func FindPhrase(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Phrase not found!"})
 		return
 	}
+
+	phrase.Text = security.RemoveBackticks(phrase.Text)
+	phrase.Context = security.RemoveBackticks(phrase.Context)
 
 	c.JSON(http.StatusOK, gin.H{"data": phrase})
 }
@@ -73,10 +85,13 @@ func PatchPhrase(c *gin.Context) {
 			ID:               phrase.ID,
 			LocaleID:         uint(input.LocaleID),
 			PhraseCategoryID: uint(input.PhraseCategoryID),
-			Text:             input.Text,
-			Context:          input.Context,
+			Text:             security.SecureString(input.Text),
+			Context:          security.SecureString(input.Context),
 			Modified:         t,
 		})
+
+	phrase.Text = security.RemoveBackticks(phrase.Text)
+	phrase.Context = security.RemoveBackticks(phrase.Context)
 
 	c.JSON(http.StatusOK, gin.H{"data": phrase})
 }

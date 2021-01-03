@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"API/models"
+	"API/security"
 	"net/http"
 	"time"
 
@@ -12,6 +13,11 @@ import (
 func GetAdvertisements(c *gin.Context) {
 	var advertisements []models.Advertisement
 	models.DB.Find(&advertisements)
+
+	for i := range advertisements {
+		advertisements[i].Body = security.RemoveBackticks(advertisements[i].Body)
+		advertisements[i].Title = security.RemoveBackticks(advertisements[i].Title)
+	}
 
 	c.JSON(http.StatusOK, gin.H{"data": advertisements})
 }
@@ -29,13 +35,16 @@ func CreateAdvertisement(c *gin.Context) {
 		UserID:       uint(input.UserID),
 		RegionID:     uint(input.RegionID),
 		AdCategoryID: uint(input.AdCategoryID),
-		Title:        input.Title,
-		Body:         input.Body,
-		Media:        input.Media,
+		Title:        security.SecureString(input.Title),
+		Body:         security.SecureString(input.Body),
+		Media:        bool(input.Media),
 		Paid:         uint(input.Paid),
 		Modified:     t,
 	}
 	models.DB.Create(&advertisement)
+
+	advertisement.Body = security.RemoveBackticks(advertisement.Body)
+	advertisement.Title = security.RemoveBackticks(advertisement.Title)
 
 	c.JSON(http.StatusOK, gin.H{"data": advertisement})
 }
@@ -48,6 +57,9 @@ func FindAdvertisement(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Advertisement not found!"})
 		return
 	}
+
+	advertisement.Body = security.RemoveBackticks(advertisement.Body)
+	advertisement.Title = security.RemoveBackticks(advertisement.Title)
 
 	c.JSON(http.StatusOK, gin.H{"data": advertisement})
 }
@@ -77,12 +89,15 @@ func PatchAdvertisement(c *gin.Context) {
 			UserID:       uint(input.UserID),
 			RegionID:     uint(input.RegionID),
 			AdCategoryID: uint(input.AdCategoryID),
-			Title:        input.Title,
-			Body:         input.Body,
-			Media:        input.Media,
+			Title:        security.SecureString(input.Title),
+			Body:         security.SecureString(input.Body),
+			Media:        bool(input.Media),
 			Paid:         uint(input.Paid),
 			Modified:     t,
 		})
+
+	advertisement.Body = security.RemoveBackticks(advertisement.Body)
+	advertisement.Title = security.RemoveBackticks(advertisement.Title)
 
 	c.JSON(http.StatusOK, gin.H{"data": advertisement})
 }

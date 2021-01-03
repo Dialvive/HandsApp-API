@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"API/models"
+	"API/security"
 	"net/http"
 	"time"
 
@@ -12,6 +13,10 @@ import (
 func GetRegions(c *gin.Context) {
 	var regions []models.Region
 	models.DB.Find(&regions)
+
+	for i := range regions {
+		regions[i].Name = security.RemoveBackticks(regions[i].Name)
+	}
 
 	c.JSON(http.StatusOK, gin.H{"data": regions})
 }
@@ -26,11 +31,13 @@ func CreateRegion(c *gin.Context) {
 
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	region := models.Region{
-		Name:      input.Name,
+		Name:      security.SecureString(input.Name),
 		CountryID: uint(input.CountryID),
 		Modified:  t,
 	}
 	models.DB.Create(&region)
+
+	region.Name = security.RemoveBackticks(region.Name)
 
 	c.JSON(http.StatusOK, gin.H{"data": region})
 }
@@ -43,6 +50,8 @@ func FindRegion(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Region not found!"})
 		return
 	}
+
+	region.Name = security.RemoveBackticks(region.Name)
 
 	c.JSON(http.StatusOK, gin.H{"data": region})
 }
@@ -69,10 +78,12 @@ func PatchRegion(c *gin.Context) {
 	models.DB.Model(&region).Updates(
 		models.Region{
 			ID:        region.ID,
-			Name:      input.Name,
+			Name:      security.SecureString(input.Name),
 			CountryID: uint(input.CountryID),
 			Modified:  t,
 		})
+
+	region.Name = security.RemoveBackticks(region.Name)
 
 	c.JSON(http.StatusOK, gin.H{"data": region})
 }

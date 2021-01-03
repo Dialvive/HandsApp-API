@@ -3,7 +3,7 @@ CREATE SCHEMA IF NOT EXISTS `signa_mundi` CHARACTER SET UTF8MB4;
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`country`(
 	`ID` TINYINT AUTO_INCREMENT NOT NULL,
     `name` TEXT NOT NULL,
-    `abbreviation` VARCHAR(2) NOT NULL,
+    `abbreviation` VARCHAR(4) NOT NULL,
     `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`ID`)
 );
@@ -24,9 +24,9 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`user`(
     `user_name` VARCHAR(32) NOT NULL,
     `mail` VARCHAR(254) NOT NULL,
     `password` TEXT NOT NULL,
-    `biography` VARCHAR(140),
-    `mailing` VARCHAR(3) DEFAULT '000',
-    `privilege` VARCHAR(3) NOT NULL,
+    `biography` VARCHAR(142),
+    `mailing` VARCHAR(5) DEFAULT '000',
+    `privilege` VARCHAR(5) NOT NULL,
     `points` INT DEFAULT 0,
     `credits` INT DEFAULT 0,
     `region_ID` INT NOT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`advertisement`(
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`spoken_language`(
 	`ID` TINYINT AUTO_INCREMENT NOT NULL,
     `name` TEXT NOT NULL,
-    `abbreviation` VARCHAR(2) NOT NULL,
+    `abbreviation` VARCHAR(4) NOT NULL,
     `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`ID`)
 );
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`spoken_language`(
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`sign_language`(
 	`ID` TINYINT AUTO_INCREMENT NOT NULL,
     `name` TEXT NOT NULL,
-    `abbreviation` VARCHAR(6) NOT NULL,
+    `abbreviation` VARCHAR(8) NOT NULL,
     `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`ID`)
 );

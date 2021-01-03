@@ -25,8 +25,8 @@ func CreateFavoritePhrases(c *gin.Context) {
 	}
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	favoritePhrases := models.FavoritePhrases{
-		PhraseID: input.PhraseID,
-		UserID:   input.UserID,
+		PhraseID: uint(input.PhraseID),
+		UserID:   uint(input.UserID),
 		Modified: t,
 	}
 	models.DB.Create(&favoritePhrases)
@@ -81,8 +81,8 @@ func PutFavoritePhrases(c *gin.Context) {
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	models.DB.Model(&favoritePhrases).Updates(
 		models.FavoritePhrases{
-			PhraseID: input.PhraseID,
-			UserID:   input.UserID,
+			PhraseID: uint(input.PhraseID),
+			UserID:   uint(input.UserID),
 			Modified: t,
 		})
 	c.JSON(http.StatusOK, gin.H{"data": favoritePhrases})

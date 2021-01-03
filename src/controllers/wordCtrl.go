@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"API/models"
+	"API/security"
 	"net/http"
 	"time"
 
@@ -12,6 +13,12 @@ import (
 func GetWords(c *gin.Context) {
 	var words []models.Word
 	models.DB.Find(&words)
+
+	for i := range words {
+		words[i].Context = security.RemoveBackticks(words[i].Context)
+		words[i].Definition = security.RemoveBackticks(words[i].Definition)
+		words[i].Text = security.RemoveBackticks(words[i].Text)
+	}
 
 	c.JSON(http.StatusOK, gin.H{"data": words})
 }
@@ -28,12 +35,16 @@ func CreateWord(c *gin.Context) {
 	word := models.Word{
 		LocaleID:       uint(input.LocaleID),
 		WordCategoryID: uint(input.WordCategoryID),
-		Text:           input.Text,
-		Definition:     input.Definition,
-		Context:        input.Context,
+		Text:           security.SecureString(input.Text),
+		Definition:     security.SecureString(input.Definition),
+		Context:        security.SecureString(input.Context),
 		Modified:       t,
 	}
 	models.DB.Create(&word)
+
+	word.Context = security.RemoveBackticks(word.Context)
+	word.Definition = security.RemoveBackticks(word.Definition)
+	word.Text = security.RemoveBackticks(word.Text)
 
 	c.JSON(http.StatusOK, gin.H{"data": word})
 }
@@ -46,6 +57,10 @@ func FindWord(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Word not found!"})
 		return
 	}
+
+	word.Context = security.RemoveBackticks(word.Context)
+	word.Definition = security.RemoveBackticks(word.Definition)
+	word.Text = security.RemoveBackticks(word.Text)
 
 	c.JSON(http.StatusOK, gin.H{"data": word})
 }
@@ -74,11 +89,15 @@ func PatchWord(c *gin.Context) {
 			ID:             word.ID,
 			LocaleID:       uint(input.LocaleID),
 			WordCategoryID: uint(input.WordCategoryID),
-			Text:           input.Text,
-			Definition:     input.Definition,
-			Context:        input.Context,
+			Text:           security.SecureString(input.Text),
+			Definition:     security.SecureString(input.Definition),
+			Context:        security.SecureString(input.Context),
 			Modified:       t,
 		})
+
+	word.Context = security.RemoveBackticks(word.Context)
+	word.Definition = security.RemoveBackticks(word.Definition)
+	word.Text = security.RemoveBackticks(word.Text)
 
 	c.JSON(http.StatusOK, gin.H{"data": word})
 }

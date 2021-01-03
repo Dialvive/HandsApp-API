@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"API/models"
+	"API/security"
 	"net/http"
 	"time"
 
@@ -12,6 +13,10 @@ import (
 func GetFriendships(c *gin.Context) {
 	var friendships []models.Friendship
 	models.DB.Find(&friendships)
+
+	for i := range friendships {
+		friendships[i].Name = security.RemoveBackticks(friendships[i].Name)
+	}
 
 	c.JSON(http.StatusOK, gin.H{"data": friendships})
 }
@@ -26,9 +31,11 @@ func CreateFriendship(c *gin.Context) {
 
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	friendship := models.Friendship{
-		Name:     input.Name,
+		Name:     security.SecureString(input.Name),
 		Modified: t}
 	models.DB.Create(&friendship)
+
+	friendship.Name = security.RemoveBackticks(friendship.Name)
 
 	c.JSON(http.StatusOK, gin.H{"data": friendship})
 }
@@ -41,6 +48,8 @@ func FindFriendship(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Friendship not found!"})
 		return
 	}
+
+	friendship.Name = security.RemoveBackticks(friendship.Name)
 
 	c.JSON(http.StatusOK, gin.H{"data": friendship})
 }
@@ -67,9 +76,11 @@ func PatchFriendship(c *gin.Context) {
 	models.DB.Model(&friendship).Updates(
 		models.Friendship{
 			ID:       friendship.ID,
-			Name:     input.Name,
+			Name:     security.SecureString(input.Name),
 			Modified: t,
 		})
+
+	friendship.Name = security.RemoveBackticks(friendship.Name)
 
 	c.JSON(http.StatusOK, gin.H{"data": friendship})
 }

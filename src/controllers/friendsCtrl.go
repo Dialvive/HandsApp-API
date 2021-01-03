@@ -26,10 +26,10 @@ func CreateFriend(c *gin.Context) {
 
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	friend := models.Friend{
-		User1ID:      input.User1ID,
-		User2ID:      input.User2ID,
-		FriendshipID: input.FriendshipID,
-		Facebook:     input.Facebook,
+		User1ID:      uint(input.User1ID),
+		User2ID:      uint(input.User2ID),
+		FriendshipID: uint(input.FriendshipID),
+		Facebook:     bool(input.Facebook),
 		Modified:     t,
 	}
 	models.DB.Create(&friend)
@@ -95,10 +95,10 @@ func PutFriend(c *gin.Context) {
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	models.DB.Model(&friend).Updates(
 		models.Friend{
-			User1ID:      input.User1ID,
-			User2ID:      input.User2ID,
-			FriendshipID: input.FriendshipID,
-			Facebook:     input.Facebook,
+			User1ID:      uint(input.User1ID),
+			User2ID:      uint(input.User2ID),
+			FriendshipID: uint(input.FriendshipID),
+			Facebook:     bool(input.Facebook),
 			Modified:     t,
 		})
 

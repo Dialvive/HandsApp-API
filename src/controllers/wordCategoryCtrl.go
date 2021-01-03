@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"API/models"
+	"API/security"
 	"net/http"
 	"time"
 
@@ -12,6 +13,10 @@ import (
 func GetWordCategories(c *gin.Context) {
 	var wordCategories []models.WordCategory
 	models.DB.Find(&wordCategories)
+
+	for i := range wordCategories {
+		wordCategories[i].Name = security.RemoveBackticks(wordCategories[i].Name)
+	}
 
 	c.JSON(http.StatusOK, gin.H{"data": wordCategories})
 }
@@ -26,9 +31,11 @@ func CreateWordCategory(c *gin.Context) {
 
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	wordCategory := models.WordCategory{
-		Name:     input.Name,
+		Name:     security.SecureString(input.Name),
 		Modified: t}
 	models.DB.Create(&wordCategory)
+
+	wordCategory.Name = security.RemoveBackticks(wordCategory.Name)
 
 	c.JSON(http.StatusOK, gin.H{"data": wordCategory})
 }
@@ -41,6 +48,8 @@ func FindWordCategory(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "WordCategory not found!"})
 		return
 	}
+
+	wordCategory.Name = security.RemoveBackticks(wordCategory.Name)
 
 	c.JSON(http.StatusOK, gin.H{"data": wordCategory})
 }
@@ -62,9 +71,11 @@ func PatchWordCategory(c *gin.Context) {
 	models.DB.Model(&wordCategory).Updates(
 		models.WordCategory{
 			ID:       wordCategory.ID,
-			Name:     input.Name,
+			Name:     security.SecureString(input.Name),
 			Modified: t,
 		})
+
+	wordCategory.Name = security.RemoveBackticks(wordCategory.Name)
 
 	c.JSON(http.StatusOK, gin.H{"data": wordCategory})
 }

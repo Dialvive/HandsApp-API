@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"API/models"
+	"API/security"
 	"net/http"
 	"time"
 
@@ -12,6 +13,11 @@ import (
 func GetSignLanguages(c *gin.Context) {
 	var signLanguages []models.SignLanguage
 	models.DB.Find(&signLanguages)
+
+	for i := range signLanguages {
+		signLanguages[i].Name = security.RemoveBackticks(signLanguages[i].Name)
+		signLanguages[i].Abbreviation = security.RemoveBackticks(signLanguages[i].Abbreviation)
+	}
 
 	c.JSON(http.StatusOK, gin.H{"data": signLanguages})
 }
@@ -26,10 +32,13 @@ func CreateSignLanguage(c *gin.Context) {
 
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	signLanguage := models.SignLanguage{
-		Name:         input.Name,
-		Abbreviation: input.Abbreviation,
+		Name:         security.SecureString(input.Name),
+		Abbreviation: security.SecureString(input.Abbreviation),
 		Modified:     t}
 	models.DB.Create(&signLanguage)
+
+	signLanguage.Name = security.RemoveBackticks(signLanguage.Name)
+	signLanguage.Abbreviation = security.RemoveBackticks(signLanguage.Abbreviation)
 
 	c.JSON(http.StatusOK, gin.H{"data": signLanguage})
 }
@@ -42,6 +51,9 @@ func FindSignLanguage(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "SignLanguage not found!"})
 		return
 	}
+
+	signLanguage.Name = security.RemoveBackticks(signLanguage.Name)
+	signLanguage.Abbreviation = security.RemoveBackticks(signLanguage.Abbreviation)
 
 	c.JSON(http.StatusOK, gin.H{"data": signLanguage})
 }
@@ -68,10 +80,13 @@ func PatchSignLanguage(c *gin.Context) {
 	models.DB.Model(&signLanguage).Updates(
 		models.SignLanguage{
 			ID:           signLanguage.ID,
-			Name:         input.Name,
-			Abbreviation: input.Abbreviation,
+			Name:         security.SecureString(input.Name),
+			Abbreviation: security.SecureString(input.Abbreviation),
 			Modified:     t,
 		})
+
+	signLanguage.Name = security.RemoveBackticks(signLanguage.Name)
+	signLanguage.Abbreviation = security.RemoveBackticks(signLanguage.Abbreviation)
 
 	c.JSON(http.StatusOK, gin.H{"data": signLanguage})
 }

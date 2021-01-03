@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"API/models"
+	"API/security"
 	"net/http"
 	"time"
 
@@ -12,6 +13,11 @@ import (
 func GetCountries(c *gin.Context) {
 	var countries []models.Country
 	models.DB.Find(&countries)
+
+	for i := range countries {
+		countries[i].Name = security.RemoveBackticks(countries[i].Name)
+		countries[i].Abbreviation = security.RemoveBackticks(countries[i].Abbreviation)
+	}
 
 	c.JSON(http.StatusOK, gin.H{"data": countries})
 }
@@ -26,10 +32,13 @@ func CreateCountry(c *gin.Context) {
 
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	country := models.Country{
-		Name:         input.Name,
-		Abbreviation: input.Abbreviation,
+		Name:         security.SecureString(input.Name),
+		Abbreviation: security.SecureString(input.Abbreviation),
 		Modified:     t}
 	models.DB.Create(&country)
+
+	country.Name = security.RemoveBackticks(country.Name)
+	country.Abbreviation = security.RemoveBackticks(country.Abbreviation)
 
 	c.JSON(http.StatusOK, gin.H{"data": country})
 }
@@ -42,6 +51,9 @@ func FindCountry(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Country not found!"})
 		return
 	}
+
+	country.Name = security.RemoveBackticks(country.Name)
+	country.Abbreviation = security.RemoveBackticks(country.Abbreviation)
 
 	c.JSON(http.StatusOK, gin.H{"data": country})
 }
@@ -68,10 +80,13 @@ func PatchCountry(c *gin.Context) {
 	models.DB.Model(&country).Updates(
 		models.Country{
 			ID:           country.ID,
-			Name:         input.Name,
-			Abbreviation: input.Abbreviation,
+			Name:         security.SecureString(input.Name),
+			Abbreviation: security.SecureString(input.Abbreviation),
 			Modified:     t,
 		})
+
+	country.Name = security.RemoveBackticks(country.Name)
+	country.Abbreviation = security.RemoveBackticks(country.Abbreviation)
 
 	c.JSON(http.StatusOK, gin.H{"data": country})
 }

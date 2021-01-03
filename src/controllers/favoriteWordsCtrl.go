@@ -26,8 +26,8 @@ func CreateFavoriteWords(c *gin.Context) {
 
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	favoriteWords := models.FavoriteWords{
-		WordID:   input.WordID,
-		UserID:   input.UserID,
+		WordID:   uint(input.WordID),
+		UserID:   uint(input.UserID),
 		Modified: t,
 	}
 	models.DB.Create(&favoriteWords)
@@ -83,8 +83,8 @@ func PutFavoriteWords(c *gin.Context) {
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	models.DB.Model(&favoriteWords).Updates(
 		models.FavoriteWords{
-			WordID:   input.WordID,
-			UserID:   input.UserID,
+			WordID:   uint(input.WordID),
+			UserID:   uint(input.UserID),
 			Modified: t,
 		})
 	c.JSON(http.StatusOK, gin.H{"data": favoriteWords})

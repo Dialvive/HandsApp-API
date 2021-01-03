@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"API/models"
+	"API/security"
 	"net/http"
 	"time"
 
@@ -12,6 +13,10 @@ import (
 func GetPhraseCategories(c *gin.Context) {
 	var phraseCategories []models.PhraseCategory
 	models.DB.Find(&phraseCategories)
+
+	for i := range phraseCategories {
+		phraseCategories[i].Name = security.RemoveBackticks(phraseCategories[i].Name)
+	}
 
 	c.JSON(http.StatusOK, gin.H{"data": phraseCategories})
 }
@@ -26,9 +31,11 @@ func CreatePhraseCategory(c *gin.Context) {
 
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	phraseCategory := models.PhraseCategory{
-		Name:     input.Name,
+		Name:     security.SecureString(input.Name),
 		Modified: t}
 	models.DB.Create(&phraseCategory)
+
+	phraseCategory.Name = security.RemoveBackticks(phraseCategory.Name)
 
 	c.JSON(http.StatusOK, gin.H{"data": phraseCategory})
 }
@@ -41,6 +48,8 @@ func FindPhraseCategory(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "PhraseCategory not found!"})
 		return
 	}
+
+	phraseCategory.Name = security.RemoveBackticks(phraseCategory.Name)
 
 	c.JSON(http.StatusOK, gin.H{"data": phraseCategory})
 }
@@ -67,9 +76,11 @@ func PatchPhraseCategory(c *gin.Context) {
 	models.DB.Model(&phraseCategory).Updates(
 		models.PhraseCategory{
 			ID:       phraseCategory.ID,
-			Name:     input.Name,
+			Name:     security.SecureString(input.Name),
 			Modified: t,
 		})
+
+	phraseCategory.Name = security.RemoveBackticks(phraseCategory.Name)
 
 	c.JSON(http.StatusOK, gin.H{"data": phraseCategory})
 }

@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"API/models"
+	"API/security"
 	"net/http"
 	"time"
 
@@ -12,6 +13,11 @@ import (
 func GetSpokenLanguages(c *gin.Context) {
 	var spokenLanguages []models.SpokenLanguage
 	models.DB.Find(&spokenLanguages)
+
+	for i := range spokenLanguages {
+		spokenLanguages[i].Name = security.RemoveBackticks(spokenLanguages[i].Name)
+		spokenLanguages[i].Abbreviation = security.RemoveBackticks(spokenLanguages[i].Abbreviation)
+	}
 
 	c.JSON(http.StatusOK, gin.H{"data": spokenLanguages})
 }
@@ -26,10 +32,13 @@ func CreateSpokenLanguage(c *gin.Context) {
 
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	spokenLanguage := models.SpokenLanguage{
-		Name:         input.Name,
-		Abbreviation: input.Abbreviation,
+		Name:         security.SecureString(input.Name),
+		Abbreviation: security.SecureString(input.Abbreviation),
 		Modified:     t}
 	models.DB.Create(&spokenLanguage)
+
+	spokenLanguage.Name = security.RemoveBackticks(spokenLanguage.Name)
+	spokenLanguage.Abbreviation = security.RemoveBackticks(spokenLanguage.Abbreviation)
 
 	c.JSON(http.StatusOK, gin.H{"data": spokenLanguage})
 }
@@ -42,6 +51,8 @@ func FindSpokenLanguage(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "SpokenLanguage not found!"})
 		return
 	}
+	spokenLanguage.Name = security.RemoveBackticks(spokenLanguage.Name)
+	spokenLanguage.Abbreviation = security.RemoveBackticks(spokenLanguage.Abbreviation)
 
 	c.JSON(http.StatusOK, gin.H{"data": spokenLanguage})
 }
@@ -68,10 +79,13 @@ func PatchSpokenLanguage(c *gin.Context) {
 	models.DB.Model(&spokenLanguage).Updates(
 		models.SpokenLanguage{
 			ID:           spokenLanguage.ID,
-			Name:         input.Name,
-			Abbreviation: input.Abbreviation,
+			Name:         security.SecureString(input.Name),
+			Abbreviation: security.SecureString(input.Abbreviation),
 			Modified:     t,
 		})
+
+	spokenLanguage.Name = security.RemoveBackticks(spokenLanguage.Name)
+	spokenLanguage.Abbreviation = security.RemoveBackticks(spokenLanguage.Abbreviation)
 
 	c.JSON(http.StatusOK, gin.H{"data": spokenLanguage})
 }

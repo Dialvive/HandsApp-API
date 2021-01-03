@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"API/models"
+	"API/security"
 	"net/http"
 	"time"
 
@@ -12,6 +13,10 @@ import (
 func GetAdCategories(c *gin.Context) {
 	var adCategories []models.AdCategory
 	models.DB.Find(&adCategories)
+
+	for i := range adCategories {
+		adCategories[i].Name = security.RemoveBackticks(adCategories[i].Name)
+	}
 
 	c.JSON(http.StatusOK, gin.H{"data": adCategories})
 }
@@ -26,10 +31,12 @@ func CreateAdCategory(c *gin.Context) {
 
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	adCategory := models.AdCategory{
-		Name:     input.Name,
-		Cost:     input.Cost,
+		Name:     security.SecureString(input.Name),
+		Cost:     uint(input.Cost),
 		Modified: t}
 	models.DB.Create(&adCategory)
+
+	adCategory.Name = security.RemoveBackticks(adCategory.Name)
 
 	c.JSON(http.StatusOK, gin.H{"data": adCategory})
 }
@@ -42,6 +49,8 @@ func FindAdCategory(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "AdCategory not found!"})
 		return
 	}
+
+	adCategory.Name = security.RemoveBackticks(adCategory.Name)
 
 	c.JSON(http.StatusOK, gin.H{"data": adCategory})
 }
@@ -68,10 +77,12 @@ func PatchAdCategory(c *gin.Context) {
 	models.DB.Model(&adCategory).Updates(
 		models.AdCategory{
 			ID:       adCategory.ID,
-			Name:     input.Name,
-			Cost:     input.Cost,
+			Name:     security.SecureString(input.Name),
+			Cost:     uint(input.Cost),
 			Modified: t,
 		})
+
+	adCategory.Name = security.RemoveBackticks(adCategory.Name)
 
 	c.JSON(http.StatusOK, gin.H{"data": adCategory})
 }
