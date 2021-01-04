@@ -4,19 +4,19 @@ import "github.com/dgrijalva/jwt-go"
 
 // User represents a user of Signa Mundi set of services.
 type User struct {
-	ID        uint   `json:"ID" gorm:"type:INT NOT NULL;primaryKey"`
-	FirstName string `json:"first_name" gorm:"type:TEXT"`
-	LastName  string `json:"last_name" gorm:"type:TEXT"`
-	UserName  string `json:"user_name" gorm:"type:VARCHAR(32) NOT NULL"`
-	Mail      string `json:"mail" gorm:"type:VARCHAR(254) NOT NULL"`
-	Password  string `json:"password" gorm:"type:TEXT NOT NULL"`
-	Biography string `json:"biography" gorm:"type:TEXT"`
-	Mailing   string `json:"mailing" gorm:"type:VARCHAR(5)"`
-	Privilege uint   `json:"privilege" gorm:"type:VARCHAR(5) NOT NULL"`
-	Points    uint   `json:"points" gorm:"type:INT; default:0"`
-	Credits   uint   `json:"credits" gorm:"type:INT; default:0"`
-	RegionID  uint   `json:"region_id" gorm:"type:INT NOT NULL"`
-	Modified  string `json:"modified" gorm:"type:TIMESTAMP"`
+	ID        uint   `json:"ID" gorm:"column:ID;type:INT NOT NULL;primaryKey"`
+	FirstName string `json:"first_name" gorm:"column:first_name;type:TEXT"`
+	LastName  string `json:"last_name" gorm:"column:last_name;type:TEXT"`
+	UserName  string `json:"user_name" gorm:"column:user_name;type:VARCHAR(32) NOT NULL"`
+	Mail      string `json:"mail" gorm:"column:mail;type:VARCHAR(254) NOT NULL"`
+	Password  string `json:"password" gorm:"column:password;type:TEXT NOT NULL"`
+	Biography string `json:"biography" gorm:"column:biography;type:TEXT"`
+	Mailing   string `json:"mailing" gorm:"column:mailing;type:VARCHAR(5)"`
+	Privilege uint   `json:"privilege" gorm:"column:privilege;type:VARCHAR(5) NOT NULL"`
+	Points    uint   `json:"points" gorm:"column:points;type:INT; default:0"`
+	Credits   uint   `json:"credits" gorm:"column:credits;type:INT; default:0"`
+	RegionID  uint   `json:"region_id" gorm:"column:region_ID;type:INT NOT NULL"`
+	Modified  string `json:"modified" gorm:"column:modified;type:TIMESTAMP"`
 }
 
 // CreateUserInput represents a user of Signa Mundi set of services.

@@ -4,9 +4,9 @@ import "github.com/dgrijalva/jwt-go"
 
 // Friendship represents the type of friendship two users have.
 type Friendship struct {
-	ID       uint   `json:"ID" gorm:"type:TINYINT NOT NULL;primaryKey"`
-	Name     string `json:"name" gorm:"type:TEXT NOT NULL"`
-	Modified string `json:"modified" gorm:"type:TIMESTAMP"`
+	ID       uint   `json:"ID" gorm:"column:ID;type:TINYINT NOT NULL;primaryKey"`
+	Name     string `json:"name" gorm:"column:name;type:TEXT NOT NULL"`
+	Modified string `json:"modified" gorm:"column:modified;type:TIMESTAMP"`
 }
 
 // CreateFriendshipInput represents the type of friendship two users have.

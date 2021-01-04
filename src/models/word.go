@@ -4,13 +4,13 @@ import "github.com/dgrijalva/jwt-go"
 
 // Word represents a coherent spoken language set of words.
 type Word struct {
-	ID             uint   `json:"ID" gorm:"type:INT NOT NULL;primaryKey"`
-	LocaleID       uint   `json:"locale_ID" gorm:"type:TINYINT NOT NULL"`
-	WordCategoryID uint   `json:"word_category_ID" gorm:"type:TINYINT NOT NULL"`
-	Text           string `json:"name" gorm:"type:TEXT NOT NULL"`
-	Context        string `json:"context" gorm:"type:TEXT"`
-	Definition     string `json:"definition" gorm:"type:TEXT"`
-	Modified       string `json:"modified" gorm:"type:TIMESTAMP"`
+	ID             uint   `json:"ID" gorm:"column:ID;type:INT NOT NULL;primaryKey"`
+	LocaleID       uint   `json:"locale_ID" gorm:"column:locale_ID;type:TINYINT NOT NULL"`
+	WordCategoryID uint   `json:"word_category_ID" gorm:"column:word_category_ID;type:TINYINT NOT NULL"`
+	Text           string `json:"name" gorm:"column:text;type:TEXT NOT NULL"`
+	Context        string `json:"context" gorm:"column:context;type:TEXT"`
+	Definition     string `json:"definition" gorm:"column:definition;type:TEXT"`
+	Modified       string `json:"modified" gorm:"column:modified;type:TIMESTAMP"`
 }
 
 // CreateWordInput represents a coherent spoken word.

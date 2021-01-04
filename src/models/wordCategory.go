@@ -6,9 +6,9 @@ import (
 
 // WordCategory is a category in which a set of words fall into.
 type WordCategory struct {
-	ID       uint   `json:"ID" gorm:"type:TINYINT NOT NULL;primaryKey"`
-	Name     string `json:"name" gorm:"type:TEXT NOT NULL"`
-	Modified string `json:"modified" gorm:"type:TIMESTAMP"`
+	ID       uint   `json:"ID" gorm:"column:ID;type:TINYINT NOT NULL;primaryKey"`
+	Name     string `json:"name" gorm:"column:name;type:TEXT NOT NULL"`
+	Modified string `json:"modified" gorm:"column:modified;type:TIMESTAMP"`
 }
 
 // CreateWordCategoryInput is a category in which a set of words fall into.

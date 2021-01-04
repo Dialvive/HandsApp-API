@@ -11,7 +11,7 @@ import (
 
 // GetFavoritePhrases retrieves all the favoritePhrases from the DB.
 func GetFavoritePhrases(c *gin.Context) {
-	var favoritePhrases []models.FavoritePhrases
+	var favoritePhrases []models.FavoritePhrase
 	models.DB.Find(&favoritePhrases)
 
 	c.JSON(http.StatusOK, gin.H{"data": favoritePhrases})
@@ -19,13 +19,13 @@ func GetFavoritePhrases(c *gin.Context) {
 
 // CreateFavoritePhrases creates a new favoritePhrase.
 func CreateFavoritePhrases(c *gin.Context) {
-	var input models.CreateFavoritePhrasesInput
+	var input models.CreateFavoritePhraseInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
-	favoritePhrases := models.FavoritePhrases{
+	favoritePhrases := models.FavoritePhrase{
 		PhraseID: uint(input.PhraseID),
 		UserID:   uint(input.UserID),
 		Modified: t,
@@ -36,7 +36,7 @@ func CreateFavoritePhrases(c *gin.Context) {
 
 // FindFavoritePhrases recieves an user id, and returns all of its favorite phrases.
 func FindFavoritePhrases(c *gin.Context) {
-	var favorites []models.FavoritePhrases
+	var favorites []models.FavoritePhrase
 	var param uint64
 	var err error
 	if param, err = security.SecureUint(c.Param("userID")); err != nil {
@@ -58,7 +58,7 @@ func CountFavoritePhrasesP(c *gin.Context) {
 	if param, err = security.SecureUint(c.Param("phraseID")); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
-	if err := models.DB.Model(&models.FavoritePhrases{}).Where("phrase_ID = ?", param).
+	if err := models.DB.Model(&models.FavoritePhrase{}).Where("phrase_ID = ?", param).
 		Count(&count).Error; err != nil {
 
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -76,7 +76,7 @@ func CountFavoritePhrasesU(c *gin.Context) {
 	if param, err = security.SecureUint(c.Param("userID")); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
-	if err := models.DB.Model(&models.FavoritePhrases{}).Where("user_ID = ?", param).
+	if err := models.DB.Model(&models.FavoritePhrase{}).Where("user_ID = ?", param).
 		Count(&count).Error; err != nil {
 
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -89,7 +89,7 @@ func CountFavoritePhrasesU(c *gin.Context) {
 func PutFavoritePhrases(c *gin.Context) {
 
 	// Get model if exist
-	var favoritePhrases models.FavoritePhrases
+	var favoritePhrases models.FavoritePhrase
 	var param1, param2 uint64
 	var err error
 	if param1, err = security.SecureUint(c.Param("userID")); err != nil {
@@ -105,14 +105,14 @@ func PutFavoritePhrases(c *gin.Context) {
 		return
 	}
 
-	var input models.CreateFavoritePhrasesInput
+	var input models.CreateFavoritePhraseInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	models.DB.Model(&favoritePhrases).Updates(
-		models.FavoritePhrases{
+		models.FavoritePhrase{
 			PhraseID: uint(input.PhraseID),
 			UserID:   uint(input.UserID),
 			Modified: t,
@@ -123,7 +123,7 @@ func PutFavoritePhrases(c *gin.Context) {
 // DeleteFavoritePhrases deletes a favoritePhrase
 func DeleteFavoritePhrases(c *gin.Context) {
 	// Get model if exist
-	var favoritePhrases models.FavoritePhrases
+	var favoritePhrases models.FavoritePhrase
 	var param1, param2 uint64
 	var err error
 	if param1, err = security.SecureUint(c.Param("userID")); err != nil {
