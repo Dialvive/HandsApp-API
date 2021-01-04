@@ -4,7 +4,7 @@ import "github.com/dgrijalva/jwt-go"
 
 // User represents a user of Signa Mundi set of services.
 type User struct {
-	ID        uint   `json:"ID" gorm:"type:INT; primaryKey"`
+	ID        uint   `json:"ID" gorm:"type:INT AUTO_INCREMENT;primaryKey"`
 	FirstName string `json:"first_name" gorm:"type:TEXT"`
 	LastName  string `json:"last_name" gorm:"type:TEXT"`
 	UserName  string `json:"user_name" gorm:"type:VARCHAR(32) NOT NULL"`

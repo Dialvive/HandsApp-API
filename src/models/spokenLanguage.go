@@ -4,7 +4,7 @@ import "github.com/dgrijalva/jwt-go"
 
 // SpokenLanguage represents a language such as English, Spanish, etc.
 type SpokenLanguage struct {
-	ID           uint   `json:"ID" gorm:"type:INT; primaryKey"`
+	ID           uint   `json:"ID" gorm:"type:INT AUTO_INCREMENT; primaryKey"`
 	Name         string `json:"name" gorm:"type:TEXT NOT NULL"`
 	Abbreviation string `json:"abbreviation" gorm:"type:VARCHAR(4) NOT NULL"`
 	Modified     string `json:"modified" gorm:"type:TIMESTAMP"`
