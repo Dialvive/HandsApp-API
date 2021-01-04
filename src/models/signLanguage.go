@@ -6,7 +6,7 @@ import "github.com/dgrijalva/jwt-go"
 type SignLanguage struct {
 	ID           uint   `json:"ID" gorm:"type:TINYINT AUTO_INCREMENT; primaryKey"`
 	Name         string `json:"name" gorm:"type:TEXT NOT NULL"`
-	Abbreviation string `json:"abbreviation" gorm:"type:VARCHAR(6) NOT NULL"`
+	Abbreviation string `json:"abbreviation" gorm:"type:VARCHAR(8) NOT NULL"`
 	Modified     string `json:"modified" gorm:"type:TIMESTAMP"`
 }
 

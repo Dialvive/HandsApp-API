@@ -6,7 +6,7 @@ import "github.com/dgrijalva/jwt-go"
 type Country struct {
 	ID           uint   `json:"ID" gorm:"type:TINYINT; primaryKey"`
 	Name         string `json:"name" gorm:"type:TEXT NOT NULL"`
-	Abbreviation string `json:"abbreviation" gorm:"type:VARCHAR(2) NOT NULL"`
+	Abbreviation string `json:"abbreviation" gorm:"type:VARCHAR(4) NOT NULL"`
 	Modified     string `json:"modified" gorm:"type:TIMESTAMP"`
 }
 

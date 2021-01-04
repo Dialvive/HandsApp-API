@@ -14,7 +14,7 @@ func main() {
 
 	// * OK 0) HASH & SALT PASSWORDS
 	// * Hash & Salt: using security.HashPassword()
-	// * Check Password: uding security.PasswordMatches()
+	// * Check Password: using security.PasswordMatches()
 
 	//TODO: 1) USE SSL/TSL
 	// * Uncomment log.Fatal(autotls.Run(r, "api.signamundi.com")) in main

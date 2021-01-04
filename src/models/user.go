@@ -11,8 +11,8 @@ type User struct {
 	Mail      string `json:"mail" gorm:"type:VARCHAR(254) NOT NULL"`
 	Password  string `json:"password" gorm:"type:TEXT NOT NULL"`
 	Biography string `json:"biography" gorm:"type:TEXT"`
-	Mailing   string `json:"mailing" gorm:"type:VARCHAR(3)"`
-	Privilege uint   `json:"privilege" gorm:"type:VARCHAR(3) NOT NULL"`
+	Mailing   string `json:"mailing" gorm:"type:VARCHAR(5)"`
+	Privilege uint   `json:"privilege" gorm:"type:VARCHAR(5) NOT NULL"`
 	Points    uint   `json:"points" gorm:"type:INT; default:0"`
 	Credits   uint   `json:"credits" gorm:"type:INT; default:0"`
 	RegionID  uint   `json:"region_id" gorm:"type:INT NOT NULL"`
