@@ -11,7 +11,8 @@ import (
 )
 
 func main() {
-	//TODO: 0) HASH & SALT PASSWORDS
+	// * OK 0) HASH & SALT PASSWORDS
+	// * Hash & Salt Passwords
 	//TODO: 1) USE SSL/TSL
 	//TODO: 2) USE JWT
 	// * OK 3) PREVENT SQL INJECTION STRINGS

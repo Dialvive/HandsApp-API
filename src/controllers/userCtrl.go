@@ -21,7 +21,7 @@ func GetUsers(c *gin.Context) {
 		users[i].UserName = security.RemoveBackticks(users[i].UserName)
 		users[i].Mail = security.RemoveBackticks(users[i].Mail)
 		users[i].Mailing = security.RemoveBackticks(users[i].Mailing)
-		users[i].Password = ""
+		users[i].Password = "" // NEVER SEND PWD DATA
 	}
 
 	c.JSON(http.StatusOK, gin.H{"data": users})
@@ -35,14 +35,19 @@ func CreateUser(c *gin.Context) {
 		return
 	}
 
+	pwd, err := security.HashPassword(input.Password)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	user := models.User{
 		FirstName: security.SecureString(input.FirstName),
 		LastName:  security.SecureString(input.LastName),
 		UserName:  security.SecureString(input.UserName),
 		Mail:      security.SecureString(input.Mail),
-		//TODO: HASH & SALT PASSWORD
-		Password:  security.SecureString(input.Password),
+		Password:  pwd,
 		Biography: security.SecureString(input.Biography),
 		Mailing:   security.SecureString(input.Mailing),
 		Privilege: uint(input.Privilege),
@@ -60,7 +65,7 @@ func CreateUser(c *gin.Context) {
 	user.UserName = security.RemoveBackticks(user.UserName)
 	user.Mail = security.RemoveBackticks(user.Mail)
 	user.Mailing = security.RemoveBackticks(user.Mailing)
-	user.Password = ""
+	user.Password = "" // NEVER SEND PWD DATA
 
 	c.JSON(http.StatusOK, gin.H{"data": user})
 }
@@ -84,7 +89,7 @@ func FindUser(c *gin.Context) {
 	user.UserName = security.RemoveBackticks(user.UserName)
 	user.Mail = security.RemoveBackticks(user.Mail)
 	user.Mailing = security.RemoveBackticks(user.Mailing)
-	user.Password = ""
+	user.Password = "" // NEVER SEND PWD DATA
 
 	c.JSON(http.StatusOK, gin.H{"data": user})
 }
@@ -111,6 +116,16 @@ func PutUser(c *gin.Context) {
 		return
 	}
 
+	if !security.PasswordMatches(user.Password, input.Password) {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Bad password!"})
+		return
+	}
+	pwd, err := security.HashPassword(input.Password)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	models.DB.Model(&user).Updates(
 		models.User{
@@ -119,7 +134,7 @@ func PutUser(c *gin.Context) {
 			LastName:  security.SecureString(input.LastName),
 			UserName:  security.SecureString(input.UserName),
 			Mail:      security.SecureString(input.Mail),
-			Password:  security.SecureString(input.Password),
+			Password:  pwd,
 			Biography: security.SecureString(input.Biography),
 			Mailing:   security.SecureString(input.Mailing), Privilege: input.Privilege,
 			Points:   uint(input.Points),
@@ -134,7 +149,7 @@ func PutUser(c *gin.Context) {
 	user.UserName = security.RemoveBackticks(user.UserName)
 	user.Mail = security.RemoveBackticks(user.Mail)
 	user.Mailing = security.RemoveBackticks(user.Mailing)
-	user.Password = ""
+	user.Password = "" // NEVER SEND PWD DATA
 
 	c.JSON(http.StatusOK, gin.H{"data": user})
 }
@@ -161,6 +176,19 @@ func PatchUser(c *gin.Context) {
 		return
 	}
 
+	if !security.PasswordMatches(user.Password, input.Password) {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Bad password!"})
+		return
+	}
+	pwd, err := security.HashPassword(input.Password)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	//TODO: ALLOW CHANGING PASSWORDS
+	user.Password = pwd
+
 	if input.FirstName != "" && input.FirstName != user.FirstName {
 		user.FirstName = input.FirstName
 	}
@@ -173,9 +201,7 @@ func PatchUser(c *gin.Context) {
 	if input.Mail != "" && input.Mail != user.Mail {
 		user.Mail = input.Mail
 	}
-	if input.Password != "" && input.Password != user.Password {
-		user.Password = input.Password
-	}
+
 	if input.Biography != "" && input.Biography != user.Biography {
 		user.Biography = input.Biography
 	}
@@ -203,7 +229,7 @@ func PatchUser(c *gin.Context) {
 			LastName:  security.SecureString(input.LastName),
 			UserName:  security.SecureString(input.UserName),
 			Mail:      security.SecureString(input.Mail),
-			Password:  security.SecureString(input.Password),
+			Password:  input.Password,
 			Biography: security.SecureString(input.Biography),
 			Mailing:   security.SecureString(input.Mailing), Privilege: user.Privilege,
 			Points:   uint(user.Points),
@@ -218,13 +244,14 @@ func PatchUser(c *gin.Context) {
 	user.UserName = security.RemoveBackticks(user.UserName)
 	user.Mail = security.RemoveBackticks(user.Mail)
 	user.Mailing = security.RemoveBackticks(user.Mailing)
-	user.Password = ""
+	user.Password = "" // NEVER SEND PWD DATA
 
 	c.JSON(http.StatusOK, gin.H{"data": user})
 }
 
 // DeleteUser deletes a user
 func DeleteUser(c *gin.Context) {
+	//TODO: ONLY ALLOW WITH CORRECT PASSWORD OR ADMIN PRIVILEGES
 	// Get model if exist
 	var user models.User
 	var param uint64

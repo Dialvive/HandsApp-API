@@ -1,6 +1,7 @@
 package security
 
 import (
+	"encoding/base64"
 	"errors"
 	"log"
 	"strconv"
@@ -8,6 +9,7 @@ import (
 	"unicode"
 
 	"github.com/sethvargo/go-password/password"
+	"golang.org/x/crypto/bcrypt"
 )
 
 // MinuteTTL is a minute in EPOCH seconds
@@ -88,6 +90,25 @@ func RemoveBackticks(s string) string {
 		s = strings.Replace(s, b, a, -1)
 	}
 	return s
+}
+
+// HashPassword uses the Bcrypt hashing algorithm and then return the hashed password
+// as a base64 encoded string
+func HashPassword(password string) (string, error) {
+	var passwordBytes = []byte(password)
+	hashedPasswordBytes, err := bcrypt.GenerateFromPassword(passwordBytes, bcrypt.MinCost)
+	if err != nil {
+		log.Println(err)
+		return "", err
+	}
+	var base64EncodedPasswordHash = base64.URLEncoding.EncodeToString(hashedPasswordBytes)
+	return base64EncodedPasswordHash, nil
+}
+
+// PasswordMatches checks if a passed password matches the original hashed password
+func PasswordMatches(hashedPassword, passedPassword string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(passedPassword))
+	return err != nil
 }
 
 func mysqlEscapeString(s string) string {
