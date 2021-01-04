@@ -4,7 +4,6 @@ import (
 	"API/models"
 	"API/security"
 	"net/http"
-	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -24,11 +23,9 @@ func CreateWordByRegion(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	wordByRegion := models.WordByRegion{
 		WordID:   uint(input.WordID),
 		RegionID: uint(input.RegionID),
-		Modified: t,
 	}
 	models.DB.Create(&wordByRegion)
 
@@ -91,12 +88,10 @@ func PutWordByRegion(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	models.DB.Model(&wordByRegion).Updates(
 		models.WordByRegion{
 			WordID:   uint(input.WordID),
 			RegionID: uint(input.RegionID),
-			Modified: t,
 		})
 	c.JSON(http.StatusOK, gin.H{"data": wordByRegion})
 }
