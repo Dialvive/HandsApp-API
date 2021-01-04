@@ -4,7 +4,7 @@ import "github.com/dgrijalva/jwt-go"
 
 // Phrase represents a coherent spoken language set of words.
 type Phrase struct {
-	ID               uint   `json:"ID" gorm:"type:INT AUTO_INCREMENT;primaryKey"`
+	ID               uint   `json:"ID" gorm:"type:INT NOT NULL;primaryKey"`
 	LocaleID         uint   `json:"locale_ID" gorm:"type:TINYINT NOT NULL"`
 	PhraseCategoryID uint   `json:"phrase_category_ID" gorm:" TINYINT NOT NULL"`
 	Text             string `json:"name" gorm:"type:TEXT NOT NULL"`
