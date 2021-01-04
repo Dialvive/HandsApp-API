@@ -50,7 +50,8 @@ func FindWordsOfRegion(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": words})
 }
 
-// CountWordsOfRegion recieves a word ID, returns the number of users that user has marked it as favorite.
+// CountWordsOfRegion recieves a word ID, returns the number of users that user has marked
+// it as favorite.
 func CountWordsOfRegion(c *gin.Context) {
 	var count int64
 	var param uint64
@@ -78,7 +79,9 @@ func PutWordByRegion(c *gin.Context) {
 	if param2, err = security.SecureUint(c.Param("wordID")); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
-	if err := models.DB.Where("region_ID = ? AND word_ID = ?", param1, param2).First(&wordByRegion).Error; err != nil {
+	if err := models.DB.Where("region_ID = ? AND word_ID = ?", param1, param2).
+		First(&wordByRegion).Error; err != nil {
+
 		c.JSON(http.StatusBadRequest, gin.H{"error": "WordByRegion not found!"})
 		return
 	}
@@ -110,7 +113,9 @@ func DeleteWordByRegion(c *gin.Context) {
 	if param2, err = security.SecureUint(c.Param("wordID")); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
-	if err := models.DB.Where("region_ID = ? AND word_ID = ?", param1, param2).First(&wordByRegion).Error; err != nil {
+	if err := models.DB.Where("region_ID = ? AND word_ID = ?", param1, param2).
+		First(&wordByRegion).Error; err != nil {
+
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}

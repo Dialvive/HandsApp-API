@@ -69,8 +69,12 @@ func FindFriend(c *gin.Context) {
 	if param2, err = security.SecureUint(c.Param("ID2")); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
-	if err := models.DB.Where("user1_ID = ? AND user2_ID = ?", param1, param2).First(&friend).Error; err != nil {
-		if err := models.DB.Where("user1_ID = ? AND user2_ID = ?", param2, param1).First(&friend).Error; err != nil {
+	if err := models.DB.Where("user1_ID = ? AND user2_ID = ?", param1, param2).
+		First(&friend).Error; err != nil {
+
+		if err := models.DB.Where("user1_ID = ? AND user2_ID = ?", param2, param1).
+			First(&friend).Error; err != nil {
+
 			c.JSON(http.StatusBadRequest, gin.H{"error": "FavoritePhrases not found!"})
 			return
 		}
@@ -111,7 +115,9 @@ func PutFriend(c *gin.Context) {
 	if param2, err = security.SecureUint(c.Param("ID2")); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
-	if err := models.DB.Model(&models.Friend{}).Where("user1_ID = ?", param1).Or("user2_ID = ?", param2).Save(&friend).Error; err != nil {
+	if err := models.DB.Model(&models.Friend{}).Where("user1_ID = ?", param1).
+		Or("user2_ID = ?", param2).Save(&friend).Error; err != nil {
+
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Friend not found!"})
 		return
 	}
@@ -148,7 +154,9 @@ func DeleteFriend(c *gin.Context) {
 	if param2, err = security.SecureUint(c.Param("ID2")); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
-	if err := models.DB.Model(&models.Friend{}).Where("user1_ID = ?", param1).Or("user2_ID = ?", param2).First(&friend).Error; err != nil {
+	if err := models.DB.Model(&models.Friend{}).Where("user1_ID = ?", param1).
+		Or("user2_ID = ?", param2).First(&friend).Error; err != nil {
+
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}

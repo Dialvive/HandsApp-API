@@ -11,16 +11,25 @@ import (
 )
 
 func main() {
+
 	// * OK 0) HASH & SALT PASSWORDS
-	// * Hash & Salt Passwords
+	// * Hash & Salt: using security.HashPassword()
+	// * Check Password: uding security.PasswordMatches()
+
 	//TODO: 1) USE SSL/TSL
+	// * Uncomment log.Fatal(autotls.Run(r, "api.signamundi.com")) in main
+
 	//TODO: 2) USE JWT
+
 	// * OK 3) PREVENT SQL INJECTION STRINGS
-	// * Parameters SQLi
-	// * Atributes SQLi
+	// * Parameters SQLi: using security.SecureUint()
+	// * Atributes SQLi: using security.SecureString() & input structs
+
 	//TODO: 4) USE CACHES
+
 	//TODO: 5) ALLOW FILTERS
-	// ? USE oAuth?
+
+	//TODO: 6) VALIDATE USER INPUT PRE DB
 
 	r := gin.Default()
 
