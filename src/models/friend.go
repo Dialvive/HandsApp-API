@@ -15,7 +15,7 @@ type Friend struct {
 type CreateFriendInput struct {
 	User1ID      uint `json:"user1_ID" binding:"required"`
 	User2ID      uint `json:"user2_ID" binding:"required"`
-	FriendshipID uint `json:"friendship_ID" binding:"required"`
+	FriendshipID uint `json:"friendship_ID"`
 	Facebook     bool `json:"facebook" binding:"required"`
 }
 

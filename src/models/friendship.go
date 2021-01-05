@@ -11,7 +11,7 @@ type Friendship struct {
 
 // CreateFriendshipInput represents the type of friendship two users have.
 type CreateFriendshipInput struct {
-	Name string `json:"cost" binding:"required"`
+	Name string `json:"name" binding:"required"`
 }
 
 // FriendshipClaim is a claim that cointains Friendship as Data.

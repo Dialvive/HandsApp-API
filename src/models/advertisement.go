@@ -22,7 +22,7 @@ type CreateAdvertisementInput struct {
 	AdCategoryID uint   `json:"ad_category_ID" binding:"required"`
 	Title        string `json:"title" binding:"required"`
 	Body         string `json:"body" binding:"required"`
-	Media        bool   `json:"media" binding:"required"`
+	Media        bool   `json:"media"`
 	Paid         uint   `json:"paid" binding:"required"`
 }
 
