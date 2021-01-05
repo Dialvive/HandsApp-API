@@ -37,6 +37,8 @@ func main() {
 	//TODO: * DELETING AN USER DELETES EVERYTHING RELATED TO IT
 	//TODO: * REMOVE binding:"required" FROM NULLABLE COLUMN STRUCTS
 
+	//TODO 7) FIX words_by_region_count, friends_count, friends/0, friend/0/0
+
 	r := gin.Default()
 
 	models.ConnectDatabase()
