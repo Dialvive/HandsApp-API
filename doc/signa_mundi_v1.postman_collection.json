@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4440ea64-91f4-4d2a-8072-98f5d2ac321b",
+		"_postman_id": "dce13536-3d6b-4f8a-91e2-b570824200e7",
 		"name": "signa_mundi_v1",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -86,7 +86,7 @@
 										}
 									},
 									"_postman_previewlanguage": "json",
-									"header": null,
+									"header": [],
 									"cookie": [],
 									"body": "{\n    \"name\": \"Mexico\",\n    \"abbreviation\": \"MX\"\n}"
 								}
@@ -130,10 +130,10 @@
 											]
 										}
 									},
-									"_postman_previewlanguage": null,
-									"header": null,
+									"_postman_previewlanguage": "Text",
+									"header": [],
 									"cookie": [],
-									"body": null
+									"body": ""
 								}
 							]
 						},
@@ -270,7 +270,7 @@
 										}
 									},
 									"_postman_previewlanguage": "json",
-									"header": null,
+									"header": [],
 									"cookie": [],
 									"body": "{\n    \"name\": \"Mexico\",\n    \"abbreviation\": \"MX\"\n}"
 								}
@@ -314,10 +314,10 @@
 											]
 										}
 									},
-									"_postman_previewlanguage": null,
-									"header": null,
+									"_postman_previewlanguage": "Text",
+									"header": [],
 									"cookie": [],
-									"body": null
+									"body": ""
 								}
 							]
 						},
@@ -454,7 +454,7 @@
 										}
 									},
 									"_postman_previewlanguage": "json",
-									"header": null,
+									"header": [],
 									"cookie": [],
 									"body": "{\n    \"name\": \"Mexico\",\n    \"abbreviation\": \"MX\"\n}"
 								}
@@ -498,10 +498,10 @@
 											]
 										}
 									},
-									"_postman_previewlanguage": null,
-									"header": null,
+									"_postman_previewlanguage": "Text",
+									"header": [],
 									"cookie": [],
-									"body": null
+									"body": ""
 								}
 							]
 						},
@@ -638,7 +638,7 @@
 										}
 									},
 									"_postman_previewlanguage": "json",
-									"header": null,
+									"header": [],
 									"cookie": [],
 									"body": "{\n    \"name\": \"Mexico\",\n    \"abbreviation\": \"MX\"\n}"
 								}
@@ -682,10 +682,10 @@
 											]
 										}
 									},
-									"_postman_previewlanguage": null,
-									"header": null,
+									"_postman_previewlanguage": "Text",
+									"header": [],
 									"cookie": [],
-									"body": null
+									"body": ""
 								}
 							]
 						},
@@ -822,7 +822,7 @@
 										}
 									},
 									"_postman_previewlanguage": "json",
-									"header": null,
+									"header": [],
 									"cookie": [],
 									"body": "{\n    \"name\": \"Mexico\",\n    \"abbreviation\": \"MX\"\n}"
 								}
@@ -866,10 +866,10 @@
 											]
 										}
 									},
-									"_postman_previewlanguage": null,
-									"header": null,
+									"_postman_previewlanguage": "Text",
+									"header": [],
 									"cookie": [],
-									"body": null
+									"body": ""
 								}
 							]
 						},
@@ -1006,7 +1006,7 @@
 										}
 									},
 									"_postman_previewlanguage": "json",
-									"header": null,
+									"header": [],
 									"cookie": [],
 									"body": "{\n    \"name\": \"Mexico\",\n    \"abbreviation\": \"MX\"\n}"
 								}
@@ -1050,10 +1050,10 @@
 											]
 										}
 									},
-									"_postman_previewlanguage": null,
-									"header": null,
+									"_postman_previewlanguage": "Text",
+									"header": [],
 									"cookie": [],
-									"body": null
+									"body": ""
 								}
 							]
 						},
@@ -1113,7 +1113,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "0ec2e59e-9a8d-4799-85f7-065303220dff",
+								"id": "d2c61a94-1bcb-4b45-a3c0-5ca12ca1557f",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -1123,7 +1123,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "9ba1ed3a-44bb-4a0b-894c-8a74aacf14ab",
+								"id": "3c4f626b-2e9b-445f-b6bd-fbcf09e717f4",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -1212,7 +1212,7 @@
 										}
 									},
 									"_postman_previewlanguage": "json",
-									"header": null,
+									"header": [],
 									"cookie": [],
 									"body": "{\n    \"name\": \"Mexico\",\n    \"abbreviation\": \"MX\"\n}"
 								}
@@ -1256,10 +1256,10 @@
 											]
 										}
 									},
-									"_postman_previewlanguage": null,
-									"header": null,
+									"_postman_previewlanguage": "Text",
+									"header": [],
 									"cookie": [],
-									"body": null
+									"body": ""
 								}
 							]
 						},
@@ -1319,7 +1319,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "d8776e7a-8ba2-41d3-a9c4-8e7b836b348d",
+								"id": "304d0270-1bd1-422b-98fc-aab4c88facb5",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -1329,7 +1329,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "e6073946-6925-4449-848b-2c7418610c48",
+								"id": "06c36e14-4c62-4a7c-b732-8912896ada56",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -1346,7 +1346,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "cd1a07a0-6c22-4458-aeb6-a606d0f15361",
+						"id": "c0f700ca-eb8e-4fa6-842c-59e1b6ab09b1",
 						"type": "text/javascript",
 						"exec": [
 							""
@@ -1356,7 +1356,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "d61c0b07-c0ff-48a0-8c21-7309cb315108",
+						"id": "a23f5a7e-8f92-4ddc-a90a-a9485bcfc75f",
 						"type": "text/javascript",
 						"exec": [
 							""
@@ -1419,39 +1419,7 @@
 								},
 								"description": "Creates a new Advertisement"
 							},
-							"response": [
-								{
-									"name": "POST Country",
-									"originalRequest": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"name\": \"\",\n    \"abbreviation\": \"\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "localhost:8080/v1/country",
-											"host": [
-												"localhost"
-											],
-											"port": "8080",
-											"path": [
-												"v1",
-												"country"
-											]
-										}
-									},
-									"_postman_previewlanguage": "json",
-									"header": null,
-									"cookie": [],
-									"body": "{\n    \"name\": \"Mexico\",\n    \"abbreviation\": \"MX\"\n}"
-								}
-							]
+							"response": []
 						},
 						{
 							"name": "GET Advertisement",
@@ -1491,10 +1459,10 @@
 											]
 										}
 									},
-									"_postman_previewlanguage": null,
-									"header": null,
+									"_postman_previewlanguage": "Text",
+									"header": [],
 									"cookie": [],
-									"body": null
+									"body": ""
 								}
 							]
 						},
@@ -1554,7 +1522,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "5ccb01b5-3942-4295-b17b-9eb242e799ba",
+								"id": "e2ddafb1-6518-4eb1-b0d2-d7e75538f48f",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -1564,7 +1532,877 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "04792d66-a196-4fe1-9419-1e4a6d5d165d",
+								"id": "7fe9a291-053d-4ab0-a727-d076971808a8",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Regions",
+					"item": [
+						{
+							"name": "GET Regions",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/regions",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"regions"
+									]
+								},
+								"description": "Obtains all the Regions"
+							},
+							"response": []
+						},
+						{
+							"name": "POST Region",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"country_ID\": 0,\n    \"name\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/v1/region",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"region"
+									]
+								},
+								"description": "Creates a new Region"
+							},
+							"response": []
+						},
+						{
+							"name": "GET Region",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/region/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"region",
+										"0"
+									]
+								},
+								"description": "Gets a Region in particular with a given ID"
+							},
+							"response": [
+								{
+									"name": "GET Country",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/v1/country/0",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"v1",
+												"country",
+												"0"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "PATCH Region",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"country_ID\": 0,\n    \"name\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/v1/region/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"region",
+										"0"
+									]
+								},
+								"description": "Patches a Region with all parameters except for ID and modified."
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE Region",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/region/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"region",
+										"0"
+									]
+								},
+								"description": "Deletes the Region with the given ID"
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "51b41126-6c69-4132-9d74-48b28ce09649",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "78a6ad1e-9e84-44c4-a2e9-d6864a76abbd",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Locales",
+					"item": [
+						{
+							"name": "GET Locales",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/locales",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"locales"
+									]
+								},
+								"description": "Obtains all the Locales"
+							},
+							"response": []
+						},
+						{
+							"name": "POST Locale",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"country_ID\": 0,\n    \"spoken_language_ID\": 0,\n    \"sign_language_ID\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/v1/locale",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"locale"
+									]
+								},
+								"description": "Creates a new Locale"
+							},
+							"response": []
+						},
+						{
+							"name": "GET Locale",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/locale/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"locale",
+										"0"
+									]
+								},
+								"description": "Gets a Locale in particular with a given ID"
+							},
+							"response": [
+								{
+									"name": "GET Country",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/v1/country/0",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"v1",
+												"country",
+												"0"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "PATCH Locale",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"country_ID\": 0,\n    \"spoken_language_ID\": 0,\n    \"sign_language_ID\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/v1/locale/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"locale",
+										"0"
+									]
+								},
+								"description": "Patches a Locale with all parameters except for ID and modified."
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE Locale",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/region/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"region",
+										"0"
+									]
+								},
+								"description": "Deletes the Locale with the given ID"
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "a95e813d-04fe-4357-a303-5419adb6e809",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "85534bda-6bff-48fe-9dae-866a7fd41cd8",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Phrases",
+					"item": [
+						{
+							"name": "GET Phrases",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/phrases",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"phrases"
+									]
+								},
+								"description": "Obtains all the Phrases"
+							},
+							"response": []
+						},
+						{
+							"name": "POST Phrase",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"locale_ID\": 0,\n    \"phrase_category_ID\": 0,\n    \"text\": \"\",\n    \"context\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/v1/phrase",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"phrase"
+									]
+								},
+								"description": "Creates a new Phrase"
+							},
+							"response": []
+						},
+						{
+							"name": "GET Phrase",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/phrase/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"phrase",
+										"0"
+									]
+								},
+								"description": "Gets a Phrase in particular with a given ID"
+							},
+							"response": [
+								{
+									"name": "GET Country",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/v1/country/0",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"v1",
+												"country",
+												"0"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "PATCH Phrase",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"locale_ID\": 0,\n    \"phrase_category_ID\": 0,\n    \"text\": \"\",\n    \"context\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/v1/phrase/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"phrase",
+										"0"
+									]
+								},
+								"description": "Patches a Phrase with all parameters except for ID and modified."
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE Phrase",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/phrase/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"phrase",
+										"0"
+									]
+								},
+								"description": "Deletes the Phrase with the given ID"
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "3cba7989-2261-467d-85b8-70f0f91f2a13",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "32d37d16-4bc6-4918-ad1c-273679fbc687",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Words",
+					"item": [
+						{
+							"name": "GET Words",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/words",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"words"
+									]
+								},
+								"description": "Obtains all the Words"
+							},
+							"response": []
+						},
+						{
+							"name": "POST Word",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"locale_ID\": 0,\n    \"word_category_ID\": 0,\n    \"text\": \"\",\n    \"definition\": \"\",\n    \"context\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/v1/word",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"word"
+									]
+								},
+								"description": "Creates a new Word"
+							},
+							"response": []
+						},
+						{
+							"name": "GET Word",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/word/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"word",
+										"0"
+									]
+								},
+								"description": "Gets a Word in particular with a given ID"
+							},
+							"response": [
+								{
+									"name": "GET Country",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/v1/country/0",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"v1",
+												"country",
+												"0"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "PATCH Word",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"locale_ID\": 0,\n    \"word_category_ID\": 0,\n    \"text\": \"\",\n    \"definition\": \"\",\n    \"context\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/v1/word/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"word",
+										"0"
+									]
+								},
+								"description": "Patches a Word with all parameters except for ID and modified."
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE Word",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/word/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"word",
+										"0"
+									]
+								},
+								"description": "Deletes the Word with the given ID"
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ebd8cf68-318b-49ac-93e7-3202db54438a",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "fe701ced-0ca6-4b53-86cf-b19bee256fff",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "GET Users",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/users",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"users"
+									]
+								},
+								"description": "Obtains all the Users"
+							},
+							"response": []
+						},
+						{
+							"name": "POST User",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"region_ID\": 0,\n    \"first_name\": \"\",\n    \"last_name\": \"\",\n    \"user_name\": \"\",\n    \"mail\": \"\",\n    \"password\": \"\",\n    \"biography\": \"\",\n    \"mailing\": \"\",\n    \"privilege\": 0,\n    \"points\": 0,\n    \"credits\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/v1/user",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"user"
+									]
+								},
+								"description": "Creates a new User"
+							},
+							"response": []
+						},
+						{
+							"name": "GET User",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/user/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"user",
+										"0"
+									]
+								},
+								"description": "Gets a User in particular with a given ID"
+							},
+							"response": [
+								{
+									"name": "GET Country",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/v1/country/0",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"v1",
+												"country",
+												"0"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "PATCH User",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"region_ID\": 0,\n    \"first_name\": \"\",\n    \"last_name\": \"\",\n    \"user_name\": \"\",\n    \"mail\": \"\",\n    \"password\": \"\",\n    \"biography\": \"\",\n    \"mailing\": \"\",\n    \"privilege\": 0,\n    \"points\": 0,\n    \"credits\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/v1/user/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"user",
+										"0"
+									]
+								},
+								"description": "Patches a User with all parameters except for ID and modified."
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE User",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/user/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"user",
+										"0"
+									]
+								},
+								"description": "Deletes the User with the given ID"
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "66253f03-6452-4af6-9d5a-4b29b46bffb8",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "61845843-da23-4d18-b2a7-7c27c8ebfdec",
 								"type": "text/javascript",
 								"exec": [
 									""
