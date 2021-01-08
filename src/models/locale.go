@@ -18,6 +18,13 @@ type CreateLocaleInput struct {
 	SignLanguageID   uint `json:"sign_language_ID" binding:"required"`
 }
 
+// UpdateLocaleInput is a mix of location, spoken language, and sign language classification..
+type UpdateLocaleInput struct {
+	CountryID        uint `json:"country_ID"`
+	SpokenLanguageID uint `json:"spoken_language_ID"`
+	SignLanguageID   uint `json:"sign_language_ID"`
+}
+
 // LocaleClaim is a claim that cointains Locale as Data.
 type LocaleClaim struct {
 	Data Locale `json:"data" binding:"required"`

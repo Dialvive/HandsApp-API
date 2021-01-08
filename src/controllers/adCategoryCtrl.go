@@ -15,7 +15,12 @@ func GetAdCategories(c *gin.Context) {
 	models.DB.Find(&adCategories)
 
 	for i := range adCategories {
-		adCategories[i].Name = security.RemoveBackticks(adCategories[i].Name)
+		adCategories[i].NameDe = security.RemoveBackticks(adCategories[i].NameDe)
+		adCategories[i].NameEs = security.RemoveBackticks(adCategories[i].NameEs)
+		adCategories[i].NameEn = security.RemoveBackticks(adCategories[i].NameEn)
+		adCategories[i].NameFr = security.RemoveBackticks(adCategories[i].NameFr)
+		adCategories[i].NameIt = security.RemoveBackticks(adCategories[i].NameIt)
+		adCategories[i].NamePt = security.RemoveBackticks(adCategories[i].NamePt)
 	}
 
 	c.JSON(http.StatusOK, gin.H{"data": adCategories})
@@ -31,12 +36,23 @@ func CreateAdCategory(c *gin.Context) {
 
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	adCategory := models.AdCategory{
-		Name:     security.SecureString(input.Name),
+		NameDe:   security.SecureString(input.NameDe),
+		NameEs:   security.SecureString(input.NameEs),
+		NameEn:   security.SecureString(input.NameEn),
+		NameFr:   security.SecureString(input.NameFr),
+		NameIt:   security.SecureString(input.NameIt),
+		NamePt:   security.SecureString(input.NamePt),
 		Cost:     uint(input.Cost),
-		Modified: t}
+		Modified: t,
+	}
 	models.DB.Create(&adCategory)
 
-	adCategory.Name = security.RemoveBackticks(adCategory.Name)
+	adCategory.NameDe = security.RemoveBackticks(adCategory.NameDe)
+	adCategory.NameEs = security.RemoveBackticks(adCategory.NameEs)
+	adCategory.NameEn = security.RemoveBackticks(adCategory.NameEn)
+	adCategory.NameFr = security.RemoveBackticks(adCategory.NameFr)
+	adCategory.NameIt = security.RemoveBackticks(adCategory.NameIt)
+	adCategory.NamePt = security.RemoveBackticks(adCategory.NamePt)
 
 	c.JSON(http.StatusOK, gin.H{"data": adCategory})
 }
@@ -55,7 +71,12 @@ func FindAdCategory(c *gin.Context) {
 		return
 	}
 
-	adCategory.Name = security.RemoveBackticks(adCategory.Name)
+	adCategory.NameDe = security.RemoveBackticks(adCategory.NameDe)
+	adCategory.NameEs = security.RemoveBackticks(adCategory.NameEs)
+	adCategory.NameEn = security.RemoveBackticks(adCategory.NameEn)
+	adCategory.NameFr = security.RemoveBackticks(adCategory.NameFr)
+	adCategory.NameIt = security.RemoveBackticks(adCategory.NameIt)
+	adCategory.NamePt = security.RemoveBackticks(adCategory.NamePt)
 
 	c.JSON(http.StatusOK, gin.H{"data": adCategory})
 }
@@ -76,7 +97,7 @@ func PatchAdCategory(c *gin.Context) {
 		return
 	}
 
-	var input models.CreateAdCategoryInput
+	var input models.UpdateAdCategoryInput
 
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -87,12 +108,22 @@ func PatchAdCategory(c *gin.Context) {
 	models.DB.Model(&adCategory).Updates(
 		models.AdCategory{
 			ID:       adCategory.ID,
-			Name:     security.SecureString(input.Name),
+			NameDe:   security.SecureString(input.NameDe),
+			NameEs:   security.SecureString(input.NameEs),
+			NameEn:   security.SecureString(input.NameEn),
+			NameFr:   security.SecureString(input.NameFr),
+			NameIt:   security.SecureString(input.NameIt),
+			NamePt:   security.SecureString(input.NamePt),
 			Cost:     uint(input.Cost),
 			Modified: t,
 		})
 
-	adCategory.Name = security.RemoveBackticks(adCategory.Name)
+	adCategory.NameDe = security.RemoveBackticks(adCategory.NameDe)
+	adCategory.NameEs = security.RemoveBackticks(adCategory.NameEs)
+	adCategory.NameEn = security.RemoveBackticks(adCategory.NameEn)
+	adCategory.NameFr = security.RemoveBackticks(adCategory.NameFr)
+	adCategory.NameIt = security.RemoveBackticks(adCategory.NameIt)
+	adCategory.NamePt = security.RemoveBackticks(adCategory.NamePt)
 
 	c.JSON(http.StatusOK, gin.H{"data": adCategory})
 }

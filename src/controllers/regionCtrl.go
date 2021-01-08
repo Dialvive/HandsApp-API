@@ -75,7 +75,7 @@ func PatchRegion(c *gin.Context) {
 		return
 	}
 
-	var input models.CreateRegionInput
+	var input models.UpdateRegionInput
 
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

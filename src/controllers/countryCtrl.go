@@ -15,7 +15,12 @@ func GetCountries(c *gin.Context) {
 	models.DB.Find(&countries)
 
 	for i := range countries {
-		countries[i].Name = security.RemoveBackticks(countries[i].Name)
+		countries[i].NameDe = security.RemoveBackticks(countries[i].NameDe)
+		countries[i].NameEs = security.RemoveBackticks(countries[i].NameEs)
+		countries[i].NameEn = security.RemoveBackticks(countries[i].NameEn)
+		countries[i].NameFr = security.RemoveBackticks(countries[i].NameFr)
+		countries[i].NameIt = security.RemoveBackticks(countries[i].NameIt)
+		countries[i].NamePt = security.RemoveBackticks(countries[i].NamePt)
 		countries[i].Abbreviation = security.RemoveBackticks(countries[i].Abbreviation)
 	}
 
@@ -32,12 +37,22 @@ func CreateCountry(c *gin.Context) {
 
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	country := models.Country{
-		Name:         security.SecureString(input.Name),
+		NameDe:       security.SecureString(input.NameDe),
+		NameEs:       security.SecureString(input.NameEs),
+		NameEn:       security.SecureString(input.NameEn),
+		NameFr:       security.SecureString(input.NameFr),
+		NameIt:       security.SecureString(input.NameIt),
+		NamePt:       security.SecureString(input.NamePt),
 		Abbreviation: security.SecureString(input.Abbreviation),
 		Modified:     t}
 	models.DB.Create(&country)
 
-	country.Name = security.RemoveBackticks(country.Name)
+	country.NameDe = security.RemoveBackticks(country.NameDe)
+	country.NameEs = security.RemoveBackticks(country.NameEs)
+	country.NameEn = security.RemoveBackticks(country.NameEn)
+	country.NameFr = security.RemoveBackticks(country.NameFr)
+	country.NameIt = security.RemoveBackticks(country.NameIt)
+	country.NamePt = security.RemoveBackticks(country.NamePt)
 	country.Abbreviation = security.RemoveBackticks(country.Abbreviation)
 
 	c.JSON(http.StatusOK, gin.H{"data": country})
@@ -56,7 +71,12 @@ func FindCountry(c *gin.Context) {
 		return
 	}
 
-	country.Name = security.RemoveBackticks(country.Name)
+	country.NameDe = security.RemoveBackticks(country.NameDe)
+	country.NameEs = security.RemoveBackticks(country.NameEs)
+	country.NameEn = security.RemoveBackticks(country.NameEn)
+	country.NameFr = security.RemoveBackticks(country.NameFr)
+	country.NameIt = security.RemoveBackticks(country.NameIt)
+	country.NamePt = security.RemoveBackticks(country.NamePt)
 	country.Abbreviation = security.RemoveBackticks(country.Abbreviation)
 
 	c.JSON(http.StatusOK, gin.H{"data": country})
@@ -77,7 +97,7 @@ func PatchCountry(c *gin.Context) {
 		return
 	}
 
-	var input models.CreateCountryInput
+	var input models.UpdateCountryInput
 
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -88,12 +108,22 @@ func PatchCountry(c *gin.Context) {
 	models.DB.Model(&country).Updates(
 		models.Country{
 			ID:           country.ID,
-			Name:         security.SecureString(input.Name),
+			NameDe:       security.SecureString(input.NameDe),
+			NameEs:       security.SecureString(input.NameEs),
+			NameEn:       security.SecureString(input.NameEn),
+			NameFr:       security.SecureString(input.NameFr),
+			NameIt:       security.SecureString(input.NameIt),
+			NamePt:       security.SecureString(input.NamePt),
 			Abbreviation: security.SecureString(input.Abbreviation),
 			Modified:     t,
 		})
 
-	country.Name = security.RemoveBackticks(country.Name)
+	country.NameDe = security.RemoveBackticks(country.NameDe)
+	country.NameEs = security.RemoveBackticks(country.NameEs)
+	country.NameEn = security.RemoveBackticks(country.NameEn)
+	country.NameFr = security.RemoveBackticks(country.NameFr)
+	country.NameIt = security.RemoveBackticks(country.NameIt)
+	country.NamePt = security.RemoveBackticks(country.NamePt)
 	country.Abbreviation = security.RemoveBackticks(country.Abbreviation)
 
 	c.JSON(http.StatusOK, gin.H{"data": country})

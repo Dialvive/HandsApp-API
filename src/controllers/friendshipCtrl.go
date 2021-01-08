@@ -15,7 +15,12 @@ func GetFriendships(c *gin.Context) {
 	models.DB.Find(&friendships)
 
 	for i := range friendships {
-		friendships[i].Name = security.RemoveBackticks(friendships[i].Name)
+		friendships[i].NameDe = security.RemoveBackticks(friendships[i].NameDe)
+		friendships[i].NameEs = security.RemoveBackticks(friendships[i].NameEs)
+		friendships[i].NameEn = security.RemoveBackticks(friendships[i].NameEn)
+		friendships[i].NameFr = security.RemoveBackticks(friendships[i].NameFr)
+		friendships[i].NameIt = security.RemoveBackticks(friendships[i].NameIt)
+		friendships[i].NamePt = security.RemoveBackticks(friendships[i].NamePt)
 	}
 
 	c.JSON(http.StatusOK, gin.H{"data": friendships})
@@ -23,7 +28,7 @@ func GetFriendships(c *gin.Context) {
 
 // CreateFriendship creates a new friendship.
 func CreateFriendship(c *gin.Context) {
-	var input models.CreateFriendshipInput
+	var input models.FriendshipInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -31,11 +36,21 @@ func CreateFriendship(c *gin.Context) {
 
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	friendship := models.Friendship{
-		Name:     security.SecureString(input.Name),
+		NameDe:   security.SecureString(input.NameDe),
+		NameEs:   security.SecureString(input.NameEs),
+		NameEn:   security.SecureString(input.NameEn),
+		NameFr:   security.SecureString(input.NameFr),
+		NameIt:   security.SecureString(input.NameIt),
+		NamePt:   security.SecureString(input.NamePt),
 		Modified: t}
 	models.DB.Create(&friendship)
 
-	friendship.Name = security.RemoveBackticks(friendship.Name)
+	friendship.NameDe = security.RemoveBackticks(friendship.NameDe)
+	friendship.NameEs = security.RemoveBackticks(friendship.NameEs)
+	friendship.NameEn = security.RemoveBackticks(friendship.NameEn)
+	friendship.NameFr = security.RemoveBackticks(friendship.NameFr)
+	friendship.NameIt = security.RemoveBackticks(friendship.NameIt)
+	friendship.NamePt = security.RemoveBackticks(friendship.NamePt)
 
 	c.JSON(http.StatusOK, gin.H{"data": friendship})
 }
@@ -53,8 +68,12 @@ func FindFriendship(c *gin.Context) {
 		return
 	}
 
-	friendship.Name = security.RemoveBackticks(friendship.Name)
-
+	friendship.NameDe = security.RemoveBackticks(friendship.NameDe)
+	friendship.NameEs = security.RemoveBackticks(friendship.NameEs)
+	friendship.NameEn = security.RemoveBackticks(friendship.NameEn)
+	friendship.NameFr = security.RemoveBackticks(friendship.NameFr)
+	friendship.NameIt = security.RemoveBackticks(friendship.NameIt)
+	friendship.NamePt = security.RemoveBackticks(friendship.NamePt)
 	c.JSON(http.StatusOK, gin.H{"data": friendship})
 }
 
@@ -73,7 +92,7 @@ func PatchFriendship(c *gin.Context) {
 		return
 	}
 
-	var input models.CreateFriendshipInput
+	var input models.FriendshipInput
 
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -84,11 +103,21 @@ func PatchFriendship(c *gin.Context) {
 	models.DB.Model(&friendship).Updates(
 		models.Friendship{
 			ID:       friendship.ID,
-			Name:     security.SecureString(input.Name),
+			NameDe:   security.SecureString(input.NameDe),
+			NameEs:   security.SecureString(input.NameEs),
+			NameEn:   security.SecureString(input.NameEn),
+			NameFr:   security.SecureString(input.NameFr),
+			NameIt:   security.SecureString(input.NameIt),
+			NamePt:   security.SecureString(input.NamePt),
 			Modified: t,
 		})
 
-	friendship.Name = security.RemoveBackticks(friendship.Name)
+	friendship.NameDe = security.RemoveBackticks(friendship.NameDe)
+	friendship.NameEs = security.RemoveBackticks(friendship.NameEs)
+	friendship.NameEn = security.RemoveBackticks(friendship.NameEn)
+	friendship.NameFr = security.RemoveBackticks(friendship.NameFr)
+	friendship.NameIt = security.RemoveBackticks(friendship.NameIt)
+	friendship.NamePt = security.RemoveBackticks(friendship.NamePt)
 
 	c.JSON(http.StatusOK, gin.H{"data": friendship})
 }

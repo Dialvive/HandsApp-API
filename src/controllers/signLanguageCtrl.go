@@ -15,7 +15,12 @@ func GetSignLanguages(c *gin.Context) {
 	models.DB.Find(&signLanguages)
 
 	for i := range signLanguages {
-		signLanguages[i].Name = security.RemoveBackticks(signLanguages[i].Name)
+		signLanguages[i].NameDe = security.RemoveBackticks(signLanguages[i].NameDe)
+		signLanguages[i].NameEs = security.RemoveBackticks(signLanguages[i].NameEs)
+		signLanguages[i].NameEn = security.RemoveBackticks(signLanguages[i].NameEn)
+		signLanguages[i].NameFr = security.RemoveBackticks(signLanguages[i].NameFr)
+		signLanguages[i].NameIt = security.RemoveBackticks(signLanguages[i].NameIt)
+		signLanguages[i].NamePt = security.RemoveBackticks(signLanguages[i].NamePt)
 		signLanguages[i].Abbreviation = security.RemoveBackticks(signLanguages[i].Abbreviation)
 	}
 
@@ -32,12 +37,22 @@ func CreateSignLanguage(c *gin.Context) {
 
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	signLanguage := models.SignLanguage{
-		Name:         security.SecureString(input.Name),
+		NameDe:       security.SecureString(input.NameDe),
+		NameEs:       security.SecureString(input.NameEs),
+		NameEn:       security.SecureString(input.NameEn),
+		NameFr:       security.SecureString(input.NameFr),
+		NameIt:       security.SecureString(input.NameIt),
+		NamePt:       security.SecureString(input.NamePt),
 		Abbreviation: security.SecureString(input.Abbreviation),
 		Modified:     t}
 	models.DB.Create(&signLanguage)
 
-	signLanguage.Name = security.RemoveBackticks(signLanguage.Name)
+	signLanguage.NameDe = security.RemoveBackticks(signLanguage.NameDe)
+	signLanguage.NameEs = security.RemoveBackticks(signLanguage.NameEs)
+	signLanguage.NameEn = security.RemoveBackticks(signLanguage.NameEn)
+	signLanguage.NameFr = security.RemoveBackticks(signLanguage.NameFr)
+	signLanguage.NameIt = security.RemoveBackticks(signLanguage.NameIt)
+	signLanguage.NamePt = security.RemoveBackticks(signLanguage.NamePt)
 	signLanguage.Abbreviation = security.RemoveBackticks(signLanguage.Abbreviation)
 
 	c.JSON(http.StatusOK, gin.H{"data": signLanguage})
@@ -56,7 +71,12 @@ func FindSignLanguage(c *gin.Context) {
 		return
 	}
 
-	signLanguage.Name = security.RemoveBackticks(signLanguage.Name)
+	signLanguage.NameDe = security.RemoveBackticks(signLanguage.NameDe)
+	signLanguage.NameEs = security.RemoveBackticks(signLanguage.NameEs)
+	signLanguage.NameEn = security.RemoveBackticks(signLanguage.NameEn)
+	signLanguage.NameFr = security.RemoveBackticks(signLanguage.NameFr)
+	signLanguage.NameIt = security.RemoveBackticks(signLanguage.NameIt)
+	signLanguage.NamePt = security.RemoveBackticks(signLanguage.NamePt)
 	signLanguage.Abbreviation = security.RemoveBackticks(signLanguage.Abbreviation)
 
 	c.JSON(http.StatusOK, gin.H{"data": signLanguage})
@@ -77,7 +97,7 @@ func PatchSignLanguage(c *gin.Context) {
 		return
 	}
 
-	var input models.CreateSignLanguageInput
+	var input models.UpdateSignLanguageInput
 
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -88,12 +108,22 @@ func PatchSignLanguage(c *gin.Context) {
 	models.DB.Model(&signLanguage).Updates(
 		models.SignLanguage{
 			ID:           signLanguage.ID,
-			Name:         security.SecureString(input.Name),
+			NameDe:       security.SecureString(input.NameDe),
+			NameEs:       security.SecureString(input.NameEs),
+			NameEn:       security.SecureString(input.NameEn),
+			NameFr:       security.SecureString(input.NameFr),
+			NameIt:       security.SecureString(input.NameIt),
+			NamePt:       security.SecureString(input.NamePt),
 			Abbreviation: security.SecureString(input.Abbreviation),
 			Modified:     t,
 		})
 
-	signLanguage.Name = security.RemoveBackticks(signLanguage.Name)
+	signLanguage.NameDe = security.RemoveBackticks(signLanguage.NameDe)
+	signLanguage.NameEs = security.RemoveBackticks(signLanguage.NameEs)
+	signLanguage.NameEn = security.RemoveBackticks(signLanguage.NameEn)
+	signLanguage.NameFr = security.RemoveBackticks(signLanguage.NameFr)
+	signLanguage.NameIt = security.RemoveBackticks(signLanguage.NameIt)
+	signLanguage.NamePt = security.RemoveBackticks(signLanguage.NamePt)
 	signLanguage.Abbreviation = security.RemoveBackticks(signLanguage.Abbreviation)
 
 	c.JSON(http.StatusOK, gin.H{"data": signLanguage})

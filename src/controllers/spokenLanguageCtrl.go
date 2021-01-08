@@ -15,7 +15,12 @@ func GetSpokenLanguages(c *gin.Context) {
 	models.DB.Find(&spokenLanguages)
 
 	for i := range spokenLanguages {
-		spokenLanguages[i].Name = security.RemoveBackticks(spokenLanguages[i].Name)
+		spokenLanguages[i].NameDe = security.RemoveBackticks(spokenLanguages[i].NameDe)
+		spokenLanguages[i].NameEs = security.RemoveBackticks(spokenLanguages[i].NameEs)
+		spokenLanguages[i].NameEn = security.RemoveBackticks(spokenLanguages[i].NameEn)
+		spokenLanguages[i].NameFr = security.RemoveBackticks(spokenLanguages[i].NameFr)
+		spokenLanguages[i].NameIt = security.RemoveBackticks(spokenLanguages[i].NameIt)
+		spokenLanguages[i].NamePt = security.RemoveBackticks(spokenLanguages[i].NamePt)
 		spokenLanguages[i].Abbreviation = security.RemoveBackticks(spokenLanguages[i].Abbreviation)
 	}
 
@@ -32,12 +37,22 @@ func CreateSpokenLanguage(c *gin.Context) {
 
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	spokenLanguage := models.SpokenLanguage{
-		Name:         security.SecureString(input.Name),
+		NameDe:       security.SecureString(input.NameDe),
+		NameEs:       security.SecureString(input.NameEs),
+		NameEn:       security.SecureString(input.NameEn),
+		NameFr:       security.SecureString(input.NameFr),
+		NameIt:       security.SecureString(input.NameIt),
+		NamePt:       security.SecureString(input.NamePt),
 		Abbreviation: security.SecureString(input.Abbreviation),
 		Modified:     t}
 	models.DB.Create(&spokenLanguage)
 
-	spokenLanguage.Name = security.RemoveBackticks(spokenLanguage.Name)
+	spokenLanguage.NameDe = security.RemoveBackticks(spokenLanguage.NameDe)
+	spokenLanguage.NameEs = security.RemoveBackticks(spokenLanguage.NameEs)
+	spokenLanguage.NameEn = security.RemoveBackticks(spokenLanguage.NameEn)
+	spokenLanguage.NameFr = security.RemoveBackticks(spokenLanguage.NameFr)
+	spokenLanguage.NameIt = security.RemoveBackticks(spokenLanguage.NameIt)
+	spokenLanguage.NamePt = security.RemoveBackticks(spokenLanguage.NamePt)
 	spokenLanguage.Abbreviation = security.RemoveBackticks(spokenLanguage.Abbreviation)
 
 	c.JSON(http.StatusOK, gin.H{"data": spokenLanguage})
@@ -55,7 +70,12 @@ func FindSpokenLanguage(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "SpokenLanguage not found!"})
 		return
 	}
-	spokenLanguage.Name = security.RemoveBackticks(spokenLanguage.Name)
+	spokenLanguage.NameDe = security.RemoveBackticks(spokenLanguage.NameDe)
+	spokenLanguage.NameEs = security.RemoveBackticks(spokenLanguage.NameEs)
+	spokenLanguage.NameEn = security.RemoveBackticks(spokenLanguage.NameEn)
+	spokenLanguage.NameFr = security.RemoveBackticks(spokenLanguage.NameFr)
+	spokenLanguage.NameIt = security.RemoveBackticks(spokenLanguage.NameIt)
+	spokenLanguage.NamePt = security.RemoveBackticks(spokenLanguage.NamePt)
 	spokenLanguage.Abbreviation = security.RemoveBackticks(spokenLanguage.Abbreviation)
 
 	c.JSON(http.StatusOK, gin.H{"data": spokenLanguage})
@@ -76,7 +96,7 @@ func PatchSpokenLanguage(c *gin.Context) {
 		return
 	}
 
-	var input models.CreateSpokenLanguageInput
+	var input models.UpdateSpokenLanguageInput
 
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -87,12 +107,22 @@ func PatchSpokenLanguage(c *gin.Context) {
 	models.DB.Model(&spokenLanguage).Updates(
 		models.SpokenLanguage{
 			ID:           spokenLanguage.ID,
-			Name:         security.SecureString(input.Name),
+			NameDe:       security.SecureString(input.NameDe),
+			NameEs:       security.SecureString(input.NameEs),
+			NameEn:       security.SecureString(input.NameEn),
+			NameFr:       security.SecureString(input.NameFr),
+			NameIt:       security.SecureString(input.NameIt),
+			NamePt:       security.SecureString(input.NamePt),
 			Abbreviation: security.SecureString(input.Abbreviation),
 			Modified:     t,
 		})
 
-	spokenLanguage.Name = security.RemoveBackticks(spokenLanguage.Name)
+	spokenLanguage.NameDe = security.RemoveBackticks(spokenLanguage.NameDe)
+	spokenLanguage.NameEs = security.RemoveBackticks(spokenLanguage.NameEs)
+	spokenLanguage.NameEn = security.RemoveBackticks(spokenLanguage.NameEn)
+	spokenLanguage.NameFr = security.RemoveBackticks(spokenLanguage.NameFr)
+	spokenLanguage.NameIt = security.RemoveBackticks(spokenLanguage.NameIt)
+	spokenLanguage.NamePt = security.RemoveBackticks(spokenLanguage.NamePt)
 	spokenLanguage.Abbreviation = security.RemoveBackticks(spokenLanguage.Abbreviation)
 
 	c.JSON(http.StatusOK, gin.H{"data": spokenLanguage})

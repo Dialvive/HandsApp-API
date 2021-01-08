@@ -26,6 +26,17 @@ type CreateAdvertisementInput struct {
 	Paid         uint   `json:"paid" binding:"required"`
 }
 
+// UpdateAdvertisementInput represents an ad.
+type UpdateAdvertisementInput struct {
+	UserID       uint   `json:"user_ID"`
+	RegionID     uint   `json:"region_ID"`
+	AdCategoryID uint   `json:"ad_category_ID"`
+	Title        string `json:"title"`
+	Body         string `json:"body"`
+	Media        bool   `json:"media"`
+	Paid         uint   `json:"paid"`
+}
+
 // AdvertisementClaim is a claim that cointains Advertisement as Data.
 type AdvertisementClaim struct {
 	Data Advertisement `json:"data" binding:"required"`

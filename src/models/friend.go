@@ -15,8 +15,16 @@ type Friend struct {
 type CreateFriendInput struct {
 	User1ID      uint `json:"user1_ID" binding:"required"`
 	User2ID      uint `json:"user2_ID" binding:"required"`
+	FriendshipID uint `json:"friendship_ID" binding:"required"`
+	Facebook     bool `json:"facebook"`
+}
+
+// UpdateFriendInput represents a friendship between two users.
+type UpdateFriendInput struct {
+	User1ID      uint `json:"user1_ID"`
+	User2ID      uint `json:"user2_ID"`
 	FriendshipID uint `json:"friendship_ID"`
-	Facebook     bool `json:"facebook" binding:"required"`
+	Facebook     bool `json:"facebook"`
 }
 
 // FriendClaim is a claim that cointains Friend as Data.

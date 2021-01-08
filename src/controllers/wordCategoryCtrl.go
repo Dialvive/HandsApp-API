@@ -15,7 +15,12 @@ func GetWordCategories(c *gin.Context) {
 	models.DB.Find(&wordCategories)
 
 	for i := range wordCategories {
-		wordCategories[i].Name = security.RemoveBackticks(wordCategories[i].Name)
+		wordCategories[i].NameDe = security.RemoveBackticks(wordCategories[i].NameDe)
+		wordCategories[i].NameEs = security.RemoveBackticks(wordCategories[i].NameEs)
+		wordCategories[i].NameEn = security.RemoveBackticks(wordCategories[i].NameEn)
+		wordCategories[i].NameFr = security.RemoveBackticks(wordCategories[i].NameFr)
+		wordCategories[i].NameIt = security.RemoveBackticks(wordCategories[i].NameIt)
+		wordCategories[i].NamePt = security.RemoveBackticks(wordCategories[i].NamePt)
 	}
 
 	c.JSON(http.StatusOK, gin.H{"data": wordCategories})
@@ -23,7 +28,7 @@ func GetWordCategories(c *gin.Context) {
 
 // CreateWordCategory creates a new wordCategory.
 func CreateWordCategory(c *gin.Context) {
-	var input models.CreateWordCategoryInput
+	var input models.WordCategoryInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -31,11 +36,21 @@ func CreateWordCategory(c *gin.Context) {
 
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	wordCategory := models.WordCategory{
-		Name:     security.SecureString(input.Name),
+		NameDe:   security.SecureString(input.NameDe),
+		NameEs:   security.SecureString(input.NameEs),
+		NameEn:   security.SecureString(input.NameEn),
+		NameFr:   security.SecureString(input.NameFr),
+		NameIt:   security.SecureString(input.NameIt),
+		NamePt:   security.SecureString(input.NamePt),
 		Modified: t}
 	models.DB.Create(&wordCategory)
 
-	wordCategory.Name = security.RemoveBackticks(wordCategory.Name)
+	wordCategory.NameDe = security.RemoveBackticks(wordCategory.NameDe)
+	wordCategory.NameEs = security.RemoveBackticks(wordCategory.NameEs)
+	wordCategory.NameEn = security.RemoveBackticks(wordCategory.NameEn)
+	wordCategory.NameFr = security.RemoveBackticks(wordCategory.NameFr)
+	wordCategory.NameIt = security.RemoveBackticks(wordCategory.NameIt)
+	wordCategory.NamePt = security.RemoveBackticks(wordCategory.NamePt)
 
 	c.JSON(http.StatusOK, gin.H{"data": wordCategory})
 }
@@ -53,7 +68,12 @@ func FindWordCategory(c *gin.Context) {
 		return
 	}
 
-	wordCategory.Name = security.RemoveBackticks(wordCategory.Name)
+	wordCategory.NameDe = security.RemoveBackticks(wordCategory.NameDe)
+	wordCategory.NameEs = security.RemoveBackticks(wordCategory.NameEs)
+	wordCategory.NameEn = security.RemoveBackticks(wordCategory.NameEn)
+	wordCategory.NameFr = security.RemoveBackticks(wordCategory.NameFr)
+	wordCategory.NameIt = security.RemoveBackticks(wordCategory.NameIt)
+	wordCategory.NamePt = security.RemoveBackticks(wordCategory.NamePt)
 
 	c.JSON(http.StatusOK, gin.H{"data": wordCategory})
 }
@@ -71,7 +91,7 @@ func PatchWordCategory(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "WordCategory not found!"})
 		return
 	}
-	var input models.CreateWordCategoryInput
+	var input models.WordCategoryInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -80,11 +100,21 @@ func PatchWordCategory(c *gin.Context) {
 	models.DB.Model(&wordCategory).Updates(
 		models.WordCategory{
 			ID:       wordCategory.ID,
-			Name:     security.SecureString(input.Name),
+			NameDe:   security.SecureString(input.NameDe),
+			NameEs:   security.SecureString(input.NameEs),
+			NameEn:   security.SecureString(input.NameEn),
+			NameFr:   security.SecureString(input.NameFr),
+			NameIt:   security.SecureString(input.NameIt),
+			NamePt:   security.SecureString(input.NamePt),
 			Modified: t,
 		})
 
-	wordCategory.Name = security.RemoveBackticks(wordCategory.Name)
+	wordCategory.NameDe = security.RemoveBackticks(wordCategory.NameDe)
+	wordCategory.NameEs = security.RemoveBackticks(wordCategory.NameEs)
+	wordCategory.NameEn = security.RemoveBackticks(wordCategory.NameEn)
+	wordCategory.NameFr = security.RemoveBackticks(wordCategory.NameFr)
+	wordCategory.NameIt = security.RemoveBackticks(wordCategory.NameIt)
+	wordCategory.NamePt = security.RemoveBackticks(wordCategory.NamePt)
 
 	c.JSON(http.StatusOK, gin.H{"data": wordCategory})
 }

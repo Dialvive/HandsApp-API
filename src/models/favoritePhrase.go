@@ -9,8 +9,8 @@ type FavoritePhrase struct {
 	Modified string `json:"modified" gorm:"column:modified;type:TIMESTAMP"`
 }
 
-// CreateFavoritePhraseInput is a classification of a phrase by a user.
-type CreateFavoritePhraseInput struct {
+// FavoritePhraseInput is a classification of a phrase by a user.
+type FavoritePhraseInput struct {
 	PhraseID uint `json:"phrase_ID" binding:"required"`
 	UserID   uint `json:"user_ID" binding:"required"`
 }

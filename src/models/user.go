@@ -15,7 +15,7 @@ type User struct {
 	Privilege uint   `json:"privilege" gorm:"column:privilege;type:VARCHAR(5) NOT NULL"`
 	Points    uint   `json:"points" gorm:"column:points;type:INT; default:0"`
 	Credits   uint   `json:"credits" gorm:"column:credits;type:INT; default:0"`
-	RegionID  uint   `json:"region_id" gorm:"column:region_ID;type:INT NOT NULL"`
+	LocaleID  uint   `json:"locale_id" gorm:"column:locale_ID;type:INT NOT NULL"`
 	Modified  string `json:"modified" gorm:"column:modified;type:TIMESTAMP"`
 }
 
@@ -31,11 +31,11 @@ type CreateUserInput struct {
 	Privilege uint   `json:"privilege" binding:"required"`
 	Points    uint   `json:"points"`
 	Credits   uint   `json:"credits"`
-	RegionID  uint   `json:"region_ID" binding:"required"`
+	LocaleID  uint   `json:"locale_ID" binding:"required"`
 }
 
-// PatchUserInput represents a user of Signa Mundi set of services.
-type PatchUserInput struct {
+// UpdateUserInput represents a user of Signa Mundi set of services.
+type UpdateUserInput struct {
 	FirstName string `json:"first_name"`
 	LastName  string `json:"last_name"`
 	UserName  string `json:"user_name"`
@@ -46,7 +46,7 @@ type PatchUserInput struct {
 	Privilege uint   `json:"privilege"`
 	Points    uint   `json:"points"`
 	Credits   uint   `json:"credits"`
-	RegionID  uint   `json:"region_ID"`
+	LocaleID  uint   `json:"locale_ID"`
 }
 
 // UserClaim is  a claim that cointains User as Data.

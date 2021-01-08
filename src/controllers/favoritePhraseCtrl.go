@@ -19,7 +19,7 @@ func GetFavoritePhrases(c *gin.Context) {
 
 // CreateFavoritePhrases creates a new favoritePhrase.
 func CreateFavoritePhrases(c *gin.Context) {
-	var input models.CreateFavoritePhraseInput
+	var input models.FavoritePhraseInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -105,7 +105,7 @@ func PutFavoritePhrases(c *gin.Context) {
 		return
 	}
 
-	var input models.CreateFavoritePhraseInput
+	var input models.FavoritePhraseInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

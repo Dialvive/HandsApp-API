@@ -16,7 +16,18 @@ func GetPhrases(c *gin.Context) {
 
 	for i := range phrases {
 		phrases[i].Text = security.RemoveBackticks(phrases[i].Text)
-		phrases[i].Context = security.RemoveBackticks(phrases[i].Context)
+		phrases[i].TextDe = security.RemoveBackticks(phrases[i].TextDe)
+		phrases[i].TextEs = security.RemoveBackticks(phrases[i].TextEs)
+		phrases[i].TextEn = security.RemoveBackticks(phrases[i].TextEn)
+		phrases[i].TextFr = security.RemoveBackticks(phrases[i].TextFr)
+		phrases[i].TextIt = security.RemoveBackticks(phrases[i].TextIt)
+		phrases[i].TextPt = security.RemoveBackticks(phrases[i].TextPt)
+		phrases[i].ContextDe = security.RemoveBackticks(phrases[i].ContextDe)
+		phrases[i].ContextEs = security.RemoveBackticks(phrases[i].ContextEs)
+		phrases[i].ContextEn = security.RemoveBackticks(phrases[i].ContextEn)
+		phrases[i].ContextFr = security.RemoveBackticks(phrases[i].ContextFr)
+		phrases[i].ContextIt = security.RemoveBackticks(phrases[i].ContextIt)
+		phrases[i].ContextPt = security.RemoveBackticks(phrases[i].ContextPt)
 	}
 
 	c.JSON(http.StatusOK, gin.H{"data": phrases})
@@ -35,13 +46,35 @@ func CreatePhrase(c *gin.Context) {
 		LocaleID:         uint(input.LocaleID),
 		PhraseCategoryID: uint(input.PhraseCategoryID),
 		Text:             security.SecureString(input.Text),
-		Context:          security.SecureString(input.Context),
+		TextDe:           security.SecureString(input.TextDe),
+		TextEs:           security.SecureString(input.TextEs),
+		TextEn:           security.SecureString(input.TextEn),
+		TextFr:           security.SecureString(input.TextFr),
+		TextIt:           security.SecureString(input.TextIt),
+		TextPt:           security.SecureString(input.TextPt),
+		ContextDe:        security.SecureString(input.ContextDe),
+		ContextEs:        security.SecureString(input.ContextEs),
+		ContextEn:        security.SecureString(input.ContextEn),
+		ContextFr:        security.SecureString(input.ContextFr),
+		ContextIt:        security.SecureString(input.ContextIt),
+		ContextPt:        security.SecureString(input.ContextPt),
 		Modified:         t,
 	}
 	models.DB.Create(&phrase)
 
 	phrase.Text = security.RemoveBackticks(phrase.Text)
-	phrase.Context = security.RemoveBackticks(phrase.Context)
+	phrase.TextDe = security.RemoveBackticks(phrase.TextDe)
+	phrase.TextEs = security.RemoveBackticks(phrase.TextEs)
+	phrase.TextEn = security.RemoveBackticks(phrase.TextEn)
+	phrase.TextFr = security.RemoveBackticks(phrase.TextFr)
+	phrase.TextIt = security.RemoveBackticks(phrase.TextIt)
+	phrase.TextPt = security.RemoveBackticks(phrase.TextPt)
+	phrase.ContextDe = security.RemoveBackticks(phrase.ContextDe)
+	phrase.ContextEs = security.RemoveBackticks(phrase.ContextEs)
+	phrase.ContextEn = security.RemoveBackticks(phrase.ContextEn)
+	phrase.ContextFr = security.RemoveBackticks(phrase.ContextFr)
+	phrase.ContextIt = security.RemoveBackticks(phrase.ContextIt)
+	phrase.ContextPt = security.RemoveBackticks(phrase.ContextPt)
 
 	c.JSON(http.StatusOK, gin.H{"data": phrase})
 }
@@ -60,7 +93,18 @@ func FindPhrase(c *gin.Context) {
 	}
 
 	phrase.Text = security.RemoveBackticks(phrase.Text)
-	phrase.Context = security.RemoveBackticks(phrase.Context)
+	phrase.TextDe = security.RemoveBackticks(phrase.TextDe)
+	phrase.TextEs = security.RemoveBackticks(phrase.TextEs)
+	phrase.TextEn = security.RemoveBackticks(phrase.TextEn)
+	phrase.TextFr = security.RemoveBackticks(phrase.TextFr)
+	phrase.TextIt = security.RemoveBackticks(phrase.TextIt)
+	phrase.TextPt = security.RemoveBackticks(phrase.TextPt)
+	phrase.ContextDe = security.RemoveBackticks(phrase.ContextDe)
+	phrase.ContextEs = security.RemoveBackticks(phrase.ContextEs)
+	phrase.ContextEn = security.RemoveBackticks(phrase.ContextEn)
+	phrase.ContextFr = security.RemoveBackticks(phrase.ContextFr)
+	phrase.ContextIt = security.RemoveBackticks(phrase.ContextIt)
+	phrase.ContextPt = security.RemoveBackticks(phrase.ContextPt)
 
 	c.JSON(http.StatusOK, gin.H{"data": phrase})
 }
@@ -80,7 +124,7 @@ func PatchPhrase(c *gin.Context) {
 		return
 	}
 
-	var input models.CreatePhraseInput
+	var input models.UpdatePhraseInput
 
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -94,12 +138,34 @@ func PatchPhrase(c *gin.Context) {
 			LocaleID:         uint(input.LocaleID),
 			PhraseCategoryID: uint(input.PhraseCategoryID),
 			Text:             security.SecureString(input.Text),
-			Context:          security.SecureString(input.Context),
+			TextDe:           security.SecureString(input.TextDe),
+			TextEs:           security.SecureString(input.TextEs),
+			TextEn:           security.SecureString(input.TextEn),
+			TextFr:           security.SecureString(input.TextFr),
+			TextIt:           security.SecureString(input.TextIt),
+			TextPt:           security.SecureString(input.TextPt),
+			ContextDe:        security.SecureString(input.ContextDe),
+			ContextEs:        security.SecureString(input.ContextEs),
+			ContextEn:        security.SecureString(input.ContextEn),
+			ContextFr:        security.SecureString(input.ContextFr),
+			ContextIt:        security.SecureString(input.ContextIt),
+			ContextPt:        security.SecureString(input.ContextPt),
 			Modified:         t,
 		})
 
 	phrase.Text = security.RemoveBackticks(phrase.Text)
-	phrase.Context = security.RemoveBackticks(phrase.Context)
+	phrase.TextDe = security.RemoveBackticks(phrase.TextDe)
+	phrase.TextEs = security.RemoveBackticks(phrase.TextEs)
+	phrase.TextEn = security.RemoveBackticks(phrase.TextEn)
+	phrase.TextFr = security.RemoveBackticks(phrase.TextFr)
+	phrase.TextIt = security.RemoveBackticks(phrase.TextIt)
+	phrase.TextPt = security.RemoveBackticks(phrase.TextPt)
+	phrase.ContextDe = security.RemoveBackticks(phrase.ContextDe)
+	phrase.ContextEs = security.RemoveBackticks(phrase.ContextEs)
+	phrase.ContextEn = security.RemoveBackticks(phrase.ContextEn)
+	phrase.ContextFr = security.RemoveBackticks(phrase.ContextFr)
+	phrase.ContextIt = security.RemoveBackticks(phrase.ContextIt)
+	phrase.ContextPt = security.RemoveBackticks(phrase.ContextPt)
 
 	c.JSON(http.StatusOK, gin.H{"data": phrase})
 }

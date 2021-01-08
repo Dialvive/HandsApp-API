@@ -54,7 +54,7 @@ func CreateUser(c *gin.Context) {
 		Points:    uint(input.Points),
 		//TODO: TRANSACTION LOCK FOR CREDIT CHANGE
 		Credits:  uint(input.Credits),
-		RegionID: uint(input.RegionID),
+		LocaleID: uint(input.LocaleID),
 		Modified: t,
 	}
 	models.DB.Create(&user)
@@ -139,7 +139,7 @@ func PutUser(c *gin.Context) {
 			Mailing:   security.SecureString(input.Mailing), Privilege: input.Privilege,
 			Points:   uint(input.Points),
 			Credits:  uint(input.Credits),
-			RegionID: uint(input.RegionID),
+			LocaleID: uint(input.LocaleID),
 			Modified: t,
 		})
 
@@ -169,7 +169,7 @@ func PatchUser(c *gin.Context) {
 		return
 	}
 
-	var input models.PatchUserInput
+	var input models.UpdateUserInput
 
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -217,8 +217,8 @@ func PatchUser(c *gin.Context) {
 	if input.Credits != 0 && input.Credits != user.Credits {
 		user.Credits = input.Credits
 	}
-	if input.RegionID != 0 && input.RegionID != user.RegionID {
-		user.RegionID = input.RegionID
+	if input.LocaleID != 0 && input.LocaleID != user.LocaleID {
+		user.LocaleID = input.LocaleID
 	}
 
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
@@ -234,7 +234,7 @@ func PatchUser(c *gin.Context) {
 			Mailing:   security.SecureString(input.Mailing), Privilege: user.Privilege,
 			Points:   uint(user.Points),
 			Credits:  uint(user.Credits),
-			RegionID: uint(user.RegionID),
+			LocaleID: uint(user.LocaleID),
 			Modified: t,
 		})
 

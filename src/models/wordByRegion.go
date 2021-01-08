@@ -8,8 +8,8 @@ type WordByRegion struct {
 	RegionID uint `json:"region_ID" gorm:"column:region_ID;type:INT NOT NULL"`
 }
 
-// CreateWordByRegionInput is a classification of a word by region.
-type CreateWordByRegionInput struct {
+// WordByRegionInput is a classification of a word by region.
+type WordByRegionInput struct {
 	WordID   uint `json:"word_ID" binding:"required"`
 	RegionID uint `json:"region_ID" binding:"required"`
 }

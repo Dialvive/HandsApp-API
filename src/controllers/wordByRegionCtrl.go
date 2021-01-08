@@ -18,7 +18,7 @@ func GetWordsByRegions(c *gin.Context) {
 
 // CreateWordByRegion creates a new wordByRegion.
 func CreateWordByRegion(c *gin.Context) {
-	var input models.CreateWordByRegionInput
+	var input models.WordByRegionInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -83,7 +83,7 @@ func PutWordByRegion(c *gin.Context) {
 		return
 	}
 
-	var input models.CreateWordByRegionInput
+	var input models.WordByRegionInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

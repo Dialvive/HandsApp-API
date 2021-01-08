@@ -16,6 +16,12 @@ type CreateRegionInput struct {
 	CountryID int    `json:"country_ID" binding:"required"`
 }
 
+// UpdateRegionInput represents an administrative division of a country.
+type UpdateRegionInput struct {
+	Name      string `json:"name"`
+	CountryID int    `json:"country_ID"`
+}
+
 // RegionClaim is  a claim that cointains Region as Data.
 type RegionClaim struct {
 	Data Region `json:"data" binding:"required"`

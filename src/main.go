@@ -37,7 +37,11 @@ func main() {
 	//TODO: * DELETING AN USER DELETES EVERYTHING RELATED TO IT
 	//TODO: * REMOVE binding:"required" FROM NULLABLE COLUMN STRUCTS
 
-	//TODO 7) FIX words_by_region_count, friends_count, friends/0, friend/0/0
+	//TODO: 7) FIX words_by_region_count, friends_count, friends/0, friend/0/0
+
+	//TODO: 8) LOCALIZE TEXT COLUMNS
+
+	//TODO: 9) REDUCE API O() COMPLEXITY
 
 	r := gin.Default()
 

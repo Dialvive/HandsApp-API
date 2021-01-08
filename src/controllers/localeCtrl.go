@@ -68,7 +68,7 @@ func PatchLocale(c *gin.Context) {
 		return
 	}
 
-	var input models.CreateLocaleInput
+	var input models.UpdateLocaleInput
 
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

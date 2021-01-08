@@ -15,7 +15,12 @@ func GetPhraseCategories(c *gin.Context) {
 	models.DB.Find(&phraseCategories)
 
 	for i := range phraseCategories {
-		phraseCategories[i].Name = security.RemoveBackticks(phraseCategories[i].Name)
+		phraseCategories[i].NameDe = security.RemoveBackticks(phraseCategories[i].NameDe)
+		phraseCategories[i].NameEs = security.RemoveBackticks(phraseCategories[i].NameEs)
+		phraseCategories[i].NameEn = security.RemoveBackticks(phraseCategories[i].NameEn)
+		phraseCategories[i].NameFr = security.RemoveBackticks(phraseCategories[i].NameFr)
+		phraseCategories[i].NameIt = security.RemoveBackticks(phraseCategories[i].NameIt)
+		phraseCategories[i].NamePt = security.RemoveBackticks(phraseCategories[i].NamePt)
 	}
 
 	c.JSON(http.StatusOK, gin.H{"data": phraseCategories})
@@ -23,7 +28,7 @@ func GetPhraseCategories(c *gin.Context) {
 
 // CreatePhraseCategory creates a new phraseCategory.
 func CreatePhraseCategory(c *gin.Context) {
-	var input models.CreatePhraseCategoryInput
+	var input models.PhraseCategoryInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -31,11 +36,21 @@ func CreatePhraseCategory(c *gin.Context) {
 
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	phraseCategory := models.PhraseCategory{
-		Name:     security.SecureString(input.Name),
+		NameDe:   security.SecureString(input.NameDe),
+		NameEs:   security.SecureString(input.NameEs),
+		NameEn:   security.SecureString(input.NameEn),
+		NameFr:   security.SecureString(input.NameFr),
+		NameIt:   security.SecureString(input.NameIt),
+		NamePt:   security.SecureString(input.NamePt),
 		Modified: t}
 	models.DB.Create(&phraseCategory)
 
-	phraseCategory.Name = security.RemoveBackticks(phraseCategory.Name)
+	phraseCategory.NameDe = security.RemoveBackticks(phraseCategory.NameDe)
+	phraseCategory.NameEs = security.RemoveBackticks(phraseCategory.NameEs)
+	phraseCategory.NameEn = security.RemoveBackticks(phraseCategory.NameEn)
+	phraseCategory.NameFr = security.RemoveBackticks(phraseCategory.NameFr)
+	phraseCategory.NameIt = security.RemoveBackticks(phraseCategory.NameIt)
+	phraseCategory.NamePt = security.RemoveBackticks(phraseCategory.NamePt)
 
 	c.JSON(http.StatusOK, gin.H{"data": phraseCategory})
 }
@@ -53,7 +68,12 @@ func FindPhraseCategory(c *gin.Context) {
 		return
 	}
 
-	phraseCategory.Name = security.RemoveBackticks(phraseCategory.Name)
+	phraseCategory.NameDe = security.RemoveBackticks(phraseCategory.NameDe)
+	phraseCategory.NameEs = security.RemoveBackticks(phraseCategory.NameEs)
+	phraseCategory.NameEn = security.RemoveBackticks(phraseCategory.NameEn)
+	phraseCategory.NameFr = security.RemoveBackticks(phraseCategory.NameFr)
+	phraseCategory.NameIt = security.RemoveBackticks(phraseCategory.NameIt)
+	phraseCategory.NamePt = security.RemoveBackticks(phraseCategory.NamePt)
 
 	c.JSON(http.StatusOK, gin.H{"data": phraseCategory})
 }
@@ -73,7 +93,7 @@ func PatchPhraseCategory(c *gin.Context) {
 		return
 	}
 
-	var input models.CreatePhraseCategoryInput
+	var input models.PhraseCategoryInput
 
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -84,11 +104,21 @@ func PatchPhraseCategory(c *gin.Context) {
 	models.DB.Model(&phraseCategory).Updates(
 		models.PhraseCategory{
 			ID:       phraseCategory.ID,
-			Name:     security.SecureString(input.Name),
+			NameDe:   security.SecureString(input.NameDe),
+			NameEs:   security.SecureString(input.NameEs),
+			NameEn:   security.SecureString(input.NameEn),
+			NameFr:   security.SecureString(input.NameFr),
+			NameIt:   security.SecureString(input.NameIt),
+			NamePt:   security.SecureString(input.NamePt),
 			Modified: t,
 		})
 
-	phraseCategory.Name = security.RemoveBackticks(phraseCategory.Name)
+	phraseCategory.NameDe = security.RemoveBackticks(phraseCategory.NameDe)
+	phraseCategory.NameEs = security.RemoveBackticks(phraseCategory.NameEs)
+	phraseCategory.NameEn = security.RemoveBackticks(phraseCategory.NameEn)
+	phraseCategory.NameFr = security.RemoveBackticks(phraseCategory.NameFr)
+	phraseCategory.NameIt = security.RemoveBackticks(phraseCategory.NameIt)
+	phraseCategory.NamePt = security.RemoveBackticks(phraseCategory.NamePt)
 
 	c.JSON(http.StatusOK, gin.H{"data": phraseCategory})
 }

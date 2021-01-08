@@ -19,7 +19,7 @@ func GetFavoriteWords(c *gin.Context) {
 
 // CreateFavoriteWords creates a new favoriteWords.
 func CreateFavoriteWords(c *gin.Context) {
-	var input models.CreateFavoriteWordInput
+	var input models.FavoriteWordInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -108,7 +108,7 @@ func PutFavoriteWords(c *gin.Context) {
 		return
 	}
 
-	var input models.CreateFavoriteWordInput
+	var input models.FavoriteWordInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

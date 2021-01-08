@@ -15,9 +15,24 @@ func GetWords(c *gin.Context) {
 	models.DB.Find(&words)
 
 	for i := range words {
-		words[i].Context = security.RemoveBackticks(words[i].Context)
-		words[i].Definition = security.RemoveBackticks(words[i].Definition)
-		words[i].Text = security.RemoveBackticks(words[i].Text)
+		words[i].TextDe = security.RemoveBackticks(words[i].TextDe)
+		words[i].TextEs = security.RemoveBackticks(words[i].TextEs)
+		words[i].TextEn = security.RemoveBackticks(words[i].TextEn)
+		words[i].TextFr = security.RemoveBackticks(words[i].TextFr)
+		words[i].TextIt = security.RemoveBackticks(words[i].TextIt)
+		words[i].TextPt = security.RemoveBackticks(words[i].TextPt)
+		words[i].ContextDe = security.RemoveBackticks(words[i].ContextDe)
+		words[i].ContextEs = security.RemoveBackticks(words[i].ContextEs)
+		words[i].ContextEn = security.RemoveBackticks(words[i].ContextEn)
+		words[i].ContextFr = security.RemoveBackticks(words[i].ContextFr)
+		words[i].ContextIt = security.RemoveBackticks(words[i].ContextIt)
+		words[i].ContextPt = security.RemoveBackticks(words[i].ContextPt)
+		words[i].DefinitionDe = security.RemoveBackticks(words[i].DefinitionDe)
+		words[i].DefinitionEs = security.RemoveBackticks(words[i].DefinitionEs)
+		words[i].DefinitionEn = security.RemoveBackticks(words[i].DefinitionEn)
+		words[i].DefinitionFr = security.RemoveBackticks(words[i].DefinitionFr)
+		words[i].DefinitionIt = security.RemoveBackticks(words[i].DefinitionIt)
+		words[i].DefinitionPt = security.RemoveBackticks(words[i].DefinitionPt)
 	}
 
 	c.JSON(http.StatusOK, gin.H{"data": words})
@@ -35,16 +50,46 @@ func CreateWord(c *gin.Context) {
 	word := models.Word{
 		LocaleID:       uint(input.LocaleID),
 		WordCategoryID: uint(input.WordCategoryID),
-		Text:           security.SecureString(input.Text),
-		Definition:     security.SecureString(input.Definition),
-		Context:        security.SecureString(input.Context),
+		TextDe:         security.SecureString(input.TextDe),
+		TextEs:         security.SecureString(input.TextEs),
+		TextEn:         security.SecureString(input.TextEn),
+		TextFr:         security.SecureString(input.TextFr),
+		TextIt:         security.SecureString(input.TextIt),
+		TextPt:         security.SecureString(input.TextPt),
+		ContextDe:      security.SecureString(input.ContextDe),
+		ContextEs:      security.SecureString(input.ContextEs),
+		ContextEn:      security.SecureString(input.ContextEn),
+		ContextFr:      security.SecureString(input.ContextFr),
+		ContextIt:      security.SecureString(input.ContextIt),
+		ContextPt:      security.SecureString(input.ContextPt),
+		DefinitionDe:   security.SecureString(input.DefinitionDe),
+		DefinitionEs:   security.SecureString(input.DefinitionEs),
+		DefinitionEn:   security.SecureString(input.DefinitionEn),
+		DefinitionFr:   security.SecureString(input.DefinitionFr),
+		DefinitionIt:   security.SecureString(input.DefinitionIt),
+		DefinitionPt:   security.SecureString(input.DefinitionPt),
 		Modified:       t,
 	}
 	models.DB.Create(&word)
 
-	word.Context = security.RemoveBackticks(word.Context)
-	word.Definition = security.RemoveBackticks(word.Definition)
-	word.Text = security.RemoveBackticks(word.Text)
+	word.TextDe = security.RemoveBackticks(word.TextDe)
+	word.TextEs = security.RemoveBackticks(word.TextEs)
+	word.TextEn = security.RemoveBackticks(word.TextEn)
+	word.TextFr = security.RemoveBackticks(word.TextFr)
+	word.TextIt = security.RemoveBackticks(word.TextIt)
+	word.TextPt = security.RemoveBackticks(word.TextPt)
+	word.ContextDe = security.RemoveBackticks(word.ContextDe)
+	word.ContextEs = security.RemoveBackticks(word.ContextEs)
+	word.ContextEn = security.RemoveBackticks(word.ContextEn)
+	word.ContextFr = security.RemoveBackticks(word.ContextFr)
+	word.ContextIt = security.RemoveBackticks(word.ContextIt)
+	word.ContextPt = security.RemoveBackticks(word.ContextPt)
+	word.DefinitionDe = security.RemoveBackticks(word.DefinitionDe)
+	word.DefinitionEs = security.RemoveBackticks(word.DefinitionEs)
+	word.DefinitionEn = security.RemoveBackticks(word.DefinitionEn)
+	word.DefinitionFr = security.RemoveBackticks(word.DefinitionFr)
+	word.DefinitionIt = security.RemoveBackticks(word.DefinitionIt)
+	word.DefinitionPt = security.RemoveBackticks(word.DefinitionPt)
 
 	c.JSON(http.StatusOK, gin.H{"data": word})
 }
@@ -62,9 +107,24 @@ func FindWord(c *gin.Context) {
 		return
 	}
 
-	word.Context = security.RemoveBackticks(word.Context)
-	word.Definition = security.RemoveBackticks(word.Definition)
-	word.Text = security.RemoveBackticks(word.Text)
+	word.TextDe = security.RemoveBackticks(word.TextDe)
+	word.TextEs = security.RemoveBackticks(word.TextEs)
+	word.TextEn = security.RemoveBackticks(word.TextEn)
+	word.TextFr = security.RemoveBackticks(word.TextFr)
+	word.TextIt = security.RemoveBackticks(word.TextIt)
+	word.TextPt = security.RemoveBackticks(word.TextPt)
+	word.ContextDe = security.RemoveBackticks(word.ContextDe)
+	word.ContextEs = security.RemoveBackticks(word.ContextEs)
+	word.ContextEn = security.RemoveBackticks(word.ContextEn)
+	word.ContextFr = security.RemoveBackticks(word.ContextFr)
+	word.ContextIt = security.RemoveBackticks(word.ContextIt)
+	word.ContextPt = security.RemoveBackticks(word.ContextPt)
+	word.DefinitionDe = security.RemoveBackticks(word.DefinitionDe)
+	word.DefinitionEs = security.RemoveBackticks(word.DefinitionEs)
+	word.DefinitionEn = security.RemoveBackticks(word.DefinitionEn)
+	word.DefinitionFr = security.RemoveBackticks(word.DefinitionFr)
+	word.DefinitionIt = security.RemoveBackticks(word.DefinitionIt)
+	word.DefinitionPt = security.RemoveBackticks(word.DefinitionPt)
 
 	c.JSON(http.StatusOK, gin.H{"data": word})
 }
@@ -84,7 +144,7 @@ func PatchWord(c *gin.Context) {
 		return
 	}
 
-	var input models.CreateWordInput
+	var input models.UpdateWordInput
 
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -97,15 +157,45 @@ func PatchWord(c *gin.Context) {
 			ID:             word.ID,
 			LocaleID:       uint(input.LocaleID),
 			WordCategoryID: uint(input.WordCategoryID),
-			Text:           security.SecureString(input.Text),
-			Definition:     security.SecureString(input.Definition),
-			Context:        security.SecureString(input.Context),
+			TextDe:         security.SecureString(input.TextDe),
+			TextEs:         security.SecureString(input.TextEs),
+			TextEn:         security.SecureString(input.TextEn),
+			TextFr:         security.SecureString(input.TextFr),
+			TextIt:         security.SecureString(input.TextIt),
+			TextPt:         security.SecureString(input.TextPt),
+			ContextDe:      security.SecureString(input.ContextDe),
+			ContextEs:      security.SecureString(input.ContextEs),
+			ContextEn:      security.SecureString(input.ContextEn),
+			ContextFr:      security.SecureString(input.ContextFr),
+			ContextIt:      security.SecureString(input.ContextIt),
+			ContextPt:      security.SecureString(input.ContextPt),
+			DefinitionDe:   security.SecureString(input.DefinitionDe),
+			DefinitionEs:   security.SecureString(input.DefinitionEs),
+			DefinitionEn:   security.SecureString(input.DefinitionEn),
+			DefinitionFr:   security.SecureString(input.DefinitionFr),
+			DefinitionIt:   security.SecureString(input.DefinitionIt),
+			DefinitionPt:   security.SecureString(input.DefinitionPt),
 			Modified:       t,
 		})
 
-	word.Context = security.RemoveBackticks(word.Context)
-	word.Definition = security.RemoveBackticks(word.Definition)
-	word.Text = security.RemoveBackticks(word.Text)
+	word.TextDe = security.RemoveBackticks(word.TextDe)
+	word.TextEs = security.RemoveBackticks(word.TextEs)
+	word.TextEn = security.RemoveBackticks(word.TextEn)
+	word.TextFr = security.RemoveBackticks(word.TextFr)
+	word.TextIt = security.RemoveBackticks(word.TextIt)
+	word.TextPt = security.RemoveBackticks(word.TextPt)
+	word.ContextDe = security.RemoveBackticks(word.ContextDe)
+	word.ContextEs = security.RemoveBackticks(word.ContextEs)
+	word.ContextEn = security.RemoveBackticks(word.ContextEn)
+	word.ContextFr = security.RemoveBackticks(word.ContextFr)
+	word.ContextIt = security.RemoveBackticks(word.ContextIt)
+	word.ContextPt = security.RemoveBackticks(word.ContextPt)
+	word.DefinitionDe = security.RemoveBackticks(word.DefinitionDe)
+	word.DefinitionEs = security.RemoveBackticks(word.DefinitionEs)
+	word.DefinitionEn = security.RemoveBackticks(word.DefinitionEn)
+	word.DefinitionFr = security.RemoveBackticks(word.DefinitionFr)
+	word.DefinitionIt = security.RemoveBackticks(word.DefinitionIt)
+	word.DefinitionPt = security.RemoveBackticks(word.DefinitionPt)
 
 	c.JSON(http.StatusOK, gin.H{"data": word})
 }

@@ -2,20 +2,26 @@ CREATE SCHEMA IF NOT EXISTS `signa_mundi` CHARACTER SET UTF8MB4;
 
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`country`(
 	`ID` TINYINT NOT NULL,
-    `name` TEXT NOT NULL,
+    `name_de` TEXT,
+    `name_es` TEXT,
+    `name_en` TEXT,
+    `name_fr` TEXT,
+    `name_it` TEXT,
+    `name_pt` TEXT,    
     `abbreviation` VARCHAR(4) NOT NULL,
     `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`region`(
 	`ID` INT NOT NULL,
-    `name` TEXT NOT NULL,
     `country_ID` TINYINT NOT NULL,
+    `name` TEXT NOT NULL,
     `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`user`(
 	`ID` INT NOT NULL,
+    `locale_ID` SMALLINT NOT NULL,
     `first_name` TEXT,
     `last_name` TEXT,
     `user_name` VARCHAR(32) NOT NULL,
@@ -26,13 +32,17 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`user`(
     `privilege` VARCHAR(5) NOT NULL,
     `points` INT DEFAULT 0,
     `credits` INT DEFAULT 0,
-    `region_ID` INT NOT NULL,
     `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`friendship`(
 	`ID` TINYINT NOT NULL,
-    `name` TEXT NOT NULL,
+    `name_de` TEXT,
+    `name_es` TEXT,
+    `name_en` TEXT,
+    `name_fr` TEXT,
+    `name_it` TEXT,
+    `name_pt` TEXT,   
     `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -46,7 +56,12 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`friend`(
 
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`ad_category`(
 	`ID` TINYINT NOT NULL,
-    `name` TEXT NOT NULL,
+    `name_de` TEXT,
+    `name_es` TEXT,
+    `name_en` TEXT,
+    `name_fr` TEXT,
+    `name_it` TEXT,
+    `name_pt` TEXT,   
     `cost` INT NOT NULL,
     `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -56,6 +71,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`advertisement`(
     `user_ID` INT NOT NULL,
     `region_ID` INT NOT NULL,
     `ad_category_ID` TINYINT NOT NULL,
+    `locale_ID` SMALLINT NOT NULL,
     `title` VARCHAR(64) NOT NULL,
     `body` TEXT,
     `media` BOOLEAN DEFAULT 0,
@@ -65,14 +81,24 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`advertisement`(
 
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`spoken_language`(
 	`ID` TINYINT NOT NULL,
-    `name` TEXT NOT NULL,
+    `name_de` TEXT,
+    `name_es` TEXT,
+    `name_en` TEXT,
+    `name_fr` TEXT,
+    `name_it` TEXT,
+    `name_pt` TEXT,   
     `abbreviation` VARCHAR(4) NOT NULL,
     `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`sign_language`(
-	`ID` TINYINT NOT NULL,
-    `name` TEXT NOT NULL,
+	`ID` SMALLINT NOT NULL,
+    `name_de` TEXT,
+    `name_es` TEXT,
+    `name_en` TEXT,
+    `name_fr` TEXT,
+    `name_it` TEXT,
+    `name_pt` TEXT,   
     `abbreviation` VARCHAR(8) NOT NULL,
     `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -87,13 +113,23 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`locale`(
 
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`phrase_category`(
 	`ID` TINYINT NOT NULL,
-    `name` TEXT NOT NULL,
+    `name_de` TEXT,
+    `name_es` TEXT,
+    `name_en` TEXT,
+    `name_fr` TEXT,
+    `name_it` TEXT,
+    `name_pt` TEXT,   
     `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`word_category`(
 	`ID` TINYINT NOT NULL,
-    `name` TEXT NOT NULL,
+    `name_de` TEXT,
+    `name_es` TEXT,
+    `name_en` TEXT,
+    `name_fr` TEXT,
+    `name_it` TEXT,
+    `name_pt` TEXT,   
     `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -102,7 +138,18 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`phrase`(
     `locale_ID` SMALLINT NOT NULL,
     `phrase_category_ID` TINYINT NOT NULL,
     `text` TEXT NOT NULL,
-    `context` TEXT,
+    `text_de` TEXT,
+    `text_es` TEXT,
+    `text_en` TEXT,
+    `text_fr` TEXT,
+    `text_it` TEXT,
+    `text_pt` TEXT,   
+    `context_de` TEXT,
+    `context_es` TEXT,
+    `context_en` TEXT,
+    `context_fr` TEXT,
+    `context_it` TEXT,
+    `context_pt` TEXT,   
     `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -111,8 +158,24 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`word`(
     `locale_ID` SMALLINT NOT NULL,
     `word_category_ID` TINYINT NOT NULL,
     `text` TEXT NOT NULL,
-    `context` TEXT,
-    `definition` TEXT,
+    `text_de` TEXT,
+    `text_es` TEXT,
+    `text_en` TEXT,
+    `text_fr` TEXT,
+    `text_it` TEXT,
+    `text_pt` TEXT,   
+    `context_de` TEXT,
+    `context_es` TEXT,
+    `context_en` TEXT,
+    `context_fr` TEXT,
+    `context_it` TEXT,
+    `context_pt` TEXT,  
+    `definition_de` TEXT,
+    `definition_es` TEXT,
+    `definition_en` TEXT,
+    `definition_fr` TEXT,
+    `definition_it` TEXT,
+    `definition_pt` TEXT,  
     `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -158,7 +221,7 @@ ALTER TABLE `signa_mundi`.`friendship` MODIFY `ID` TINYINT NOT NULL AUTO_INCREME
 ALTER TABLE `signa_mundi`.`ad_category` MODIFY `ID` TINYINT NOT NULL AUTO_INCREMENT;
 ALTER TABLE `signa_mundi`.`advertisement` MODIFY `ID` INT NOT NULL AUTO_INCREMENT;
 ALTER TABLE `signa_mundi`.`spoken_language` MODIFY `ID` TINYINT NOT NULL AUTO_INCREMENT;
-ALTER TABLE `signa_mundi`.`sign_language` MODIFY `ID` TINYINT NOT NULL AUTO_INCREMENT;
+ALTER TABLE `signa_mundi`.`sign_language` MODIFY `ID` SMALLINT NOT NULL AUTO_INCREMENT;
 ALTER TABLE `signa_mundi`.`locale` MODIFY `ID` SMALLINT NOT NULL AUTO_INCREMENT;
 ALTER TABLE `signa_mundi`.`phrase_category` MODIFY `ID` TINYINT NOT NULL AUTO_INCREMENT;
 ALTER TABLE `signa_mundi`.`word_category` MODIFY `ID` TINYINT NOT NULL AUTO_INCREMENT;
@@ -179,7 +242,7 @@ ALTER TABLE `signa_mundi`.`phrase` AUTO_INCREMENT=1;
 ALTER TABLE `signa_mundi`.`word` AUTO_INCREMENT=1;
 
 ALTER TABLE `signa_mundi`.`region` ADD FOREIGN KEY (`country_ID`) REFERENCES `signa_mundi`.`country`(`ID`);
-ALTER TABLE `signa_mundi`.`user` ADD FOREIGN KEY (`region_ID`) REFERENCES `signa_mundi`.`region`(`ID`);
+ALTER TABLE `signa_mundi`.`user` ADD FOREIGN KEY (`locale_ID`) REFERENCES `signa_mundi`.`locale`(`ID`);
 ALTER TABLE `signa_mundi`.`friend` ADD FOREIGN KEY (`user1_ID`) REFERENCES `signa_mundi`.`user`(`ID`);
 ALTER TABLE `signa_mundi`.`friend` ADD FOREIGN KEY (`user2_ID`) REFERENCES `signa_mundi`.`user`(`ID`);
 ALTER TABLE `signa_mundi`.`friend` ADD FOREIGN KEY (`friendship_ID`) REFERENCES `signa_mundi`.`friendship`(`ID`);
