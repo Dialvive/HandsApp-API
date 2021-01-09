@@ -45,12 +45,12 @@ func CreateUser(c *gin.Context) {
 	user := models.User{
 		FirstName: security.SecureString(input.FirstName),
 		LastName:  security.SecureString(input.LastName),
-		UserName:  security.SecureString(input.UserName),
-		Mail:      security.SecureString(input.Mail),
+		UserName:  security.SecureString(security.TrimToLength(input.UserName, 30)),
+		Mail:      security.SecureString(security.TrimToLength(input.Mail, 252)),
 		Password:  pwd,
-		Biography: security.SecureString(input.Biography),
-		Mailing:   security.SecureString(input.Mailing),
-		Privilege: uint(input.Privilege),
+		Biography: security.SecureString(security.TrimToLength(input.Biography, 140)),
+		Mailing:   security.SecureString(security.TrimToLength(input.Mailing, 3)),
+		Privilege: security.SecureString(security.TrimToLength(input.Privilege, 3)),
 		Points:    uint(input.Points),
 		//TODO: TRANSACTION LOCK FOR CREDIT CHANGE
 		Credits:  uint(input.Credits),
@@ -208,7 +208,7 @@ func PatchUser(c *gin.Context) {
 	if input.Mailing != "" && input.Mailing != user.Mailing {
 		user.Mailing = input.Mailing
 	}
-	if input.Privilege != 0 && input.Privilege != user.Privilege {
+	if input.Privilege != "" && input.Privilege != user.Privilege {
 		user.Privilege = input.Privilege
 	}
 	if input.Points != 0 && input.Points != user.Points {
@@ -227,15 +227,16 @@ func PatchUser(c *gin.Context) {
 			ID:        user.ID,
 			FirstName: security.SecureString(input.FirstName),
 			LastName:  security.SecureString(input.LastName),
-			UserName:  security.SecureString(input.UserName),
-			Mail:      security.SecureString(input.Mail),
+			UserName:  security.SecureString(security.TrimToLength(input.UserName, 30)),
+			Mail:      security.SecureString(security.TrimToLength(input.Mail, 252)),
 			Password:  input.Password,
-			Biography: security.SecureString(input.Biography),
-			Mailing:   security.SecureString(input.Mailing), Privilege: user.Privilege,
-			Points:   uint(user.Points),
-			Credits:  uint(user.Credits),
-			LocaleID: uint(user.LocaleID),
-			Modified: t,
+			Biography: security.SecureString(security.TrimToLength(input.Biography, 140)),
+			Mailing:   security.SecureString(security.TrimToLength(input.Mailing, 3)),
+			Privilege: security.SecureString(security.TrimToLength(user.Privilege, 3)),
+			Points:    uint(user.Points),
+			Credits:   uint(user.Credits),
+			LocaleID:  uint(user.LocaleID),
+			Modified:  t,
 		})
 
 	user.Biography = security.RemoveBackticks(user.Biography)

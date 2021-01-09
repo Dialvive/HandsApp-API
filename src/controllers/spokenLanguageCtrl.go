@@ -43,7 +43,7 @@ func CreateSpokenLanguage(c *gin.Context) {
 		NameFr:       security.SecureString(input.NameFr),
 		NameIt:       security.SecureString(input.NameIt),
 		NamePt:       security.SecureString(input.NamePt),
-		Abbreviation: security.SecureString(input.Abbreviation),
+		Abbreviation: security.SecureString(security.TrimToLength(input.Abbreviation, 2)),
 		Modified:     t}
 	models.DB.Create(&spokenLanguage)
 
@@ -113,7 +113,7 @@ func PatchSpokenLanguage(c *gin.Context) {
 			NameFr:       security.SecureString(input.NameFr),
 			NameIt:       security.SecureString(input.NameIt),
 			NamePt:       security.SecureString(input.NamePt),
-			Abbreviation: security.SecureString(input.Abbreviation),
+			Abbreviation: security.SecureString(security.TrimToLength(input.Abbreviation, 2)),
 			Modified:     t,
 		})
 

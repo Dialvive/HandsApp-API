@@ -12,7 +12,7 @@ type User struct {
 	Password  string `json:"password" gorm:"column:password;type:TEXT NOT NULL"`
 	Biography string `json:"biography" gorm:"column:biography;type:TEXT"`
 	Mailing   string `json:"mailing" gorm:"column:mailing;type:VARCHAR(5)"`
-	Privilege uint   `json:"privilege" gorm:"column:privilege;type:VARCHAR(5) NOT NULL"`
+	Privilege string `json:"privilege" gorm:"column:privilege;type:VARCHAR(5) NOT NULL"`
 	Points    uint   `json:"points" gorm:"column:points;type:INT; default:0"`
 	Credits   uint   `json:"credits" gorm:"column:credits;type:INT; default:0"`
 	LocaleID  uint   `json:"locale_id" gorm:"column:locale_ID;type:INT NOT NULL"`
@@ -28,7 +28,7 @@ type CreateUserInput struct {
 	Password  string `json:"password" binding:"required"`
 	Biography string `json:"biography"`
 	Mailing   string `json:"mailing" binding:"required"`
-	Privilege uint   `json:"privilege" binding:"required"`
+	Privilege string `json:"privilege" binding:"required"`
 	Points    uint   `json:"points"`
 	Credits   uint   `json:"credits"`
 	LocaleID  uint   `json:"locale_ID" binding:"required"`
@@ -43,7 +43,7 @@ type UpdateUserInput struct {
 	Password  string `json:"password"`
 	Biography string `json:"biography"`
 	Mailing   string `json:"mailing"`
-	Privilege uint   `json:"privilege"`
+	Privilege string `json:"privilege"`
 	Points    uint   `json:"points"`
 	Credits   uint   `json:"credits"`
 	LocaleID  uint   `json:"locale_ID"`

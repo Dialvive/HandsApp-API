@@ -76,6 +76,10 @@ func SecureUint(s string) (uint64, error) {
 //SecureString checks for SQL injection strings and characters and returns a
 // secure string.
 func SecureString(s string) string {
+	s = strings.TrimSpace(s)
+	if s == "" {
+		return ""
+	}
 	str := (mysqlEscapeString(strings.ToValidUTF8(s, "")))
 	str = "`" + str + "`"
 	return str
@@ -83,6 +87,9 @@ func SecureString(s string) string {
 
 // RemoveBackticks removes every backtick from a given string
 func RemoveBackticks(s string) string {
+	if s == "" {
+		return ""
+	}
 	replace := map[string]string{
 		"`": "",
 	}
@@ -109,6 +116,17 @@ func HashPassword(password string) (string, error) {
 func PasswordMatches(hashedPassword, passedPassword string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(passedPassword))
 	return err != nil
+}
+
+// TrimToLength Trims the given string to the given length
+func TrimToLength(s string, l int) string {
+	if l < 0 {
+		l = l * -1
+	}
+	if len(s) > l {
+		return s[0:l]
+	}
+	return s
 }
 
 func mysqlEscapeString(s string) string {
