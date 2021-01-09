@@ -84,7 +84,7 @@ func FindPhrase(c *gin.Context) {
 	var phrase models.Phrase
 	var param uint64
 	var err error
-	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+	if param, err = security.SecureUint(c.Param("ID")); err != nil || param == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 	if err := models.DB.Where("id = ?", param).First(&phrase).Error; err != nil {
@@ -116,7 +116,7 @@ func PatchPhrase(c *gin.Context) {
 	var phrase models.Phrase
 	var param uint64
 	var err error
-	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+	if param, err = security.SecureUint(c.Param("ID")); err != nil || param == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 	if err := models.DB.Where("id = ?", param).First(&phrase).Error; err != nil {
@@ -176,7 +176,7 @@ func DeletePhrase(c *gin.Context) {
 	var phrase models.Phrase
 	var param uint64
 	var err error
-	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+	if param, err = security.SecureUint(c.Param("ID")); err != nil || param == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 	if err := models.DB.Where("id = ?", param).First(&phrase).Error; err != nil {

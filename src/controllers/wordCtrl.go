@@ -99,7 +99,7 @@ func FindWord(c *gin.Context) {
 	var word models.Word
 	var param uint64
 	var err error
-	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+	if param, err = security.SecureUint(c.Param("ID")); err != nil || param == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 	if err := models.DB.Where("id = ?", param).First(&word).Error; err != nil {
@@ -136,7 +136,7 @@ func PatchWord(c *gin.Context) {
 	var word models.Word
 	var param uint64
 	var err error
-	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+	if param, err = security.SecureUint(c.Param("ID")); err != nil || param == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 	if err := models.DB.Where("id = ?", param).First(&word).Error; err != nil {
@@ -206,7 +206,7 @@ func DeleteWord(c *gin.Context) {
 	var word models.Word
 	var param uint64
 	var err error
-	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+	if param, err = security.SecureUint(c.Param("ID")); err != nil || param == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 	if err := models.DB.Where("id = ?", param).First(&word).Error; err != nil {

@@ -37,7 +37,7 @@ func FindWordsOfRegion(c *gin.Context) {
 	var words []models.WordByRegion
 	var param uint64
 	var err error
-	if param, err = security.SecureUint(c.Param("regionID")); err != nil {
+	if param, err = security.SecureUint(c.Param("regionID")); err != nil || param == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 	if err := models.DB.Where("region_ID = ?", param).Find(&words).Error; err != nil {
@@ -53,7 +53,7 @@ func CountWordsOfRegion(c *gin.Context) {
 	var count int64
 	var param uint64
 	var err error
-	if param, err = security.SecureUint(c.Param("regionID")); err != nil {
+	if param, err = security.SecureUint(c.Param("regionID")); err != nil || param == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 	if err := models.DB.Where("region_ID = ?", param).Count(&count).Error; err != nil {
@@ -70,10 +70,10 @@ func PutWordByRegion(c *gin.Context) {
 	var wordByRegion models.WordByRegion
 	var param1, param2 uint64
 	var err error
-	if param1, err = security.SecureUint(c.Param("regionID")); err != nil {
+	if param1, err = security.SecureUint(c.Param("regionID")); err != nil || param1 == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
-	if param2, err = security.SecureUint(c.Param("wordID")); err != nil {
+	if param2, err = security.SecureUint(c.Param("wordID")); err != nil || param2 == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 	if err := models.DB.Where("region_ID = ? AND word_ID = ?", param1, param2).
@@ -102,10 +102,10 @@ func DeleteWordByRegion(c *gin.Context) {
 	var wordByRegion models.WordByRegion
 	var param1, param2 uint64
 	var err error
-	if param1, err = security.SecureUint(c.Param("regionID")); err != nil {
+	if param1, err = security.SecureUint(c.Param("regionID")); err != nil || param1 == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
-	if param2, err = security.SecureUint(c.Param("wordID")); err != nil {
+	if param2, err = security.SecureUint(c.Param("wordID")); err != nil || param2 == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 	if err := models.DB.Where("region_ID = ? AND word_ID = ?", param1, param2).

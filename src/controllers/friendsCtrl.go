@@ -43,7 +43,7 @@ func FindFriends(c *gin.Context) {
 	var friends []models.Friend
 	var param uint64
 	var err error
-	if param, err = security.SecureUint(c.Param("ID1")); err != nil {
+	if param, err = security.SecureUint(c.Param("ID1")); err != nil || param == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 
@@ -63,10 +63,10 @@ func FindFriend(c *gin.Context) {
 	var friend models.Friend
 	var param1, param2 uint64
 	var err error
-	if param1, err = security.SecureUint(c.Param("ID1")); err != nil {
+	if param1, err = security.SecureUint(c.Param("ID1")); err != nil || param1 == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
-	if param2, err = security.SecureUint(c.Param("ID2")); err != nil {
+	if param2, err = security.SecureUint(c.Param("ID2")); err != nil || param2 == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 	if err := models.DB.Where("user1_ID = ? AND user2_ID = ?", param1, param2).
@@ -87,7 +87,7 @@ func CountFriends(c *gin.Context) {
 	var count int64
 	var param uint64
 	var err error
-	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+	if param, err = security.SecureUint(c.Param("ID")); err != nil || param == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 
@@ -109,10 +109,10 @@ func PutFriend(c *gin.Context) {
 	var friend models.Friend
 	var param1, param2 uint64
 	var err error
-	if param1, err = security.SecureUint(c.Param("ID1")); err != nil {
+	if param1, err = security.SecureUint(c.Param("ID1")); err != nil || param1 == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
-	if param2, err = security.SecureUint(c.Param("ID2")); err != nil {
+	if param2, err = security.SecureUint(c.Param("ID2")); err != nil || param2 == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 	if err := models.DB.Model(&models.Friend{}).Where("user1_ID = ?", param1).
@@ -148,10 +148,10 @@ func DeleteFriend(c *gin.Context) {
 	var friend models.Friend
 	var param1, param2 uint64
 	var err error
-	if param1, err = security.SecureUint(c.Param("ID1")); err != nil {
+	if param1, err = security.SecureUint(c.Param("ID1")); err != nil || param1 == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
-	if param2, err = security.SecureUint(c.Param("ID2")); err != nil {
+	if param2, err = security.SecureUint(c.Param("ID2")); err != nil || param2 == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 	if err := models.DB.Model(&models.Friend{}).Where("user1_ID = ?", param1).

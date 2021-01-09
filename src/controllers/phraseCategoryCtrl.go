@@ -60,7 +60,7 @@ func FindPhraseCategory(c *gin.Context) {
 	var phraseCategory models.PhraseCategory
 	var param uint64
 	var err error
-	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+	if param, err = security.SecureUint(c.Param("ID")); err != nil || param == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 	if err := models.DB.Where("id = ?", param).First(&phraseCategory).Error; err != nil {
@@ -85,7 +85,7 @@ func PatchPhraseCategory(c *gin.Context) {
 	var phraseCategory models.PhraseCategory
 	var param uint64
 	var err error
-	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+	if param, err = security.SecureUint(c.Param("ID")); err != nil || param == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 	if err := models.DB.Where("id = ?", param).First(&phraseCategory).Error; err != nil {
@@ -129,7 +129,7 @@ func DeletePhraseCategory(c *gin.Context) {
 	var phraseCategory models.PhraseCategory
 	var param uint64
 	var err error
-	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+	if param, err = security.SecureUint(c.Param("ID")); err != nil || param == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 	if err := models.DB.Where("id = ?", param).First(&phraseCategory).Error; err != nil {

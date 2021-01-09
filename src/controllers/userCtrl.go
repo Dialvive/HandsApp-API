@@ -75,7 +75,7 @@ func FindUser(c *gin.Context) {
 	var user models.User
 	var param uint64
 	var err error
-	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+	if param, err = security.SecureUint(c.Param("ID")); err != nil || param == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 	if err := models.DB.Where("id = ?", param).First(&user).Error; err != nil {
@@ -101,7 +101,7 @@ func PutUser(c *gin.Context) {
 	var user models.User
 	var param uint64
 	var err error
-	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+	if param, err = security.SecureUint(c.Param("ID")); err != nil || param == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 	if err := models.DB.Where("id = ?", param).First(&user).Error; err != nil {
@@ -161,7 +161,7 @@ func PatchUser(c *gin.Context) {
 	var user models.User
 	var param uint64
 	var err error
-	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+	if param, err = security.SecureUint(c.Param("ID")); err != nil || param == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 	if err := models.DB.Where("id = ?", param).First(&user).Error; err != nil {
@@ -257,7 +257,7 @@ func DeleteUser(c *gin.Context) {
 	var user models.User
 	var param uint64
 	var err error
-	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+	if param, err = security.SecureUint(c.Param("ID")); err != nil || param == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 	if err := models.DB.Where("id = ?", param).First(&user).Error; err != nil {

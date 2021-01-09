@@ -41,7 +41,7 @@ func FindFavoriteWords(c *gin.Context) {
 	var favorites []models.FavoriteWord
 	var param uint64
 	var err error
-	if param, err = security.SecureUint(c.Param("userID")); err != nil {
+	if param, err = security.SecureUint(c.Param("userID")); err != nil || param == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 	if err := models.DB.Where("user_ID = ?", param).Find(&favorites).Error; err != nil {
@@ -57,7 +57,7 @@ func CountFavoriteWordsP(c *gin.Context) {
 	var count int64
 	var param uint64
 	var err error
-	if param, err = security.SecureUint(c.Param("wordID")); err != nil {
+	if param, err = security.SecureUint(c.Param("wordID")); err != nil || param == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 	if err := models.DB.Model(&models.FavoriteWord{}).
@@ -75,7 +75,7 @@ func CountFavoriteWordsU(c *gin.Context) {
 	var count int64
 	var param uint64
 	var err error
-	if param, err = security.SecureUint(c.Param("userID")); err != nil {
+	if param, err = security.SecureUint(c.Param("userID")); err != nil || param == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 
@@ -95,10 +95,10 @@ func PutFavoriteWords(c *gin.Context) {
 	var favoriteWords models.FavoriteWord
 	var param1, param2 uint64
 	var err error
-	if param1, err = security.SecureUint(c.Param("userID")); err != nil {
+	if param1, err = security.SecureUint(c.Param("userID")); err != nil || param1 == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
-	if param2, err = security.SecureUint(c.Param("wordID")); err != nil {
+	if param2, err = security.SecureUint(c.Param("wordID")); err != nil || param2 == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 	if err := models.DB.Where("user_ID = ? AND word_ID = ?", param1, param2).
@@ -129,10 +129,10 @@ func DeleteFavoriteWords(c *gin.Context) {
 	var favoriteWords models.FavoriteWord
 	var param1, param2 uint64
 	var err error
-	if param1, err = security.SecureUint(c.Param("userID")); err != nil {
+	if param1, err = security.SecureUint(c.Param("userID")); err != nil || param1 == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
-	if param2, err = security.SecureUint(c.Param("wordID")); err != nil {
+	if param2, err = security.SecureUint(c.Param("wordID")); err != nil || param2 == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 	if err := models.DB.Where("user_ID = ? AND word_ID = ?", param1, param2).

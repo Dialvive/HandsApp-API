@@ -62,7 +62,7 @@ func FindAdCategory(c *gin.Context) {
 	var adCategory models.AdCategory
 	var param uint64
 	var err error
-	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+	if param, err = security.SecureUint(c.Param("ID")); err != nil || param == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 
@@ -88,7 +88,7 @@ func PatchAdCategory(c *gin.Context) {
 	var adCategory models.AdCategory
 	var param uint64
 	var err error
-	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+	if param, err = security.SecureUint(c.Param("ID")); err != nil || param == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 
@@ -134,7 +134,7 @@ func DeleteAdCategory(c *gin.Context) {
 	var adCategory models.AdCategory
 	var param uint64
 	var err error
-	if param, err = security.SecureUint(c.Param("ID")); err != nil {
+	if param, err = security.SecureUint(c.Param("ID")); err != nil || param == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 	if err := models.DB.Where("id = ?", param).First(&adCategory).Error; err != nil {
