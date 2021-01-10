@@ -38,7 +38,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"\",\n    \"abbreviation\": \"\"\n}",
+									"raw": "{\n    \"name_de\": \"\",\n    \"name_es\": \"\",\n    \"name_en\": \"\",\n    \"name_fr\": \"\",\n    \"name_it\": \"\",\n    \"name_pt\": \"\",\n    \"abbreviation\": \"\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -144,7 +144,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"Mexico\",\n    \"abbreviation\": \"MX\"\n}",
+									"raw": "{\n    \"name_de\": \"\",\n    \"name_es\": \"\",\n    \"name_en\": \"\",\n    \"name_fr\": \"\",\n    \"name_it\": \"\",\n    \"name_pt\": \"\",\n    \"abbreviation\": \"MX\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -328,7 +328,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"\",\n    \"cost\": 0\n}",
+									"raw": "{\n    \"name_de\": \"\",\n    \"name_es\": \"\",\n    \"name_en\": \"\",\n    \"name_fr\": \" de service\",\n    \"name_it\": \"\",\n    \"name_pt\": \"\",\n    \"cost\": 0\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -512,7 +512,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"\"\n}",
+									"raw": "{\n    \"name_de\": \"\",\n    \"name_es\": \"\",\n    \"name_en\": \"\",\n    \"name_fr\": \"\",\n    \"name_it\": \"\",\n    \"name_pt\": \"\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -590,7 +590,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"\"\n}",
+									"raw": "{\n    \"name_de\": \"\",\n    \"name_es\": \"\",\n    \"name_en\": \"\",\n    \"name_fr\": \"\",\n    \"name_it\": \"\",\n    \"name_pt\": \"\"\n}\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -696,7 +696,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"\"\n}",
+									"raw": "{\n    \"name_de\": \"\",\n    \"name_es\": \"\",\n    \"name_en\": \"\",\n    \"name_fr\": \"\",\n    \"name_it\": \"\",\n    \"name_pt\": \"\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -774,7 +774,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"\"\n}",
+									"raw": "{\n    \"name_de\": \"\",\n    \"name_es\": \"\",\n    \"name_en\": \"\",\n    \"name_fr\": \"\",\n    \"name_it\": \"\",\n    \"name_pt\": \"\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -880,7 +880,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"\"\n}",
+									"raw": "{\n    \"name_de\": \"\",\n    \"name_es\": \"\",\n    \"name_en\": \"\",\n    \"name_fr\": \"\",\n    \"name_it\": \"\",\n    \"name_pt\": \"\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -958,7 +958,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"\",\n    \"abbreviation\": \"\"\n}",
+									"raw": "{\n    \"name_de\": \"\",\n    \"name_es\": \"\",\n    \"name_en\": \"\",\n    \"name_fr\": \"\",\n    \"name_it\": \"\",\n    \"name_pt\": \"\",\n    \"abbreviation\": \"\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1064,7 +1064,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"\",\n    \"abbreviation\": \"\"\n}",
+									"raw": "{\n    \"name_de\": \"\",\n    \"name_es\": \"\",\n    \"name_en\": \"\",\n    \"name_fr\": \"\",\n    \"name_it\": \"\",\n    \"name_pt\": \"\",\n    \"abbreviation\": \"\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1164,7 +1164,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"\",\n    \"abbreviation\": \"\"\n}",
+									"raw": "{\n    \"name_de\": \"\",\n    \"name_es\": \"\",\n    \"name_en\": \"\",\n    \"name_fr\": \"\",\n    \"name_it\": \"\",\n    \"name_pt\": \"\",\n    \"abbreviation\": \"\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1270,7 +1270,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"\",\n    \"abbreviation\": \"\"\n}",
+									"raw": "{\n    \"name_de\": \"\",\n    \"name_es\": \"\",\n    \"name_en\": \"\",\n    \"name_fr\": \"\",\n    \"name_it\": \"\",\n    \"name_pt\": \"\",\n    \"abbreviation\": \"\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1369,180 +1369,6 @@
 		{
 			"name": "Related Entities",
 			"item": [
-				{
-					"name": "Advertisements",
-					"item": [
-						{
-							"name": "GET Advertisements",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/v1/advertisements",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"advertisements"
-									]
-								},
-								"description": "Obtains all the Advertisements"
-							},
-							"response": []
-						},
-						{
-							"name": "POST Advertisement",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"user_ID\": 0,\n    \"region_ID\": 0,\n    \"ad_category_ID\": 0,\n    \"title\": \"\",\n    \"body\": \"\",\n    \"media\": false,\n    \"paid\": 0\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:8080/v1/advertisement",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"advertisement"
-									]
-								},
-								"description": "Creates a new Advertisement"
-							},
-							"response": []
-						},
-						{
-							"name": "GET Advertisement",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/v1/advertisement/0",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"advertisement",
-										"0"
-									]
-								},
-								"description": "Gets a Advertisement in particular with a given ID"
-							},
-							"response": [
-								{
-									"name": "GET Country",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "localhost:8080/v1/country/0",
-											"host": [
-												"localhost"
-											],
-											"port": "8080",
-											"path": [
-												"v1",
-												"country",
-												"0"
-											]
-										}
-									},
-									"_postman_previewlanguage": "Text",
-									"header": [],
-									"cookie": [],
-									"body": ""
-								}
-							]
-						},
-						{
-							"name": "PATCH Advertisement",
-							"request": {
-								"method": "PATCH",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"user_ID\": 0,\n    \"region_ID\": 0,\n    \"ad_category_ID\": 0,\n    \"title\": \"\",\n    \"body\": \"\",\n    \"media\": false,\n    \"paid\": 0\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:8080/v1/advertisement/0",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"advertisement",
-										"0"
-									]
-								},
-								"description": "Patches a Advertisement with all parameters except for ID and modified."
-							},
-							"response": []
-						},
-						{
-							"name": "DELETE Advertisement",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/v1/advertisement/0",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"advertisement",
-										"0"
-									]
-								},
-								"description": "Deletes the Advertisement with the given ID"
-							},
-							"response": []
-						}
-					],
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "e2ddafb1-6518-4eb1-b0d2-d7e75538f48f",
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"id": "7fe9a291-053d-4ab0-a727-d076971808a8",
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				},
 				{
 					"name": "Regions",
 					"item": [
@@ -1850,14 +1676,14 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/region/0",
+									"raw": "localhost:8080/v1/locale/0",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
 										"v1",
-										"region",
+										"locale",
 										"0"
 									]
 								},
@@ -1881,6 +1707,354 @@
 							"listen": "test",
 							"script": {
 								"id": "85534bda-6bff-48fe-9dae-866a7fd41cd8",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "GET Users",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/users",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"users"
+									]
+								},
+								"description": "Obtains all the Users"
+							},
+							"response": []
+						},
+						{
+							"name": "POST User",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"locale_ID\": 0,\n    \"first_name\": \"\",\n    \"last_name\": \"\",\n    \"user_name\": \"\",\n    \"mail\": \"\",\n    \"password\": \"\",\n    \"biography\": \"\",\n    \"mailing\": \"\",\n    \"privilege\": \"\",\n    \"points\": 0,\n    \"credits\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/v1/user",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"user"
+									]
+								},
+								"description": "Creates a new User"
+							},
+							"response": []
+						},
+						{
+							"name": "GET User",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/user/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"user",
+										"0"
+									]
+								},
+								"description": "Gets a User in particular with a given ID"
+							},
+							"response": [
+								{
+									"name": "GET Country",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/v1/country/0",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"v1",
+												"country",
+												"0"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "PATCH User",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"locale_ID\": 0,\n    \"first_name\": \"\",\n    \"last_name\": \"\",\n    \"user_name\": \"\",\n    \"mail\": \"\",\n    \"password\": \"\",\n    \"biography\": \"\",\n    \"mailing\": \"\",\n    \"privilege\": \"\",\n    \"points\": 0,\n    \"credits\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/v1/user/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"user",
+										"0"
+									]
+								},
+								"description": "Patches a User with all parameters except for ID and modified."
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE User",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/user/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"user",
+										"0"
+									]
+								},
+								"description": "Deletes the User with the given ID"
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "66253f03-6452-4af6-9d5a-4b29b46bffb8",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "61845843-da23-4d18-b2a7-7c27c8ebfdec",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Advertisements",
+					"item": [
+						{
+							"name": "GET Advertisements",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/advertisements",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"advertisements"
+									]
+								},
+								"description": "Obtains all the Advertisements"
+							},
+							"response": []
+						},
+						{
+							"name": "POST Advertisement",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_ID\": 0,\n    \"region_ID\": 0,\n    \"ad_category_ID\": 0,\n    \"title\": \"\",\n    \"body\": \"\",\n    \"media\": false,\n    \"paid\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/v1/advertisement",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"advertisement"
+									]
+								},
+								"description": "Creates a new Advertisement"
+							},
+							"response": []
+						},
+						{
+							"name": "GET Advertisement",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/advertisement/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"advertisement",
+										"0"
+									]
+								},
+								"description": "Gets a Advertisement in particular with a given ID"
+							},
+							"response": [
+								{
+									"name": "GET Country",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/v1/country/0",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"v1",
+												"country",
+												"0"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "PATCH Advertisement",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_ID\": 0,\n    \"region_ID\": 0,\n    \"ad_category_ID\": 0,\n    \"title\": \"\",\n    \"body\": \"\",\n    \"media\": false,\n    \"paid\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/v1/advertisement/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"advertisement",
+										"0"
+									]
+								},
+								"description": "Patches a Advertisement with all parameters except for ID and modified."
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE Advertisement",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/advertisement/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"advertisement",
+										"0"
+									]
+								},
+								"description": "Deletes the Advertisement with the given ID"
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e2ddafb1-6518-4eb1-b0d2-d7e75538f48f",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "7fe9a291-053d-4ab0-a727-d076971808a8",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -1921,7 +2095,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"locale_ID\": 0,\n    \"phrase_category_ID\": 0,\n    \"text\": \"\",\n    \"context\": \"\"\n}",
+									"raw": "{\n    \"locale_ID\": 0,\n    \"phrase_category_ID\": 0,\n    \"text\": \"\",\n    \"text_de\": \"\",\n    \"text_es\": \"\",\n    \"text_en\": \"\",\n    \"text_fr\": \"\",\n    \"text_it\": \"\",\n    \"text_pt\": \"\",\n    \"context_de\": \"\",\n    \"context_es\": \"\",\n    \"context_en\": \"\",\n    \"context_fr\": \"\",\n    \"context_it\": \"\",\n    \"context_pt\": \"\"\n    }",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1995,7 +2169,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"locale_ID\": 0,\n    \"phrase_category_ID\": 0,\n    \"text\": \"\",\n    \"context\": \"\"\n}",
+									"raw": "{\n    \"locale_ID\": 0,\n    \"phrase_category_ID\": 0,\n    \"text\": \"\",\n    \"text_de\": \"\",\n    \"text_es\": \"\",\n    \"text_en\": \"\",\n    \"text_fr\": \"\",\n    \"text_it\": \"\",\n    \"text_pt\": \"\",\n    \"context_de\": \"\",\n    \"context_es\": \"\",\n    \"context_en\": \"\",\n    \"context_fr\": \"\",\n    \"context_it\": \"\",\n    \"context_pt\": \"\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2095,7 +2269,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"locale_ID\": 0,\n    \"word_category_ID\": 0,\n    \"text\": \"\",\n    \"definition\": \"\",\n    \"context\": \"\"\n}",
+									"raw": "{\n    \"locale_ID\": 0,\n    \"word_category_ID\": 0,\n    \"text\": \"\",\n    \"text_de\": \"\",\n    \"text_es\": \"\",\n    \"text_en\": \"\",\n    \"text_fr\": \"\",\n    \"text_it\": \"\",\n    \"text_pt\": \"\",\n    \"context_de\": \"\",\n    \"context_es\": \"\",\n    \"context_en\": \"\",\n    \"context_fr\": \"\",\n    \"context_it\": \"\",\n    \"context_pt\": \"\",\n    \"definition_de\": \"\",\n    \"definition_es\": \"\",\n    \"definition_en\": \"\",\n    \"definition_fr\": \"\",\n    \"definition_it\": \"\",\n    \"definition_pt\": \"\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2169,7 +2343,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"locale_ID\": 0,\n    \"word_category_ID\": 0,\n    \"text\": \"\",\n    \"definition\": \"\",\n    \"context\": \"\"\n}",
+									"raw": "{\n    \"locale_ID\": 0,\n    \"word_category_ID\": 0,\n    \"text\": \"\",\n    \"text_de\": \"\",\n    \"text_es\": \"\",\n    \"text_en\": \"\",\n    \"text_fr\": \"\",\n    \"text_it\": \"\",\n    \"text_pt\": \"\",\n    \"context_de\": \"\",\n    \"context_es\": \"\",\n    \"context_en\": \"\",\n    \"context_fr\": \"\",\n    \"context_it\": \"\",\n    \"context_pt\": \"\",\n    \"definition_de\": \"\",\n    \"definition_es\": \"\",\n    \"definition_en\": \"\",\n    \"definition_fr\": \"\",\n    \"definition_it\": \"\",\n    \"definition_pt\": \"\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2238,38 +2412,44 @@
 					],
 					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
-				},
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Weak Entities",
+			"item": [
 				{
-					"name": "Users",
+					"name": "Favorite Phrases",
 					"item": [
 						{
-							"name": "GET Users",
+							"name": "GET Favorite Phrases",
 							"request": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/users",
+									"raw": "localhost:8080/v1/favorite_phrases",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
 										"v1",
-										"users"
+										"favorite_phrases"
 									]
 								},
-								"description": "Obtains all the Users"
+								"description": "Obtains all the Favorite Phrases"
 							},
 							"response": []
 						},
 						{
-							"name": "POST User",
+							"name": "POST Favorite Phrase",
 							"request": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"region_ID\": 0,\n    \"first_name\": \"\",\n    \"last_name\": \"\",\n    \"user_name\": \"\",\n    \"mail\": \"\",\n    \"password\": \"\",\n    \"biography\": \"\",\n    \"mailing\": \"\",\n    \"privilege\": 0,\n    \"points\": 0,\n    \"credits\": 0\n}",
+									"raw": "{\n    \"phrase_ID\": 0,\n    \"user_ID\": 0\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2277,38 +2457,39 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/user",
+									"raw": "localhost:8080/v1/favorite_phrase",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
 										"v1",
-										"user"
+										"favorite_phrase"
 									]
 								},
-								"description": "Creates a new User"
+								"description": "Creates a new Favorite Phrase"
 							},
 							"response": []
 						},
 						{
-							"name": "GET User",
+							"name": "GET Count Favorite Phrase By User",
 							"request": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/user/0",
+									"raw": "localhost:8080/v1/favorite_phrases_count/phrase/0",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
 										"v1",
-										"user",
+										"favorite_phrases_count",
+										"phrase",
 										"0"
 									]
 								},
-								"description": "Gets a User in particular with a given ID"
+								"description": "Gets a the Count of Favorite Phrases of a user in particular with a given ID"
 							},
 							"response": [
 								{
@@ -2337,13 +2518,80 @@
 							]
 						},
 						{
-							"name": "PATCH User",
+							"name": "GET Count Favorite Phrase By Phrase",
 							"request": {
-								"method": "PATCH",
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/favorite_phrases_count/user/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"favorite_phrases_count",
+										"user",
+										"0"
+									]
+								},
+								"description": "Gets a the Count of a Favorited Phrase with a given ID"
+							},
+							"response": [
+								{
+									"name": "GET Country",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/v1/country/0",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"v1",
+												"country",
+												"0"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "GET Favorite Phrases Of User",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/favorite_phrases/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"favorite_phrases",
+										"0"
+									]
+								},
+								"description": "Obtains all the Favorite Phrases of a user in particular with a given ID"
+							},
+							"response": []
+						},
+						{
+							"name": "Put Favorite Phrase",
+							"request": {
+								"method": "PUT",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"region_ID\": 0,\n    \"first_name\": \"\",\n    \"last_name\": \"\",\n    \"user_name\": \"\",\n    \"mail\": \"\",\n    \"password\": \"\",\n    \"biography\": \"\",\n    \"mailing\": \"\",\n    \"privilege\": 0,\n    \"points\": 0,\n    \"credits\": 0\n}",
+									"raw": "{\n    \"phrase_ID\": 0,\n    \"user_ID\": 0\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2351,39 +2599,41 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/user/0",
+									"raw": "localhost:8080/v1/favorite_phrases/0/0",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
 										"v1",
-										"user",
+										"favorite_phrases",
+										"0",
 										"0"
 									]
 								},
-								"description": "Patches a User with all parameters except for ID and modified."
+								"description": "Puts a Favorite Phrase with all parameters"
 							},
 							"response": []
 						},
 						{
-							"name": "DELETE User",
+							"name": "DELETE Favorite Phrase",
 							"request": {
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/user/0",
+									"raw": "localhost:8080/v1/favorite_phrases/0/0",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
 										"v1",
-										"user",
+										"favorite_phrases",
+										"0",
 										"0"
 									]
 								},
-								"description": "Deletes the User with the given ID"
+								"description": "Deletes the Favorite Phrase with the given IDs"
 							},
 							"response": []
 						}
@@ -2392,7 +2642,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "66253f03-6452-4af6-9d5a-4b29b46bffb8",
+								"id": "318400be-3162-41f2-95e6-5b1d4960f6d0",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -2402,7 +2652,667 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "61845843-da23-4d18-b2a7-7c27c8ebfdec",
+								"id": "9899b2db-3d0c-4712-a375-e1a2e74beb47",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Favorite Words",
+					"item": [
+						{
+							"name": "GET Favorite Words",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/favorite_words",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"favorite_words"
+									]
+								},
+								"description": "Obtains all the Favorite Words"
+							},
+							"response": []
+						},
+						{
+							"name": "POST Favorite Word",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"word_ID\": 0,\n    \"user_ID\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/v1/favorite_word",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"favorite_word"
+									]
+								},
+								"description": "Creates a new Favorite Word"
+							},
+							"response": []
+						},
+						{
+							"name": "GET Count Favorite Word By User",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/favorite_words_count/word/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"favorite_words_count",
+										"word",
+										"0"
+									]
+								},
+								"description": "Gets a the Count of Favorite Words of a user in particular with a given ID"
+							},
+							"response": [
+								{
+									"name": "GET Country",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/v1/country/0",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"v1",
+												"country",
+												"0"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "GET Count Favorite Word By Phrase",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/favorite_phrases_count/user/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"favorite_phrases_count",
+										"user",
+										"0"
+									]
+								},
+								"description": "Gets a the Count of a Favorited Word with a given ID"
+							},
+							"response": [
+								{
+									"name": "GET Country",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/v1/country/0",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"v1",
+												"country",
+												"0"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "GET Favorite Words Of User",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/favorite_words/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"favorite_words",
+										"0"
+									]
+								},
+								"description": "Obtains all the Favorite Words of a user in particular with a given ID"
+							},
+							"response": []
+						},
+						{
+							"name": "Put Favorite Word",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"word_ID\": 0,\n    \"user_ID\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/v1/favorite_word/0/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"favorite_word",
+										"0",
+										"0"
+									]
+								},
+								"description": "Puts a Favorite Word with all parameters"
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE Favorite Word",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/favorite_word/0/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"favorite_word",
+										"0",
+										"0"
+									]
+								},
+								"description": "Deletes the Favorite Word with the given IDs"
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "a4974503-c9e6-40fa-8418-15031d282e09",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "21f790a5-8bf9-46db-bf66-1699584da12d",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Word By Region",
+					"item": [
+						{
+							"name": "GET Words By Region",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/words_by_regions",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"words_by_regions"
+									]
+								},
+								"description": "Obtains all the Words By Region"
+							},
+							"response": []
+						},
+						{
+							"name": "POST Word By Region",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"region_ID\": 0,\n    \"word_ID\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/v1/word_by_region",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"word_by_region"
+									]
+								},
+								"description": "Creates a new Word By Region"
+							},
+							"response": []
+						},
+						{
+							"name": "GET Count Word By Region",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/words_by_region_count/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"words_by_region_count",
+										"0"
+									]
+								},
+								"description": "Gets a the Count of Words By Region in particular with a given ID"
+							},
+							"response": [
+								{
+									"name": "GET Country",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/v1/country/0",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"v1",
+												"country",
+												"0"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "GET Words Of Region",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/words_of_region/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"words_of_region",
+										"0"
+									]
+								},
+								"description": "Obtains all the Words Of a Region in particular with a given ID"
+							},
+							"response": []
+						},
+						{
+							"name": "Put Word By Region",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"region_ID\": 0,\n    \"word_ID\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/v1/word_by_region/0/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"word_by_region",
+										"0",
+										"0"
+									]
+								},
+								"description": "Puts a Word By Region with all parameters"
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE Word By Region",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/word_by_region/0/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"word_by_region",
+										"0",
+										"0"
+									]
+								},
+								"description": "Deletes the Word By Region with the given ID"
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "28061788-7dde-4bb4-a121-8965ec921942",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "3d762d78-5e24-45ff-8797-6e6c2718bd86",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Friends",
+					"item": [
+						{
+							"name": "GET Friends",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/friends",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"friends"
+									]
+								},
+								"description": "Obtains all the Friends"
+							},
+							"response": []
+						},
+						{
+							"name": "POST Friend",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user1_ID\": 0,\n    \"user2_ID\": 0,\n    \"friendship_ID\": 0,\n    \"facebook\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/v1/friends",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"friends"
+									]
+								},
+								"description": "Creates a new Friend"
+							},
+							"response": []
+						},
+						{
+							"name": "GET Count Friends",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/friends_count/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"friends_count",
+										"0"
+									]
+								},
+								"description": "Gets the Count of Friends of a user in particular with a given ID"
+							},
+							"response": [
+								{
+									"name": "GET Country",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/v1/country/0",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"v1",
+												"country",
+												"0"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "GET Friend",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/friend/0/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"friend",
+										"0",
+										"0"
+									]
+								},
+								"description": "Obtains a Friend with particular ids"
+							},
+							"response": []
+						},
+						{
+							"name": "GET Friends Of User",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/friend/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"friend",
+										"0"
+									]
+								},
+								"description": "Obtains all of the friends of a user with a given ID"
+							},
+							"response": []
+						},
+						{
+							"name": "Put Friend",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user1_ID\": 0,\n    \"user2_ID\": 0,\n    \"friendship_ID\": 0,\n    \"facebook\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/v1/friends/0/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"friends",
+										"0",
+										"0"
+									]
+								},
+								"description": "Puts a Friend with all parameters"
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE Friend",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/v1/friend/0/0",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"friend",
+										"0",
+										"0"
+									]
+								},
+								"description": "Deletes the Friend with the given IDs"
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e7435648-810f-4a0b-9e4d-f610633bd803",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "c8325049-bb58-42f0-b1b6-5784c9183602",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -2414,6 +3324,7 @@
 					"_postman_isSubFolder": true
 				}
 			],
+			"description": "This entities have a composite primary key consisting on two foreign keys",
 			"protocolProfileBehavior": {}
 		}
 	],
