@@ -37,7 +37,8 @@ func main() {
 	//TODO: * DELETING AN USER DELETES EVERYTHING RELATED TO IT
 	// * REMOVE binding:"required" FROM NULLABLE COLUMN STRUCTS
 
-	//TODO: 7) FIX words_by_region_count, friends_count, friends/0, friend/0/0
+	//TODO: 7) FIX post advertisements, post words, put & delete favorite phrases, post words by regions, friends count,
+	//words_by_region_count, friends_count, friends/0, friend/0/0
 
 	// * OK 8) LOCALIZE TEXT COLUMNS
 

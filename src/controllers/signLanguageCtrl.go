@@ -43,7 +43,7 @@ func CreateSignLanguage(c *gin.Context) {
 		NameFr:       security.SecureString(input.NameFr),
 		NameIt:       security.SecureString(input.NameIt),
 		NamePt:       security.SecureString(input.NamePt),
-		Abbreviation: security.SecureString(security.TrimToLength(input.Abbreviation, 2)),
+		Abbreviation: security.SecureString(security.TrimToLength(input.Abbreviation, 6)),
 		Modified:     t}
 	models.DB.Create(&signLanguage)
 
