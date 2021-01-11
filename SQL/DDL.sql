@@ -159,7 +159,6 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`word`(
 	`ID` INT NOT NULL,
     `locale_ID` SMALLINT NOT NULL,
     `word_category_ID` TINYINT NOT NULL,
-    `text` TEXT NOT NULL,
     `text_de` TEXT,
     `text_es` TEXT,
     `text_en` TEXT,

@@ -48,6 +48,7 @@ func CreateWord(c *gin.Context) {
 
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	word := models.Word{
+		ID:             0,
 		LocaleID:       uint(input.LocaleID),
 		WordCategoryID: uint(input.WordCategoryID),
 		TextDe:         security.SecureString(input.TextDe),
