@@ -1921,7 +1921,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"user_ID\": 0,\n    \"region_ID\": 0,\n    \"ad_category_ID\": 0,\n    \"title\": \"\",\n    \"body\": \"\",\n    \"media\": false,\n    \"paid\": 0\n}",
+									"raw": "{\n    \"user_ID\": 0,\n    \"region_ID\": 0,\n    \"ad_category_ID\": 0,\n    \"locale_ID\": 0,\n    \"title\": \"\",\n    \"body\": \"\",\n    \"media\": false,\n    \"paid\": 0\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1995,7 +1995,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"user_ID\": 0,\n    \"region_ID\": 0,\n    \"ad_category_ID\": 0,\n    \"title\": \"\",\n    \"body\": \"\",\n    \"media\": false,\n    \"paid\": 0\n}",
+									"raw": "{\n    \"user_ID\": 0,\n    \"region_ID\": 0,\n    \"ad_category_ID\": 0,\n    \"locale_ID\": 0,\n    \"title\": \"\",\n    \"body\": \"\",\n    \"media\": false,\n    \"paid\": 0\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2269,7 +2269,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"locale_ID\": 0,\n    \"word_category_ID\": 0,\n    \"text\": \"\",\n    \"text_de\": \"\",\n    \"text_es\": \"\",\n    \"text_en\": \"\",\n    \"text_fr\": \"\",\n    \"text_it\": \"\",\n    \"text_pt\": \"\",\n    \"context_de\": \"\",\n    \"context_es\": \"\",\n    \"context_en\": \"\",\n    \"context_fr\": \"\",\n    \"context_it\": \"\",\n    \"context_pt\": \"\",\n    \"definition_de\": \"\",\n    \"definition_es\": \"\",\n    \"definition_en\": \"\",\n    \"definition_fr\": \"\",\n    \"definition_it\": \"\",\n    \"definition_pt\": \"\"\n}",
+									"raw": "{\n    \"locale_ID\": 0,\n    \"word_category_ID\": 0,\n    \"text_de\": \"\",\n    \"text_es\": \"\",\n    \"text_en\": \"\",\n    \"text_fr\": \"\",\n    \"text_it\": \"\",\n    \"text_pt\": \"\",\n    \"context_de\": \"\",\n    \"context_es\": \"\",\n    \"context_en\": \"\",\n    \"context_fr\": \"\",\n    \"context_it\": \"\",\n    \"context_pt\": \"\",\n    \"definition_de\": \"\",\n    \"definition_es\": \"\",\n    \"definition_en\": \"\",\n    \"definition_fr\": \"\",\n    \"definition_it\": \"\",\n    \"definition_pt\": \"\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2585,50 +2585,19 @@
 							"response": []
 						},
 						{
-							"name": "Put Favorite Phrase",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"phrase_ID\": 0,\n    \"user_ID\": 0\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:8080/v1/favorite_phrases/0/0",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"favorite_phrases",
-										"0",
-										"0"
-									]
-								},
-								"description": "Puts a Favorite Phrase with all parameters"
-							},
-							"response": []
-						},
-						{
 							"name": "DELETE Favorite Phrase",
 							"request": {
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/favorite_phrases/0/0",
+									"raw": "localhost:8080/v1/favorite_phrase/0/0",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
 										"v1",
-										"favorite_phrases",
+										"favorite_phrase",
 										"0",
 										"0"
 									]
@@ -2829,37 +2798,6 @@
 							"response": []
 						},
 						{
-							"name": "Put Favorite Word",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"word_ID\": 0,\n    \"user_ID\": 0\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:8080/v1/favorite_word/0/0",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"favorite_word",
-										"0",
-										"0"
-									]
-								},
-								"description": "Puts a Favorite Word with all parameters"
-							},
-							"response": []
-						},
-						{
 							"name": "DELETE Favorite Word",
 							"request": {
 								"method": "DELETE",
@@ -3026,37 +2964,6 @@
 							"response": []
 						},
 						{
-							"name": "Put Word By Region",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"region_ID\": 0,\n    \"word_ID\": 0\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:8080/v1/word_by_region/0/0",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"word_by_region",
-										"0",
-										"0"
-									]
-								},
-								"description": "Puts a Word By Region with all parameters"
-							},
-							"response": []
-						},
-						{
 							"name": "DELETE Word By Region",
 							"request": {
 								"method": "DELETE",
@@ -3142,14 +3049,14 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/friends",
+									"raw": "localhost:8080/v1/friend",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
 										"v1",
-										"friends"
+										"friend"
 									]
 								},
 								"description": "Creates a new Friend"
