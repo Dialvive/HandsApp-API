@@ -210,10 +210,6 @@ ALTER TABLE `signa_mundi`.`phrase_category` ADD PRIMARY KEY(`ID`);
 ALTER TABLE `signa_mundi`.`word_category` ADD PRIMARY KEY(`ID`);
 ALTER TABLE `signa_mundi`.`phrase` ADD PRIMARY KEY(`ID`);
 ALTER TABLE `signa_mundi`.`word` ADD PRIMARY KEY(`ID`);
-ALTER TABLE `signa_mundi`.`friend` ADD PRIMARY KEY(`user1_ID`,`user2_ID`);
-ALTER TABLE `signa_mundi`.`word_by_region` ADD PRIMARY KEY(`word_ID`,`region_ID`);
-ALTER TABLE `signa_mundi`.`favorite_phrase` ADD PRIMARY KEY(`phrase_ID`,`user_ID`);
-ALTER TABLE `signa_mundi`.`favorite_word` ADD PRIMARY KEY(`word_ID`,`user_ID`);
 
 ALTER TABLE `signa_mundi`.`country` MODIFY `ID` TINYINT NOT NULL AUTO_INCREMENT;
 ALTER TABLE `signa_mundi`.`region` MODIFY `ID` INT NOT NULL AUTO_INCREMENT;
@@ -263,3 +259,8 @@ ALTER TABLE `signa_mundi`.`favorite_phrase` ADD FOREIGN KEY (`phrase_ID`) REFERE
 ALTER TABLE `signa_mundi`.`favorite_phrase` ADD FOREIGN KEY (`user_ID`) REFERENCES `signa_mundi`.`user`(`ID`);
 ALTER TABLE `signa_mundi`.`favorite_word` ADD FOREIGN KEY (`word_ID`) REFERENCES `signa_mundi`.`word`(`ID`);
 ALTER TABLE `signa_mundi`.`favorite_word` ADD FOREIGN KEY (`user_ID`) REFERENCES `signa_mundi`.`user`(`ID`);
+
+ALTER TABLE `signa_mundi`.`friend` ADD PRIMARY KEY(`user1_ID`,`user2_ID`);
+ALTER TABLE `signa_mundi`.`word_by_region` ADD PRIMARY KEY(`word_ID`,`region_ID`);
+ALTER TABLE `signa_mundi`.`favorite_phrase` ADD PRIMARY KEY(`phrase_ID`,`user_ID`);
+ALTER TABLE `signa_mundi`.`favorite_word` ADD PRIMARY KEY(`word_ID`,`user_ID`);

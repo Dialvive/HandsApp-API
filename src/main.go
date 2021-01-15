@@ -37,8 +37,7 @@ func main() {
 	//TODO: * DELETING AN USER DELETES EVERYTHING RELATED TO IT
 	// * REMOVE binding:"required" FROM NULLABLE COLUMN STRUCTS
 
-	//TODO: 7) FIX post advertisements, post words, put & delete favorite phrases, post words by regions, friends count,
-	//words_by_region_count, friends_count, friends/0, friend/0/0
+	//TODO: 7) FIX delete word by region, friends count,
 
 	// * OK 8) LOCALIZE TEXT COLUMNS
 
@@ -150,7 +149,7 @@ func main() {
 	r.GET("/v1/friend/:ID1/:ID2", controllers.FindFriend)
 	r.GET("/v1/friends/:ID", controllers.FindFriends)
 	r.GET("/v1/friends_count/:ID", controllers.CountFriends)
-	r.PUT("/v1/friend/:ID1/:ID2", controllers.PutFriend)
+	r.PATCH("/v1/friend/:ID1/:ID2", controllers.PatchFriend)
 	r.DELETE("/v1/friend/:ID1/:ID2", controllers.DeleteFriend)
 
 	// Routes for wordsByRegions
@@ -158,7 +157,6 @@ func main() {
 	r.POST("/v1/word_by_region", controllers.CreateWordByRegion)
 	r.GET("/v1/words_by_region_count/:regionID", controllers.CountWordsOfRegion)
 	r.GET("/v1/words_of_region/:regionID", controllers.FindWordsOfRegion)
-	r.PUT("/v1/word_by_region/:regionID/:wordID", controllers.PutWordByRegion)
 	r.DELETE("/v1/word_by_region/:regionID/:wordID", controllers.DeleteWordByRegion)
 
 	// Routes for favorite_phrases
@@ -167,7 +165,6 @@ func main() {
 	r.GET("/v1/favorite_phrases_count/phrase/:phraseID", controllers.CountFavoritePhrasesP)
 	r.GET("/v1/favorite_phrases_count/user/:userID", controllers.CountFavoritePhrasesU)
 	r.GET("/v1/favorite_phrases/:userID", controllers.FindFavoritePhrases)
-	r.PUT("/v1/favorite_phrase/:userID/:phraseID", controllers.PutFavoritePhrases)
 	r.DELETE("/v1/favorite_phrase/:userID/:phraseID", controllers.DeleteFavoritePhrases)
 
 	// Routes for favorite_words
@@ -176,7 +173,6 @@ func main() {
 	r.GET("/v1/favorite_words_count/word/:wordID", controllers.CountFavoriteWordsP)
 	r.GET("/v1/favorite_words_count/user/:userID", controllers.CountFavoriteWordsU)
 	r.GET("/v1/favorite_words/:userID", controllers.FindFavoriteWords)
-	r.PUT("/v1/favorite_word/:userID/:wordID", controllers.PutFavoriteWords)
 	r.DELETE("/v1/favorite_word/:userID/:wordID", controllers.DeleteFavoriteWords)
 
 	//log.Fatal(autotls.Run(r, "api.signamundi.com"))

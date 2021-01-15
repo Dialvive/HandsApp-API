@@ -85,41 +85,6 @@ func CountFavoritePhrasesU(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": count})
 }
 
-// PutFavoritePhrases updates a favoritePhrase
-func PutFavoritePhrases(c *gin.Context) {
-
-	// Get model if exist
-	var favoritePhrases models.FavoritePhrase
-	var param1, param2 uint64
-	var err error
-	if param1, err = security.SecureUint(c.Param("userID")); err != nil || param1 == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
-	}
-	if param2, err = security.SecureUint(c.Param("phraseID")); err != nil || param2 == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
-	}
-	if err := models.DB.Where("user_ID = ? AND phrase_ID = ?", param1, param2).
-		First(&favoritePhrases).Error; err != nil {
-
-		c.JSON(http.StatusBadRequest, gin.H{"error": "FavoritePhrases not found!"})
-		return
-	}
-
-	var input models.FavoritePhraseInput
-	if err := c.ShouldBindJSON(&input); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-	t := time.Now().UTC().Format("2006-01-02 15:04:05")
-	models.DB.Model(&favoritePhrases).Updates(
-		models.FavoritePhrase{
-			PhraseID: uint(input.PhraseID),
-			UserID:   uint(input.UserID),
-			Modified: t,
-		})
-	c.JSON(http.StatusOK, gin.H{"data": favoritePhrases})
-}
-
 // DeleteFavoritePhrases deletes a favoritePhrase
 func DeleteFavoritePhrases(c *gin.Context) {
 	// Get model if exist

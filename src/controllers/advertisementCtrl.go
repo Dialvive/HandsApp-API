@@ -83,7 +83,7 @@ func PatchAdvertisement(c *gin.Context) {
 		return
 	}
 
-	var input models.CreateAdvertisementInput
+	var input models.UpdateAdvertisementInput
 
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

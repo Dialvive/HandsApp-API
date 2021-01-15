@@ -84,26 +84,27 @@ func FindFriend(c *gin.Context) {
 
 // CountFriends recieves a user ID, returns the number of users that user has as friends.
 func CountFriends(c *gin.Context) {
-	var count int64
+	var count1 int64
+	var count2 int64
 	var param uint64
 	var err error
 	if param, err = security.SecureUint(c.Param("ID")); err != nil || param == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
 	}
 
-	err1 := models.DB.Where("user1_ID = ?", param).Count(&count).Error
-	err2 := models.DB.Where("user2_ID = ?", param).Count(&count).Error
+	err1 := models.DB.Model(&models.Friend{}).Where("user1_ID = ?", param).Count(&count1).Error
+	err2 := models.DB.Model(&models.Friend{}).Where("user2_ID = ?", param).Count(&count2).Error
 
 	if err1 != nil && err2 != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Friends not found!"})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"data": count})
+	c.JSON(http.StatusOK, gin.H{"data": count1 + count2})
 }
 
-// PutFriend updates a friend
-func PutFriend(c *gin.Context) {
+// PatchFriend updates a friend
+func PatchFriend(c *gin.Context) {
 
 	// Get model if exist
 	var friend models.Friend

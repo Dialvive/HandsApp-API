@@ -8,6 +8,7 @@ type Advertisement struct {
 	UserID       uint   `json:"user_ID" gorm:"column:user_ID;type:INT NOT NULL"`
 	RegionID     uint   `json:"region_ID" gorm:"column:region_ID;type:INT NOT NULL"`
 	AdCategoryID uint   `json:"ad_category_ID" gorm:"column:ad_category_ID;type:TINYINT NOT NULL"`
+	LocaleID     uint   `json:"locale_ID" gorm:"column:locale_ID;type:SMALLINT NOT NULL"`
 	Title        string `json:"title" gorm:"column:title;type:VARCHAR(64) NOT NULL"`
 	Body         string `json:"body" gorm:"column:body;type:TEXT"`
 	Media        bool   `json:"media" gorm:"column:media;BOOLEAN; default:0"`
@@ -20,6 +21,7 @@ type CreateAdvertisementInput struct {
 	UserID       uint   `json:"user_ID" binding:"required"`
 	RegionID     uint   `json:"region_ID" binding:"required"`
 	AdCategoryID uint   `json:"ad_category_ID" binding:"required"`
+	LocaleID     uint   `json:"locale_ID" binding:"required"`
 	Title        string `json:"title" binding:"required"`
 	Body         string `json:"body" binding:"required"`
 	Media        bool   `json:"media"`
@@ -31,6 +33,7 @@ type UpdateAdvertisementInput struct {
 	UserID       uint   `json:"user_ID"`
 	RegionID     uint   `json:"region_ID"`
 	AdCategoryID uint   `json:"ad_category_ID"`
+	LocaleID     uint   `json:"locale_ID"`
 	Title        string `json:"title"`
 	Body         string `json:"body"`
 	Media        bool   `json:"media"`
