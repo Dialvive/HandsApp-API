@@ -3,8 +3,9 @@ package main
 import (
 	"API/controllers"
 	"API/models"
-
 	"log"
+
+	"github.com/gin-contrib/cors"
 
 	"github.com/gin-gonic/gin"
 	//"github.com/gin-gonic/autotls"
@@ -42,7 +43,9 @@ func main() {
 	// * OK 8) LOCALIZE TEXT COLUMNS
 
 	r := gin.Default()
-
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"*"}
+	r.Use(cors.New(config))
 	models.ConnectDatabase()
 
 	// SIMPLE TABLES ROUTES /////////////////////////////////////////
@@ -176,6 +179,7 @@ func main() {
 	r.DELETE("/v1/favorite_word/:userID/:wordID", controllers.DeleteFavoriteWords)
 
 	//log.Fatal(autotls.Run(r, "api.signamundi.com"))
+
 	log.Fatal(r.Run(":8080"))
 
 }
