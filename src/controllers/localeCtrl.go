@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"API/models"
+	"API/security"
 	"net/http"
 	"time"
 
@@ -18,6 +19,12 @@ func GetLocales(c *gin.Context) {
 
 // CreateLocale creates a new locale.
 func CreateLocale(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	var input models.CreateLocaleInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -39,8 +46,12 @@ func CreateLocale(c *gin.Context) {
 // FindLocale recieves an id, and returns an specific locale with that id.
 func FindLocale(c *gin.Context) {
 	var locale models.Locale
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&locale).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil || param == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&locale).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Locale not found!"})
 		return
 	}
@@ -50,16 +61,25 @@ func FindLocale(c *gin.Context) {
 
 // PatchLocale updates a locale
 func PatchLocale(c *gin.Context) {
-
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	// Get model if exist
 	var locale models.Locale
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&locale).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil || param == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&locale).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Locale not found!"})
 		return
 	}
 
-	var input models.CreateLocaleInput
+	var input models.UpdateLocaleInput
 
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -81,9 +101,20 @@ func PatchLocale(c *gin.Context) {
 
 // DeleteLocale deletes a locale
 func DeleteLocale(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	// Get model if exist
 	var locale models.Locale
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&locale).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil || param == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&locale).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}

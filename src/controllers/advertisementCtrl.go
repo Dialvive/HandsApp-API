@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"API/models"
+	"API/security"
 	"net/http"
 	"time"
 
@@ -12,6 +13,11 @@ import (
 func GetAdvertisements(c *gin.Context) {
 	var advertisements []models.Advertisement
 	models.DB.Find(&advertisements)
+
+	for i := range advertisements {
+		advertisements[i].Body = security.RemoveBackticks(advertisements[i].Body)
+		advertisements[i].Title = security.RemoveBackticks(advertisements[i].Title)
+	}
 
 	c.JSON(http.StatusOK, gin.H{"data": advertisements})
 }
@@ -29,13 +35,16 @@ func CreateAdvertisement(c *gin.Context) {
 		UserID:       uint(input.UserID),
 		RegionID:     uint(input.RegionID),
 		AdCategoryID: uint(input.AdCategoryID),
-		Title:        input.Title,
-		Body:         input.Body,
-		Media:        input.Media,
+		Title:        security.SecureString(security.TrimToLength(input.Title, 62)),
+		Body:         security.SecureString(input.Body),
+		Media:        bool(input.Media),
 		Paid:         uint(input.Paid),
 		Modified:     t,
 	}
 	models.DB.Create(&advertisement)
+
+	advertisement.Body = security.RemoveBackticks(advertisement.Body)
+	advertisement.Title = security.RemoveBackticks(advertisement.Title)
 
 	c.JSON(http.StatusOK, gin.H{"data": advertisement})
 }
@@ -43,11 +52,18 @@ func CreateAdvertisement(c *gin.Context) {
 // FindAdvertisement recieves an id, and returns an specific advertisement with that id.
 func FindAdvertisement(c *gin.Context) {
 	var advertisement models.Advertisement
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&advertisement).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil || param == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&advertisement).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Advertisement not found!"})
 		return
 	}
+
+	advertisement.Body = security.RemoveBackticks(advertisement.Body)
+	advertisement.Title = security.RemoveBackticks(advertisement.Title)
 
 	c.JSON(http.StatusOK, gin.H{"data": advertisement})
 }
@@ -57,13 +73,17 @@ func PatchAdvertisement(c *gin.Context) {
 
 	// Get model if exist
 	var advertisement models.Advertisement
-
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&advertisement).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil || param == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&advertisement).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Advertisement not found!"})
 		return
 	}
 
-	var input models.CreateAdvertisementInput
+	var input models.UpdateAdvertisementInput
 
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -77,12 +97,15 @@ func PatchAdvertisement(c *gin.Context) {
 			UserID:       uint(input.UserID),
 			RegionID:     uint(input.RegionID),
 			AdCategoryID: uint(input.AdCategoryID),
-			Title:        input.Title,
-			Body:         input.Body,
-			Media:        input.Media,
+			Title:        security.SecureString(security.TrimToLength(input.Title, 62)),
+			Body:         security.SecureString(input.Body),
+			Media:        bool(input.Media),
 			Paid:         uint(input.Paid),
 			Modified:     t,
 		})
+
+	advertisement.Body = security.RemoveBackticks(advertisement.Body)
+	advertisement.Title = security.RemoveBackticks(advertisement.Title)
 
 	c.JSON(http.StatusOK, gin.H{"data": advertisement})
 }
@@ -91,7 +114,12 @@ func PatchAdvertisement(c *gin.Context) {
 func DeleteAdvertisement(c *gin.Context) {
 	// Get model if exist
 	var advertisement models.Advertisement
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&advertisement).Error; err != nil {
+	var param uint64
+	var err error
+	if param, err = security.SecureUint(c.Param("ID")); err != nil || param == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+	}
+	if err := models.DB.Where("id = ?", param).First(&advertisement).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}

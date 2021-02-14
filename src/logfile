@@ -1,0 +1,9 @@
+
+2021/01/15 18:29:48 [32m/home/marcob/Documentos/signa_mundi/SignaMundi-REST-API/src/models/setup.go:48 [33mSLOW SQL >= 1s
+[0m[31;1m[1653.392ms] [33m[rows:-][35m SELECT count(*) FROM information_schema.tables WHERE table_schema = 'signa_mundi' AND table_name = 'ad_category' AND table_type = 'BASE TABLE'[0m
+
+2021/01/16 12:42:07 [32m/home/marcob/Documentos/signa_mundi/SignaMundi-REST-API/src/models/setup.go:48 [33mSLOW SQL >= 1s
+[0m[31;1m[2312.716ms] [33m[rows:-][35m SELECT count(*) FROM information_schema.tables WHERE table_schema = 'signa_mundi' AND table_name = 'ad_category' AND table_type = 'BASE TABLE'[0m
+
+2021/01/18 11:37:30 [32m/home/marcob/Documentos/signa_mundi/SignaMundi-REST-API/src/models/setup.go:48 [33mSLOW SQL >= 1s
+[0m[31;1m[1069.126ms] [33m[rows:-][35m SELECT count(*) FROM information_schema.tables WHERE table_schema = 'signa_mundi' AND table_name = 'ad_category' AND table_type = 'BASE TABLE'[0m
