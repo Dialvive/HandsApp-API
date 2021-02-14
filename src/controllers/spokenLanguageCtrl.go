@@ -29,6 +29,12 @@ func GetSpokenLanguages(c *gin.Context) {
 
 // CreateSpokenLanguage creates a new spokenLanguage.
 func CreateSpokenLanguage(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	var input models.CreateSpokenLanguageInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -83,7 +89,12 @@ func FindSpokenLanguage(c *gin.Context) {
 
 // PatchSpokenLanguage updates a spokenLanguage
 func PatchSpokenLanguage(c *gin.Context) {
-
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	// Get model if exist
 	var spokenLanguage models.SpokenLanguage
 	var param uint64
@@ -130,6 +141,12 @@ func PatchSpokenLanguage(c *gin.Context) {
 
 // DeleteSpokenLanguage deletes a spokenLanguage
 func DeleteSpokenLanguage(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	// Get model if exist
 	var spokenLanguage models.SpokenLanguage
 	var param uint64

@@ -28,6 +28,12 @@ func GetWordCategories(c *gin.Context) {
 
 // CreateWordCategory creates a new wordCategory.
 func CreateWordCategory(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	var input models.WordCategoryInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -80,6 +86,12 @@ func FindWordCategory(c *gin.Context) {
 
 // PatchWordCategory updates a wordCategory
 func PatchWordCategory(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	// Get model if exist
 	var wordCategory models.WordCategory
 	var param uint64
@@ -121,6 +133,12 @@ func PatchWordCategory(c *gin.Context) {
 
 // DeleteWordCategory deletes a wordCategory
 func DeleteWordCategory(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	// Get model if exist
 	var wordCategory models.WordCategory
 	var param uint64

@@ -28,6 +28,12 @@ func GetFriendships(c *gin.Context) {
 
 // CreateFriendship creates a new friendship.
 func CreateFriendship(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	var input models.FriendshipInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -79,7 +85,12 @@ func FindFriendship(c *gin.Context) {
 
 // PatchFriendship updates a friendship
 func PatchFriendship(c *gin.Context) {
-
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	// Get model if exist
 	var friendship models.Friendship
 	var param uint64
@@ -124,6 +135,12 @@ func PatchFriendship(c *gin.Context) {
 
 // DeleteFriendship deletes a friendship
 func DeleteFriendship(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	// Get model if exist
 	var friendship models.Friendship
 	var param uint64

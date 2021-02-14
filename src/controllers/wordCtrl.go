@@ -40,6 +40,12 @@ func GetWords(c *gin.Context) {
 
 // CreateWord creates a new word.
 func CreateWord(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	var input models.CreateWordInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -132,7 +138,12 @@ func FindWord(c *gin.Context) {
 
 // PatchWord updates a word
 func PatchWord(c *gin.Context) {
-
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	// Get model if exist
 	var word models.Word
 	var param uint64
@@ -203,6 +214,12 @@ func PatchWord(c *gin.Context) {
 
 // DeleteWord deletes a word
 func DeleteWord(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	// Get model if exist
 	var word models.Word
 	var param uint64

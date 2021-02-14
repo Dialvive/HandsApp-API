@@ -19,6 +19,12 @@ func GetLocales(c *gin.Context) {
 
 // CreateLocale creates a new locale.
 func CreateLocale(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	var input models.CreateLocaleInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -55,7 +61,12 @@ func FindLocale(c *gin.Context) {
 
 // PatchLocale updates a locale
 func PatchLocale(c *gin.Context) {
-
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	// Get model if exist
 	var locale models.Locale
 	var param uint64
@@ -90,6 +101,12 @@ func PatchLocale(c *gin.Context) {
 
 // DeleteLocale deletes a locale
 func DeleteLocale(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	// Get model if exist
 	var locale models.Locale
 	var param uint64

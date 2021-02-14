@@ -3,6 +3,7 @@ package security
 import (
 	"encoding/base64"
 	"errors"
+	"github.com/gin-gonic/gin"
 	"log"
 	"strconv"
 	"strings"
@@ -66,7 +67,7 @@ func GenPassword256() (string, error) {
 func SecureUint(s string) (uint64, error) {
 	for _, c := range s {
 		if !unicode.IsDigit(c) {
-			err := errors.New("Not a valid input")
+			err := errors.New("not a valid input")
 			return 0, err
 		}
 	}
@@ -80,7 +81,7 @@ func SecureString(s string) string {
 	if s == "" {
 		return ""
 	}
-	str := (mysqlEscapeString(strings.ToValidUTF8(s, "")))
+	str := mysqlEscapeString(strings.ToValidUTF8(s, ""))
 	str = "`" + str + "`"
 	return str
 }
@@ -127,6 +128,14 @@ func TrimToLength(s string, l int) string {
 		return s[0:l]
 	}
 	return s
+}
+
+// CheckKey verifies that a given string matches an API key
+func CheckKey(c *gin.Context, s string) bool {
+	if s != "SECURITY" {
+		return false
+	}
+	return true
 }
 
 func mysqlEscapeString(s string) string {

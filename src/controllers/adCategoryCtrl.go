@@ -28,6 +28,12 @@ func GetAdCategories(c *gin.Context) {
 
 // CreateAdCategory creates a new adCategory.
 func CreateAdCategory(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	var input models.CreateAdCategoryInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -83,7 +89,12 @@ func FindAdCategory(c *gin.Context) {
 
 // PatchAdCategory updates a adCategory
 func PatchAdCategory(c *gin.Context) {
-
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	// Get model if exist
 	var adCategory models.AdCategory
 	var param uint64
@@ -130,6 +141,12 @@ func PatchAdCategory(c *gin.Context) {
 
 // DeleteAdCategory deletes a adCategory
 func DeleteAdCategory(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	// Get model if exist
 	var adCategory models.AdCategory
 	var param uint64

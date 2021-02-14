@@ -35,6 +35,12 @@ func GetPhrases(c *gin.Context) {
 
 // CreatePhrase creates a new phrase.
 func CreatePhrase(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	var input models.CreatePhraseInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -111,7 +117,12 @@ func FindPhrase(c *gin.Context) {
 
 // PatchPhrase updates a phrase
 func PatchPhrase(c *gin.Context) {
-
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	// Get model if exist
 	var phrase models.Phrase
 	var param uint64
@@ -172,6 +183,12 @@ func PatchPhrase(c *gin.Context) {
 
 // DeletePhrase deletes a phrase
 func DeletePhrase(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	// Get model if exist
 	var phrase models.Phrase
 	var param uint64

@@ -4,6 +4,7 @@ import (
 	"API/models"
 	"API/security"
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -18,6 +19,12 @@ func GetWordsByRegions(c *gin.Context) {
 
 // CreateWordByRegion creates a new wordByRegion.
 func CreateWordByRegion(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	var input models.WordByRegionInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -65,6 +72,12 @@ func CountWordsOfRegion(c *gin.Context) {
 
 // DeleteWordByRegion deletes a wordByRegion
 func DeleteWordByRegion(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	// Get model if exist
 	var wordByRegion models.WordByRegion
 	var param1, param2 uint64

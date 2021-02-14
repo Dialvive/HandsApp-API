@@ -23,6 +23,12 @@ func GetRegions(c *gin.Context) {
 
 // CreateRegion creates a new region.
 func CreateRegion(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	var input models.CreateRegionInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -62,7 +68,12 @@ func FindRegion(c *gin.Context) {
 
 // PatchRegion updates a region
 func PatchRegion(c *gin.Context) {
-
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	// Get model if exist
 	var region models.Region
 	var param uint64
@@ -98,6 +109,12 @@ func PatchRegion(c *gin.Context) {
 
 // DeleteRegion deletes a region
 func DeleteRegion(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	// Get model if exist
 	var region models.Region
 	var param uint64

@@ -29,6 +29,12 @@ func GetCountries(c *gin.Context) {
 
 // CreateCountry recieves a Name and Abbreviation, and creates a new country.
 func CreateCountry(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	var input models.CreateCountryInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -84,7 +90,12 @@ func FindCountry(c *gin.Context) {
 
 // PatchCountry updates a country
 func PatchCountry(c *gin.Context) {
-
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	// Get model if exist
 	var country models.Country
 	var param uint64
@@ -131,6 +142,12 @@ func PatchCountry(c *gin.Context) {
 
 // DeleteCountry deletes a country
 func DeleteCountry(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	// Get model if exist
 	var country models.Country
 	var param uint64

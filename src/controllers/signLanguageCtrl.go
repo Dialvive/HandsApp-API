@@ -29,6 +29,12 @@ func GetSignLanguages(c *gin.Context) {
 
 // CreateSignLanguage creates a new signLanguage.
 func CreateSignLanguage(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	var input models.CreateSignLanguageInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -84,7 +90,12 @@ func FindSignLanguage(c *gin.Context) {
 
 // PatchSignLanguage updates a signLanguage
 func PatchSignLanguage(c *gin.Context) {
-
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	// Get model if exist
 	var signLanguage models.SignLanguage
 	var param uint64
@@ -131,6 +142,12 @@ func PatchSignLanguage(c *gin.Context) {
 
 // DeleteSignLanguage deletes a signLanguage
 func DeleteSignLanguage(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	// Get model if exist
 	var signLanguage models.SignLanguage
 	var param uint64

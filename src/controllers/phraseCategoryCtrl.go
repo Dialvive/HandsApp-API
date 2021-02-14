@@ -28,6 +28,12 @@ func GetPhraseCategories(c *gin.Context) {
 
 // CreatePhraseCategory creates a new phraseCategory.
 func CreatePhraseCategory(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	var input models.PhraseCategoryInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -80,7 +86,12 @@ func FindPhraseCategory(c *gin.Context) {
 
 // PatchPhraseCategory updates a phraseCategory
 func PatchPhraseCategory(c *gin.Context) {
-
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	// Get model if exist
 	var phraseCategory models.PhraseCategory
 	var param uint64
@@ -125,6 +136,12 @@ func PatchPhraseCategory(c *gin.Context) {
 
 // DeletePhraseCategory deletes a phraseCategory
 func DeletePhraseCategory(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+		c.Abort()
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	// Get model if exist
 	var phraseCategory models.PhraseCategory
 	var param uint64
