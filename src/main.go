@@ -3,8 +3,11 @@ package main
 import (
 	"API/controllers"
 	"API/models"
+	"API/security"
 	"github.com/gin-contrib/cors"
+	"golang.org/x/crypto/acme/autocert"
 	"log"
+	"net/http"
 
 	"github.com/gin-gonic/autotls"
 	"github.com/gin-gonic/gin"
@@ -32,10 +35,29 @@ func main() {
 	//TODO: 7) FIX delete word by region, friends count,
 
 	r := gin.Default()
+	httpRouter := gin.Default()
+
+	m := autocert.Manager{
+		Prompt:          autocert.AcceptTOS,
+		Cache:           autocert.DirCache("/var/www/.cache"),
+		HostPolicy:      autocert.HostWhitelist("api.signapp.site"),
+		Email:           "haikode@protonmail.com",
+	}
+
 	config := cors.DefaultConfig()
 	config.AllowOrigins = []string{"*"}
 	r.Use(cors.New(config))
 	models.ConnectDatabase()
+
+	// REDIRECT ALL HTTP TO HTTPS ///////////////////////////////////
+
+	httpRouter.NoRoute(func(c *gin.Context) {
+		c.Redirect(http.StatusPermanentRedirect, "https://api.signapp.site" + c.FullPath())
+	})
+
+	// EVERY OTHER ROUTE ////////////////////////////////////////////
+
+	r.NoRoute(security.RerouteHandler)
 
 	// SIMPLE TABLES ROUTES /////////////////////////////////////////
 
@@ -167,7 +189,8 @@ func main() {
 	r.GET("/v1/favorite_words/:userID", controllers.FindFavoriteWords)
 	r.DELETE("/v1/favorite_word/:userID/:wordID", controllers.DeleteFavoriteWords)
 
-	log.Fatal(autotls.Run(r, "api.signapp.site"))
+	log.Fatal(autotls.RunWithManager(r, &m)) // HTTPS
+	log.Fatal(httpRouter.Run(":80")) // HTTP
 
 	//log.Fatal(r.Run(":8080"))
 
