@@ -3,35 +3,26 @@ package main
 import (
 	"API/controllers"
 	"API/models"
+	"github.com/gin-contrib/cors"
 	"log"
 
-	"github.com/gin-contrib/cors"
-
+	"github.com/gin-gonic/autotls"
 	"github.com/gin-gonic/gin"
-	//"github.com/gin-gonic/autotls"
 )
 
 func main() {
 
-	// * OK 0) HASH & SALT PASSWORDS
 	// * Hash & Salt: using security.HashPassword()
 	// * Check Password: using security.PasswordMatches()
+	// * Comment log.Fatal(autotls.Run(r, "api.signamundi.com")) for localhost
 
-	//TODO: 1) USE SSL/TSL
-	// * Uncomment log.Fatal(autotls.Run(r, "api.signamundi.com")) in main
+	//TODO: 1) USE JWT
 
-	//TODO: 2) USE JWT
+	//TODO: 2) USE CACHES
 
-	// * OK 3) PREVENT SQL INJECTION STRINGS
-	// * Parameters SQLi: using security.SecureUint()
-	// * Atributes SQLi: using security.SecureString() & input structs
+	//TODO: 3) ALLOW FILTERS
 
-	//TODO: 4) USE CACHES
-
-	//TODO: 5) ALLOW FILTERS
-
-	//TODO: 6) VALIDATE USER INPUT PRE DB
-	// * TRIM VARCHAR INPUTS TO LENGTH BEFORE PROCESSING
+	//TODO: 4) VALIDATE USER INPUT PRE DB
 	// * RETURN BAD INPUT IF USER PARAM EMPTY
 	//TODO: * RETURN ERROR IF NECESSARY ENTITIES DONT EXIST WHILE CREATING & UPDATING
 	//TODO: * DONT ALLOW DELETING RELATED ENTITY IF THERE ARE OBJECTS RELATED TO IT
@@ -39,8 +30,6 @@ func main() {
 	// * REMOVE binding:"required" FROM NULLABLE COLUMN STRUCTS
 
 	//TODO: 7) FIX delete word by region, friends count,
-
-	// * OK 8) LOCALIZE TEXT COLUMNS
 
 	r := gin.Default()
 	config := cors.DefaultConfig()
@@ -178,8 +167,8 @@ func main() {
 	r.GET("/v1/favorite_words/:userID", controllers.FindFavoriteWords)
 	r.DELETE("/v1/favorite_word/:userID/:wordID", controllers.DeleteFavoriteWords)
 
-	//log.Fatal(autotls.Run(r, "api.signamundi.com"))
+	log.Fatal(autotls.Run(r, "api.signapp.site"))
 
-	log.Fatal(r.Run(":8080"))
+	//log.Fatal(r.Run(":8080"))
 
 }
