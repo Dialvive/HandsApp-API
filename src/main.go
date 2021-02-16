@@ -5,12 +5,8 @@ import (
 	"API/models"
 	"API/security"
 	"github.com/gin-contrib/cors"
-	"golang.org/x/crypto/acme/autocert"
-	"log"
-	"net/http"
-
-	"github.com/gin-gonic/autotls"
 	"github.com/gin-gonic/gin"
+	"log"
 )
 
 func main() {
@@ -26,16 +22,17 @@ func main() {
 	//TODO: 3) ALLOW FILTERS
 
 	//TODO: 4) VALIDATE USER INPUT PRE DB
-	// * RETURN BAD INPUT IF USER PARAM EMPTY
 	//TODO: * RETURN ERROR IF NECESSARY ENTITIES DONT EXIST WHILE CREATING & UPDATING
 	//TODO: * DONT ALLOW DELETING RELATED ENTITY IF THERE ARE OBJECTS RELATED TO IT
 	//TODO: * DELETING AN USER DELETES EVERYTHING RELATED TO IT
-	// * REMOVE binding:"required" FROM NULLABLE COLUMN STRUCTS
 
-	//TODO: 7) FIX delete word by region, friends count,
+	//TODO: 7) FIX friends count
 
-	r := gin.Default()
-	httpRouter := gin.Default()
+	// PRODUCTION ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	/*
+	gin.SetMode(gin.ReleaseMode)
+
+	// GET HTTPS/TLS CERTIFICATES
 
 	m := autocert.Manager{
 		Prompt:          autocert.AcceptTOS,
@@ -44,16 +41,23 @@ func main() {
 		Email:           "haikode@protonmail.com",
 	}
 
-	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"*"}
-	r.Use(cors.New(config))
-	models.ConnectDatabase()
+	// REDIRECT ALL HTTP TO HTTPS
 
-	// REDIRECT ALL HTTP TO HTTPS ///////////////////////////////////
-
+	httpRouter := gin.Default()
 	httpRouter.NoRoute(func(c *gin.Context) {
 		c.Redirect(http.StatusPermanentRedirect, "https://api.signapp.site" + c.FullPath())
 	})
+	*/
+	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+	r := gin.Default()
+	models.ConnectDatabase()
+
+	// CORS POLICY //////////////////////////////////////////////////
+
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"*"}
+	r.Use(cors.New(config))
 
 	// EVERY OTHER ROUTE ////////////////////////////////////////////
 
@@ -189,9 +193,14 @@ func main() {
 	r.GET("/v1/favorite_words/:userID", controllers.FindFavoriteWords)
 	r.DELETE("/v1/favorite_word/:userID/:wordID", controllers.DeleteFavoriteWords)
 
+	// PRODUCTION ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	/*
 	log.Fatal(autotls.RunWithManager(r, &m)) // HTTPS
 	log.Fatal(httpRouter.Run(":80")) // HTTP
+	*/
+	// DEVELOPMENT ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-	//log.Fatal(r.Run(":8080"))
+	log.Fatal(r.Run(":8080"))
 
+	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
