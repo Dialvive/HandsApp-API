@@ -3,7 +3,7 @@
 CREATE SCHEMA IF NOT EXISTS `signa_mundi` CHARACTER SET UTF8MB4;
 
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`country`(
-	`ID` TINYINT NOT NULL,
+    `ID` TINYINT NOT NULL,
     `name_de` TEXT,
     `name_es` TEXT,
     `name_en` TEXT,
@@ -15,14 +15,14 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`country`(
 );
 
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`region`(
-	`ID` INT NOT NULL,
+    `ID` INT NOT NULL,
     `country_ID` TINYINT NOT NULL,
     `name` TEXT NOT NULL,
     `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`user`(
-	`ID` INT NOT NULL,
+    `ID` INT NOT NULL,
     `locale_ID` SMALLINT NOT NULL,
     `first_name` TEXT,
     `last_name` TEXT,
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`user`(
 );
 
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`friendship`(
-	`ID` TINYINT NOT NULL,
+    `ID` TINYINT NOT NULL,
     `name_de` TEXT,
     `name_es` TEXT,
     `name_en` TEXT,
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`friend`(
 );
 
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`ad_category`(
-	`ID` TINYINT NOT NULL,
+    `ID` TINYINT NOT NULL,
     `name_de` TEXT,
     `name_es` TEXT,
     `name_en` TEXT,
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`ad_category`(
 );
 
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`advertisement`(
-	`ID` INT NOT NULL,
+    `ID` INT NOT NULL,
     `user_ID` INT NOT NULL,
     `region_ID` INT NOT NULL,
     `ad_category_ID` TINYINT NOT NULL,
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`advertisement`(
 );
 
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`spoken_language`(
-	`ID` TINYINT NOT NULL,
+    `ID` TINYINT NOT NULL,
     `name_de` TEXT,
     `name_es` TEXT,
     `name_en` TEXT,
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`spoken_language`(
 );
 
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`sign_language`(
-	`ID` SMALLINT NOT NULL,
+    `ID` SMALLINT NOT NULL,
     `name_de` TEXT,
     `name_es` TEXT,
     `name_en` TEXT,
@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`sign_language`(
 );
 
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`locale`(
-	`ID` SMALLINT NOT NULL,
+    `ID` SMALLINT NOT NULL,
     `country_ID` TINYINT NOT NULL,
     `spoken_language_ID` TINYINT NOT NULL,
     `sign_language_ID` SMALLINT NOT NULL,
@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`locale`(
 );
 
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`phrase_category`(
-	`ID` TINYINT NOT NULL,
+    `ID` TINYINT NOT NULL,
     `name_de` TEXT,
     `name_es` TEXT,
     `name_en` TEXT,
@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`phrase_category`(
 );
 
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`word_category`(
-	`ID` TINYINT NOT NULL,
+    `ID` TINYINT NOT NULL,
     `name_de` TEXT,
     `name_es` TEXT,
     `name_en` TEXT,
@@ -136,10 +136,8 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`word_category`(
 );
 
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`phrase`(
-	`ID` INT NOT NULL,
-    `locale_ID` SMALLINT NOT NULL,
+    `ID` INT NOT NULL,
     `phrase_category_ID` TINYINT NOT NULL,
-    `text` TEXT NOT NULL,
     `text_de` TEXT,
     `text_es` TEXT,
     `text_en` TEXT,
@@ -156,8 +154,7 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`phrase`(
 );
 
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`word`(
-	`ID` INT NOT NULL,
-    `locale_ID` SMALLINT NOT NULL,
+    `ID` INT NOT NULL,
     `word_category_ID` TINYINT NOT NULL,
     `text_de` TEXT,
     `text_es` TEXT,
@@ -180,11 +177,6 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`word`(
     `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS `signa_mundi`.`word_by_region`(
-    `word_ID` INT NOT NULL,
-    `region_ID` INT NOT NULL
-);
-
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`favorite_phrase`(
     `phrase_ID` INT NOT NULL,
     `user_ID` INT NOT NULL,
@@ -194,6 +186,21 @@ CREATE TABLE IF NOT EXISTS `signa_mundi`.`favorite_phrase`(
 CREATE TABLE IF NOT EXISTS `signa_mundi`.`favorite_word`(
     `word_ID` INT NOT NULL,
     `user_ID` INT NOT NULL,
+    `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS `signa_mundi`.`word_sign` (
+    `word_ID` INT NOT NULL,
+    `locale_ID` INT NOT NULL,
+    `version` CHAR NOT NULL ,
+    `region_ID` INT,
+    `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS `signa_mundi`.`phrase_sign` (
+    `phrase_ID` INT NOT NULL,
+    `locale_ID` INT NOT NULL,
+    `region_ID` INT,
     `modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -253,14 +260,19 @@ ALTER TABLE `signa_mundi`.`phrase` ADD FOREIGN KEY (`locale_ID`) REFERENCES `sig
 ALTER TABLE `signa_mundi`.`phrase` ADD FOREIGN KEY (`phrase_category_ID`) REFERENCES `signa_mundi`.`phrase_category`(`ID`);
 ALTER TABLE `signa_mundi`.`word` ADD FOREIGN KEY (`locale_ID`) REFERENCES `signa_mundi`.`locale`(`ID`);
 ALTER TABLE `signa_mundi`.`word` ADD FOREIGN KEY (`word_category_ID`) REFERENCES `signa_mundi`.`word_category`(`ID`);
-ALTER TABLE `signa_mundi`.`word_by_region` ADD FOREIGN KEY (`word_ID`) REFERENCES `signa_mundi`.`word`(`ID`);
-ALTER TABLE `signa_mundi`.`word_by_region` ADD FOREIGN KEY (`region_ID`) REFERENCES `signa_mundi`.`region`(`ID`);
+ALTER TABLE `signa_mundi`.`word_sign` ADD FOREIGN KEY (`word_ID`) REFERENCES `signa_mundi`.`word`(`ID`);
+ALTER TABLE `signa_mundi`.`word_sign` ADD FOREIGN KEY (`locale_ID`) REFERENCES `signa_mundi`.`locale`(`ID`);
+ALTER TABLE `signa_mundi`.`word_sign` ADD FOREIGN KEY (`region_ID`) REFERENCES `signa_mundi`.`region`(`ID`);
+ALTER TABLE `signa_mundi`.`phrase_sign` ADD FOREIGN KEY (`phrase_ID`) REFERENCES `signa_mundi`.`phrase`(`ID`);
+ALTER TABLE `signa_mundi`.`phrase_sign` ADD FOREIGN KEY (`locale_ID`) REFERENCES `signa_mundi`.`locale`(`ID`);
+ALTER TABLE `signa_mundi`.`phrase_sign` ADD FOREIGN KEY (`region_ID`) REFERENCES `signa_mundi`.`region`(`ID`);
 ALTER TABLE `signa_mundi`.`favorite_phrase` ADD FOREIGN KEY (`phrase_ID`) REFERENCES `signa_mundi`.`phrase`(`ID`);
 ALTER TABLE `signa_mundi`.`favorite_phrase` ADD FOREIGN KEY (`user_ID`) REFERENCES `signa_mundi`.`user`(`ID`);
 ALTER TABLE `signa_mundi`.`favorite_word` ADD FOREIGN KEY (`word_ID`) REFERENCES `signa_mundi`.`word`(`ID`);
 ALTER TABLE `signa_mundi`.`favorite_word` ADD FOREIGN KEY (`user_ID`) REFERENCES `signa_mundi`.`user`(`ID`);
 
+ALTER TABLE `signa_mundi`.`word_sign` ADD PRIMARY KEY(`word_ID`,`locale_ID`,`version`);
+ALTER TABLE `signa_mundi`.`phrase_sign` ADD PRIMARY KEY(`phrase_ID`,`locale_ID`);
 ALTER TABLE `signa_mundi`.`friend` ADD PRIMARY KEY(`user1_ID`,`user2_ID`);
-ALTER TABLE `signa_mundi`.`word_by_region` ADD PRIMARY KEY(`word_ID`,`region_ID`);
 ALTER TABLE `signa_mundi`.`favorite_phrase` ADD PRIMARY KEY(`phrase_ID`,`user_ID`);
 ALTER TABLE `signa_mundi`.`favorite_word` ADD PRIMARY KEY(`word_ID`,`user_ID`);
