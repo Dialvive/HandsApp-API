@@ -17,11 +17,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/countries",
+									"raw": "{{URI}}/v1/countries",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"countries"
@@ -35,7 +34,13 @@
 							"name": "POST Country",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"name_de\": \"\",\n    \"name_es\": \"\",\n    \"name_en\": \"\",\n    \"name_fr\": \"\",\n    \"name_it\": \"\",\n    \"name_pt\": \"\",\n    \"abbreviation\": \"\"\n}",
@@ -46,11 +51,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/country",
+									"raw": "{{URI}}/v1/country",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"country"
@@ -98,11 +102,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/country/0",
+									"raw": "{{URI}}/v1/country/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"country",
@@ -141,10 +144,16 @@
 							"name": "PATCH Country",
 							"request": {
 								"method": "PATCH",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name_de\": \"\",\n    \"name_es\": \"\",\n    \"name_en\": \"\",\n    \"name_fr\": \"\",\n    \"name_it\": \"\",\n    \"name_pt\": \"\",\n    \"abbreviation\": \"MX\"\n}",
+									"raw": "{\n    \"name_de\": \"\",\n    \"name_es\": \"\",\n    \"name_en\": \"\",\n    \"name_fr\": \"\",\n    \"name_it\": \"\",\n    \"name_pt\": \"\",\n    \"abbreviation\": \"\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -152,11 +161,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/country/0",
+									"raw": "{{URI}}/v1/country/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"country",
@@ -171,13 +179,18 @@
 							"name": "DELETE Country",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "localhost:8080/v1/country/0",
+									"raw": "{{URI}}/v1/country/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"country",
@@ -201,11 +214,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/ad_categories",
+									"raw": "{{URI}}/v1/ad_categories",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"ad_categories"
@@ -219,7 +231,13 @@
 							"name": "POST Ad Category",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"name\": \"\",\n    \"cost\": 0\n}",
@@ -230,11 +248,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/ad_category",
+									"raw": "{{URI}}/v1/ad_category",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"ad_category"
@@ -282,11 +299,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/ad_category/0",
+									"raw": "{{URI}}/v1/ad_category/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"ad_category",
@@ -325,7 +341,13 @@
 							"name": "PATCH Ad Category",
 							"request": {
 								"method": "PATCH",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"name_de\": \"\",\n    \"name_es\": \"\",\n    \"name_en\": \"\",\n    \"name_fr\": \" de service\",\n    \"name_it\": \"\",\n    \"name_pt\": \"\",\n    \"cost\": 0\n}",
@@ -336,11 +358,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/ad_category/0",
+									"raw": "{{URI}}/v1/ad_category/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"ad_category",
@@ -355,13 +376,18 @@
 							"name": "DELETE Ad Category",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "localhost:8080/v1/ad_category/0",
+									"raw": "{{URI}}/v1/ad_category/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"ad_category",
@@ -385,11 +411,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/friendships",
+									"raw": "{{URI}}/v1/friendships",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"friendships"
@@ -402,6 +427,9 @@
 						{
 							"name": "POST Friendship",
 							"request": {
+								"auth": {
+									"type": "noauth"
+								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -414,11 +442,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/friendship",
+									"raw": "{{URI}}/v1/friendship",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"friendship"
@@ -466,11 +493,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/friendship/0",
+									"raw": "{{URI}}/v1/friendship/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"friendship",
@@ -509,7 +535,13 @@
 							"name": "PATCH Friendship",
 							"request": {
 								"method": "PATCH",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"name_de\": \"\",\n    \"name_es\": \"\",\n    \"name_en\": \"\",\n    \"name_fr\": \"\",\n    \"name_it\": \"\",\n    \"name_pt\": \"\"\n}",
@@ -520,11 +552,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/friendship/0",
+									"raw": "{{URI}}/v1/friendship/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"friendship",
@@ -539,13 +570,18 @@
 							"name": "DELETE Friendship",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "localhost:8080/v1/friendship/1",
+									"raw": "{{URI}}/v1/friendship/1",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"friendship",
@@ -569,11 +605,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/phrase_categories",
+									"raw": "{{URI}}/v1/phrase_categories",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"phrase_categories"
@@ -587,7 +622,13 @@
 							"name": "POST Phrase Category",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"name_de\": \"\",\n    \"name_es\": \"\",\n    \"name_en\": \"\",\n    \"name_fr\": \"\",\n    \"name_it\": \"\",\n    \"name_pt\": \"\"\n}\n",
@@ -598,11 +639,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/phrase_category",
+									"raw": "{{URI}}/v1/phrase_category",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"phrase_category"
@@ -650,11 +690,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/phrase_category/0",
+									"raw": "{{URI}}/v1/phrase_category/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"phrase_category",
@@ -693,7 +732,13 @@
 							"name": "PATCH Phrase Category",
 							"request": {
 								"method": "PATCH",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"name_de\": \"\",\n    \"name_es\": \"\",\n    \"name_en\": \"\",\n    \"name_fr\": \"\",\n    \"name_it\": \"\",\n    \"name_pt\": \"\"\n}",
@@ -704,11 +749,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/phrase_category/0",
+									"raw": "{{URI}}/v1/phrase_category/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"phrase_category",
@@ -723,13 +767,18 @@
 							"name": "DELETE Phrase Category",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "localhost:8080/v1/phrase_category/0",
+									"raw": "{{URI}}/v1/phrase_category/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"phrase_category",
@@ -753,11 +802,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/word_categories",
+									"raw": "{{URI}}/v1/word_categories",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"word_categories"
@@ -771,7 +819,13 @@
 							"name": "POST Word Category",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"name_de\": \"\",\n    \"name_es\": \"\",\n    \"name_en\": \"\",\n    \"name_fr\": \"\",\n    \"name_it\": \"\",\n    \"name_pt\": \"\"\n}",
@@ -782,11 +836,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/word_category",
+									"raw": "{{URI}}/v1/word_category",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"word_category"
@@ -834,11 +887,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/word_category/0",
+									"raw": "{{URI}}/v1/word_category/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"word_category",
@@ -877,7 +929,13 @@
 							"name": "PATCH Word Category",
 							"request": {
 								"method": "PATCH",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"name_de\": \"\",\n    \"name_es\": \"\",\n    \"name_en\": \"\",\n    \"name_fr\": \"\",\n    \"name_it\": \"\",\n    \"name_pt\": \"\"\n}",
@@ -888,11 +946,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/word_category/0",
+									"raw": "{{URI}}/v1/word_category/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"word_category",
@@ -907,13 +964,18 @@
 							"name": "DELETE Word Category",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "localhost:8080/v1/word_category/0",
+									"raw": "{{URI}}/v1/word_category/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"word_category",
@@ -937,11 +999,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/spoken_languages",
+									"raw": "{{URI}}/v1/spoken_languages",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"spoken_languages"
@@ -955,7 +1016,13 @@
 							"name": "POST Spoken Language",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"name_de\": \"\",\n    \"name_es\": \"\",\n    \"name_en\": \"\",\n    \"name_fr\": \"\",\n    \"name_it\": \"\",\n    \"name_pt\": \"\",\n    \"abbreviation\": \"\"\n}",
@@ -966,11 +1033,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/spoken_language",
+									"raw": "{{URI}}/v1/spoken_language",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"spoken_language"
@@ -1018,11 +1084,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/spoken_language/0",
+									"raw": "{{URI}}/v1/spoken_language/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"spoken_language",
@@ -1061,7 +1126,13 @@
 							"name": "PATCH Spoken Language",
 							"request": {
 								"method": "PATCH",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"name_de\": \"\",\n    \"name_es\": \"\",\n    \"name_en\": \"\",\n    \"name_fr\": \"\",\n    \"name_it\": \"\",\n    \"name_pt\": \"\",\n    \"abbreviation\": \"\"\n}",
@@ -1072,11 +1143,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/spoken_language/0",
+									"raw": "{{URI}}/v1/spoken_language/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"spoken_language",
@@ -1091,13 +1161,18 @@
 							"name": "DELETE Spoken Language",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "localhost:8080/v1/spoken_language/0",
+									"raw": "{{URI}}/v1/spoken_language/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"spoken_language",
@@ -1143,11 +1218,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/sign_languages",
+									"raw": "{{URI}}/v1/sign_languages",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"sign_languages"
@@ -1161,7 +1235,13 @@
 							"name": "POST Sign Language",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"name_de\": \"\",\n    \"name_es\": \"\",\n    \"name_en\": \"\",\n    \"name_fr\": \"\",\n    \"name_it\": \"\",\n    \"name_pt\": \"\",\n    \"abbreviation\": \"\"\n}",
@@ -1172,11 +1252,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/sign_language",
+									"raw": "{{URI}}/v1/sign_language",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"sign_language"
@@ -1224,11 +1303,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/sign_language/0",
+									"raw": "{{URI}}/v1/sign_language/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"sign_language",
@@ -1267,7 +1345,13 @@
 							"name": "PATCH Sign Language",
 							"request": {
 								"method": "PATCH",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"name_de\": \"\",\n    \"name_es\": \"\",\n    \"name_en\": \"\",\n    \"name_fr\": \"\",\n    \"name_it\": \"\",\n    \"name_pt\": \"\",\n    \"abbreviation\": \"\"\n}",
@@ -1278,11 +1362,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/sign_language/0",
+									"raw": "{{URI}}/v1/sign_language/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"sign_language",
@@ -1297,13 +1380,18 @@
 							"name": "DELETE Sign Language",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "localhost:8080/v1/sign_language/0",
+									"raw": "{{URI}}/v1/sign_language/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"sign_language",
@@ -1378,11 +1466,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/regions",
+									"raw": "{{URI}}/v1/regions",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"regions"
@@ -1396,7 +1483,13 @@
 							"name": "POST Region",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"country_ID\": 0,\n    \"name\": \"\"\n}",
@@ -1407,11 +1500,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/region",
+									"raw": "{{URI}}/v1/region",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"region"
@@ -1427,11 +1519,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/region/0",
+									"raw": "{{URI}}/v1/region/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"region",
@@ -1470,7 +1561,13 @@
 							"name": "PATCH Region",
 							"request": {
 								"method": "PATCH",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"country_ID\": 0,\n    \"name\": \"\"\n}",
@@ -1481,11 +1578,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/region/0",
+									"raw": "{{URI}}/v1/region/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"region",
@@ -1500,13 +1596,18 @@
 							"name": "DELETE Region",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "localhost:8080/v1/region/0",
+									"raw": "{{URI}}/v1/region/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"region",
@@ -1552,11 +1653,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/locales",
+									"raw": "{{URI}}/v1/locales",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"locales"
@@ -1570,7 +1670,13 @@
 							"name": "POST Locale",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"country_ID\": 0,\n    \"spoken_language_ID\": 0,\n    \"sign_language_ID\": 0\n}",
@@ -1581,11 +1687,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/locale",
+									"raw": "{{URI}}/v1/locale",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"locale"
@@ -1601,11 +1706,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/locale/0",
+									"raw": "{{URI}}/v1/locale/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"locale",
@@ -1644,7 +1748,13 @@
 							"name": "PATCH Locale",
 							"request": {
 								"method": "PATCH",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"country_ID\": 0,\n    \"spoken_language_ID\": 0,\n    \"sign_language_ID\": 0\n}",
@@ -1655,11 +1765,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/locale/0",
+									"raw": "{{URI}}/v1/locale/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"locale",
@@ -1674,13 +1783,18 @@
 							"name": "DELETE Locale",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "localhost:8080/v1/locale/0",
+									"raw": "{{URI}}/v1/locale/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"locale",
@@ -1726,11 +1840,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/users",
+									"raw": "{{URI}}/v1/users",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"users"
@@ -1744,7 +1857,13 @@
 							"name": "POST User",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"locale_ID\": 0,\n    \"first_name\": \"\",\n    \"last_name\": \"\",\n    \"user_name\": \"\",\n    \"mail\": \"\",\n    \"password\": \"\",\n    \"biography\": \"\",\n    \"mailing\": \"\",\n    \"privilege\": \"\",\n    \"points\": 0,\n    \"credits\": 0\n}",
@@ -1755,11 +1874,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/user",
+									"raw": "{{URI}}/v1/user",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"user"
@@ -1775,11 +1893,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/user/0",
+									"raw": "{{URI}}/v1/user/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"user",
@@ -1818,7 +1935,13 @@
 							"name": "PATCH User",
 							"request": {
 								"method": "PATCH",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"locale_ID\": 0,\n    \"first_name\": \"\",\n    \"last_name\": \"\",\n    \"user_name\": \"\",\n    \"mail\": \"\",\n    \"password\": \"\",\n    \"biography\": \"\",\n    \"mailing\": \"\",\n    \"privilege\": \"\",\n    \"points\": 0,\n    \"credits\": 0\n}",
@@ -1829,11 +1952,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/user/0",
+									"raw": "{{URI}}/v1/user/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"user",
@@ -1848,13 +1970,18 @@
 							"name": "DELETE User",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "localhost:8080/v1/user/0",
+									"raw": "{{URI}}/v1/user/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"user",
@@ -1900,11 +2027,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/advertisements",
+									"raw": "{{URI}}/v1/advertisements",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"advertisements"
@@ -1918,7 +2044,13 @@
 							"name": "POST Advertisement",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"user_ID\": 0,\n    \"region_ID\": 0,\n    \"ad_category_ID\": 0,\n    \"locale_ID\": 0,\n    \"title\": \"\",\n    \"body\": \"\",\n    \"media\": false,\n    \"paid\": 0\n}",
@@ -1929,11 +2061,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/advertisement",
+									"raw": "{{URI}}/v1/advertisement",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"advertisement"
@@ -1949,11 +2080,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/advertisement/0",
+									"raw": "{{URI}}/v1/advertisement/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"advertisement",
@@ -1992,7 +2122,13 @@
 							"name": "PATCH Advertisement",
 							"request": {
 								"method": "PATCH",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"user_ID\": 0,\n    \"region_ID\": 0,\n    \"ad_category_ID\": 0,\n    \"locale_ID\": 0,\n    \"title\": \"\",\n    \"body\": \"\",\n    \"media\": false,\n    \"paid\": 0\n}",
@@ -2003,11 +2139,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/advertisement/0",
+									"raw": "{{URI}}/v1/advertisement/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"advertisement",
@@ -2022,13 +2157,18 @@
 							"name": "DELETE Advertisement",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "localhost:8080/v1/advertisement/0",
+									"raw": "{{URI}}/v1/advertisement/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"advertisement",
@@ -2074,11 +2214,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/phrases",
+									"raw": "{{URI}}/v1/phrases",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"phrases"
@@ -2092,7 +2231,13 @@
 							"name": "POST Phrase",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"locale_ID\": 0,\n    \"phrase_category_ID\": 0,\n    \"text\": \"\",\n    \"text_de\": \"\",\n    \"text_es\": \"\",\n    \"text_en\": \"\",\n    \"text_fr\": \"\",\n    \"text_it\": \"\",\n    \"text_pt\": \"\",\n    \"context_de\": \"\",\n    \"context_es\": \"\",\n    \"context_en\": \"\",\n    \"context_fr\": \"\",\n    \"context_it\": \"\",\n    \"context_pt\": \"\"\n    }",
@@ -2103,11 +2248,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/phrase",
+									"raw": "{{URI}}/v1/phrase",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"phrase"
@@ -2123,11 +2267,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/phrase/0",
+									"raw": "{{URI}}/v1/phrase/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"phrase",
@@ -2166,7 +2309,13 @@
 							"name": "PATCH Phrase",
 							"request": {
 								"method": "PATCH",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"locale_ID\": 0,\n    \"phrase_category_ID\": 0,\n    \"text\": \"\",\n    \"text_de\": \"\",\n    \"text_es\": \"\",\n    \"text_en\": \"\",\n    \"text_fr\": \"\",\n    \"text_it\": \"\",\n    \"text_pt\": \"\",\n    \"context_de\": \"\",\n    \"context_es\": \"\",\n    \"context_en\": \"\",\n    \"context_fr\": \"\",\n    \"context_it\": \"\",\n    \"context_pt\": \"\"\n}",
@@ -2177,11 +2326,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/phrase/0",
+									"raw": "{{URI}}/v1/phrase/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"phrase",
@@ -2196,13 +2344,18 @@
 							"name": "DELETE Phrase",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "localhost:8080/v1/phrase/0",
+									"raw": "{{URI}}/v1/phrase/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"phrase",
@@ -2248,11 +2401,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/words",
+									"raw": "{{URI}}/v1/words",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"words"
@@ -2266,7 +2418,13 @@
 							"name": "POST Word",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"locale_ID\": 0,\n    \"word_category_ID\": 0,\n    \"text_de\": \"\",\n    \"text_es\": \"\",\n    \"text_en\": \"\",\n    \"text_fr\": \"\",\n    \"text_it\": \"\",\n    \"text_pt\": \"\",\n    \"context_de\": \"\",\n    \"context_es\": \"\",\n    \"context_en\": \"\",\n    \"context_fr\": \"\",\n    \"context_it\": \"\",\n    \"context_pt\": \"\",\n    \"definition_de\": \"\",\n    \"definition_es\": \"\",\n    \"definition_en\": \"\",\n    \"definition_fr\": \"\",\n    \"definition_it\": \"\",\n    \"definition_pt\": \"\"\n}",
@@ -2277,11 +2435,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/word",
+									"raw": "{{URI}}/v1/word",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"word"
@@ -2297,11 +2454,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/word/0",
+									"raw": "{{URI}}/v1/word/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"word",
@@ -2340,7 +2496,13 @@
 							"name": "PATCH Word",
 							"request": {
 								"method": "PATCH",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"locale_ID\": 0,\n    \"word_category_ID\": 0,\n    \"text\": \"\",\n    \"text_de\": \"\",\n    \"text_es\": \"\",\n    \"text_en\": \"\",\n    \"text_fr\": \"\",\n    \"text_it\": \"\",\n    \"text_pt\": \"\",\n    \"context_de\": \"\",\n    \"context_es\": \"\",\n    \"context_en\": \"\",\n    \"context_fr\": \"\",\n    \"context_it\": \"\",\n    \"context_pt\": \"\",\n    \"definition_de\": \"\",\n    \"definition_es\": \"\",\n    \"definition_en\": \"\",\n    \"definition_fr\": \"\",\n    \"definition_it\": \"\",\n    \"definition_pt\": \"\"\n}",
@@ -2351,11 +2513,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/word/0",
+									"raw": "{{URI}}/v1/word/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"word",
@@ -2370,13 +2531,18 @@
 							"name": "DELETE Word",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "localhost:8080/v1/word/0",
+									"raw": "{{URI}}/v1/word/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"word",
@@ -2428,11 +2594,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/favorite_phrases",
+									"raw": "{{URI}}/v1/favorite_phrases",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"favorite_phrases"
@@ -2446,7 +2611,13 @@
 							"name": "POST Favorite Phrase",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"phrase_ID\": 0,\n    \"user_ID\": 0\n}",
@@ -2457,11 +2628,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/favorite_phrase",
+									"raw": "{{URI}}/v1/favorite_phrase",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"favorite_phrase"
@@ -2477,11 +2647,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/favorite_phrases_count/phrase/0",
+									"raw": "{{URI}}/v1/favorite_phrases_count/phrase/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"favorite_phrases_count",
@@ -2523,11 +2692,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/favorite_phrases_count/user/0",
+									"raw": "{{URI}}/v1/favorite_phrases_count/user/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"favorite_phrases_count",
@@ -2569,11 +2737,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/favorite_phrases/0",
+									"raw": "{{URI}}/v1/favorite_phrases/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"favorite_phrases",
@@ -2588,13 +2755,18 @@
 							"name": "DELETE Favorite Phrase",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "localhost:8080/v1/favorite_phrase/0/0",
+									"raw": "{{URI}}/v1/favorite_phrase/0/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"favorite_phrase",
@@ -2641,11 +2813,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/favorite_words",
+									"raw": "{{URI}}/v1/favorite_words",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"favorite_words"
@@ -2659,7 +2830,13 @@
 							"name": "POST Favorite Word",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"word_ID\": 0,\n    \"user_ID\": 0\n}",
@@ -2670,11 +2847,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/favorite_word",
+									"raw": "{{URI}}/v1/favorite_word",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"favorite_word"
@@ -2690,11 +2866,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/favorite_words_count/word/0",
+									"raw": "{{URI}}/v1/favorite_words_count/word/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"favorite_words_count",
@@ -2736,11 +2911,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/favorite_phrases_count/user/0",
+									"raw": "{{URI}}/v1/favorite_phrases_count/user/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"favorite_phrases_count",
@@ -2782,11 +2956,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/favorite_words/0",
+									"raw": "{{URI}}/v1/favorite_words/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"favorite_words",
@@ -2801,13 +2974,18 @@
 							"name": "DELETE Favorite Word",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "localhost:8080/v1/favorite_word/0/0",
+									"raw": "{{URI}}/v1/favorite_word/0/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"favorite_word",
@@ -2854,11 +3032,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/words_by_regions",
+									"raw": "{{URI}}/v1/words_by_regions",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"words_by_regions"
@@ -2872,7 +3049,13 @@
 							"name": "POST Word By Region",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"region_ID\": 0,\n    \"word_ID\": 0\n}",
@@ -2883,11 +3066,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/word_by_region",
+									"raw": "{{URI}}/v1/word_by_region",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"word_by_region"
@@ -2903,11 +3085,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/words_by_region_count/0",
+									"raw": "{{URI}}/v1/words_by_region_count/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"words_by_region_count",
@@ -2948,11 +3129,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/words_of_region/0",
+									"raw": "{{URI}}/v1/words_of_region/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"words_of_region",
@@ -2967,13 +3147,18 @@
 							"name": "DELETE Word By Region",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "localhost:8080/v1/word_by_region/0/0",
+									"raw": "{{URI}}/v1/word_by_region/0/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"word_by_region",
@@ -3020,11 +3205,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/friends",
+									"raw": "{{URI}}/v1/friends",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"friends"
@@ -3038,7 +3222,13 @@
 							"name": "POST Friend",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"user1_ID\": 0,\n    \"user2_ID\": 0,\n    \"friendship_ID\": 0,\n    \"facebook\": false\n}",
@@ -3049,11 +3239,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/friend",
+									"raw": "{{URI}}/v1/friend",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"friend"
@@ -3069,11 +3258,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/friends_count/0",
+									"raw": "{{URI}}/v1/friends_count/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"friends_count",
@@ -3114,11 +3302,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/friend/0/0",
+									"raw": "{{URI}}/v1/friend/0/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"friend",
@@ -3136,11 +3323,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/v1/friend/0",
+									"raw": "{{URI}}/v1/friend/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"friend",
@@ -3155,7 +3341,13 @@
 							"name": "Put Friend",
 							"request": {
 								"method": "PUT",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"user1_ID\": 0,\n    \"user2_ID\": 0,\n    \"friendship_ID\": 0,\n    \"facebook\": false\n}",
@@ -3166,11 +3358,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/v1/friends/0/0",
+									"raw": "{{URI}}/v1/friends/0/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"friends",
@@ -3186,13 +3377,18 @@
 							"name": "DELETE Friend",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "localhost:8080/v1/friend/0/0",
+									"raw": "{{URI}}/v1/friend/0/0",
 									"host": [
-										"localhost"
+										"{{URI}}"
 									],
-									"port": "8080",
 									"path": [
 										"v1",
 										"friend",

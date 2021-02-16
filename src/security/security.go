@@ -138,6 +138,12 @@ func CheckKey(c *gin.Context, s string) bool {
 	return true
 }
 
+// RerouteHandler Reroutes every other route to another website
+func RerouteHandler(c *gin.Context) {
+		c.Redirect(302, "https://signapp.site")
+		return
+}
+
 func mysqlEscapeString(s string) string {
 	replace := map[string]string{
 		"\\":   "",
