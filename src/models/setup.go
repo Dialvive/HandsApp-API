@@ -64,7 +64,6 @@ func ConnectDatabase() {
 		&Friend{},
 		&FavoritePhrase{},
 		&FavoriteWord{},
-		&WordByRegion{},
 	)
 
 	DB = database
