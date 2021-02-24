@@ -170,13 +170,6 @@ func main() {
 	r.PATCH("/v1/friend/:ID1/:ID2", controllers.PatchFriend)
 	r.DELETE("/v1/friend/:ID1/:ID2", controllers.DeleteFriend)
 
-	// Routes for wordsByRegions
-	r.GET("/v1/words_by_regions", controllers.GetWordsByRegions)
-	r.POST("/v1/word_by_region", controllers.CreateWordByRegion)
-	r.GET("/v1/words_by_region_count/:regionID", controllers.CountWordsOfRegion)
-	r.GET("/v1/words_of_region/:regionID", controllers.FindWordsOfRegion)
-	r.DELETE("/v1/word_by_region/:regionID/:wordID", controllers.DeleteWordByRegion)
-
 	// Routes for favorite_phrases
 	r.GET("/v1/favorite_phrases", controllers.GetFavoritePhrases)
 	r.POST("/v1/favorite_phrase", controllers.CreateFavoritePhrases)
