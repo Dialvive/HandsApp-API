@@ -2805,6 +2805,350 @@
 					"_postman_isSubFolder": true
 				},
 				{
+					"name": "Phrase Signs",
+					"item": [
+						{
+							"name": "GET All Phrase Signs",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URI}}/v1/phrase_signs",
+									"host": [
+										"{{URI}}"
+									],
+									"path": [
+										"v1",
+										"phrase_signs"
+									]
+								},
+								"description": "Obtains all the Favorite Phrases"
+							},
+							"response": []
+						},
+						{
+							"name": "POST Phrase Sign",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"phrase_ID\": 0,\n    \"locale_ID\": 0,\n    \"region_ID\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URI}}/v1/phrase_sign",
+									"host": [
+										"{{URI}}"
+									],
+									"path": [
+										"v1",
+										"phrase_sign"
+									]
+								},
+								"description": "Creates a new Favorite Phrase"
+							},
+							"response": []
+						},
+						{
+							"name": "GET Phrase Signs",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URI}}/v1/favorite_phrases/0",
+									"host": [
+										"{{URI}}"
+									],
+									"path": [
+										"v1",
+										"favorite_phrases",
+										"0"
+									]
+								},
+								"description": "Obtains all the Favorite Phrases of a user in particular with a given ID"
+							},
+							"response": []
+						},
+						{
+							"name": "GET Phrase Sign",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URI}}/v1/phrase_sign/0/0",
+									"host": [
+										"{{URI}}"
+									],
+									"path": [
+										"v1",
+										"phrase_sign",
+										"0",
+										"0"
+									]
+								},
+								"description": "Obtains all the Favorite Phrases of a user in particular with a given ID"
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE Phrase Sign",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{URI}}/v1/phrase_sign/0/0",
+									"host": [
+										"{{URI}}"
+									],
+									"path": [
+										"v1",
+										"phrase_sign",
+										"0",
+										"0"
+									]
+								},
+								"description": "Deletes the Favorite Phrase with the given IDs"
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e6fbc99e-e838-4647-9d80-2a17b65676d0",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "00fa6052-3c2c-4002-a7be-7211bd71e7e9",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Word Signs",
+					"item": [
+						{
+							"name": "GET All Word Signs",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URI}}/v1/word_signs",
+									"host": [
+										"{{URI}}"
+									],
+									"path": [
+										"v1",
+										"word_signs"
+									]
+								},
+								"description": "Obtains all the Favorite Phrases"
+							},
+							"response": []
+						},
+						{
+							"name": "POST Word Sign",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"word_ID\": 0,\n    \"locale_ID\": 0,\n    \"version\": \"\",\n    \"region_ID\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URI}}/v1/word_sign",
+									"host": [
+										"{{URI}}"
+									],
+									"path": [
+										"v1",
+										"word_sign"
+									]
+								},
+								"description": "Creates a new Favorite Phrase"
+							},
+							"response": []
+						},
+						{
+							"name": "GET Words Signs",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URI}}/v1/word_signs/0",
+									"host": [
+										"{{URI}}"
+									],
+									"path": [
+										"v1",
+										"word_signs",
+										"0"
+									]
+								},
+								"description": "Obtains all the Favorite Phrases of a user in particular with a given ID"
+							},
+							"response": []
+						},
+						{
+							"name": "GET Locale Words Signs",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URI}}/v1/word_signs/0/0",
+									"host": [
+										"{{URI}}"
+									],
+									"path": [
+										"v1",
+										"word_signs",
+										"0",
+										"0"
+									]
+								},
+								"description": "Obtains all the Favorite Phrases of a user in particular with a given ID"
+							},
+							"response": []
+						},
+						{
+							"name": "GET Word Sign",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URI}}/v1/word_sign/0/0/A",
+									"host": [
+										"{{URI}}"
+									],
+									"path": [
+										"v1",
+										"word_sign",
+										"0",
+										"0",
+										"A"
+									]
+								},
+								"description": "Obtains all the Favorite Phrases of a user in particular with a given ID"
+							},
+							"response": []
+						},
+						{
+							"name": "GET Locale Word Sign Count",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URI}}/v1/word_sign_count/0/0",
+									"host": [
+										"{{URI}}"
+									],
+									"path": [
+										"v1",
+										"word_sign_count",
+										"0",
+										"0"
+									]
+								},
+								"description": "Obtains all the Favorite Phrases of a user in particular with a given ID"
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE Word Sign",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-api-key",
+										"type": "text",
+										"value": "{{KEY}}"
+									}
+								],
+								"url": {
+									"raw": "{{URI}}/v1/word_sign/0/0/A",
+									"host": [
+										"{{URI}}"
+									],
+									"path": [
+										"v1",
+										"word_sign",
+										"0",
+										"0",
+										"A"
+									]
+								},
+								"description": "Deletes the Favorite Phrase with the given IDs"
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "b84e4ad8-03f6-4e1a-8212-7693d1afc891",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "f1706233-c8fa-4779-af19-313a0d784236",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
 					"name": "Favorite Words",
 					"item": [
 						{
@@ -3013,179 +3357,6 @@
 							"listen": "test",
 							"script": {
 								"id": "21f790a5-8bf9-46db-bf66-1699584da12d",
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "Word By Region",
-					"item": [
-						{
-							"name": "GET Words By Region",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{URI}}/v1/words_by_regions",
-									"host": [
-										"{{URI}}"
-									],
-									"path": [
-										"v1",
-										"words_by_regions"
-									]
-								},
-								"description": "Obtains all the Words By Region"
-							},
-							"response": []
-						},
-						{
-							"name": "POST Word By Region",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "x-api-key",
-										"value": "{{KEY}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"region_ID\": 0,\n    \"word_ID\": 0\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URI}}/v1/word_by_region",
-									"host": [
-										"{{URI}}"
-									],
-									"path": [
-										"v1",
-										"word_by_region"
-									]
-								},
-								"description": "Creates a new Word By Region"
-							},
-							"response": []
-						},
-						{
-							"name": "GET Count Word By Region",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{URI}}/v1/words_by_region_count/0",
-									"host": [
-										"{{URI}}"
-									],
-									"path": [
-										"v1",
-										"words_by_region_count",
-										"0"
-									]
-								},
-								"description": "Gets a the Count of Words By Region in particular with a given ID"
-							},
-							"response": [
-								{
-									"name": "GET Country",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "localhost:8080/v1/country/0",
-											"host": [
-												"localhost"
-											],
-											"port": "8080",
-											"path": [
-												"v1",
-												"country",
-												"0"
-											]
-										}
-									},
-									"_postman_previewlanguage": "Text",
-									"header": [],
-									"cookie": [],
-									"body": ""
-								}
-							]
-						},
-						{
-							"name": "GET Words Of Region",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{URI}}/v1/words_of_region/0",
-									"host": [
-										"{{URI}}"
-									],
-									"path": [
-										"v1",
-										"words_of_region",
-										"0"
-									]
-								},
-								"description": "Obtains all the Words Of a Region in particular with a given ID"
-							},
-							"response": []
-						},
-						{
-							"name": "DELETE Word By Region",
-							"request": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "x-api-key",
-										"value": "{{KEY}}",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{URI}}/v1/word_by_region/0/0",
-									"host": [
-										"{{URI}}"
-									],
-									"path": [
-										"v1",
-										"word_by_region",
-										"0",
-										"0"
-									]
-								},
-								"description": "Deletes the Word By Region with the given ID"
-							},
-							"response": []
-						}
-					],
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "28061788-7dde-4bb4-a121-8965ec921942",
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"id": "3d762d78-5e24-45ff-8797-6e6c2718bd86",
 								"type": "text/javascript",
 								"exec": [
 									""

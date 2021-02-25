@@ -4,12 +4,9 @@ import (
 	"API/controllers"
 	"API/models"
 	"API/security"
-	"github.com/gin-contrib/cors"
-	"golang.org/x/crypto/acme/autocert"
 	"log"
-	"net/http"
 
-	"github.com/gin-gonic/autotls"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -26,34 +23,42 @@ func main() {
 	//TODO: 3) ALLOW FILTERS
 
 	//TODO: 4) VALIDATE USER INPUT PRE DB
-	// * RETURN BAD INPUT IF USER PARAM EMPTY
 	//TODO: * RETURN ERROR IF NECESSARY ENTITIES DONT EXIST WHILE CREATING & UPDATING
 	//TODO: * DONT ALLOW DELETING RELATED ENTITY IF THERE ARE OBJECTS RELATED TO IT
 	//TODO: * DELETING AN USER DELETES EVERYTHING RELATED TO IT
-	// * REMOVE binding:"required" FROM NULLABLE COLUMN STRUCTS
 
-	//TODO: 7) FIX delete word by region, friends count,
+	//TODO: 7) FIX friends count
+
+	// PRODUCTION ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	/*
+		gin.SetMode(gin.ReleaseMode)
+
+		// GET HTTPS/TLS CERTIFICATES
+
+		m := autocert.Manager{
+			Prompt:          autocert.AcceptTOS,
+			Cache:           autocert.DirCache("/var/www/.cache"),
+			HostPolicy:      autocert.HostWhitelist("api.signapp.site"),
+			Email:           "haikode@protonmail.com",
+		}
+
+		// REDIRECT ALL HTTP TO HTTPS
+
+		httpRouter := gin.Default()
+		httpRouter.NoRoute(func(c *gin.Context) {
+			c.Redirect(http.StatusPermanentRedirect, "https://api.signapp.site" + c.FullPath())
+		})
+	*/
+	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	r := gin.Default()
-	httpRouter := gin.Default()
+	models.ConnectDatabase()
 
-	m := autocert.Manager{
-		Prompt:          autocert.AcceptTOS,
-		Cache:           autocert.DirCache("/var/www/.cache"),
-		HostPolicy:      autocert.HostWhitelist("api.signapp.site"),
-		Email:           "haikode@protonmail.com",
-	}
+	// CORS POLICY //////////////////////////////////////////////////
 
 	config := cors.DefaultConfig()
 	config.AllowOrigins = []string{"*"}
 	r.Use(cors.New(config))
-	models.ConnectDatabase()
-
-	// REDIRECT ALL HTTP TO HTTPS ///////////////////////////////////
-
-	httpRouter.NoRoute(func(c *gin.Context) {
-		c.Redirect(http.StatusPermanentRedirect, "https://api.signapp.site" + c.FullPath())
-	})
 
 	// EVERY OTHER ROUTE ////////////////////////////////////////////
 
@@ -157,6 +162,24 @@ func main() {
 
 	// Weak entities routes /////////////////////////////////////////
 
+	// Routes for wordSigns
+
+	r.GET("/v1/word_signs", controllers.GetWordSigns)
+	r.POST("/v1/word_sign", controllers.CreateWordSign)
+	r.GET("/v1/word_signs/:wordID", controllers.FindAllWordSigns)
+	r.GET("/v1/word_signs/:wordID/:localeID", controllers.FindWordSigns)
+	r.GET("/v1/word_sign/:wordID/:localeID/:version", controllers.FindWordSign)
+	r.GET("/v1/word_sign_count/:wordID/:localeID", controllers.CountWordSigns)
+	r.DELETE("/v1/word_sign/:wordID/:localeID/:version", controllers.DeleteWordSign)
+
+	// Routes for phraseSigns
+
+	r.GET("/v1/phrase_signs", controllers.GetPhraseSigns)
+	r.POST("/v1/phrase_sign", controllers.CreatePhraseSign)
+	r.GET("/v1/phrase_signs/:phraseID", controllers.FindPhraseSigns)
+	r.GET("/v1/phrase_sign/:phraseID/:localeID", controllers.FindPhraseSign)
+	r.DELETE("/v1/phrase_sign/:phraseID/:localeID/", controllers.DeletePhraseSign)
+
 	// Routes for friends
 	r.GET("/v1/friends", controllers.GetFriends)
 	r.POST("/v1/friend", controllers.CreateFriend)
@@ -165,13 +188,6 @@ func main() {
 	r.GET("/v1/friends_count/:ID", controllers.CountFriends)
 	r.PATCH("/v1/friend/:ID1/:ID2", controllers.PatchFriend)
 	r.DELETE("/v1/friend/:ID1/:ID2", controllers.DeleteFriend)
-
-	// Routes for wordsByRegions
-	r.GET("/v1/words_by_regions", controllers.GetWordsByRegions)
-	r.POST("/v1/word_by_region", controllers.CreateWordByRegion)
-	r.GET("/v1/words_by_region_count/:regionID", controllers.CountWordsOfRegion)
-	r.GET("/v1/words_of_region/:regionID", controllers.FindWordsOfRegion)
-	r.DELETE("/v1/word_by_region/:regionID/:wordID", controllers.DeleteWordByRegion)
 
 	// Routes for favorite_phrases
 	r.GET("/v1/favorite_phrases", controllers.GetFavoritePhrases)
@@ -189,9 +205,14 @@ func main() {
 	r.GET("/v1/favorite_words/:userID", controllers.FindFavoriteWords)
 	r.DELETE("/v1/favorite_word/:userID/:wordID", controllers.DeleteFavoriteWords)
 
-	log.Fatal(autotls.RunWithManager(r, &m)) // HTTPS
-	log.Fatal(httpRouter.Run(":80")) // HTTP
+	// PRODUCTION ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	/*
+		log.Fatal(autotls.RunWithManager(r, &m)) // HTTPS
+		log.Fatal(httpRouter.Run(":80")) // HTTP
+	*/
+	// DEVELOPMENT ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-	//log.Fatal(r.Run(":8080"))
+	log.Fatal(r.Run(":8080"))
 
+	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
