@@ -30,7 +30,7 @@ func main() {
 	//TODO: 7) FIX friends count
 
 	// PRODUCTION ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	/*
+	
 		gin.SetMode(gin.ReleaseMode)
 
 		// GET HTTPS/TLS CERTIFICATES
@@ -48,7 +48,7 @@ func main() {
 		httpRouter.NoRoute(func(c *gin.Context) {
 			c.Redirect(http.StatusPermanentRedirect, "https://api.signapp.site" + c.FullPath())
 		})
-	*/
+
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	r := gin.Default()
@@ -206,13 +206,13 @@ func main() {
 	r.DELETE("/v1/favorite_word/:userID/:wordID", controllers.DeleteFavoriteWords)
 
 	// PRODUCTION ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	/*
+	
 		log.Fatal(autotls.RunWithManager(r, &m)) // HTTPS
 		log.Fatal(httpRouter.Run(":80")) // HTTP
-	*/
+
 	// DEVELOPMENT ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-	log.Fatal(r.Run(":8080"))
+	// log.Fatal(r.Run(":8080"))
 
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
