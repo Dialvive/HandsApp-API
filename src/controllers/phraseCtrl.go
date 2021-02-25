@@ -15,7 +15,6 @@ func GetPhrases(c *gin.Context) {
 	models.DB.Find(&phrases)
 
 	for i := range phrases {
-		phrases[i].Text = security.RemoveBackticks(phrases[i].Text)
 		phrases[i].TextDe = security.RemoveBackticks(phrases[i].TextDe)
 		phrases[i].TextEs = security.RemoveBackticks(phrases[i].TextEs)
 		phrases[i].TextEn = security.RemoveBackticks(phrases[i].TextEn)
@@ -51,7 +50,6 @@ func CreatePhrase(c *gin.Context) {
 	phrase := models.Phrase{
 		LocaleID:         uint(input.LocaleID),
 		PhraseCategoryID: uint(input.PhraseCategoryID),
-		Text:             security.SecureString(input.Text),
 		TextDe:           security.SecureString(input.TextDe),
 		TextEs:           security.SecureString(input.TextEs),
 		TextEn:           security.SecureString(input.TextEn),
@@ -68,7 +66,6 @@ func CreatePhrase(c *gin.Context) {
 	}
 	models.DB.Create(&phrase)
 
-	phrase.Text = security.RemoveBackticks(phrase.Text)
 	phrase.TextDe = security.RemoveBackticks(phrase.TextDe)
 	phrase.TextEs = security.RemoveBackticks(phrase.TextEs)
 	phrase.TextEn = security.RemoveBackticks(phrase.TextEn)
@@ -98,7 +95,6 @@ func FindPhrase(c *gin.Context) {
 		return
 	}
 
-	phrase.Text = security.RemoveBackticks(phrase.Text)
 	phrase.TextDe = security.RemoveBackticks(phrase.TextDe)
 	phrase.TextEs = security.RemoveBackticks(phrase.TextEs)
 	phrase.TextEn = security.RemoveBackticks(phrase.TextEn)
@@ -148,7 +144,6 @@ func PatchPhrase(c *gin.Context) {
 			ID:               phrase.ID,
 			LocaleID:         uint(input.LocaleID),
 			PhraseCategoryID: uint(input.PhraseCategoryID),
-			Text:             security.SecureString(input.Text),
 			TextDe:           security.SecureString(input.TextDe),
 			TextEs:           security.SecureString(input.TextEs),
 			TextEn:           security.SecureString(input.TextEn),
@@ -164,7 +159,6 @@ func PatchPhrase(c *gin.Context) {
 			Modified:         t,
 		})
 
-	phrase.Text = security.RemoveBackticks(phrase.Text)
 	phrase.TextDe = security.RemoveBackticks(phrase.TextDe)
 	phrase.TextEs = security.RemoveBackticks(phrase.TextEs)
 	phrase.TextEn = security.RemoveBackticks(phrase.TextEn)

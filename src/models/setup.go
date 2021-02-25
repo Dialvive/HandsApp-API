@@ -44,8 +44,8 @@ func ConnectDatabase() {
 		panic("Failed to connect to DB. " + err.Error())
 	}
 
-	// Simple objects
 	database.AutoMigrate(
+		// Simple objects
 		&AdCategory{},
 		&Country{},
 		&Friendship{},
@@ -61,6 +61,8 @@ func ConnectDatabase() {
 		&User{},
 		&Word{},
 		// Weak objects
+		&PhraseSign{},
+		&WordSign{},
 		&Friend{},
 		&FavoritePhrase{},
 		&FavoriteWord{},

@@ -4,9 +4,10 @@ import (
 	"API/controllers"
 	"API/models"
 	"API/security"
+	"log"
+
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"log"
 )
 
 func main() {
@@ -30,23 +31,23 @@ func main() {
 
 	// PRODUCTION ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	/*
-	gin.SetMode(gin.ReleaseMode)
+		gin.SetMode(gin.ReleaseMode)
 
-	// GET HTTPS/TLS CERTIFICATES
+		// GET HTTPS/TLS CERTIFICATES
 
-	m := autocert.Manager{
-		Prompt:          autocert.AcceptTOS,
-		Cache:           autocert.DirCache("/var/www/.cache"),
-		HostPolicy:      autocert.HostWhitelist("api.signapp.site"),
-		Email:           "haikode@protonmail.com",
-	}
+		m := autocert.Manager{
+			Prompt:          autocert.AcceptTOS,
+			Cache:           autocert.DirCache("/var/www/.cache"),
+			HostPolicy:      autocert.HostWhitelist("api.signapp.site"),
+			Email:           "haikode@protonmail.com",
+		}
 
-	// REDIRECT ALL HTTP TO HTTPS
+		// REDIRECT ALL HTTP TO HTTPS
 
-	httpRouter := gin.Default()
-	httpRouter.NoRoute(func(c *gin.Context) {
-		c.Redirect(http.StatusPermanentRedirect, "https://api.signapp.site" + c.FullPath())
-	})
+		httpRouter := gin.Default()
+		httpRouter.NoRoute(func(c *gin.Context) {
+			c.Redirect(http.StatusPermanentRedirect, "https://api.signapp.site" + c.FullPath())
+		})
 	*/
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -161,6 +162,24 @@ func main() {
 
 	// Weak entities routes /////////////////////////////////////////
 
+	// Routes for wordSigns
+
+	r.GET("/v1/word_signs", controllers.GetWordSigns)
+	r.POST("/v1/word_sign", controllers.CreateWordSign)
+	r.GET("/v1/word_signs/:wordID", controllers.FindAllWordSigns)
+	r.GET("/v1/word_signs/:wordID/:localeID", controllers.FindWordSigns)
+	r.GET("/v1/word_sign/:wordID/:localeID/:version", controllers.FindWordSign)
+	r.GET("/v1/word_sign_count/:wordID/:localeID", controllers.CountWordSigns)
+	r.DELETE("/v1/word_sign/:wordID/:localeID/:version", controllers.DeleteWordSign)
+
+	// Routes for phraseSigns
+
+	r.GET("/v1/phrase_signs", controllers.GetPhraseSigns)
+	r.POST("/v1/phrase_sign", controllers.CreatePhraseSign)
+	r.GET("/v1/phrase_signs/:phraseID", controllers.FindPhraseSigns)
+	r.GET("/v1/phrase_sign/:phraseID/:localeID", controllers.FindPhraseSign)
+	r.DELETE("/v1/phrase_sign/:phraseID/:localeID/", controllers.DeletePhraseSign)
+
 	// Routes for friends
 	r.GET("/v1/friends", controllers.GetFriends)
 	r.POST("/v1/friend", controllers.CreateFriend)
@@ -188,8 +207,8 @@ func main() {
 
 	// PRODUCTION ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	/*
-	log.Fatal(autotls.RunWithManager(r, &m)) // HTTPS
-	log.Fatal(httpRouter.Run(":80")) // HTTP
+		log.Fatal(autotls.RunWithManager(r, &m)) // HTTPS
+		log.Fatal(httpRouter.Run(":80")) // HTTP
 	*/
 	// DEVELOPMENT ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 

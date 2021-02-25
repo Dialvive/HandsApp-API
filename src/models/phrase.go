@@ -7,7 +7,6 @@ type Phrase struct {
 	ID               uint   `json:"ID" gorm:"column:ID;type:INT NOT NULL;primaryKey"`
 	LocaleID         uint   `json:"locale_ID" gorm:"column:locale_ID;type:TINYINT NOT NULL"`
 	PhraseCategoryID uint   `json:"phrase_category_ID" gorm:"column:phrase_category_ID;type:TINYINT NOT NULL"`
-	Text             string `json:"text" gorm:"column:text;type:TEXT"`
 	TextDe           string `json:"text_de" gorm:"column:text_de;type:TEXT"`
 	TextEs           string `json:"text_es" gorm:"column:text_es;type:TEXT"`
 	TextEn           string `json:"text_en" gorm:"column:text_en;type:TEXT"`
@@ -27,7 +26,6 @@ type Phrase struct {
 type CreatePhraseInput struct {
 	LocaleID         uint   `json:"locale_ID" binding:"required"`
 	PhraseCategoryID uint   `json:"phrase_category_ID" binding:"required"`
-	Text             string `json:"text" gorm:"column:text;type:TEXT" binding:"required"`
 	TextDe           string `json:"text_de"`
 	TextEs           string `json:"text_es"`
 	TextEn           string `json:"text_en"`
@@ -46,7 +44,6 @@ type CreatePhraseInput struct {
 type UpdatePhraseInput struct {
 	LocaleID         uint   `json:"locale_ID"`
 	PhraseCategoryID uint   `json:"phrase_category_ID"`
-	Text             string `json:"text" gorm:"column:text;type:TEXT"`
 	TextDe           string `json:"text_de"`
 	TextEs           string `json:"text_es"`
 	TextEn           string `json:"text_en"`
