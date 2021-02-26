@@ -5,9 +5,12 @@ import (
 	"API/models"
 	"API/security"
 	"log"
+	"net/http"
 
 	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/autotls"
 	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/acme/autocert"
 )
 
 func main() {
@@ -30,25 +33,25 @@ func main() {
 	//TODO: 7) FIX friends count
 
 	// PRODUCTION ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	/*
-		gin.SetMode(gin.ReleaseMode)
 
-		// GET HTTPS/TLS CERTIFICATES
+	gin.SetMode(gin.ReleaseMode)
 
-		m := autocert.Manager{
-			Prompt:          autocert.AcceptTOS,
-			Cache:           autocert.DirCache("/var/www/.cache"),
-			HostPolicy:      autocert.HostWhitelist("api.signapp.site"),
-			Email:           "haikode@protonmail.com",
-		}
+	// GET HTTPS/TLS CERTIFICATES
 
-		// REDIRECT ALL HTTP TO HTTPS
+	m := autocert.Manager{
+		Prompt:     autocert.AcceptTOS,
+		Cache:      autocert.DirCache("/var/www/.cache"),
+		HostPolicy: autocert.HostWhitelist("api.signapp.site"),
+		Email:      "haikode@protonmail.com",
+	}
 
-		httpRouter := gin.Default()
-		httpRouter.NoRoute(func(c *gin.Context) {
-			c.Redirect(http.StatusPermanentRedirect, "https://api.signapp.site" + c.FullPath())
-		})
-	*/
+	// REDIRECT ALL HTTP TO HTTPS
+
+	httpRouter := gin.Default()
+	httpRouter.NoRoute(func(c *gin.Context) {
+		c.Redirect(http.StatusPermanentRedirect, "https://api.signapp.site"+c.FullPath())
+	})
+
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	r := gin.Default()
@@ -206,10 +209,10 @@ func main() {
 	r.DELETE("/v1/favorite_word/:userID/:wordID", controllers.DeleteFavoriteWords)
 
 	// PRODUCTION ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	/*
-		log.Fatal(autotls.RunWithManager(r, &m)) // HTTPS
-		log.Fatal(httpRouter.Run(":80")) // HTTP
-	*/
+
+	log.Fatal(autotls.RunWithManager(r, &m)) // HTTPS
+	log.Fatal(httpRouter.Run(":80"))         // HTTP
+
 	// DEVELOPMENT ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	log.Fatal(r.Run(":8080"))
