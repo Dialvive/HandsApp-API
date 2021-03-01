@@ -32,7 +32,7 @@ func main() {
 
 	//TODO: 7) FIX friends count
 
-	// PRODUCTION ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	// ! PRODUCTION ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	gin.SetMode(gin.ReleaseMode)
 
@@ -208,14 +208,14 @@ func main() {
 	r.GET("/v1/favorite_words/:userID", controllers.FindFavoriteWords)
 	r.DELETE("/v1/favorite_word/:userID/:wordID", controllers.DeleteFavoriteWords)
 
-	// PRODUCTION ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	// ! PRODUCTION ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	log.Fatal(autotls.RunWithManager(r, &m)) // HTTPS
 	log.Fatal(httpRouter.Run(":80"))         // HTTP
 
 	// DEVELOPMENT ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-	log.Fatal(r.Run(":8080"))
-
+	/*
+		log.Fatal(r.Run(":8080"))
+	*/
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
