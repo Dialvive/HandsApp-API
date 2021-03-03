@@ -21,7 +21,6 @@ func GetPhraseSigns(c *gin.Context) {
 func CreatePhraseSign(c *gin.Context) {
 	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
 		c.Abort()
-		time.Sleep(5 * time.Second)
 		c.String(http.StatusNotFound, "404 page not found")
 		return
 	}
@@ -82,7 +81,6 @@ func FindPhraseSign(c *gin.Context) {
 func DeletePhraseSign(c *gin.Context) {
 	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
 		c.Abort()
-		time.Sleep(5 * time.Second)
 		c.String(http.StatusNotFound, "404 page not found")
 		return
 	}

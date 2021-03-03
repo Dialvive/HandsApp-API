@@ -31,7 +31,6 @@ func GetSignLanguages(c *gin.Context) {
 func CreateSignLanguage(c *gin.Context) {
 	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
 		c.Abort()
-		time.Sleep(5 * time.Second)
 		c.String(http.StatusNotFound, "404 page not found")
 		return
 	}
@@ -92,7 +91,6 @@ func FindSignLanguage(c *gin.Context) {
 func PatchSignLanguage(c *gin.Context) {
 	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
 		c.Abort()
-		time.Sleep(5 * time.Second)
 		c.String(http.StatusNotFound, "404 page not found")
 		return
 	}
@@ -144,7 +142,6 @@ func PatchSignLanguage(c *gin.Context) {
 func DeleteSignLanguage(c *gin.Context) {
 	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
 		c.Abort()
-		time.Sleep(5 * time.Second)
 		c.String(http.StatusNotFound, "404 page not found")
 		return
 	}

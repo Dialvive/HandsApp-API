@@ -42,7 +42,6 @@ func GetWords(c *gin.Context) {
 func CreateWord(c *gin.Context) {
 	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
 		c.Abort()
-		time.Sleep(5 * time.Second)
 		c.String(http.StatusNotFound, "404 page not found")
 		return
 	}
@@ -54,8 +53,7 @@ func CreateWord(c *gin.Context) {
 
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	word := models.Word{
-		ID:             0,
-		LocaleID:       uint(input.LocaleID),
+		ID:             uint(input.ID),
 		WordCategoryID: uint(input.WordCategoryID),
 		TextDe:         security.SecureString(input.TextDe),
 		TextEs:         security.SecureString(input.TextEs),
@@ -140,7 +138,6 @@ func FindWord(c *gin.Context) {
 func PatchWord(c *gin.Context) {
 	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
 		c.Abort()
-		time.Sleep(5 * time.Second)
 		c.String(http.StatusNotFound, "404 page not found")
 		return
 	}
@@ -166,8 +163,7 @@ func PatchWord(c *gin.Context) {
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	models.DB.Model(&word).Updates(
 		models.Word{
-			ID:             word.ID,
-			LocaleID:       uint(input.LocaleID),
+			ID:             uint(input.ID),
 			WordCategoryID: uint(input.WordCategoryID),
 			TextDe:         security.SecureString(input.TextDe),
 			TextEs:         security.SecureString(input.TextEs),
@@ -216,7 +212,6 @@ func PatchWord(c *gin.Context) {
 func DeleteWord(c *gin.Context) {
 	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
 		c.Abort()
-		time.Sleep(5 * time.Second)
 		c.String(http.StatusNotFound, "404 page not found")
 		return
 	}
