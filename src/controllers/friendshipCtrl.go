@@ -30,7 +30,6 @@ func GetFriendships(c *gin.Context) {
 func CreateFriendship(c *gin.Context) {
 	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
 		c.Abort()
-		time.Sleep(5 * time.Second)
 		c.String(http.StatusNotFound, "404 page not found")
 		return
 	}
@@ -87,7 +86,6 @@ func FindFriendship(c *gin.Context) {
 func PatchFriendship(c *gin.Context) {
 	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
 		c.Abort()
-		time.Sleep(5 * time.Second)
 		c.String(http.StatusNotFound, "404 page not found")
 		return
 	}
@@ -137,7 +135,6 @@ func PatchFriendship(c *gin.Context) {
 func DeleteFriendship(c *gin.Context) {
 	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
 		c.Abort()
-		time.Sleep(5 * time.Second)
 		c.String(http.StatusNotFound, "404 page not found")
 		return
 	}

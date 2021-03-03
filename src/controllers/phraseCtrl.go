@@ -36,7 +36,6 @@ func GetPhrases(c *gin.Context) {
 func CreatePhrase(c *gin.Context) {
 	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
 		c.Abort()
-		time.Sleep(5 * time.Second)
 		c.String(http.StatusNotFound, "404 page not found")
 		return
 	}
@@ -115,7 +114,6 @@ func FindPhrase(c *gin.Context) {
 func PatchPhrase(c *gin.Context) {
 	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
 		c.Abort()
-		time.Sleep(5 * time.Second)
 		c.String(http.StatusNotFound, "404 page not found")
 		return
 	}
@@ -178,7 +176,6 @@ func PatchPhrase(c *gin.Context) {
 func DeletePhrase(c *gin.Context) {
 	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
 		c.Abort()
-		time.Sleep(5 * time.Second)
 		c.String(http.StatusNotFound, "404 page not found")
 		return
 	}

@@ -30,7 +30,6 @@ func GetPhraseCategories(c *gin.Context) {
 func CreatePhraseCategory(c *gin.Context) {
 	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
 		c.Abort()
-		time.Sleep(5 * time.Second)
 		c.String(http.StatusNotFound, "404 page not found")
 		return
 	}
@@ -88,7 +87,6 @@ func FindPhraseCategory(c *gin.Context) {
 func PatchPhraseCategory(c *gin.Context) {
 	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
 		c.Abort()
-		time.Sleep(5 * time.Second)
 		c.String(http.StatusNotFound, "404 page not found")
 		return
 	}
@@ -138,7 +136,6 @@ func PatchPhraseCategory(c *gin.Context) {
 func DeletePhraseCategory(c *gin.Context) {
 	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
 		c.Abort()
-		time.Sleep(5 * time.Second)
 		c.String(http.StatusNotFound, "404 page not found")
 		return
 	}

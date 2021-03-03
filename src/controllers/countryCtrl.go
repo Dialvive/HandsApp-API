@@ -31,7 +31,6 @@ func GetCountries(c *gin.Context) {
 func CreateCountry(c *gin.Context) {
 	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
 		c.Abort()
-		time.Sleep(5 * time.Second)
 		c.String(http.StatusNotFound, "404 page not found")
 		return
 	}
@@ -92,7 +91,6 @@ func FindCountry(c *gin.Context) {
 func PatchCountry(c *gin.Context) {
 	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
 		c.Abort()
-		time.Sleep(5 * time.Second)
 		c.String(http.StatusNotFound, "404 page not found")
 		return
 	}
@@ -144,7 +142,6 @@ func PatchCountry(c *gin.Context) {
 func DeleteCountry(c *gin.Context) {
 	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
 		c.Abort()
-		time.Sleep(5 * time.Second)
 		c.String(http.StatusNotFound, "404 page not found")
 		return
 	}

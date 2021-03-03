@@ -31,7 +31,6 @@ func GetSpokenLanguages(c *gin.Context) {
 func CreateSpokenLanguage(c *gin.Context) {
 	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
 		c.Abort()
-		time.Sleep(5 * time.Second)
 		c.String(http.StatusNotFound, "404 page not found")
 		return
 	}
@@ -91,7 +90,6 @@ func FindSpokenLanguage(c *gin.Context) {
 func PatchSpokenLanguage(c *gin.Context) {
 	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
 		c.Abort()
-		time.Sleep(5 * time.Second)
 		c.String(http.StatusNotFound, "404 page not found")
 		return
 	}
@@ -143,7 +141,6 @@ func PatchSpokenLanguage(c *gin.Context) {
 func DeleteSpokenLanguage(c *gin.Context) {
 	if !security.CheckKey(c, c.GetHeader("x-api-key")) {
 		c.Abort()
-		time.Sleep(5 * time.Second)
 		c.String(http.StatusNotFound, "404 page not found")
 		return
 	}
