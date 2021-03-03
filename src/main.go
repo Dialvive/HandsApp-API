@@ -22,6 +22,7 @@ func main() {
 	//TODO: 1) USE JWT
 
 	//TODO: 2) USE CACHES
+	// * implemented caches
 
 	//TODO: 3) ALLOW FILTERS
 
