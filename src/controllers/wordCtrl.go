@@ -54,8 +54,7 @@ func CreateWord(c *gin.Context) {
 
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	word := models.Word{
-		ID:             0,
-		LocaleID:       uint(input.LocaleID),
+		ID:             uint(input.ID),
 		WordCategoryID: uint(input.WordCategoryID),
 		TextDe:         security.SecureString(input.TextDe),
 		TextEs:         security.SecureString(input.TextEs),
@@ -166,8 +165,7 @@ func PatchWord(c *gin.Context) {
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	models.DB.Model(&word).Updates(
 		models.Word{
-			ID:             word.ID,
-			LocaleID:       uint(input.LocaleID),
+			ID:             uint(input.ID),
 			WordCategoryID: uint(input.WordCategoryID),
 			TextDe:         security.SecureString(input.TextDe),
 			TextEs:         security.SecureString(input.TextEs),

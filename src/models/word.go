@@ -5,7 +5,6 @@ import "github.com/dgrijalva/jwt-go"
 // Word represents a coherent spoken language set of words.
 type Word struct {
 	ID             uint   `json:"ID" gorm:"column:ID;type:INT NOT NULL;primaryKey"`
-	LocaleID       uint   `json:"locale_ID" gorm:"column:locale_ID;type:TINYINT NOT NULL"`
 	WordCategoryID uint   `json:"word_category_ID" gorm:"column:word_category_ID;type:TINYINT NOT NULL"`
 	TextDe         string `json:"text_de" gorm:"column:text_de;type:TEXT"`
 	TextEs         string `json:"text_es" gorm:"column:text_es;type:TEXT"`
@@ -30,7 +29,7 @@ type Word struct {
 
 // CreateWordInput represents a coherent spoken word.
 type CreateWordInput struct {
-	LocaleID       uint   `json:"locale_ID" binding:"required"`
+	ID             uint   `json:"ID" binding:"required"`
 	WordCategoryID uint   `json:"word_category_ID" binding:"required"`
 	TextDe         string `json:"text_de"`
 	TextEs         string `json:"text_es"`
@@ -54,7 +53,7 @@ type CreateWordInput struct {
 
 // UpdateWordInput represents a coherent spoken word.
 type UpdateWordInput struct {
-	LocaleID       uint   `json:"locale_ID"`
+	ID             uint   `json:"ID"`
 	WordCategoryID uint   `json:"word_category_ID"`
 	TextDe         string `json:"text_de"`
 	TextEs         string `json:"text_es"`

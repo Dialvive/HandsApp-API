@@ -48,7 +48,7 @@ func CreatePhrase(c *gin.Context) {
 
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	phrase := models.Phrase{
-		LocaleID:         uint(input.LocaleID),
+		ID:               uint(input.ID),
 		PhraseCategoryID: uint(input.PhraseCategoryID),
 		TextDe:           security.SecureString(input.TextDe),
 		TextEs:           security.SecureString(input.TextEs),
@@ -141,8 +141,7 @@ func PatchPhrase(c *gin.Context) {
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	models.DB.Model(&phrase).Updates(
 		models.Phrase{
-			ID:               phrase.ID,
-			LocaleID:         uint(input.LocaleID),
+			ID:               uint(input.ID),
 			PhraseCategoryID: uint(input.PhraseCategoryID),
 			TextDe:           security.SecureString(input.TextDe),
 			TextEs:           security.SecureString(input.TextEs),
