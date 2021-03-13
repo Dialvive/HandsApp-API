@@ -5,9 +5,12 @@ import (
 	"API/models"
 	"API/security"
 	"log"
+	"net/http"
 
 	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/autotls"
 	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/acme/autocert"
 )
 
 func main() {
@@ -31,25 +34,25 @@ func main() {
 	//TODO: 7) FIX friends count
 
 	// ! PRODUCTION ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	/*
-		gin.SetMode(gin.ReleaseMode)
 
-		// GET HTTPS/TLS CERTIFICATES
+	gin.SetMode(gin.ReleaseMode)
 
-		m := autocert.Manager{
-			Prompt:     autocert.AcceptTOS,
-			Cache:      autocert.DirCache("/var/www/.cache"),
-			HostPolicy: autocert.HostWhitelist("api.signapp.site"),
-			Email:      "haikode@protonmail.com",
-		}
+	// GET HTTPS/TLS CERTIFICATES
 
-		// REDIRECT ALL HTTP TO HTTPS
+	m := autocert.Manager{
+		Prompt:     autocert.AcceptTOS,
+		Cache:      autocert.DirCache("/var/www/.cache"),
+		HostPolicy: autocert.HostWhitelist("api.signapp.site"),
+		Email:      "haikode@protonmail.com",
+	}
 
-		httpRouter := gin.Default()
-		httpRouter.NoRoute(func(c *gin.Context) {
-			c.Redirect(http.StatusPermanentRedirect, "https://api.signapp.site"+c.FullPath())
-		})
-	*/
+	// REDIRECT ALL HTTP TO HTTPS
+
+	httpRouter := gin.Default()
+	httpRouter.NoRoute(func(c *gin.Context) {
+		c.Redirect(http.StatusPermanentRedirect, "https://api.signapp.site"+c.FullPath())
+	})
+
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	r := gin.Default()
@@ -91,11 +94,13 @@ func main() {
 	r.DELETE("/v1/sign_language/:ID", controllers.DeleteSignLanguage)
 
 	// Routes for phraseCategories
-	r.GET("/v1/phrase_categories", controllers.GetPhraseCategories)
-	r.POST("/v1/phrase_category", controllers.CreatePhraseCategory)
-	r.GET("/v1/phrase_category/:ID", controllers.FindPhraseCategory)
-	r.PATCH("/v1/phrase_category/:ID", controllers.PatchPhraseCategory)
-	r.DELETE("/v1/phrase_category/:ID", controllers.DeletePhraseCategory)
+	/*
+		r.GET("/v1/phrase_categories", controllers.GetPhraseCategories)
+		r.POST("/v1/phrase_category", controllers.CreatePhraseCategory)
+		r.GET("/v1/phrase_category/:ID", controllers.FindPhraseCategory)
+		r.PATCH("/v1/phrase_category/:ID", controllers.PatchPhraseCategory)
+		r.DELETE("/v1/phrase_category/:ID", controllers.DeletePhraseCategory)
+	*/
 
 	// Routes for wordCategories
 	r.GET("/v1/word_categories", controllers.GetWordCategories)
@@ -105,18 +110,20 @@ func main() {
 	r.DELETE("/v1/word_category/:ID", controllers.DeleteWordCategory)
 
 	// Routes for ad_categories
-	r.GET("/v1/ad_categories", controllers.GetAdCategories)
-	r.POST("/v1/ad_category", controllers.CreateAdCategory)
-	r.GET("/v1/ad_category/:ID", controllers.FindAdCategory)
-	r.PATCH("/v1/ad_category/:ID", controllers.PatchAdCategory)
-	r.DELETE("/v1/ad_category/:ID", controllers.DeleteAdCategory)
+	/*
+		r.GET("/v1/ad_categories", controllers.GetAdCategories)
+		r.POST("/v1/ad_category", controllers.CreateAdCategory)
+		r.GET("/v1/ad_category/:ID", controllers.FindAdCategory)
+		r.PATCH("/v1/ad_category/:ID", controllers.PatchAdCategory)
+		r.DELETE("/v1/ad_category/:ID", controllers.DeleteAdCategory)
 
-	// Routes for friendships
-	r.GET("/v1/friendships", controllers.GetFriendships)
-	r.POST("/v1/friendship", controllers.CreateFriendship)
-	r.GET("/v1/friendship/:ID", controllers.FindFriendship)
-	r.PATCH("/v1/friendship/:ID", controllers.PatchFriendship)
-	r.DELETE("/v1/friendship/:ID", controllers.DeleteFriendship)
+		// Routes for friendships
+		r.GET("/v1/friendships", controllers.GetFriendships)
+		r.POST("/v1/friendship", controllers.CreateFriendship)
+		r.GET("/v1/friendship/:ID", controllers.FindFriendship)
+		r.PATCH("/v1/friendship/:ID", controllers.PatchFriendship)
+		r.DELETE("/v1/friendship/:ID", controllers.DeleteFriendship)
+	*/
 
 	// RELATED TABLES ROUTES ////////////////////////////////////////
 
@@ -128,12 +135,14 @@ func main() {
 	r.DELETE("/v1/region/:ID", controllers.DeleteRegion)
 
 	// Routes for users
-	r.GET("/v1/users", controllers.GetUsers)
-	r.POST("/v1/user", controllers.CreateUser)
-	r.GET("/v1/user/:ID", controllers.FindUser)
-	r.PATCH("/v1/user/:ID", controllers.PatchUser)
-	r.PUT("/v1/user/:ID", controllers.PutUser)
-	r.DELETE("/v1/user/:ID", controllers.DeleteUser)
+	/*
+		r.GET("/v1/users", controllers.GetUsers)
+		r.POST("/v1/user", controllers.CreateUser)
+		r.GET("/v1/user/:ID", controllers.FindUser)
+		r.PATCH("/v1/user/:ID", controllers.PatchUser)
+		r.PUT("/v1/user/:ID", controllers.PutUser)
+		r.DELETE("/v1/user/:ID", controllers.DeleteUser)
+	*/
 
 	// Routes for locales
 	r.GET("/v1/locales", controllers.GetLocales)
@@ -150,18 +159,20 @@ func main() {
 	r.DELETE("/v1/word/:ID", controllers.DeleteWord)
 
 	// Routes for phrases
-	r.GET("/v1/phrases", controllers.GetPhrases)
-	r.POST("/v1/phrase", controllers.CreatePhrase)
-	r.GET("/v1/phrase/:ID", controllers.FindPhrase)
-	r.PATCH("/v1/phrase/:ID", controllers.PatchPhrase)
-	r.DELETE("/v1/phrase/:ID", controllers.DeletePhrase)
+	/*
+		r.GET("/v1/phrases", controllers.GetPhrases)
+		r.POST("/v1/phrase", controllers.CreatePhrase)
+		r.GET("/v1/phrase/:ID", controllers.FindPhrase)
+		r.PATCH("/v1/phrase/:ID", controllers.PatchPhrase)
+		r.DELETE("/v1/phrase/:ID", controllers.DeletePhrase)
 
-	// Routes for advertisements
-	r.GET("/v1/advertisements", controllers.GetAdvertisements)
-	r.POST("/v1/advertisement", controllers.CreateAdvertisement)
-	r.GET("/v1/advertisement/:ID", controllers.FindAdvertisement)
-	r.PATCH("/v1/advertisement/:ID", controllers.PatchAdvertisement)
-	r.DELETE("/v1/advertisement/:ID", controllers.DeleteAdvertisement)
+		// Routes for advertisements
+		r.GET("/v1/advertisements", controllers.GetAdvertisements)
+		r.POST("/v1/advertisement", controllers.CreateAdvertisement)
+		r.GET("/v1/advertisement/:ID", controllers.FindAdvertisement)
+		r.PATCH("/v1/advertisement/:ID", controllers.PatchAdvertisement)
+		r.DELETE("/v1/advertisement/:ID", controllers.DeleteAdvertisement)
+	*/
 
 	// Weak entities routes /////////////////////////////////////////
 
@@ -176,49 +187,50 @@ func main() {
 	r.DELETE("/v1/word_sign/:wordID/:localeID/:version", controllers.DeleteWordSign)
 
 	// Routes for phraseSigns
+	/*
+		r.GET("/v1/phrase_signs", controllers.GetPhraseSigns)
+		r.POST("/v1/phrase_sign", controllers.CreatePhraseSign)
+		r.GET("/v1/phrase_signs/:phraseID", controllers.FindPhraseSigns)
+		r.GET("/v1/phrase_sign/:phraseID/:localeID", controllers.FindPhraseSign)
+		r.DELETE("/v1/phrase_sign/:phraseID/:localeID/", controllers.DeletePhraseSign)
 
-	r.GET("/v1/phrase_signs", controllers.GetPhraseSigns)
-	r.POST("/v1/phrase_sign", controllers.CreatePhraseSign)
-	r.GET("/v1/phrase_signs/:phraseID", controllers.FindPhraseSigns)
-	r.GET("/v1/phrase_sign/:phraseID/:localeID", controllers.FindPhraseSign)
-	r.DELETE("/v1/phrase_sign/:phraseID/:localeID/", controllers.DeletePhraseSign)
+		// Routes for friends
+		r.GET("/v1/friends", controllers.GetFriends)
+		r.POST("/v1/friend", controllers.CreateFriend)
+		r.GET("/v1/friend/:ID1/:ID2", controllers.FindFriend)
+		r.GET("/v1/friends/:ID", controllers.FindFriends)
+		r.GET("/v1/friends_count/:ID", controllers.CountFriends)
+		r.PATCH("/v1/friend/:ID1/:ID2", controllers.PatchFriend)
+		r.DELETE("/v1/friend/:ID1/:ID2", controllers.DeleteFriend)
 
-	// Routes for friends
-	r.GET("/v1/friends", controllers.GetFriends)
-	r.POST("/v1/friend", controllers.CreateFriend)
-	r.GET("/v1/friend/:ID1/:ID2", controllers.FindFriend)
-	r.GET("/v1/friends/:ID", controllers.FindFriends)
-	r.GET("/v1/friends_count/:ID", controllers.CountFriends)
-	r.PATCH("/v1/friend/:ID1/:ID2", controllers.PatchFriend)
-	r.DELETE("/v1/friend/:ID1/:ID2", controllers.DeleteFriend)
+		// Routes for favorite_phrases
+		r.GET("/v1/favorite_phrases", controllers.GetFavoritePhrases)
+		r.POST("/v1/favorite_phrase", controllers.CreateFavoritePhrases)
+		r.GET("/v1/favorite_phrases_count/phrase/:phraseID", controllers.CountFavoritePhrasesP)
+		r.GET("/v1/favorite_phrases_count/user/:userID", controllers.CountFavoritePhrasesU)
+		r.GET("/v1/favorite_phrases/:userID", controllers.FindFavoritePhrases)
+		r.DELETE("/v1/favorite_phrase/:userID/:phraseID", controllers.DeleteFavoritePhrases)
 
-	// Routes for favorite_phrases
-	r.GET("/v1/favorite_phrases", controllers.GetFavoritePhrases)
-	r.POST("/v1/favorite_phrase", controllers.CreateFavoritePhrases)
-	r.GET("/v1/favorite_phrases_count/phrase/:phraseID", controllers.CountFavoritePhrasesP)
-	r.GET("/v1/favorite_phrases_count/user/:userID", controllers.CountFavoritePhrasesU)
-	r.GET("/v1/favorite_phrases/:userID", controllers.FindFavoritePhrases)
-	r.DELETE("/v1/favorite_phrase/:userID/:phraseID", controllers.DeleteFavoritePhrases)
-
-	// Routes for favorite_words
-	r.GET("/v1/favorite_words", controllers.GetFavoriteWords)
-	r.POST("/v1/favorite_word", controllers.CreateFavoriteWords)
-	r.GET("/v1/favorite_words_count/word/:wordID", controllers.CountFavoriteWordsP)
-	r.GET("/v1/favorite_words_count/user/:userID", controllers.CountFavoriteWordsU)
-	r.GET("/v1/favorite_words/:userID", controllers.FindFavoriteWords)
-	r.DELETE("/v1/favorite_word/:userID/:wordID", controllers.DeleteFavoriteWords)
+		// Routes for favorite_words
+		r.GET("/v1/favorite_words", controllers.GetFavoriteWords)
+		r.POST("/v1/favorite_word", controllers.CreateFavoriteWords)
+		r.GET("/v1/favorite_words_count/word/:wordID", controllers.CountFavoriteWordsP)
+		r.GET("/v1/favorite_words_count/user/:userID", controllers.CountFavoriteWordsU)
+		r.GET("/v1/favorite_words/:userID", controllers.FindFavoriteWords)
+		r.DELETE("/v1/favorite_word/:userID/:wordID", controllers.DeleteFavoriteWords)
+	*/
 
 	// Routes for Meilisearch
 	r.POST("/v1/search/words", controllers.MeiliSearchWords)
 
 	// ! PRODUCTION ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	/*
-		log.Fatal(autotls.RunWithManager(r, &m)) // HTTPS
-		log.Fatal(httpRouter.Run(":80"))         // HTTP
-	*/
+
+	log.Fatal(autotls.RunWithManager(r, &m)) // HTTPS
+	log.Fatal(httpRouter.Run(":80"))         // HTTP
+
 	// DEVELOPMENT ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-	log.Fatal(r.Run(":8080"))
-
+	/*
+		log.Fatal(r.Run(":8080"))
+	*/
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }

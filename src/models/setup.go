@@ -46,26 +46,31 @@ func ConnectDatabase() {
 
 	database.AutoMigrate(
 		// Simple objects
-		&AdCategory{},
+
+		//&AdCategory{},
 		&Country{},
-		&Friendship{},
-		&PhraseCategory{},
+		//&Friendship{},
+		//&PhraseCategory{},
 		&SignLanguage{},
 		&SpokenLanguage{},
 		&WordCategory{},
+
 		// Related objects
-		&Advertisement{},
+
+		//&Advertisement{},
 		&Region{},
 		&Locale{},
-		&Phrase{},
-		&User{},
+		//&Phrase{},
+		//&User{},
 		&Word{},
+
 		// Weak objects
-		&PhraseSign{},
+
+		//&PhraseSign{},
 		&WordSign{},
-		&Friend{},
-		&FavoritePhrase{},
-		&FavoriteWord{},
+		//&Friend{},
+		//&FavoritePhrase{},
+		//&FavoriteWord{},
 	)
 
 	DB = database
