@@ -3,15 +3,19 @@ package security
 import (
 	"encoding/base64"
 	"errors"
-	"github.com/gin-gonic/gin"
 	"log"
 	"strconv"
 	"strings"
 	"unicode"
 
+	"github.com/gin-gonic/gin"
+
 	"github.com/sethvargo/go-password/password"
 	"golang.org/x/crypto/bcrypt"
 )
+
+// KEY is the API key
+const KEY string = "SECURITY"
 
 // MinuteTTL is a minute in EPOCH seconds
 const MinuteTTL uint64 = 60
@@ -132,7 +136,7 @@ func TrimToLength(s string, l int) string {
 
 // CheckKey verifies that a given string matches an API key
 func CheckKey(c *gin.Context, s string) bool {
-	if s != "SECURITY" {
+	if s != KEY {
 		return false
 	}
 	return true
@@ -140,8 +144,8 @@ func CheckKey(c *gin.Context, s string) bool {
 
 // RerouteHandler Reroutes every other route to another website
 func RerouteHandler(c *gin.Context) {
-		c.Redirect(302, "https://signapp.site")
-		return
+	c.Redirect(302, "https://signapp.site")
+	return
 }
 
 func mysqlEscapeString(s string) string {

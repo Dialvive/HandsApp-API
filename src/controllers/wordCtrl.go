@@ -231,3 +231,32 @@ func DeleteWord(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"data": true})
 }
+
+// GetWordsJsonMap retrieves all the words and retuns them as a JSON
+func GetWordsJsonMap() []models.Word {
+	var words []models.Word
+	models.DB.Find(&words)
+
+	for i := range words {
+		words[i].TextDe = security.RemoveBackticks(words[i].TextDe)
+		words[i].TextEs = security.RemoveBackticks(words[i].TextEs)
+		words[i].TextEn = security.RemoveBackticks(words[i].TextEn)
+		words[i].TextFr = security.RemoveBackticks(words[i].TextFr)
+		words[i].TextIt = security.RemoveBackticks(words[i].TextIt)
+		words[i].TextPt = security.RemoveBackticks(words[i].TextPt)
+		words[i].ContextDe = security.RemoveBackticks(words[i].ContextDe)
+		words[i].ContextEs = security.RemoveBackticks(words[i].ContextEs)
+		words[i].ContextEn = security.RemoveBackticks(words[i].ContextEn)
+		words[i].ContextFr = security.RemoveBackticks(words[i].ContextFr)
+		words[i].ContextIt = security.RemoveBackticks(words[i].ContextIt)
+		words[i].ContextPt = security.RemoveBackticks(words[i].ContextPt)
+		words[i].DefinitionDe = security.RemoveBackticks(words[i].DefinitionDe)
+		words[i].DefinitionEs = security.RemoveBackticks(words[i].DefinitionEs)
+		words[i].DefinitionEn = security.RemoveBackticks(words[i].DefinitionEn)
+		words[i].DefinitionFr = security.RemoveBackticks(words[i].DefinitionFr)
+		words[i].DefinitionIt = security.RemoveBackticks(words[i].DefinitionIt)
+		words[i].DefinitionPt = security.RemoveBackticks(words[i].DefinitionPt)
+	}
+
+	return words
+}

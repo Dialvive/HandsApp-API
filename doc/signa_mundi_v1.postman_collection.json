@@ -2240,7 +2240,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"locale_ID\": 0,\n    \"phrase_category_ID\": 0,\n    \"text\": \"\",\n    \"text_de\": \"\",\n    \"text_es\": \"\",\n    \"text_en\": \"\",\n    \"text_fr\": \"\",\n    \"text_it\": \"\",\n    \"text_pt\": \"\",\n    \"context_de\": \"\",\n    \"context_es\": \"\",\n    \"context_en\": \"\",\n    \"context_fr\": \"\",\n    \"context_it\": \"\",\n    \"context_pt\": \"\"\n    }",
+									"raw": "{\n    \"phrase_category_ID\": 0,\n    \"text\": \"\",\n    \"text_de\": \"\",\n    \"text_es\": \"\",\n    \"text_en\": \"\",\n    \"text_fr\": \"\",\n    \"text_it\": \"\",\n    \"text_pt\": \"\",\n    \"context_de\": \"\",\n    \"context_es\": \"\",\n    \"context_en\": \"\",\n    \"context_fr\": \"\",\n    \"context_it\": \"\",\n    \"context_pt\": \"\"\n    }",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2318,7 +2318,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"locale_ID\": 0,\n    \"phrase_category_ID\": 0,\n    \"text\": \"\",\n    \"text_de\": \"\",\n    \"text_es\": \"\",\n    \"text_en\": \"\",\n    \"text_fr\": \"\",\n    \"text_it\": \"\",\n    \"text_pt\": \"\",\n    \"context_de\": \"\",\n    \"context_es\": \"\",\n    \"context_en\": \"\",\n    \"context_fr\": \"\",\n    \"context_it\": \"\",\n    \"context_pt\": \"\"\n}",
+									"raw": "{\n    \"phrase_category_ID\": 0,\n    \"text\": \"\",\n    \"text_de\": \"\",\n    \"text_es\": \"\",\n    \"text_en\": \"\",\n    \"text_fr\": \"\",\n    \"text_it\": \"\",\n    \"text_pt\": \"\",\n    \"context_de\": \"\",\n    \"context_es\": \"\",\n    \"context_en\": \"\",\n    \"context_fr\": \"\",\n    \"context_it\": \"\",\n    \"context_pt\": \"\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2427,7 +2427,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"locale_ID\": 0,\n    \"word_category_ID\": 0,\n    \"text_de\": \"\",\n    \"text_es\": \"\",\n    \"text_en\": \"\",\n    \"text_fr\": \"\",\n    \"text_it\": \"\",\n    \"text_pt\": \"\",\n    \"context_de\": \"\",\n    \"context_es\": \"\",\n    \"context_en\": \"\",\n    \"context_fr\": \"\",\n    \"context_it\": \"\",\n    \"context_pt\": \"\",\n    \"definition_de\": \"\",\n    \"definition_es\": \"\",\n    \"definition_en\": \"\",\n    \"definition_fr\": \"\",\n    \"definition_it\": \"\",\n    \"definition_pt\": \"\"\n}",
+									"raw": "{\n    \"ID\": 0,\n    \"word_category_ID\": 0,\n    \"text_de\": \"\",\n    \"text_es\": \"\",\n    \"text_en\": \"\",\n    \"text_fr\": \"\",\n    \"text_it\": \"\",\n    \"text_pt\": \"\",\n    \"context_de\": \"\",\n    \"context_es\": \"\",\n    \"context_en\": \"\",\n    \"context_fr\": \"\",\n    \"context_it\": \"\",\n    \"context_pt\": \"\",\n    \"definition_de\": \"\",\n    \"definition_es\": \"\",\n    \"definition_en\": \"\",\n    \"definition_fr\": \"\",\n    \"definition_it\": \"\",\n    \"definition_pt\": \"\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2505,7 +2505,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"locale_ID\": 0,\n    \"word_category_ID\": 0,\n    \"text\": \"\",\n    \"text_de\": \"\",\n    \"text_es\": \"\",\n    \"text_en\": \"\",\n    \"text_fr\": \"\",\n    \"text_it\": \"\",\n    \"text_pt\": \"\",\n    \"context_de\": \"\",\n    \"context_es\": \"\",\n    \"context_en\": \"\",\n    \"context_fr\": \"\",\n    \"context_it\": \"\",\n    \"context_pt\": \"\",\n    \"definition_de\": \"\",\n    \"definition_es\": \"\",\n    \"definition_en\": \"\",\n    \"definition_fr\": \"\",\n    \"definition_it\": \"\",\n    \"definition_pt\": \"\"\n}",
+									"raw": "{\n    \"word_category_ID\": 0,\n    \"text_de\": \"\",\n    \"text_es\": \"\",\n    \"text_en\": \"\",\n    \"text_fr\": \"\",\n    \"text_it\": \"\",\n    \"text_pt\": \"\",\n    \"context_de\": \"\",\n    \"context_es\": \"\",\n    \"context_en\": \"\",\n    \"context_fr\": \"\",\n    \"context_it\": \"\",\n    \"context_pt\": \"\",\n    \"definition_de\": \"\",\n    \"definition_es\": \"\",\n    \"definition_en\": \"\",\n    \"definition_fr\": \"\",\n    \"definition_it\": \"\",\n    \"definition_pt\": \"\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2513,14 +2513,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{URI}}/v1/word/0",
+									"raw": "{{URI}}/v1/word/1",
 									"host": [
 										"{{URI}}"
 									],
 									"path": [
 										"v1",
 										"word",
-										"0"
+										"1"
 									]
 								},
 								"description": "Patches a Word with all parameters except for ID and modified."
