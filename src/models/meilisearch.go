@@ -12,7 +12,8 @@ var Meili meilisearch.ClientInterface
 // ConnectMeili connects the API to the Meilisearch Client
 func ConnectMeili() {
 	Meili = meilisearch.NewClient(meilisearch.Config{
-		Host: "http://127.0.0.1:7700",
+		Host:   "http://127.0.0.1:7700",
+		APIKey: "",
 	})
 	s, _ := Meili.Stats().GetAll()
 	k, _ := Meili.Keys().Get()
