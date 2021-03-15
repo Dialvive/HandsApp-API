@@ -5,12 +5,9 @@ import (
 	"API/models"
 	"API/security"
 	"log"
-	"net/http"
 
 	"github.com/gin-contrib/cors"
-	"github.com/gin-gonic/autotls"
 	"github.com/gin-gonic/gin"
-	"golang.org/x/crypto/acme/autocert"
 )
 
 func main() {
@@ -30,25 +27,25 @@ func main() {
 	//TODO: 7) FIX friends count
 
 	// ! PRODUCTION ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	/*
+		gin.SetMode(gin.ReleaseMode)
 
-	gin.SetMode(gin.ReleaseMode)
+		// GET HTTPS/TLS CERTIFICATES
 
-	// GET HTTPS/TLS CERTIFICATES
+		m := autocert.Manager{
+			Prompt:     autocert.AcceptTOS,
+			Cache:      autocert.DirCache("/var/www/.cache"),
+			HostPolicy: autocert.HostWhitelist("api.handsapp.org"),
+			Email:      "haikode@protonmail.com",
+		}
 
-	m := autocert.Manager{
-		Prompt:     autocert.AcceptTOS,
-		Cache:      autocert.DirCache("/var/www/.cache"),
-		HostPolicy: autocert.HostWhitelist("api.handsapp.org"),
-		Email:      "haikode@protonmail.com",
-	}
+		// REDIRECT ALL HTTP TO HTTPS
 
-	// REDIRECT ALL HTTP TO HTTPS
-
-	httpRouter := gin.Default()
-	httpRouter.NoRoute(func(c *gin.Context) {
-		c.Redirect(http.StatusPermanentRedirect, "https://api.handsapp.org"+c.FullPath())
-	})
-
+		httpRouter := gin.Default()
+		httpRouter.NoRoute(func(c *gin.Context) {
+			c.Redirect(http.StatusPermanentRedirect, "https://api.handsapp.org"+c.FullPath())
+		})
+	*/
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	r := gin.Default()
@@ -221,13 +218,13 @@ func main() {
 	r.POST("/v1/search/words", controllers.MeiliSearchWords)
 
 	// ! PRODUCTION ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-	log.Fatal(autotls.RunWithManager(r, &m)) // HTTPS
-	log.Fatal(httpRouter.Run(":80"))         // HTTP
-
-	// DEVELOPMENT ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	/*
-		log.Fatal(r.Run(":8080"))
+		log.Fatal(autotls.RunWithManager(r, &m)) // HTTPS
+		log.Fatal(httpRouter.Run(":80"))         // HTTP
 	*/
+	// DEVELOPMENT ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+	log.Fatal(r.Run(":8080"))
+
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
