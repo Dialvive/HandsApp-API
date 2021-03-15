@@ -15,10 +15,6 @@ import (
 
 func main() {
 
-	// * Hash & Salt: using security.HashPassword()
-	// * Check Password: using security.PasswordMatches()
-	// * Comment log.Fatal(autotls.Run(r, "api.signamundi.com")) for localhost
-
 	//TODO: 1) USE JWT
 
 	//TODO: 2) USE CACHES
@@ -42,7 +38,7 @@ func main() {
 	m := autocert.Manager{
 		Prompt:     autocert.AcceptTOS,
 		Cache:      autocert.DirCache("/var/www/.cache"),
-		HostPolicy: autocert.HostWhitelist("api.signapp.site"),
+		HostPolicy: autocert.HostWhitelist("api.handsapp.org"),
 		Email:      "haikode@protonmail.com",
 	}
 
@@ -50,7 +46,7 @@ func main() {
 
 	httpRouter := gin.Default()
 	httpRouter.NoRoute(func(c *gin.Context) {
-		c.Redirect(http.StatusPermanentRedirect, "https://api.signapp.site"+c.FullPath())
+		c.Redirect(http.StatusPermanentRedirect, "https://api.handsapp.org"+c.FullPath())
 	})
 
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -69,6 +65,7 @@ func main() {
 	// EVERY OTHER ROUTE ////////////////////////////////////////////
 
 	r.NoRoute(security.RerouteHandler)
+	r.Any("/", security.RerouteHandler)
 
 	// SIMPLE TABLES ROUTES /////////////////////////////////////////
 
