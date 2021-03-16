@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "dce13536-3d6b-4f8a-91e2-b570824200e7",
+		"_postman_id": "264a26ac-c191-49b3-b75a-10e2e1beb299",
 		"name": "signa_mundi_v1",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -62,39 +62,7 @@
 								},
 								"description": "Creates a new country"
 							},
-							"response": [
-								{
-									"name": "POST Country",
-									"originalRequest": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"name\": \"\",\n    \"abbreviation\": \"\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "localhost:8080/v1/country",
-											"host": [
-												"localhost"
-											],
-											"port": "8080",
-											"path": [
-												"v1",
-												"country"
-											]
-										}
-									},
-									"_postman_previewlanguage": "json",
-									"header": [],
-									"cookie": [],
-									"body": "{\n    \"name\": \"Mexico\",\n    \"abbreviation\": \"MX\"\n}"
-								}
-							]
+							"response": []
 						},
 						{
 							"name": "GET Country",
@@ -114,31 +82,7 @@
 								},
 								"description": "Gets a country in particular with a given ID"
 							},
-							"response": [
-								{
-									"name": "GET Country",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "localhost:8080/v1/country/0",
-											"host": [
-												"localhost"
-											],
-											"port": "8080",
-											"path": [
-												"v1",
-												"country",
-												"0"
-											]
-										}
-									},
-									"_postman_previewlanguage": "Text",
-									"header": [],
-									"cookie": [],
-									"body": ""
-								}
-							]
+							"response": []
 						},
 						{
 							"name": "PATCH Country",
@@ -201,9 +145,7 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Ad Categories",
@@ -398,9 +340,7 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Friendships",
@@ -592,9 +532,7 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Phrase Categories",
@@ -789,9 +727,7 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Word Categories",
@@ -847,39 +783,7 @@
 								},
 								"description": "Creates a new Word Category"
 							},
-							"response": [
-								{
-									"name": "POST Country",
-									"originalRequest": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"name\": \"\",\n    \"abbreviation\": \"\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "localhost:8080/v1/country",
-											"host": [
-												"localhost"
-											],
-											"port": "8080",
-											"path": [
-												"v1",
-												"country"
-											]
-										}
-									},
-									"_postman_previewlanguage": "json",
-									"header": [],
-									"cookie": [],
-									"body": "{\n    \"name\": \"Mexico\",\n    \"abbreviation\": \"MX\"\n}"
-								}
-							]
+							"response": []
 						},
 						{
 							"name": "GET Word Category",
@@ -899,31 +803,7 @@
 								},
 								"description": "Gets a Word Category in particular with a given ID"
 							},
-							"response": [
-								{
-									"name": "GET Country",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "localhost:8080/v1/country/0",
-											"host": [
-												"localhost"
-											],
-											"port": "8080",
-											"path": [
-												"v1",
-												"country",
-												"0"
-											]
-										}
-									},
-									"_postman_previewlanguage": "Text",
-									"header": [],
-									"cookie": [],
-									"body": ""
-								}
-							]
+							"response": []
 						},
 						{
 							"name": "PATCH Word Category",
@@ -986,9 +866,7 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Spoken Languages",
@@ -1044,39 +922,7 @@
 								},
 								"description": "Creates a new Spoken Language"
 							},
-							"response": [
-								{
-									"name": "POST Country",
-									"originalRequest": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"name\": \"\",\n    \"abbreviation\": \"\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "localhost:8080/v1/country",
-											"host": [
-												"localhost"
-											],
-											"port": "8080",
-											"path": [
-												"v1",
-												"country"
-											]
-										}
-									},
-									"_postman_previewlanguage": "json",
-									"header": [],
-									"cookie": [],
-									"body": "{\n    \"name\": \"Mexico\",\n    \"abbreviation\": \"MX\"\n}"
-								}
-							]
+							"response": []
 						},
 						{
 							"name": "GET Spoken Language",
@@ -1096,31 +942,7 @@
 								},
 								"description": "Gets a Spoken Language in particular with a given ID"
 							},
-							"response": [
-								{
-									"name": "GET Country",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "localhost:8080/v1/country/0",
-											"host": [
-												"localhost"
-											],
-											"port": "8080",
-											"path": [
-												"v1",
-												"country",
-												"0"
-											]
-										}
-									},
-									"_postman_previewlanguage": "Text",
-									"header": [],
-									"cookie": [],
-									"body": ""
-								}
-							]
+							"response": []
 						},
 						{
 							"name": "PATCH Spoken Language",
@@ -1188,7 +1010,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "d2c61a94-1bcb-4b45-a3c0-5ca12ca1557f",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -1198,16 +1019,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "3c4f626b-2e9b-445f-b6bd-fbcf09e717f4",
 								"type": "text/javascript",
 								"exec": [
 									""
 								]
 							}
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Sign Languages",
@@ -1263,39 +1081,7 @@
 								},
 								"description": "Creates a new Sign Language"
 							},
-							"response": [
-								{
-									"name": "POST Country",
-									"originalRequest": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"name\": \"\",\n    \"abbreviation\": \"\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "localhost:8080/v1/country",
-											"host": [
-												"localhost"
-											],
-											"port": "8080",
-											"path": [
-												"v1",
-												"country"
-											]
-										}
-									},
-									"_postman_previewlanguage": "json",
-									"header": [],
-									"cookie": [],
-									"body": "{\n    \"name\": \"Mexico\",\n    \"abbreviation\": \"MX\"\n}"
-								}
-							]
+							"response": []
 						},
 						{
 							"name": "GET Sign Language",
@@ -1315,31 +1101,7 @@
 								},
 								"description": "Gets a Sign Language in particular with a given ID"
 							},
-							"response": [
-								{
-									"name": "GET Country",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "localhost:8080/v1/country/0",
-											"host": [
-												"localhost"
-											],
-											"port": "8080",
-											"path": [
-												"v1",
-												"country",
-												"0"
-											]
-										}
-									},
-									"_postman_previewlanguage": "Text",
-									"header": [],
-									"cookie": [],
-									"body": ""
-								}
-							]
+							"response": []
 						},
 						{
 							"name": "PATCH Sign Language",
@@ -1407,7 +1169,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "304d0270-1bd1-422b-98fc-aab4c88facb5",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -1417,16 +1178,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "06c36e14-4c62-4a7c-b732-8912896ada56",
 								"type": "text/javascript",
 								"exec": [
 									""
 								]
 							}
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				}
 			],
 			"description": "Entities under this category do not have any foreign key in the database.",
@@ -1434,7 +1192,6 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "c0f700ca-eb8e-4fa6-842c-59e1b6ab09b1",
 						"type": "text/javascript",
 						"exec": [
 							""
@@ -1444,15 +1201,13 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "a23f5a7e-8f92-4ddc-a90a-a9485bcfc75f",
 						"type": "text/javascript",
 						"exec": [
 							""
 						]
 					}
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "Related Entities",
@@ -1531,31 +1286,7 @@
 								},
 								"description": "Gets a Region in particular with a given ID"
 							},
-							"response": [
-								{
-									"name": "GET Country",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "localhost:8080/v1/country/0",
-											"host": [
-												"localhost"
-											],
-											"port": "8080",
-											"path": [
-												"v1",
-												"country",
-												"0"
-											]
-										}
-									},
-									"_postman_previewlanguage": "Text",
-									"header": [],
-									"cookie": [],
-									"body": ""
-								}
-							]
+							"response": []
 						},
 						{
 							"name": "PATCH Region",
@@ -1623,7 +1354,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "51b41126-6c69-4132-9d74-48b28ce09649",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -1633,16 +1363,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "78a6ad1e-9e84-44c4-a2e9-d6864a76abbd",
 								"type": "text/javascript",
 								"exec": [
 									""
 								]
 							}
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Locales",
@@ -1718,31 +1445,7 @@
 								},
 								"description": "Gets a Locale in particular with a given ID"
 							},
-							"response": [
-								{
-									"name": "GET Country",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "localhost:8080/v1/country/0",
-											"host": [
-												"localhost"
-											],
-											"port": "8080",
-											"path": [
-												"v1",
-												"country",
-												"0"
-											]
-										}
-									},
-									"_postman_previewlanguage": "Text",
-									"header": [],
-									"cookie": [],
-									"body": ""
-								}
-							]
+							"response": []
 						},
 						{
 							"name": "PATCH Locale",
@@ -1810,7 +1513,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "a95e813d-04fe-4357-a303-5419adb6e809",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -1820,16 +1522,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "85534bda-6bff-48fe-9dae-866a7fd41cd8",
 								"type": "text/javascript",
 								"exec": [
 									""
 								]
 							}
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Users",
@@ -1997,7 +1696,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "66253f03-6452-4af6-9d5a-4b29b46bffb8",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -2007,16 +1705,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "61845843-da23-4d18-b2a7-7c27c8ebfdec",
 								"type": "text/javascript",
 								"exec": [
 									""
 								]
 							}
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Advertisements",
@@ -2184,7 +1879,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "e2ddafb1-6518-4eb1-b0d2-d7e75538f48f",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -2194,16 +1888,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "7fe9a291-053d-4ab0-a727-d076971808a8",
 								"type": "text/javascript",
 								"exec": [
 									""
 								]
 							}
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Phrases",
@@ -2371,7 +2062,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "3cba7989-2261-467d-85b8-70f0f91f2a13",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -2381,16 +2071,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "32d37d16-4bc6-4918-ad1c-273679fbc687",
 								"type": "text/javascript",
 								"exec": [
 									""
 								]
 							}
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Words",
@@ -2466,31 +2153,7 @@
 								},
 								"description": "Gets a Word in particular with a given ID"
 							},
-							"response": [
-								{
-									"name": "GET Country",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "localhost:8080/v1/country/0",
-											"host": [
-												"localhost"
-											],
-											"port": "8080",
-											"path": [
-												"v1",
-												"country",
-												"0"
-											]
-										}
-									},
-									"_postman_previewlanguage": "Text",
-									"header": [],
-									"cookie": [],
-									"body": ""
-								}
-							]
+							"response": []
 						},
 						{
 							"name": "PATCH Word",
@@ -2558,7 +2221,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "ebd8cf68-318b-49ac-93e7-3202db54438a",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -2568,19 +2230,15 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "fe701ced-0ca6-4b53-86cf-b19bee256fff",
 								"type": "text/javascript",
 								"exec": [
 									""
 								]
 							}
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "Weak Entities",
@@ -2783,7 +2441,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "318400be-3162-41f2-95e6-5b1d4960f6d0",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -2793,16 +2450,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "9899b2db-3d0c-4712-a375-e1a2e74beb47",
 								"type": "text/javascript",
 								"exec": [
 									""
 								]
 							}
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Phrase Signs",
@@ -2933,7 +2587,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "e6fbc99e-e838-4647-9d80-2a17b65676d0",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -2943,16 +2596,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "00fa6052-3c2c-4002-a7be-7211bd71e7e9",
 								"type": "text/javascript",
 								"exec": [
 									""
 								]
 							}
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Word Signs",
@@ -3127,7 +2777,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "b84e4ad8-03f6-4e1a-8212-7693d1afc891",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -3137,16 +2786,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f1706233-c8fa-4779-af19-313a0d784236",
 								"type": "text/javascript",
 								"exec": [
 									""
 								]
 							}
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Favorite Words",
@@ -3346,7 +2992,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "a4974503-c9e6-40fa-8418-15031d282e09",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -3356,16 +3001,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "21f790a5-8bf9-46db-bf66-1699584da12d",
 								"type": "text/javascript",
 								"exec": [
 									""
 								]
 							}
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Friends",
@@ -3576,7 +3218,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "e7435648-810f-4a0b-9e4d-f610633bd803",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -3586,21 +3227,49 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "c8325049-bb58-42f0-b1b6-5784c9183602",
 								"type": "text/javascript",
 								"exec": [
 									""
 								]
 							}
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				}
 			],
-			"description": "This entities have a composite primary key consisting on two foreign keys",
-			"protocolProfileBehavior": {}
+			"description": "This entities have a composite primary key consisting on two foreign keys"
+		},
+		{
+			"name": "Search",
+			"item": [
+				{
+					"name": "Search Words",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Query\":                 \"bee\",\n    \"_Offset\":                0,\n    \"Limit\":                 10,\n    \"_AttributesToRetrieve\":  \"\",\n    \"_AttributesToCrop\":      \"\",\n    \"CropLength\":            140,\n    \"_AttributesToHighlight\": \"\",\n    \"_Filters\":               \"\",\n    \"Matches\":               false,\n    \"_FacetsDistribution\":    \"\",\n    \"_FacetFilters\":          \"\",\n    \"_PlaceholderSearch\":     \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URI}}/v1/search/words",
+							"host": [
+								"{{URI}}"
+							],
+							"path": [
+								"v1",
+								"search",
+								"words"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
