@@ -27,10 +27,17 @@ func MeiliSearchWords(c *gin.Context) {
 		return
 	}
 
+	var lim int64
+	if input.Limit > 100 {
+		lim = 10
+	} else if input.Limit >= 0 && input.Limit <= 100 {
+		lim = input.Limit
+	}
+
 	if m, err := models.Meili.Search("words").Search(meilisearch.SearchRequest{
 		Query:                 input.Query,
 		Offset:                input.Offset,
-		Limit:                 10,
+		Limit:                 lim,
 		AttributesToRetrieve:  input.AttributesToRetrieve,
 		AttributesToCrop:      input.AttributesToCrop,
 		CropLength:            input.CropLength,

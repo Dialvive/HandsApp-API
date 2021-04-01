@@ -55,9 +55,11 @@ func main() {
 
 	// CORS POLICY //////////////////////////////////////////////////
 
-	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"*"}
-	r.Use(cors.New(config))
+	corsConfig := cors.DefaultConfig()
+	corsConfig.AllowAllOrigins = true //! DISABLED IN PRODUCTION
+	//corsConfig.AllowOrigins = []string{"http://handsapp.org"} //! ENABLED IN PRODUCTION
+	corsConfig.AllowMethods = []string{"GET", "PATCH", "POST", "PUT", "DELETE"}
+	r.Use(cors.New(corsConfig))
 
 	// EVERY OTHER ROUTE ////////////////////////////////////////////
 
