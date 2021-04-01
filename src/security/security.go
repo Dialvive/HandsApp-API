@@ -144,7 +144,7 @@ func CheckKey(c *gin.Context, s string) bool {
 
 // RerouteHandler Reroutes every other route to another website
 func RerouteHandler(c *gin.Context) {
-	c.Redirect(302, "https://signapp.site")
+	c.Redirect(302, "https://handsapp.org")
 	return
 }
 
