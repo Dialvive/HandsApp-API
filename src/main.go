@@ -51,7 +51,7 @@ func main() {
 	r := gin.Default()
 	models.ConnectDatabase()
 	models.ConnectMeili()
-	controllers.PopulateMeili()
+	controllers.PopulateMeili(nil)
 
 	// CORS POLICY //////////////////////////////////////////////////
 
@@ -216,8 +216,12 @@ func main() {
 		r.DELETE("/v1/favorite_word/:userID/:wordID", controllers.DeleteFavoriteWords)
 	*/
 
+	// Routes for contact email
+	r.POST("/v1/email", controllers.SendEmail)
+
 	// Routes for Meilisearch
 	r.POST("/v1/search/words", controllers.MeiliSearchWords)
+	r.POST("/v1/search/refresh", controllers.PopulateMeili)
 
 	// ! PRODUCTION ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	/*

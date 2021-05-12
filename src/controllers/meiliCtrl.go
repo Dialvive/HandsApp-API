@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"API/models"
+	"API/security"
 	"log"
 	"net/http"
 
@@ -10,7 +11,12 @@ import (
 )
 
 // PopulateMeili retrieves all the Jsons form the DB and populates the Meilisearch Client
-func PopulateMeili() {
+func PopulateMeili(c *gin.Context) {
+	if !security.CheckKey(c, c.GetHeader("x-api-key")) && c != nil {
+		c.Abort()
+		c.String(http.StatusNotFound, "404 page not found")
+		return
+	}
 	if words := GetWordsJsonMap(); len(words) == 0 {
 		log.Fatal("Couldn't populate meili: Empty set of words")
 	} else if _, err := models.Meili.Documents("words").AddOrReplace(words); err != nil {
