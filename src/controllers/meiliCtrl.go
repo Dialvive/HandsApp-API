@@ -2,6 +2,9 @@ package controllers
 
 import (
 	"API/models"
+	"API/security"
+	"errors"
+	"fmt"
 	"log"
 	"net/http"
 
@@ -10,12 +13,33 @@ import (
 )
 
 // PopulateMeili retrieves all the Jsons form the DB and populates the Meilisearch Client
-func PopulateMeili() {
-	if words := GetWordsJsonMap(); len(words) == 0 {
-		log.Fatal("Couldn't populate meili: Empty set of words")
-	} else if _, err := models.Meili.Documents("words").AddOrReplace(words); err != nil {
-		log.Fatal("Couldn't populate meili with words: " + err.Error())
+func RefreshMeili(c *gin.Context) {
+	if c != nil {
+		if !security.CheckKey(c, c.GetHeader("x-api-key")) {
+			c.Abort()
+			c.String(http.StatusNotFound, "404 page not found")
+			return
+		}
+		if err := PopulateMeili(); err != nil {
+			c.JSON(http.StatusInternalServerError, err.Error())
+		} else {
+			s, _ := models.Meili.Stats().GetAll()
+			var str string = "databaseSize: " + fmt.Sprint(s.DatabaseSize) + ", lastUpdate:" + s.LastUpdate.String()
+			log.Println(str)
+			c.JSON(http.StatusOK, str)
+		}
 	}
+}
+
+// PopulateMeili retrieves all the Jsons form the DB and populates the Meilisearch Client
+func PopulateMeili() error {
+	if words := GetWordsJsonMap(); len(words) == 0 {
+		errors.New("Couldn't populate meili: Empty set of words")
+	} else if _, err := models.Meili.Documents("words").AddOrReplace(words); err != nil {
+		errors.New("Couldn't populate meili with words: " + err.Error())
+		return err
+	}
+	return nil
 }
 
 //MeiliSearchWords returns search results

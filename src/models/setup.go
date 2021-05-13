@@ -32,8 +32,7 @@ func ConnectDatabase() {
 		},
 	)
 
-
-	dsn := "user:pwd@tcp(localhost:3306)/signa_mundi?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "usr:passwd@tcp(localhost:3306)/signa_mundi?charset=utf8mb4&parseTime=True&loc=Local"
 	database, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
 		NamingStrategy: schema.NamingStrategy{
 			SingularTable: true,
