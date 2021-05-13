@@ -51,7 +51,9 @@ func main() {
 	r := gin.Default()
 	models.ConnectDatabase()
 	models.ConnectMeili()
-	controllers.PopulateMeili(nil)
+	if err := controllers.PopulateMeili(); err != nil {
+		log.Fatalln(err.Error())
+	}
 
 	// CORS POLICY //////////////////////////////////////////////////
 
@@ -60,11 +62,6 @@ func main() {
 	//corsConfig.AllowOrigins = []string{"http://handsapp.org"} //! ENABLED IN PRODUCTION
 	corsConfig.AllowMethods = []string{"GET", "PATCH", "POST", "PUT", "DELETE"}
 	r.Use(cors.New(corsConfig))
-
-	// EVERY OTHER ROUTE ////////////////////////////////////////////
-
-	r.NoRoute(security.RerouteHandler)
-	r.Any("/", security.RerouteHandler)
 
 	// SIMPLE TABLES ROUTES /////////////////////////////////////////
 
@@ -221,7 +218,12 @@ func main() {
 
 	// Routes for Meilisearch
 	r.POST("/v1/search/words", controllers.MeiliSearchWords)
-	r.POST("/v1/search/refresh", controllers.PopulateMeili)
+	r.POST("/v1/search/refresh", controllers.RefreshMeili)
+
+	// EVERY OTHER ROUTE ////////////////////////////////////////////
+
+	r.NoRoute(security.RerouteHandler)
+	r.Any("/", security.RerouteHandler)
 
 	// ! PRODUCTION ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	/*
