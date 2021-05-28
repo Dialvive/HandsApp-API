@@ -128,14 +128,12 @@ func main() {
 	r.DELETE("/v1/region/:ID", controllers.DeleteRegion)
 
 	// Routes for users
-	/*
-		r.GET("/v1/users", controllers.GetUsers)
-		r.POST("/v1/user", controllers.CreateUser)
-		r.GET("/v1/user/:ID", controllers.FindUser)
-		r.PATCH("/v1/user/:ID", controllers.PatchUser)
-		r.PUT("/v1/user/:ID", controllers.PutUser)
-		r.DELETE("/v1/user/:ID", controllers.DeleteUser)
-	*/
+	//r.GET("/v1/users", controllers.GetUsers)
+	r.POST("/v1/user", controllers.CreateUser)
+	//r.GET("/v1/user/:ID", controllers.FindUser)
+	//r.PATCH("/v1/user/:ID", controllers.PatchUser)
+	//r.PUT("/v1/user/:ID", controllers.PutUser)
+	//r.DELETE("/v1/user/:ID", controllers.DeleteUser)
 
 	// Routes for locales
 	r.GET("/v1/locales", controllers.GetLocales)

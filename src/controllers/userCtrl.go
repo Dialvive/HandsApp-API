@@ -57,7 +57,11 @@ func CreateUser(c *gin.Context) {
 		LocaleID: uint(input.LocaleID),
 		Modified: t,
 	}
-	models.DB.Create(&user)
+
+	if create := models.DB.Create(&user); create.Error != nil {
+		c.JSON(http.StatusConflict, gin.H{"error": create.Error})
+		return
+	}
 
 	user.Biography = security.RemoveBackticks(user.Biography)
 	user.FirstName = security.RemoveBackticks(user.FirstName)
