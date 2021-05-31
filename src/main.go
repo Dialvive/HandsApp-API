@@ -130,6 +130,7 @@ func main() {
 	// Routes for users
 	//r.GET("/v1/users", controllers.GetUsers)
 	r.POST("/v1/user", controllers.CreateUser)
+	r.POST("/v1/user/g", controllers.CreateUserWithGoogle)
 	//r.GET("/v1/user/:ID", controllers.FindUser)
 	//r.PATCH("/v1/user/:ID", controllers.PatchUser)
 	//r.PUT("/v1/user/:ID", controllers.PutUser)
@@ -230,7 +231,7 @@ func main() {
 	*/
 	// DEVELOPMENT ONLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-	log.Fatal(r.Run(":8080"))
+	log.Fatal(r.Run(":5000"))
 
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }

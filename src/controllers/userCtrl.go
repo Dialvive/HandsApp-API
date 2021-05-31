@@ -3,6 +3,8 @@ package controllers
 import (
 	"API/models"
 	"API/security"
+	"API/services/users"
+	"github.com/dgrijalva/jwt-go"
 	"net/http"
 	"time"
 
@@ -29,14 +31,29 @@ func GetUsers(c *gin.Context) {
 
 // CreateUser creates a new user.
 func CreateUser(c *gin.Context) {
-	var input models.CreateUserInput
+	var input models.User
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+	userService := users.UserService{User: input}
+	user, dbError := userService.Save()
 
-	pwd, err := security.HashPassword(input.Password)
-	if err != nil {
+	if dbError != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": dbError.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": user})
+}
+
+type GoogleAuth struct {
+	Credential string `json:"credential"`
+}
+
+func CreateUserWithGoogle(c *gin.Context) {
+	var googleAuth GoogleAuth
+	if err := c.ShouldBindJSON(&googleAuth); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
