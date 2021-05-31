@@ -274,3 +274,7 @@ ALTER TABLE `signa_mundi`.`phrase_sign` ADD PRIMARY KEY(`phrase_ID`,`locale_ID`)
 ALTER TABLE `signa_mundi`.`friend` ADD PRIMARY KEY(`user1_ID`,`user2_ID`);
 ALTER TABLE `signa_mundi`.`favorite_phrase` ADD PRIMARY KEY(`phrase_ID`,`user_ID`);
 ALTER TABLE `signa_mundi`.`favorite_word` ADD PRIMARY KEY(`word_ID`,`user_ID`);
+
+CREATE UNIQUE INDEX `user_mail_uindex` ON `signa_mundi`.`user` (`mail`);
+CREATE UNIQUE INDEX `user_name_uindex` ON `signa_mundi`.`user` (`user_name`);
+
