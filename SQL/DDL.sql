@@ -289,4 +289,5 @@ alter table user ADD check (
     NOT (ISNULL(password)) OR
     NOT (ISNULL(google_sub) AND ISNULL(facebook_sub) AND ISNULL(apple_sub))
 );
+alter table user add picture varchar(128) null;
 

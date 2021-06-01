@@ -23,8 +23,9 @@ func (usrService *UserService) Save(receiver models.User, omitColumns ...string)
 		Points:    receiver.Points,
 		Credits:   receiver.Credits,
 		LocaleID:  receiver.LocaleID,
-		GoogleSub: security.SecureString(receiver.GoogleSub),
+		GoogleSub: security.SecureString(security.TrimToLength(receiver.GoogleSub, 68)),
 		Modified:  t,
+		Picture:   security.SecureString(security.TrimToLength(receiver.Picture, 128)),
 	}
 
 	pwd, err := security.HashPassword(receiver.Password)

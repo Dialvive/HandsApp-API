@@ -20,6 +20,7 @@ type User struct {
 	GoogleSub   string `json:"google_sub,omitempty"`
 	FacebookSub string `json:"facebook_sub,omitempty"`
 	AppleSub    string `json:"apple_sub,omitempty"`
+	Picture     string `json:"picture"`
 }
 
 // CreateUserInput represents a user of Signa Mundi set of services.

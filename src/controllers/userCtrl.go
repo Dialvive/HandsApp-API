@@ -69,7 +69,7 @@ func CreateUserWithGoogle(c *gin.Context) {
 		FirstName: claims["given_name"].(string),
 		LastName:  claims["family_name"].(string),
 		GoogleSub: payload.Subject,
-		//Picture: claims["picture"].(string),
+		Picture:   claims["picture"].(string),
 	}
 	userService := services.UserService{User: user}
 	userSaved, err := userService.Save(user, "password")
