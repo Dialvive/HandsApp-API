@@ -3,12 +3,13 @@ package controllers
 import (
 	"API/models"
 	"API/security"
-	"API/services/users"
-	"github.com/dgrijalva/jwt-go"
-	"net/http"
-	"time"
-
+	services "API/services/users"
+	"context"
 	"github.com/gin-gonic/gin"
+	"google.golang.org/api/idtoken"
+	"net/http"
+	"os"
+	"time"
 )
 
 // GetUsers retrieves all the users from the DB.
@@ -36,8 +37,8 @@ func CreateUser(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	userService := users.UserService{User: input}
-	user, dbError := userService.Save()
+	userService := services.UserService{}
+	user, dbError := userService.Save(input, "apple_sub", "google_sub", "facebook_sub")
 
 	if dbError != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": dbError.Error()})
@@ -47,48 +48,36 @@ func CreateUser(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": user})
 }
 
-type GoogleAuth struct {
-	Credential string `json:"credential"`
-}
-
+// CreateUserWithGoogle with a token, there is no need for a password
 func CreateUserWithGoogle(c *gin.Context) {
-	var googleAuth GoogleAuth
+	var googleAuth models.GoogleAuth
 	if err := c.ShouldBindJSON(&googleAuth); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-
-	t := time.Now().UTC().Format("2006-01-02 15:04:05")
-	user := models.User{
-		FirstName: security.SecureString(input.FirstName),
-		LastName:  security.SecureString(input.LastName),
-		UserName:  security.SecureString(security.TrimToLength(input.UserName, 30)),
-		Mail:      security.SecureString(security.TrimToLength(input.Mail, 252)),
-		Password:  pwd,
-		Biography: security.SecureString(security.TrimToLength(input.Biography, 140)),
-		Mailing:   security.SecureString(security.TrimToLength(input.Mailing, 3)),
-		Privilege: security.SecureString(security.TrimToLength(input.Privilege, 3)),
-		Points:    uint(input.Points),
-		//TODO: TRANSACTION LOCK FOR CREDIT CHANGE
-		Credits:  uint(input.Credits),
-		LocaleID: uint(input.LocaleID),
-		Modified: t,
-	}
-
-	if create := models.DB.Create(&user); create.Error != nil {
-		c.JSON(http.StatusConflict, gin.H{"error": create.Error})
+	payload, err := idtoken.Validate(context.Background(), googleAuth.Credential, os.Getenv("GOOGLE_CLIENT_ID"))
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
-	user.Biography = security.RemoveBackticks(user.Biography)
-	user.FirstName = security.RemoveBackticks(user.FirstName)
-	user.LastName = security.RemoveBackticks(user.LastName)
-	user.UserName = security.RemoveBackticks(user.UserName)
-	user.Mail = security.RemoveBackticks(user.Mail)
-	user.Mailing = security.RemoveBackticks(user.Mailing)
-	user.Password = "" // NEVER SEND PWD DATA
-
-	c.JSON(http.StatusOK, gin.H{"data": user})
+	claims := payload.Claims
+	user := models.User{
+		LocaleID:  1,
+		Mail:      claims["email"].(string),
+		UserName:  payload.Subject,
+		FirstName: claims["given_name"].(string),
+		LastName:  claims["family_name"].(string),
+		GoogleSub: payload.Subject,
+		//Picture: claims["picture"].(string),
+	}
+	userService := services.UserService{User: user}
+	userSaved, err := userService.Save(user, "password")
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"data": userSaved})
 }
 
 // FindUser recieves an id, and returns an specific user with that id.
@@ -158,9 +147,9 @@ func PutUser(c *gin.Context) {
 			Password:  pwd,
 			Biography: security.SecureString(input.Biography),
 			Mailing:   security.SecureString(input.Mailing), Privilege: input.Privilege,
-			Points:   uint(input.Points),
-			Credits:  uint(input.Credits),
-			LocaleID: uint(input.LocaleID),
+			Points:   input.Points,
+			Credits:  input.Credits,
+			LocaleID: input.LocaleID,
 			Modified: t,
 		})
 
@@ -254,9 +243,9 @@ func PatchUser(c *gin.Context) {
 			Biography: security.SecureString(security.TrimToLength(input.Biography, 140)),
 			Mailing:   security.SecureString(security.TrimToLength(input.Mailing, 3)),
 			Privilege: security.SecureString(security.TrimToLength(user.Privilege, 3)),
-			Points:    uint(user.Points),
-			Credits:   uint(user.Credits),
-			LocaleID:  uint(user.LocaleID),
+			Points:    user.Points,
+			Credits:   user.Credits,
+			LocaleID:  user.LocaleID,
 			Modified:  t,
 		})
 

@@ -1,7 +1,7 @@
-package users
+package services
 
 import "API/models"
 
-type userServiceI interface {
-	Save() (models.User, error)
+type UserServiceI interface {
+	Save(receiver models.User, omitColumns ...string) (models.User, error)
 }

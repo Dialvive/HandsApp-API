@@ -278,3 +278,15 @@ ALTER TABLE `signa_mundi`.`favorite_word` ADD PRIMARY KEY(`word_ID`,`user_ID`);
 CREATE UNIQUE INDEX `user_mail_uindex` ON `signa_mundi`.`user` (`mail`);
 CREATE UNIQUE INDEX `user_name_uindex` ON `signa_mundi`.`user` (`user_name`);
 
+alter table user add google_sub varchar(64) null;
+alter table user add apple_sub varchar(64) null;
+alter table user add facebook_sub varchar(64) null;
+create unique index user_google_sub_uindex on user (google_sub);
+create unique index user_apple_sub_uindex on user (apple_sub);
+create unique index user_facebook_sub_uindex on user (facebook_sub);
+alter table user modify password text null;
+alter table user ADD check (
+    NOT (ISNULL(password)) OR
+    NOT (ISNULL(google_sub) AND ISNULL(facebook_sub) AND ISNULL(apple_sub))
+);
+
