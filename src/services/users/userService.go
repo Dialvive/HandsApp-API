@@ -6,9 +6,7 @@ import (
 	"time"
 )
 
-type UserService struct {
-	User models.User
-}
+type UserService struct{}
 
 func (usrService *UserService) Save(receiver models.User, omitColumns ...string) (models.User, error) {
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
