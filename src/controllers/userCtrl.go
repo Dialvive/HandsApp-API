@@ -72,7 +72,7 @@ func CreateUserWithGoogle(c *gin.Context) {
 		GoogleSub: payload.Subject,
 		Picture:   claims["picture"].(string),
 	}
-	userSaved, err := userService.Save(user, "password")
+	userSaved, err := userService.Save(user, "password", "apple_sub", "facebook_sub")
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
