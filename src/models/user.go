@@ -11,8 +11,8 @@ type User struct {
 	Mail        string `json:"mail" gorm:"column:mail;type:VARCHAR(254) NOT NULL"`
 	Password    string `json:"password" gorm:"column:password;type:TEXT NOT NULL"`
 	Biography   string `json:"biography" gorm:"column:biography;type:TEXT"`
-	Mailing     string `json:"mailing" gorm:"column:mailing;type:VARCHAR(5)"`
-	Privilege   string `json:"privilege" gorm:"column:privilege;type:VARCHAR(5) NOT NULL"`
+	Mailing     string "json:\"mailing\" gorm:\"type:set('`notification`', '`promotion`', '`advertising`');default:'`notification`'\""
+	Privilege   string "json:\"privilege\" gorm:\"type:enum('`child`', '`adult`', '`editor`', '`super user`');default:'`adult`'\""
 	Points      uint   `json:"points" gorm:"column:points;type:INT; default:0"`
 	Credits     uint   `json:"credits" gorm:"column:credits;type:INT; default:0"`
 	LocaleID    uint   `json:"locale_id" gorm:"column:locale_ID;type:INT NOT NULL"`

@@ -305,4 +305,5 @@ begin
             SET MESSAGE_TEXT = 'Only one sign up method is available (password, google_sub, apple_sub, facebook_sub) and is mandatory';
     end if;
 end;
-
+alter table user modify privilege ENUM('`child`', '`adult`', '`editor`', '`super user`') default '`adult`' not null;
+alter table user modify mailing SET('`notification`', '`promotion`', '`advertising`') default '`notification`' not null;
