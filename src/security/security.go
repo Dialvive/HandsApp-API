@@ -1,9 +1,12 @@
 package security
 
 import (
+	"API/models"
 	"encoding/base64"
 	"errors"
+	"github.com/dgrijalva/jwt-go"
 	"log"
+	"os"
 	"strconv"
 	"strings"
 	"unicode"
@@ -161,4 +164,14 @@ func mysqlEscapeString(s string) string {
 		s = strings.Replace(s, b, a, -1)
 	}
 	return s
+}
+
+func CreateJWT(userClaim models.UserClaim, err error) string {
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, userClaim)
+	signedString, err := token.SignedString([]byte(os.Getenv("TOKEN_SECRET_KEY")))
+	if err != nil {
+		log.Printf("\033[1;31m there has an error creating a jwt for user:\u001B[0m %+v", userClaim)
+		log.Println(err.Error())
+	}
+	return signedString
 }

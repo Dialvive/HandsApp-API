@@ -3,12 +3,15 @@ package services
 import (
 	"API/models"
 	"API/security"
+	"github.com/dgrijalva/jwt-go"
+	"os"
+	"strconv"
 	"time"
 )
 
 type UserService struct{}
 
-func (usrService *UserService) Save(receiver models.User, omitColumns ...string) (models.User, error) {
+func (usrService *UserService) Save(receiver models.User, omitColumns ...string) (string, error) {
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	user := models.User{
 		FirstName: security.SecureString(receiver.FirstName),
@@ -28,12 +31,12 @@ func (usrService *UserService) Save(receiver models.User, omitColumns ...string)
 
 	pwd, err := security.HashPassword(receiver.Password)
 	if err != nil {
-		return receiver, err
+		return "", err
 	}
 	user.Password = pwd
 
 	if dbError := models.DB.Omit(omitColumns...).Create(&user); dbError.Error != nil {
-		return receiver, dbError.Error
+		return "", dbError.Error
 	}
 
 	user.Biography = security.RemoveBackticks(user.Biography)
@@ -44,5 +47,19 @@ func (usrService *UserService) Save(receiver models.User, omitColumns ...string)
 	user.Mailing = security.RemoveBackticks(user.Mailing)
 	user.Password = "" // NEVER SEND PWD DATA
 
-	return user, nil
+	userClaim := models.UserClaim{
+		UserName:  user.UserName,
+		Mail:      user.Mail,
+		Privilege: user.Privilege,
+		StandardClaims: jwt.StandardClaims{
+			ExpiresAt: time.Now().Add(time.Hour * 24 * 7).UTC().Unix(),
+			IssuedAt:  time.Now().UTC().Unix(),
+			NotBefore: time.Now().Add(time.Minute * -5).UTC().Unix(),
+			Issuer:    os.Getenv("APP_NAME"),
+			Subject:   strconv.Itoa(int(user.ID)),
+		},
+	}
+
+	signedString := security.CreateJWT(userClaim, err)
+	return signedString, nil
 }

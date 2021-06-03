@@ -16,7 +16,7 @@ func init() {
 
 // Test the normal use case whe using password and mail
 func TestUserService_Save(t *testing.T) {
-	user, err := userService.Save(User{
+	token, err := userService.Save(User{
 		LocaleID: 1,
 		Mail:     "example@example.com",
 		UserName: "exampleUser",
@@ -27,7 +27,7 @@ func TestUserService_Save(t *testing.T) {
 		t.Fatalf(`expect no error but got: %v`, err.Error())
 	}
 
-	if user.ID == 0 {
+	if token == "" {
 		t.Fail()
 	}
 }

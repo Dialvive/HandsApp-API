@@ -55,7 +55,9 @@ type UpdateUserInput struct {
 
 // UserClaim is  a claim that cointains User as Data.
 type UserClaim struct {
-	Data User `json:"data" binding:"required"`
+	UserName  string `json:"user_name"`
+	Mail      string `json:"mail"`
+	Privilege string `json:"privilege"`
 	jwt.StandardClaims
 }
 
