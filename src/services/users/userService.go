@@ -45,6 +45,7 @@ func (usrService *UserService) Save(receiver models.User, omitColumns ...string)
 	user.UserName = security.RemoveBackticks(user.UserName)
 	user.Mail = security.RemoveBackticks(user.Mail)
 	user.Mailing = security.RemoveBackticks(user.Mailing)
+	user.Privilege = security.RemoveBackticks(user.Privilege)
 	user.Password = "" // NEVER SEND PWD DATA
 
 	userClaim := models.UserClaim{
