@@ -49,6 +49,21 @@ func CreateUser(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": user})
 }
 
+func Login(c *gin.Context) {
+	var loginForm models.LoginForm
+	if err := c.ShouldBindJSON(&loginForm); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"data": err.Error()})
+		return
+	}
+	token, err := userService.Login(loginForm)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"data": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": token})
+}
+
 // CreateUserWithGoogle with a token, there is no need for a password
 func CreateUserWithGoogle(c *gin.Context) {
 	var googleAuth models.GoogleAuth

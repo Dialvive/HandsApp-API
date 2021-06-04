@@ -9,6 +9,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"time"
 	"unicode"
 
 	"github.com/gin-gonic/gin"
@@ -166,7 +167,19 @@ func mysqlEscapeString(s string) string {
 	return s
 }
 
-func CreateJWT(userClaim models.UserClaim, err error) string {
+func CreateJWT(user models.User) string {
+	userClaim := models.UserClaim{
+		UserName:  RemoveBackticks(user.UserName),
+		Mail:      RemoveBackticks(user.Mail),
+		Privilege: user.Privilege,
+		StandardClaims: jwt.StandardClaims{
+			ExpiresAt: time.Now().Add(time.Hour * 24 * 7).UTC().Unix(),
+			IssuedAt:  time.Now().UTC().Unix(),
+			NotBefore: time.Now().Add(time.Minute * -5).UTC().Unix(),
+			Issuer:    os.Getenv("APP_NAME"),
+			Subject:   strconv.Itoa(int(user.ID)),
+		},
+	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, userClaim)
 	signedString, err := token.SignedString([]byte(os.Getenv("TOKEN_SECRET_KEY")))
 	if err != nil {
@@ -174,4 +187,16 @@ func CreateJWT(userClaim models.UserClaim, err error) string {
 		log.Println(err.Error())
 	}
 	return signedString
+}
+
+func ParseJWT(tokenFromHeader string, claims *models.UserClaim) error {
+	tokenFromHeader = strings.TrimPrefix(tokenFromHeader, "Bearer ")
+	_, err := jwt.ParseWithClaims(
+		tokenFromHeader,
+		claims,
+		func(token *jwt.Token) (interface{}, error) {
+			return []byte(os.Getenv("TOKEN_SECRET_KEY")), nil
+		},
+	)
+	return err
 }

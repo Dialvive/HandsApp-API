@@ -3,9 +3,7 @@ package services
 import (
 	"API/models"
 	"API/security"
-	"github.com/dgrijalva/jwt-go"
-	"os"
-	"strconv"
+	"errors"
 	"time"
 )
 
@@ -48,19 +46,19 @@ func (usrService *UserService) Save(receiver models.User, omitColumns ...string)
 	user.Privilege = security.RemoveBackticks(user.Privilege)
 	user.Password = "" // NEVER SEND PWD DATA
 
-	userClaim := models.UserClaim{
-		UserName:  user.UserName,
-		Mail:      user.Mail,
-		Privilege: user.Privilege,
-		StandardClaims: jwt.StandardClaims{
-			ExpiresAt: time.Now().Add(time.Hour * 24 * 7).UTC().Unix(),
-			IssuedAt:  time.Now().UTC().Unix(),
-			NotBefore: time.Now().Add(time.Minute * -5).UTC().Unix(),
-			Issuer:    os.Getenv("APP_NAME"),
-			Subject:   strconv.Itoa(int(user.ID)),
-		},
-	}
-
-	signedString := security.CreateJWT(userClaim, err)
+	signedString := security.CreateJWT(user)
 	return signedString, nil
+}
+
+func (usrService UserService) Login(form models.LoginForm) (string, error) {
+	var user models.User
+	loginError := errors.New("user or password are incorrect")
+	form.Identifier = security.SecureString(form.Identifier)
+	if res := models.DB.Where(&models.User{Mail: form.Identifier}).Or(&models.User{UserName: form.Identifier}).First(&user); res.Error != nil {
+		return "", loginError
+	}
+	if !security.PasswordMatches(user.Password, form.Password) {
+		return "", loginError
+	}
+	return security.CreateJWT(user), nil
 }

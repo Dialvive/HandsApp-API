@@ -66,3 +66,8 @@ type UserClaim struct {
 type GoogleAuth struct {
 	Credential string `json:"credential"`
 }
+
+type LoginForm struct {
+	Identifier string // username or mail
+	Password   string
+}

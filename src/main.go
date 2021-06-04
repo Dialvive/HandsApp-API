@@ -131,6 +131,7 @@ func main() {
 	//r.GET("/v1/users", controllers.GetUsers)
 	r.POST("/v1/user", controllers.CreateUser)
 	r.POST("/v1/user/g", controllers.CreateUserWithGoogle)
+	r.POST("/v1/login", controllers.Login)
 	//r.GET("/v1/user/:ID", controllers.FindUser)
 	//r.PATCH("/v1/user/:ID", controllers.PatchUser)
 	//r.PUT("/v1/user/:ID", controllers.PutUser)
