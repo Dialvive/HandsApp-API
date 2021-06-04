@@ -50,14 +50,36 @@ func CreateUser(c *gin.Context) {
 }
 
 func Login(c *gin.Context) {
-	var loginForm models.LoginForm
-	if err := c.ShouldBindJSON(&loginForm); err != nil {
+	var form models.LoginForm
+	if err := c.ShouldBindJSON(&form); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"data": err.Error()})
 		return
 	}
-	token, err := userService.Login(loginForm)
+	token, err := userService.Login(form)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"data": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": token})
+}
+
+// LoginWithGoogle creates a JWT for this app, from a JWT signed by google
+func LoginWithGoogle(c *gin.Context) {
+	var form models.LoginForm
+	if err := c.ShouldBindJSON(&form); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"data": err.Error()})
+		return
+	}
+	payload, err := idtoken.Validate(context.Background(), form.Credential, os.Getenv("GOOGLE_CLIENT_ID"))
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	form.Credential = payload.Subject
+	token, err := userService.LoginWithGoogle(form)
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
 		return
 	}
 

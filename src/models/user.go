@@ -68,6 +68,6 @@ type GoogleAuth struct {
 }
 
 type LoginForm struct {
-	Identifier string // username or mail
+	Credential string // username or mail
 	Password   string
 }

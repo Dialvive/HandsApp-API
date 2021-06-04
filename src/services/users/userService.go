@@ -53,12 +53,21 @@ func (usrService *UserService) Save(receiver models.User, omitColumns ...string)
 func (usrService UserService) Login(form models.LoginForm) (string, error) {
 	var user models.User
 	loginError := errors.New("user or password are incorrect")
-	form.Identifier = security.SecureString(form.Identifier)
-	if res := models.DB.Where(&models.User{Mail: form.Identifier}).Or(&models.User{UserName: form.Identifier}).First(&user); res.Error != nil {
+	form.Credential = security.SecureString(form.Credential)
+	if res := models.DB.Where(&models.User{Mail: form.Credential}).Or(&models.User{UserName: form.Credential}).First(&user); res.Error != nil {
 		return "", loginError
 	}
 	if !security.PasswordMatches(user.Password, form.Password) {
 		return "", loginError
+	}
+	return security.CreateJWT(user), nil
+}
+
+func (usrService UserService) LoginWithGoogle(form models.LoginForm) (string, error) {
+	form.Credential = security.SecureString(form.Credential)
+	var user models.User
+	if res := models.DB.Where(&models.User{GoogleSub: form.Credential}).First(&user); res.Error != nil {
+		return "", res.Error
 	}
 	return security.CreateJWT(user), nil
 }

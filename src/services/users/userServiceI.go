@@ -1,8 +1,11 @@
 package services
 
-import "API/models"
+import (
+	"API/models"
+	"gorm.io/gorm"
+)
 
 type UserServiceI interface {
-	Save(receiver models.User, omitColumns ...string) (string, error)
-	Login() (string, error)
+	Save(models.User, ...string) (string, error)
+	Login(models.LoginForm, func(db *gorm.DB) *gorm.DB) (string, error)
 }
