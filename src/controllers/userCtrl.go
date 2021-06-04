@@ -88,12 +88,12 @@ func LoginWithGoogle(c *gin.Context) {
 
 // CreateUserWithGoogle with a token, there is no need for a password
 func CreateUserWithGoogle(c *gin.Context) {
-	var googleAuth models.GoogleAuth
-	if err := c.ShouldBindJSON(&googleAuth); err != nil {
+	var form models.LoginForm
+	if err := c.ShouldBindJSON(&form); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	payload, err := idtoken.Validate(context.Background(), googleAuth.Credential, os.Getenv("GOOGLE_CLIENT_ID"))
+	payload, err := idtoken.Validate(context.Background(), form.Credential, os.Getenv("GOOGLE_CLIENT_ID"))
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

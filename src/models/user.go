@@ -62,11 +62,8 @@ type UserClaim struct {
 	jwt.StandardClaims
 }
 
-// GoogleAuth represent the TokenId for 'Sing up with Google'
-type GoogleAuth struct {
-	Credential string `json:"credential"`
-}
-
+// LoginForm represents typical login structure, but credential can be a username,
+// mail or jwt token (for google)
 type LoginForm struct {
 	Credential string // username or mail
 	Password   string
