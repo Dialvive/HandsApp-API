@@ -123,8 +123,12 @@ func HashPassword(password string) (string, error) {
 
 // PasswordMatches checks if a passed password matches the original hashed password
 func PasswordMatches(hashedPassword, passedPassword string) bool {
-	err := bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(passedPassword))
-	return err != nil
+	decodedPassword, err := base64.URLEncoding.DecodeString(hashedPassword)
+	if err != nil {
+		return false
+	}
+	err = bcrypt.CompareHashAndPassword(decodedPassword, []byte(passedPassword))
+	return err == nil
 }
 
 // TrimToLength Trims the given string to the given length
