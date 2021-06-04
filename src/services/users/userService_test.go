@@ -2,7 +2,9 @@ package services
 
 import (
 	. "API/models"
+	"fmt"
 	"testing"
+	"time"
 )
 
 var (
@@ -16,11 +18,14 @@ func init() {
 
 // Test the normal use case whe using password and mail
 func TestUserService_Save(t *testing.T) {
+	uniqueSalt := time.Now().UTC().Unix()
 	token, err := userService.Save(User{
-		LocaleID: 1,
-		Mail:     "example@example.com",
-		UserName: "exampleUser",
-		Password: "super_secret_pass",
+		LocaleID:  1,
+		Mail:      fmt.Sprintf("example%v@example.com", uniqueSalt),
+		UserName:  fmt.Sprintf("exampleUser%v", uniqueSalt),
+		FirstName: fmt.Sprintf("exampleFstName%v", uniqueSalt),
+		LastName:  fmt.Sprintf("exampleLstName%v", uniqueSalt),
+		Password:  "super_secret_pass",
 	}, columnsWithPassword...)
 
 	if err != nil {
