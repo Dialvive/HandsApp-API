@@ -11,27 +11,30 @@ type UserService struct{}
 
 func (usrService *UserService) Save(receiver models.User, omitColumns ...string) (string, error) {
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
-	user := models.User{
-		FirstName: security.SecureString(receiver.FirstName),
-		LastName:  security.SecureString(receiver.LastName),
-		UserName:  security.SecureString(security.TrimToLength(receiver.UserName, 30)),
-		Mail:      security.SecureString(security.TrimToLength(receiver.Mail, 252)),
-		Biography: security.SecureString(security.TrimToLength(receiver.Biography, 140)),
-		Mailing:   security.SecureString(security.TrimToLength(receiver.Mailing, 12)),
-		Privilege: security.SecureString(security.TrimToLength(receiver.Privilege, 10)),
-		Points:    receiver.Points,
-		Credits:   receiver.Credits,
-		LocaleID:  receiver.LocaleID,
-		GoogleSub: security.SecureString(security.TrimToLength(receiver.GoogleSub, 68)),
-		Modified:  t,
-		Picture:   security.SecureString(security.TrimToLength(receiver.Picture, 128)),
-	}
-
-	pwd, err := security.HashPassword(receiver.Password)
+	hashPassword, err := security.HashPassword(receiver.Password)
 	if err != nil {
 		return "", err
 	}
-	user.Password = pwd
+	user := models.User{
+		ID:             0,
+		FirstName:      security.SecureString(receiver.FirstName),
+		LastName:       security.SecureString(receiver.LastName),
+		UserName:       security.SecureString(security.TrimToLength(receiver.UserName, 30)),
+		Mail:           security.SecureString(security.TrimToLength(receiver.Mail, 252)),
+		Password:       hashPassword,
+		Biography:      security.SecureString(security.TrimToLength(receiver.Biography, 140)),
+		Mailing:        receiver.Mailing,
+		Privilege:      receiver.Privilege,
+		Points:         receiver.Points,
+		Credits:        receiver.Credits,
+		LocaleID:       receiver.LocaleID,
+		Modified:       t,
+		GoogleSub:      security.SecureString(security.TrimToLength(receiver.GoogleSub, 68)),
+		FacebookSub:    security.SecureString(security.TrimToLength(receiver.FacebookSub, 68)),
+		AppleSub:       security.SecureString(security.TrimToLength(receiver.AppleSub, 68)),
+		Picture:        security.SecureString(security.TrimToLength(receiver.Picture, 128)),
+		SubscriberType: receiver.SubscriberType,
+	}
 
 	if dbError := models.DB.Omit(omitColumns...).Create(&user); dbError.Error != nil {
 		return "", dbError.Error
