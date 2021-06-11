@@ -4,12 +4,67 @@ import (
 	"API/models"
 	"API/security"
 	"errors"
+	"gorm.io/gorm"
 	"time"
 )
 
 type UserService struct{}
 
-func (usrService *UserService) Save(receiver models.User, omitColumns ...string) (string, error) {
+var (
+	justPassword = []string{"apple_sub", "facebook_sub", "google_sub"}
+	justGoogle   = []string{"password", "apple_sub", "facebook_sub"}
+	justFacebook = []string{"password", "apple_sub", "google_sub"}
+)
+
+// SignWithHandsApp Just create an user with a jwt token
+func (usrService UserService) SignWithHandsApp(receiver models.User) (string, error) {
+	return usrService.save(receiver, justPassword...)
+}
+
+func (usrService UserService) Login(form models.LoginForm) (string, error) {
+	var user models.User
+	loginError := errors.New("user or password are incorrect")
+	example := models.User{Mail: security.SecureString(form.Credential)}
+	err := usrService.findByExample(&user, &example)
+	if err != nil {
+		return "", loginError
+	}
+	if !security.PasswordMatches(user.Password, form.Password) {
+		return "", loginError
+	}
+	return security.CreateJWT(user), nil
+}
+
+// SignWithGoogle Log in a user if exist return his jwt token, otherwise a new user is created with a jwt token
+func (usrService UserService) SignWithGoogle(receiver models.User) (string, error) {
+	example := models.User{GoogleSub: security.SecureString(receiver.GoogleSub)}
+	return usrService.signWith(receiver, example, justGoogle...)
+}
+
+// SignWithFacebook Log in a user if exist return his jwt token, otherwise a new user is created with a jwt token
+func (usrService UserService) SignWithFacebook(receiver models.User) (string, error) {
+	example := models.User{FacebookSub: security.SecureString(receiver.FacebookSub)}
+	return usrService.signWith(receiver, example, justFacebook...)
+}
+
+// signWith Log in a user if exist return his jwt token, otherwise a new user is created with a jwt token
+func (usrService UserService) signWith(receiver, example models.User, omitColumns ...string) (string, error) {
+	var user models.User
+	err := usrService.findByExample(&user, &example)
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		return usrService.save(receiver, omitColumns...)
+	}
+	if err != nil {
+		return "", err
+	}
+	return security.CreateJWT(user), nil
+}
+
+func (usrService UserService) findByExample(result, example *models.User) error {
+	return models.DB.First(result, example).Error
+}
+
+func (usrService UserService) save(receiver models.User, omitColumns ...string) (string, error) {
 	t := time.Now().UTC().Format("2006-01-02 15:04:05")
 	hashPassword, err := security.HashPassword(receiver.Password)
 	if err != nil {
@@ -40,37 +95,5 @@ func (usrService *UserService) Save(receiver models.User, omitColumns ...string)
 		return "", dbError.Error
 	}
 
-	user.Biography = security.RemoveBackticks(user.Biography)
-	user.FirstName = security.RemoveBackticks(user.FirstName)
-	user.LastName = security.RemoveBackticks(user.LastName)
-	user.UserName = security.RemoveBackticks(user.UserName)
-	user.Mail = security.RemoveBackticks(user.Mail)
-	user.Mailing = security.RemoveBackticks(user.Mailing)
-	user.Privilege = security.RemoveBackticks(user.Privilege)
-	user.Password = "" // NEVER SEND PWD DATA
-
-	signedString := security.CreateJWT(user)
-	return signedString, nil
-}
-
-func (usrService UserService) Login(form models.LoginForm) (string, error) {
-	var user models.User
-	loginError := errors.New("user or password are incorrect")
-	form.Credential = security.SecureString(form.Credential)
-	if res := models.DB.Where(&models.User{Mail: form.Credential}).Or(&models.User{UserName: form.Credential}).First(&user); res.Error != nil {
-		return "", loginError
-	}
-	if !security.PasswordMatches(user.Password, form.Password) {
-		return "", loginError
-	}
-	return security.CreateJWT(user), nil
-}
-
-func (usrService UserService) LoginWithGoogle(form models.LoginForm) (string, error) {
-	form.Credential = security.SecureString(form.Credential)
-	var user models.User
-	if res := models.DB.Where(&models.User{GoogleSub: form.Credential}).First(&user); res.Error != nil {
-		return "", res.Error
-	}
 	return security.CreateJWT(user), nil
 }

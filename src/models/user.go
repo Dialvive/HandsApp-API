@@ -68,3 +68,12 @@ type LoginForm struct {
 	Credential string // username or mail
 	Password   string
 }
+
+type FacebookForm struct {
+	AccessToken              string `json:"accessToken,omitempty"`
+	UserID                   string `json:"userID,omitempty"`
+	ExpiresIn                uint32 `json:"expiresIn"`
+	SignedRequest            string `json:"signedRequest"`
+	GraphDomain              string `json:"graphDomain"`
+	DataAccessExpirationTime uint   `json:"data_access_expiration_time"`
+}

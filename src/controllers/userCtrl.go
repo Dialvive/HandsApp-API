@@ -6,13 +6,21 @@ import (
 	services "API/services/users"
 	"context"
 	"github.com/gin-gonic/gin"
+	"github.com/huandu/facebook/v2"
 	"google.golang.org/api/idtoken"
 	"net/http"
 	"os"
 	"time"
 )
 
-var userService = services.UserService{}
+var (
+	userService = services.UserService{}
+	facebookApp = facebook.New(os.Getenv("FACEBOOK_APP_ID"), os.Getenv("FACEBOOK_APP_SECRET"))
+)
+
+func init() {
+	facebookApp.EnableAppsecretProof = true
+}
 
 // GetUsers retrieves all the users from the DB.
 func GetUsers(c *gin.Context) {
@@ -39,7 +47,7 @@ func CreateUser(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	user, dbError := userService.Save(input, "apple_sub", "google_sub", "facebook_sub")
+	user, dbError := userService.SignWithHandsApp(input)
 
 	if dbError != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": dbError.Error()})
@@ -58,28 +66,6 @@ func Login(c *gin.Context) {
 	token, err := userService.Login(form)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"data": err.Error()})
-		return
-	}
-
-	c.JSON(http.StatusOK, gin.H{"data": token})
-}
-
-// LoginWithGoogle creates a JWT for this app, from a JWT signed by google
-func LoginWithGoogle(c *gin.Context) {
-	var form models.LoginForm
-	if err := c.ShouldBindJSON(&form); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"data": err.Error()})
-		return
-	}
-	payload, err := idtoken.Validate(context.Background(), form.Credential, os.Getenv("GOOGLE_CLIENT_ID"))
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-	form.Credential = payload.Subject
-	token, err := userService.LoginWithGoogle(form)
-	if err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
 		return
 	}
 
@@ -109,12 +95,52 @@ func CreateUserWithGoogle(c *gin.Context) {
 		GoogleSub: payload.Subject,
 		Picture:   claims["picture"].(string),
 	}
-	userSaved, err := userService.Save(user, "password", "apple_sub", "facebook_sub")
+	userSaved, err := userService.SignWithGoogle(user)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"data": userSaved})
+}
+
+func CreateUserWithFacebook(c *gin.Context) {
+	var form models.FacebookForm
+	if err := c.ShouldBindJSON(&form); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	session := facebookApp.Session(form.AccessToken)
+
+	if sessionError := session.Validate(); sessionError != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": sessionError})
+		return
+	}
+
+	facebookInfo, err := session.Get("/me", facebook.Params{
+		"fields": "first_name,last_name,email",
+	})
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	user := models.User{
+		LocaleID:    1,
+		Mail:        facebookInfo["email"].(string),
+		UserName:    facebookInfo["id"].(string),
+		FirstName:   facebookInfo["first_name"].(string),
+		LastName:    facebookInfo["last_name"].(string),
+		FacebookSub: facebookInfo["id"].(string),
+	}
+	userToken, err := userService.SignWithFacebook(user)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": userToken})
 }
 
 // FindUser recieves an id, and returns an specific user with that id.

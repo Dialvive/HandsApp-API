@@ -5,6 +5,7 @@ import (
 	"API/models"
 	"API/security"
 	"log"
+	"os"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -58,9 +59,9 @@ func main() {
 	// CORS POLICY //////////////////////////////////////////////////
 
 	corsConfig := cors.DefaultConfig()
-	corsConfig.AllowAllOrigins = true //! DISABLED IN PRODUCTION
-	//corsConfig.AllowOrigins = []string{"http://handsapp.org"} //! ENABLED IN PRODUCTION
+	corsConfig.AllowOrigins = []string{os.Getenv("ALLOW_ORIGINS")}
 	corsConfig.AllowMethods = []string{"GET", "PATCH", "POST", "PUT", "DELETE"}
+	corsConfig.AllowCredentials = true
 	r.Use(cors.New(corsConfig))
 
 	// SIMPLE TABLES ROUTES /////////////////////////////////////////
@@ -131,8 +132,8 @@ func main() {
 	//r.GET("/v1/users", controllers.GetUsers)
 	r.POST("/v1/user", controllers.CreateUser)
 	r.POST("/v1/user/g", controllers.CreateUserWithGoogle)
+	r.POST("/v1/user/f", controllers.CreateUserWithFacebook)
 	r.POST("/v1/login", controllers.Login)
-	r.POST("/v1/login/g", controllers.LoginWithGoogle)
 	//r.GET("/v1/user/:ID", controllers.FindUser)
 	//r.PATCH("/v1/user/:ID", controllers.PatchUser)
 	//r.PUT("/v1/user/:ID", controllers.PutUser)

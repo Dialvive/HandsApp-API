@@ -17,9 +17,9 @@ func init() {
 }
 
 // Test the normal use case whe using password and mail
-func TestUserService_Save(t *testing.T) {
+func TestUserService_save(t *testing.T) {
 	uniqueSalt := time.Now().UTC().Unix()
-	token, err := userService.Save(User{
+	token, err := userService.save(User{
 		LocaleID:  1,
 		Mail:      fmt.Sprintf("example%v@example.com", uniqueSalt),
 		UserName:  fmt.Sprintf("exampleUser%v", uniqueSalt),
@@ -37,7 +37,7 @@ func TestUserService_Save(t *testing.T) {
 	}
 }
 
-func TestUserService_SaveWithWrongParams(t *testing.T) {
+func TestUserService_saveWithWrongParams(t *testing.T) {
 	wrongUsers := []User{
 		{},                // without fields
 		{LocaleID: 32132}, // unknown locale
@@ -47,7 +47,7 @@ func TestUserService_SaveWithWrongParams(t *testing.T) {
 		{LocaleID: 1, GoogleSub: "asasasa", AppleSub: "dsadw21", FacebookSub: "fdsfds", UserName: "dummyUser"}, // multiple sign up methods in a row
 	}
 	for _, wrongUser := range wrongUsers {
-		if _, err := userService.Save(wrongUser); err == nil {
+		if _, err := userService.save(wrongUser); err == nil {
 			t.Fail()
 		}
 	}
