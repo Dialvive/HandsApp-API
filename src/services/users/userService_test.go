@@ -32,7 +32,7 @@ func TestUserService_save(t *testing.T) {
 		t.Fatalf(`expect no error but got: %v`, err.Error())
 	}
 
-	if token == "" {
+	if token.Token == "" {
 		t.Fail()
 	}
 }

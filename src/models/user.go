@@ -1,7 +1,5 @@
 package models
 
-import "github.com/dgrijalva/jwt-go"
-
 // User represents a user of Signa Mundi set of services.
 type User struct {
 	ID             uint   `json:"ID" gorm:"column:ID;type:INT NOT NULL;primaryKey"`
@@ -52,14 +50,6 @@ type UpdateUserInput struct {
 	Points    uint   `json:"points"`
 	Credits   uint   `json:"credits"`
 	LocaleID  uint   `json:"locale_ID"`
-}
-
-// UserClaim is  a claim that cointains User as Data.
-type UserClaim struct {
-	UserName  string `json:"user_name"`
-	Mail      string `json:"mail"`
-	Privilege string `json:"privilege"`
-	jwt.StandardClaims
 }
 
 // LoginForm represents typical login structure, but credential can be a username,

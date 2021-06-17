@@ -18,6 +18,11 @@ var (
 	facebookApp = facebook.New(os.Getenv("FACEBOOK_APP_ID"), os.Getenv("FACEBOOK_APP_SECRET"))
 )
 
+const (
+	HandsAppCsrfToken = "HandsApp-Csrf-Token"
+	HandsAppSession   = "__Host-ha-session"
+)
+
 func init() {
 	facebookApp.EnableAppsecretProof = true
 }
@@ -53,8 +58,8 @@ func CreateUser(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": dbError.Error()})
 		return
 	}
-
-	c.JSON(http.StatusOK, gin.H{"data": user})
+	putCsrfToken(c, user)
+	c.JSON(http.StatusOK, gin.H{"data": user.ExpireAt})
 }
 
 func Login(c *gin.Context) {
@@ -69,7 +74,8 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"data": token})
+	putCsrfToken(c, token)
+	c.JSON(http.StatusOK, gin.H{"data": token.ExpireAt})
 }
 
 // CreateUserWithGoogle with a token, there is no need for a password
@@ -100,7 +106,9 @@ func CreateUserWithGoogle(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"data": userSaved})
+
+	putCsrfToken(c, userSaved)
+	c.JSON(http.StatusOK, gin.H{"data": userSaved.ExpireAt})
 }
 
 func CreateUserWithFacebook(c *gin.Context) {
@@ -117,7 +125,7 @@ func CreateUserWithFacebook(c *gin.Context) {
 	}
 
 	facebookInfo, err := session.Get("/me", facebook.Params{
-		"fields": "first_name,last_name,email",
+		"fields": "first_name,last_name,email,picture{url}",
 	})
 
 	if err != nil {
@@ -125,13 +133,17 @@ func CreateUserWithFacebook(c *gin.Context) {
 		return
 	}
 
+	picture, _ := facebookInfo.Get("picture.data.url").(string)
+	mail, _ := facebookInfo["email"].(string)
+
 	user := models.User{
 		LocaleID:    1,
-		Mail:        facebookInfo["email"].(string),
+		Mail:        mail,
 		UserName:    facebookInfo["id"].(string),
 		FirstName:   facebookInfo["first_name"].(string),
 		LastName:    facebookInfo["last_name"].(string),
 		FacebookSub: facebookInfo["id"].(string),
+		Picture:     picture,
 	}
 	userToken, err := userService.SignWithFacebook(user)
 
@@ -140,7 +152,14 @@ func CreateUserWithFacebook(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"data": userToken})
+	putCsrfToken(c, userToken)
+	c.JSON(http.StatusOK, gin.H{"data": userToken.ExpireAt})
+}
+
+func putCsrfToken(c *gin.Context, userToken models.HandsAppJWT) {
+	c.SetSameSite(http.SameSiteStrictMode)
+	c.SetCookie(HandsAppSession, userToken.Token, int(security.TokenLifetime.Seconds()), "", "", true, true)
+	c.Writer.Header().Set(HandsAppCsrfToken, userToken.CsrfToken)
 }
 
 // FindUser recieves an id, and returns an specific user with that id.

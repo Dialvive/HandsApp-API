@@ -13,8 +13,6 @@ import (
 
 func main() {
 
-	//TODO: 1) USE JWT
-
 	//TODO: 2) USE CACHES
 	// * implemented caches
 
@@ -61,6 +59,8 @@ func main() {
 	corsConfig := cors.DefaultConfig()
 	corsConfig.AllowOrigins = []string{os.Getenv("ALLOW_ORIGINS")}
 	corsConfig.AllowMethods = []string{"GET", "PATCH", "POST", "PUT", "DELETE"}
+	corsConfig.ExposeHeaders = []string{"HandsApp-Csrf-Token"}
+	corsConfig.AllowHeaders = []string{"HandsApp-Csrf-Token"}
 	corsConfig.AllowCredentials = true
 	r.Use(cors.New(corsConfig))
 

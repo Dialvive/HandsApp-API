@@ -39,6 +39,9 @@ const MonthTTL uint64 = 2629743
 // YearTTL is a YEAR of 365.24 days in EPOCH seconds
 const YearTTL uint64 = 31556926
 
+// TokenLifetime is the lifetime of a token in hours
+const TokenLifetime = time.Hour * 24 * 7
+
 //GenPassword128 creates a password that is 128 characters long with 32 digits,
 // 32 symbols, allowing upper and lower case letters, disallowing repeat characters.
 func GenPassword128() (string, error) {
@@ -171,13 +174,19 @@ func mysqlEscapeString(s string) string {
 	return s
 }
 
-func CreateJWT(user models.User) string {
+func CreateJWT(user models.User) (models.HandsAppJWT, error) {
+	csrfToken, err := password.Generate(64, 10, 22, false, false)
+	if err != nil {
+		return models.HandsAppJWT{}, err
+	}
+	expiresAt := time.Now().Add(TokenLifetime).UTC().Unix()
 	userClaim := models.UserClaim{
 		UserName:  RemoveBackticks(user.UserName),
 		Mail:      RemoveBackticks(user.Mail),
 		Privilege: user.Privilege,
+		CsrfToken: csrfToken,
 		StandardClaims: jwt.StandardClaims{
-			ExpiresAt: time.Now().Add(time.Hour * 24 * 7).UTC().Unix(),
+			ExpiresAt: expiresAt,
 			IssuedAt:  time.Now().UTC().Unix(),
 			NotBefore: time.Now().Add(time.Minute * -5).UTC().Unix(),
 			Issuer:    os.Getenv("APP_NAME"),
@@ -187,10 +196,10 @@ func CreateJWT(user models.User) string {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, userClaim)
 	signedString, err := token.SignedString([]byte(os.Getenv("TOKEN_SECRET_KEY")))
 	if err != nil {
-		log.Printf("\033[1;31m there has an error creating a jwt for user:\u001B[0m %+v", userClaim)
-		log.Println(err.Error())
+		log.Printf("\033[1;31m there has an error creating a jwt for user:\u001B[0m %+v, error: %v", userClaim, err.Error())
+		return models.HandsAppJWT{}, err
 	}
-	return signedString
+	return models.HandsAppJWT{Token: signedString, CsrfToken: csrfToken, ExpireAt: expiresAt}, nil
 }
 
 func ParseJWT(tokenFromHeader string, claims *models.UserClaim) error {
