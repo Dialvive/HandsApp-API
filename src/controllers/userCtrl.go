@@ -5,6 +5,7 @@ import (
 	"API/security"
 	services "API/services/users"
 	"context"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/huandu/facebook/v2"
 	"google.golang.org/api/idtoken"
@@ -21,6 +22,7 @@ var (
 const (
 	HandsAppCsrfToken = "HandsApp-Csrf-Token"
 	HandsAppSession   = "__Host-ha-session"
+	GinKeyUser        = "GinKeyUser"
 )
 
 func init() {
@@ -344,20 +346,52 @@ func PatchUser(c *gin.Context) {
 
 // DeleteUser deletes a user
 func DeleteUser(c *gin.Context) {
-	//TODO: ONLY ALLOW WITH CORRECT PASSWORD OR ADMIN PRIVILEGES
-	// Get model if exist
-	var user models.User
-	var param uint64
-	var err error
-	if param, err = security.SecureUint(c.Param("ID")); err != nil || param == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
-	}
-	if err := models.DB.Where("id = ?", param).First(&user).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
+	jwtClaims := c.MustGet(GinKeyUser).(models.UserClaim)
+
+	isRoot := jwtClaims.Privilege == "super user"
+	if !isRoot && jwtClaims.Subject != c.Param("ID") {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "You can't delete this user"})
 		return
 	}
 
-	models.DB.Delete(&user)
+	param, err := security.SecureUint(c.Param("ID"))
+	if err != nil || param == 0 {
+		c.JSON(http.StatusForbidden, gin.H{"error": "Invalid id"})
+		return
+	}
+
+	tx := models.DB.Delete(&models.User{ID: uint(param)})
+	if tx.Error != nil {
+		return
+	}
+
+	if tx.RowsAffected == 0 {
+		c.JSON(http.StatusNotFound, gin.H{"data": "user doesn't exist"})
+		return
+	}
 
 	c.JSON(http.StatusOK, gin.H{"data": true})
+}
+
+func CsrfMiddleware(c *gin.Context) {
+	csrfToken := c.Request.Header.Get(HandsAppCsrfToken)
+	jwtCookie, cookieErr := c.Request.Cookie(HandsAppSession)
+
+	if cookieErr != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": fmt.Sprint("Cookie: ", HandsAppSession, " is not present")})
+		return
+	}
+
+	var jwtClaims models.UserClaim
+	if jwtErr := security.ParseJWT(jwtCookie.Value, &jwtClaims); jwtErr != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": fmt.Sprint("Header: ", HandsAppCsrfToken, " is not present")})
+		return
+	}
+
+	if csrfToken != jwtClaims.CsrfToken {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "Failed to verify double submit cookie"})
+		return
+	}
+
+	c.Set(GinKeyUser, jwtClaims)
 }
