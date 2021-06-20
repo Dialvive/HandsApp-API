@@ -5,14 +5,13 @@ import (
 	"API/models"
 	"API/security"
 	"log"
+	"os"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-
-	//TODO: 1) USE JWT
 
 	//TODO: 2) USE CACHES
 	// * implemented caches
@@ -58,9 +57,11 @@ func main() {
 	// CORS POLICY //////////////////////////////////////////////////
 
 	corsConfig := cors.DefaultConfig()
-	corsConfig.AllowAllOrigins = true //! DISABLED IN PRODUCTION
-	//corsConfig.AllowOrigins = []string{"http://handsapp.org"} //! ENABLED IN PRODUCTION
+	corsConfig.AllowOrigins = []string{os.Getenv("ALLOW_ORIGINS")}
 	corsConfig.AllowMethods = []string{"GET", "PATCH", "POST", "PUT", "DELETE"}
+	corsConfig.ExposeHeaders = []string{"HandsApp-Csrf-Token"}
+	corsConfig.AllowHeaders = []string{"HandsApp-Csrf-Token"}
+	corsConfig.AllowCredentials = true
 	r.Use(cors.New(corsConfig))
 
 	// SIMPLE TABLES ROUTES /////////////////////////////////////////
@@ -128,14 +129,15 @@ func main() {
 	r.DELETE("/v1/region/:ID", controllers.DeleteRegion)
 
 	// Routes for users
-	/*
-		r.GET("/v1/users", controllers.GetUsers)
-		r.POST("/v1/user", controllers.CreateUser)
-		r.GET("/v1/user/:ID", controllers.FindUser)
-		r.PATCH("/v1/user/:ID", controllers.PatchUser)
-		r.PUT("/v1/user/:ID", controllers.PutUser)
-		r.DELETE("/v1/user/:ID", controllers.DeleteUser)
-	*/
+	//r.GET("/v1/users", controllers.GetUsers)
+	r.POST("/v1/user", controllers.CreateUser)
+	r.POST("/v1/user/g", controllers.CreateUserWithGoogle)
+	r.POST("/v1/user/f", controllers.CreateUserWithFacebook)
+	r.POST("/v1/login", controllers.Login)
+	//r.GET("/v1/user/:ID", controllers.FindUser)
+	//r.PATCH("/v1/user/:ID", controllers.PatchUser)
+	//r.PUT("/v1/user/:ID", controllers.PutUser)
+	r.DELETE("/v1/user/:ID", controllers.CsrfMiddleware, controllers.DeleteUser)
 
 	// Routes for locales
 	r.GET("/v1/locales", controllers.GetLocales)

@@ -1565,7 +1565,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"locale_ID\": 0,\n    \"first_name\": \"\",\n    \"last_name\": \"\",\n    \"user_name\": \"\",\n    \"mail\": \"\",\n    \"password\": \"\",\n    \"biography\": \"\",\n    \"mailing\": \"\",\n    \"privilege\": \"\",\n    \"points\": 0,\n    \"credits\": 0\n}",
+									"raw": "{\n    \"first_name\": \"Juan\",\n    \"last_name\": \"Poco\",\n    \"user_name\": \"juan.poco\", // required\n    \"mail\": \"example@juan.com\", // required\n    \"password\": \"password\", // required\n    \"biography\": \"Bio bla bla bla\",\n    \"mailing\": \"notification,promotion\", // default: notification\n    \"privilege\": \"child\", // default: adult\n    \"points\": 10, // default: 0\n    \"credits\": 5, // default: 0\n    \"locale_ID\": 2, // required\n    \"picture\": \"https://cutt.ly/TnvfytC\",\n    \"subscriber_type\": \"premium\" // default: free\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1582,9 +1582,362 @@
 										"user"
 									]
 								},
-								"description": "Creates a new User"
+								"description": "Creates a new User using a simple **password**\n\n### Notes\n* `mailing` **must be** a combination of `notification`, `promotion` or `advertising` separated by coma, examples:\n  - `notification,advertising`\n  - `notification,promotion,notification` becomes `notification,promotion`\n* `privilege` **must be** `child`, `adult`, `editor` xor `super user`, only one.\n* `subscriber_type` is `premium` or `free`"
 							},
-							"response": []
+							"response": [
+								{
+									"name": "200 Ok creation",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{KEY}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\": 34432,\n    \"first_name\": \"Juan\",\n    \"last_name\": \"Poco\",\n    \"user_name\": \"juan.poco\",\n    \"mail\": \"example@juan.com\",\n    \"password\": \"password\",\n    \"biography\": \"Bio bla bla bla\",\n    \"mailing\": \"notification,promotion\",\n    \"privilege\": \"adult\",\n    \"points\": 10,\n    \"credits\": 5,\n    \"locale_ID\": 1,\n    \"picture\": \"https://cutt.ly/TnvfytC\",\n    \"subscriber_type\": \"free\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URI}}/v1/user",
+											"host": [
+												"{{URI}}"
+											],
+											"path": [
+												"v1",
+												"user"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 04 Jun 2021 23:17:02 GMT"
+										},
+										{
+											"key": "Content-Length",
+											"value": "294"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJqdWFuLnBvY28iLCJtYWlsIjoiZXhhbXBsZUBqdWFuLmNvbSIsInByaXZpbGVnZSI6ImFkdWx0IiwiZXhwIjoxNjIzNDUzNDE2LCJpYXQiOjE2MjI4NDg2MTYsImlzcyI6IkhhbmRzQXBwIiwibmJmIjoxNjIyODQ4MzE2LCJzdWIiOiIxNTMifQ.aNJoH784PKoCQ6UkAt4sZIUQr7gTAPYhhbj_K7bkwTc\"\n}"
+								}
+							]
+						},
+						{
+							"name": "POST User with Google",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"credential\":\"eyJhbGciOiJSUzI1NiIsImtpZCI6IjE3MTllYjk1N2Y2OTU2YjU4MThjMTk2OGZmMTZkZmY3NzRlNzA4ZGUiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJuYmYiOjE2MjI4NTI3NTksImF1ZCI6IjQ3NzgwNzE0OTAxMy1wajNiaHFlM2h1Z205OWJhcnZnMWZ2OXZsbG42OTA0dS5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjEwNjgzODk2NTI2NTYxOTA5MDQyNiIsImhkIjoiY2llbmNpYXMudW5hbS5teCIsImVtYWlsIjoiYnJheWFubXR6QGNpZW5jaWFzLnVuYW0ubXgiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXpwIjoiNDc3ODA3MTQ5MDEzLXBqM2JocWUzaHVnbTk5YmFydmcxZnY5dmxsbjY5MDR1LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwibmFtZSI6IkJyYXlhbiBNYXJ0w61uZXogU2FudGFuYSIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS0vQU9oMTRHaUF6VlNvbk5pVnktaEZnMnJDV2NyeEQwYW1XZDdXbmtQTXFrSWRUQW89czk2LWMiLCJnaXZlbl9uYW1lIjoiQnJheWFuIiwiZmFtaWx5X25hbWUiOiJNYXJ0w61uZXogU2FudGFuYSIsImlhdCI6MTYyMjg1MzA1OSwiZXhwIjoxNjIyODU2NjU5LCJqdGkiOiIxYjUyNmJhMzU1ODU1YTU3OWQ2MjAyZjRiODMxZTJiYTE1ZDEyYTVmIn0.ir0fzSNNq-0EgKa5GnSHjoYKo87j2aNEU24DV2AQKHBvUIsJTG7-hx12WuNQDxmS3n9Mwyy3-sjMsl4oL7IoPbBM13gEqrRlPLlIF7o-hqHFJDDb4mGTGXZMGw_8iZD0jmVB95H96L4aHNl8yVZuu4ewQlfJsXeNgDsvksLj0HE1HVQIG8j1JCrHiQPtbNxEDQijlhz1z5oO8-jrEAELlwWOt_7uGhIKd0gamWm7zrJtiSJakCjpuQOCHE9F5WZKKq3A4P0_eJmIktKNKGlW3LwvSbKvo0rugzDddACkatRYJGRKbjCIIRXYTot7NHqBUxiJ1svt1S_tQ_zNDqe-ig\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URI}}/v1/user/g",
+									"host": [
+										"{{URI}}"
+									],
+									"path": [
+										"v1",
+										"user",
+										"g"
+									]
+								},
+								"description": "This endpoint only need a basic json and `credential` is a jwt signeed by google.\n\nA minimal example from a sign up are:\n\n```\n<head>\n    <script src=\"https://accounts.google.com/gsi/client\" async defer></script>\n</head>\n```\n\n```\n<body>\n<div id=\"g_id_onload\" data-client_id=\"GOOGLE_CLIENT_ID\"\n     data-callback=\"handler\">\n</div>\n\n<script>\n    function handler(response) {\n        console.table(response);\n\n        fetch('http://localhost:5000/v1/user/g', {\n            method: 'POST',\n            body: JSON.stringify(response)\n        })\n    }\n</script>\n</body>\n```"
+							},
+							"response": [
+								{
+									"name": "POST User with Google",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"credential\":\"eyJhbGciOiJSUzI1NiIsImtpZCI6IjE3MTllYjk1N2Y2OTU2YjU4MThjMTk2OGZmMTZkZmY3NzRlNzA4ZGUiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJuYmYiOjE2MjI4NTI3NTksImF1ZCI6IjQ3NzgwNzE0OTAxMy1wajNiaHFlM2h1Z205OWJhcnZnMWZ2OXZsbG42OTA0dS5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjEwNjgzODk2NTI2NTYxOTA5MDQyNiIsImhkIjoiY2llbmNpYXMudW5hbS5teCIsImVtYWlsIjoiYnJheWFubXR6QGNpZW5jaWFzLnVuYW0ubXgiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXpwIjoiNDc3ODA3MTQ5MDEzLXBqM2JocWUzaHVnbTk5YmFydmcxZnY5dmxsbjY5MDR1LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwibmFtZSI6IkJyYXlhbiBNYXJ0w61uZXogU2FudGFuYSIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS0vQU9oMTRHaUF6VlNvbk5pVnktaEZnMnJDV2NyeEQwYW1XZDdXbmtQTXFrSWRUQW89czk2LWMiLCJnaXZlbl9uYW1lIjoiQnJheWFuIiwiZmFtaWx5X25hbWUiOiJNYXJ0w61uZXogU2FudGFuYSIsImlhdCI6MTYyMjg1MzA1OSwiZXhwIjoxNjIyODU2NjU5LCJqdGkiOiIxYjUyNmJhMzU1ODU1YTU3OWQ2MjAyZjRiODMxZTJiYTE1ZDEyYTVmIn0.ir0fzSNNq-0EgKa5GnSHjoYKo87j2aNEU24DV2AQKHBvUIsJTG7-hx12WuNQDxmS3n9Mwyy3-sjMsl4oL7IoPbBM13gEqrRlPLlIF7o-hqHFJDDb4mGTGXZMGw_8iZD0jmVB95H96L4aHNl8yVZuu4ewQlfJsXeNgDsvksLj0HE1HVQIG8j1JCrHiQPtbNxEDQijlhz1z5oO8-jrEAELlwWOt_7uGhIKd0gamWm7zrJtiSJakCjpuQOCHE9F5WZKKq3A4P0_eJmIktKNKGlW3LwvSbKvo0rugzDddACkatRYJGRKbjCIIRXYTot7NHqBUxiJ1svt1S_tQ_zNDqe-ig\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URI}}/v1/user/g",
+											"host": [
+												"{{URI}}"
+											],
+											"path": [
+												"v1",
+												"user",
+												"g"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 05 Jun 2021 00:31:39 GMT"
+										},
+										{
+											"key": "Content-Length",
+											"value": "323"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiIxMDY4Mzg5NjUyNjU2MTkwOTA0MjYiLCJtYWlsIjoiYnJheWFubXR6QGNpZW5jaWFzLnVuYW0ubXgiLCJwcml2aWxlZ2UiOiJhZHVsdCIsImV4cCI6MTYyMzQ1Nzg5OSwiaWF0IjoxNjIyODUzMDk5LCJpc3MiOiJIYW5kc0FwcCIsIm5iZiI6MTYyMjg1Mjc5OSwic3ViIjoiMTYyIn0.GPM-Rc-9jmD_TxuYKLKBb45aIsZ8N2xwNGSiqHhkovk\"\n}"
+								}
+							]
+						},
+						{
+							"name": "POST Login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"credential\": \"juan.poco\",\n    \"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URI}}/v1/login",
+									"host": [
+										"{{URI}}"
+									],
+									"path": [
+										"v1",
+										"login"
+									]
+								},
+								"description": "Log in a user using a jwt token\n\n- The token expires in 7 days"
+							},
+							"response": [
+								{
+									"name": "POST Login",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{KEY}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"credential\": \"juan.poco\",\n    \"password\": \"password\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URI}}/v1/login",
+											"host": [
+												"{{URI}}"
+											],
+											"path": [
+												"v1",
+												"login"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 05 Jun 2021 00:25:24 GMT"
+										},
+										{
+											"key": "Content-Length",
+											"value": "294"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJqdWFuLnBvY28iLCJtYWlsIjoiZXhhbXBsZUBqdWFuLmNvbSIsInByaXZpbGVnZSI6ImFkdWx0IiwiZXhwIjoxNjIzNDU3NTI0LCJpYXQiOjE2MjI4NTI3MjQsImlzcyI6IkhhbmRzQXBwIiwibmJmIjoxNjIyODUyNDI0LCJzdWIiOiIxNTMifQ.zd5F1OzibfDngLq5p674f7RhLdS-qliEeDFHpZLExyY\"\n}"
+								},
+								{
+									"name": "POST Login",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{KEY}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"credential\": \"juan.poco.not.found\",\n    \"password\": \"password.-dsadsadblablabla\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URI}}/v1/login",
+											"host": [
+												"{{URI}}"
+											],
+											"path": [
+												"v1",
+												"login"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 05 Jun 2021 00:26:07 GMT"
+										},
+										{
+											"key": "Content-Length",
+											"value": "41"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": \"user or password are incorrect\"\n}"
+								}
+							]
+						},
+						{
+							"name": "POST Login with Google",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{KEY}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"credential\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6IjE3MTllYjk1N2Y2OTU2YjU4MThjMTk2OGZmMTZkZmY3NzRlNzA4ZGUiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJuYmYiOjE2MjI4NTI2MDQsImF1ZCI6IjQ3NzgwNzE0OTAxMy1wajNiaHFlM2h1Z205OWJhcnZnMWZ2OXZsbG42OTA0dS5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjEwNjgzODk2NTI2NTYxOTA5MDQyNiIsImhkIjoiY2llbmNpYXMudW5hbS5teCIsImVtYWlsIjoiYnJheWFubXR6QGNpZW5jaWFzLnVuYW0ubXgiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXpwIjoiNDc3ODA3MTQ5MDEzLXBqM2JocWUzaHVnbTk5YmFydmcxZnY5dmxsbjY5MDR1LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwibmFtZSI6IkJyYXlhbiBNYXJ0w61uZXogU2FudGFuYSIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS0vQU9oMTRHaUF6VlNvbk5pVnktaEZnMnJDV2NyeEQwYW1XZDdXbmtQTXFrSWRUQW89czk2LWMiLCJnaXZlbl9uYW1lIjoiQnJheWFuIiwiZmFtaWx5X25hbWUiOiJNYXJ0w61uZXogU2FudGFuYSIsImlhdCI6MTYyMjg1MjkwNCwiZXhwIjoxNjIyODU2NTA0LCJqdGkiOiI1MjEwZjNlZWY2OGRhM2U5ZTVjNmFiN2Q0MTNmNDNlNjIxYzFjZGMyIn0.P4ZCodqjjjbhwxRsDkg6YJdz_j-OrOHsiyLNsWQB5Op_0KpcFGhZoTbmXjvG30LNDF9jqfBPH_MJEQgDsKDfbTq0xM6PqYEDGfQIm1rHVIar7Rm6-eOZt8CnxzWJ0tp9gi0xs81z-03cY7mN4WtB3NLk3rpKb-Oieh6inZ5b3IQGSXRpqJA1g5UU4FOkqvNHC-9hhMe3JJSKYIeUvRP33m-Z-sv3oXYOHZAIUOM35krXY1QBCsbQFt_gPDeHnldWuYEl6nxaBK-pVk7WG7spYsrKf2ea2CrrC_PHpGG31hlCyVinFJUXT_-q2mhQqZ7alk_JIXtWaOBQ5oZWMrz-Ag\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URI}}/v1/login/g",
+									"host": [
+										"{{URI}}"
+									],
+									"path": [
+										"v1",
+										"login",
+										"g"
+									]
+								},
+								"description": "Log in a user and generate a jwt token\n\nHere is a minimal example\n\n```\n<head>\n    <script src=\"https://accounts.google.com/gsi/client\" async defer></script>\n</head>\n```\n\n```\n<div id=\"g_id_onload\" data-client_id=\"GOOGLE_CLIENT_ID\" data-auto_prompt=\"false\"\n     data-callback=\"handler\">\n</div>\n<div class=\"g_id_signin\" data-type=\"standard\" data-size=\"large\" data-theme=\"outline\" data-text=\"sign_in_with\"\n     data-shape=\"rectangular\" data-logo_alignment=\"left\">\n</div>\n\n<script>\n    function handler(response) {\n        console.table(response);\n\n        fetch('http://localhost:5000/v1/login/g', {\n            method: 'POST',\n            body: JSON.stringify(response)\n        })\n    }\n</script>\n```"
+							},
+							"response": [
+								{
+									"name": "POST Login with Google",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{KEY}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"credential\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6IjE3MTllYjk1N2Y2OTU2YjU4MThjMTk2OGZmMTZkZmY3NzRlNzA4ZGUiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJuYmYiOjE2MjI4NTI2MDQsImF1ZCI6IjQ3NzgwNzE0OTAxMy1wajNiaHFlM2h1Z205OWJhcnZnMWZ2OXZsbG42OTA0dS5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjEwNjgzODk2NTI2NTYxOTA5MDQyNiIsImhkIjoiY2llbmNpYXMudW5hbS5teCIsImVtYWlsIjoiYnJheWFubXR6QGNpZW5jaWFzLnVuYW0ubXgiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXpwIjoiNDc3ODA3MTQ5MDEzLXBqM2JocWUzaHVnbTk5YmFydmcxZnY5dmxsbjY5MDR1LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwibmFtZSI6IkJyYXlhbiBNYXJ0w61uZXogU2FudGFuYSIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS0vQU9oMTRHaUF6VlNvbk5pVnktaEZnMnJDV2NyeEQwYW1XZDdXbmtQTXFrSWRUQW89czk2LWMiLCJnaXZlbl9uYW1lIjoiQnJheWFuIiwiZmFtaWx5X25hbWUiOiJNYXJ0w61uZXogU2FudGFuYSIsImlhdCI6MTYyMjg1MjkwNCwiZXhwIjoxNjIyODU2NTA0LCJqdGkiOiI1MjEwZjNlZWY2OGRhM2U5ZTVjNmFiN2Q0MTNmNDNlNjIxYzFjZGMyIn0.P4ZCodqjjjbhwxRsDkg6YJdz_j-OrOHsiyLNsWQB5Op_0KpcFGhZoTbmXjvG30LNDF9jqfBPH_MJEQgDsKDfbTq0xM6PqYEDGfQIm1rHVIar7Rm6-eOZt8CnxzWJ0tp9gi0xs81z-03cY7mN4WtB3NLk3rpKb-Oieh6inZ5b3IQGSXRpqJA1g5UU4FOkqvNHC-9hhMe3JJSKYIeUvRP33m-Z-sv3oXYOHZAIUOM35krXY1QBCsbQFt_gPDeHnldWuYEl6nxaBK-pVk7WG7spYsrKf2ea2CrrC_PHpGG31hlCyVinFJUXT_-q2mhQqZ7alk_JIXtWaOBQ5oZWMrz-Ag\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URI}}/v1/login/g",
+											"host": [
+												"{{URI}}"
+											],
+											"path": [
+												"v1",
+												"login",
+												"g"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 05 Jun 2021 00:29:11 GMT"
+										},
+										{
+											"key": "Content-Length",
+											"value": "323"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiIxMDY4Mzg5NjUyNjU2MTkwOTA0MjYiLCJtYWlsIjoiYnJheWFubXR6QGNpZW5jaWFzLnVuYW0ubXgiLCJwcml2aWxlZ2UiOiJhZHVsdCIsImV4cCI6MTYyMzQ1Nzc1MSwiaWF0IjoxNjIyODUyOTUxLCJpc3MiOiJIYW5kc0FwcCIsIm5iZiI6MTYyMjg1MjY1MSwic3ViIjoiMTU4In0.j-x06xL7pMEUtwr3OtQSLhu6dex_YiQtnfZTaCVg3WE\"\n}"
+								}
+							]
 						},
 						{
 							"name": "GET User",

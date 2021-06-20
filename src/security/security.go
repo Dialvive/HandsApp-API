@@ -1,11 +1,15 @@
 package security
 
 import (
+	"API/models"
 	"encoding/base64"
 	"errors"
+	"github.com/dgrijalva/jwt-go"
 	"log"
+	"os"
 	"strconv"
 	"strings"
+	"time"
 	"unicode"
 
 	"github.com/gin-gonic/gin"
@@ -34,6 +38,9 @@ const MonthTTL uint64 = 2629743
 
 // YearTTL is a YEAR of 365.24 days in EPOCH seconds
 const YearTTL uint64 = 31556926
+
+// TokenLifetime is the lifetime of a token in hours
+const TokenLifetime = time.Hour * 24 * 7
 
 //GenPassword128 creates a password that is 128 characters long with 32 digits,
 // 32 symbols, allowing upper and lower case letters, disallowing repeat characters.
@@ -119,8 +126,12 @@ func HashPassword(password string) (string, error) {
 
 // PasswordMatches checks if a passed password matches the original hashed password
 func PasswordMatches(hashedPassword, passedPassword string) bool {
-	err := bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(passedPassword))
-	return err != nil
+	decodedPassword, err := base64.URLEncoding.DecodeString(hashedPassword)
+	if err != nil {
+		return false
+	}
+	err = bcrypt.CompareHashAndPassword(decodedPassword, []byte(passedPassword))
+	return err == nil
 }
 
 // TrimToLength Trims the given string to the given length
@@ -161,4 +172,44 @@ func mysqlEscapeString(s string) string {
 		s = strings.Replace(s, b, a, -1)
 	}
 	return s
+}
+
+func CreateJWT(user models.User) (models.HandsAppJWT, error) {
+	csrfToken, err := password.Generate(64, 10, 22, false, false)
+	if err != nil {
+		return models.HandsAppJWT{}, err
+	}
+	expiresAt := time.Now().Add(TokenLifetime).UTC().Unix()
+	userClaim := models.UserClaim{
+		UserName:  RemoveBackticks(user.UserName),
+		Mail:      RemoveBackticks(user.Mail),
+		Privilege: user.Privilege,
+		CsrfToken: csrfToken,
+		StandardClaims: jwt.StandardClaims{
+			ExpiresAt: expiresAt,
+			IssuedAt:  time.Now().UTC().Unix(),
+			NotBefore: time.Now().Add(time.Minute * -5).UTC().Unix(),
+			Issuer:    os.Getenv("APP_NAME"),
+			Subject:   strconv.Itoa(int(user.ID)),
+		},
+	}
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, userClaim)
+	signedString, err := token.SignedString([]byte(os.Getenv("TOKEN_SECRET_KEY")))
+	if err != nil {
+		log.Printf("\033[1;31m there has an error creating a jwt for user:\u001B[0m %+v, error: %v", userClaim, err.Error())
+		return models.HandsAppJWT{}, err
+	}
+	return models.HandsAppJWT{Token: signedString, CsrfToken: csrfToken, ExpireAt: expiresAt}, nil
+}
+
+func ParseJWT(tokenFromHeader string, claims *models.UserClaim) error {
+	tokenFromHeader = strings.TrimPrefix(tokenFromHeader, "Bearer ")
+	_, err := jwt.ParseWithClaims(
+		tokenFromHeader,
+		claims,
+		func(token *jwt.Token) (interface{}, error) {
+			return []byte(os.Getenv("TOKEN_SECRET_KEY")), nil
+		},
+	)
+	return err
 }

@@ -16,3 +16,10 @@
 
 # Log files
 logfile
+
+# env files
+.env*
+!.env.example
+
+# Intellij
+.idea
