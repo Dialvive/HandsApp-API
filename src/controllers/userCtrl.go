@@ -362,6 +362,7 @@ func DeleteUser(c *gin.Context) {
 
 	tx := models.DB.Delete(&models.User{ID: uint(param)})
 	if tx.Error != nil {
+		c.JSON(http.StatusNotFound, gin.H{"data": tx.Error})
 		return
 	}
 
