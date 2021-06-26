@@ -188,66 +188,6 @@ func FindUser(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": user})
 }
 
-// PutUser updates a User
-func PutUser(c *gin.Context) {
-
-	// Get model if exist
-	var user models.User
-	var param uint64
-	var err error
-	if param, err = security.SecureUint(c.Param("ID")); err != nil || param == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
-	}
-	if err := models.DB.Where("id = ?", param).First(&user).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "User not found!"})
-		return
-	}
-
-	var input models.CreateUserInput
-
-	if err := c.ShouldBindJSON(&input); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	if !security.PasswordMatches(user.Password, input.Password) {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Bad password!"})
-		return
-	}
-	pwd, err := security.HashPassword(input.Password)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	t := time.Now().UTC().Format("2006-01-02 15:04:05")
-	models.DB.Model(&user).Updates(
-		models.User{
-			ID:        user.ID,
-			FirstName: security.SecureString(input.FirstName),
-			LastName:  security.SecureString(input.LastName),
-			UserName:  security.SecureString(input.UserName),
-			Mail:      security.SecureString(input.Mail),
-			Password:  pwd,
-			Biography: security.SecureString(input.Biography),
-			Mailing:   security.SecureString(input.Mailing), Privilege: input.Privilege,
-			Points:   input.Points,
-			Credits:  input.Credits,
-			LocaleID: input.LocaleID,
-			Modified: t,
-		})
-
-	user.Biography = security.RemoveBackticks(user.Biography)
-	user.FirstName = security.RemoveBackticks(user.FirstName)
-	user.LastName = security.RemoveBackticks(user.LastName)
-	user.UserName = security.RemoveBackticks(user.UserName)
-	user.Mail = security.RemoveBackticks(user.Mail)
-	user.Mailing = security.RemoveBackticks(user.Mailing)
-	user.Password = "" // NEVER SEND PWD DATA
-
-	c.JSON(http.StatusOK, gin.H{"data": user})
-}
-
 // PatchUser patches a user with the values that are not default nor equal to the existing one
 func PatchUser(c *gin.Context) {
 

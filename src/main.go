@@ -136,7 +136,6 @@ func main() {
 	r.POST("/v1/login", controllers.Login)
 	//r.GET("/v1/user/:ID", controllers.FindUser)
 	//r.PATCH("/v1/user/:ID", controllers.PatchUser)
-	//r.PUT("/v1/user/:ID", controllers.PutUser)
 	r.DELETE("/v1/user/:ID", controllers.CsrfMiddleware, controllers.DeleteUser)
 
 	// Routes for locales
