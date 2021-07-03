@@ -4,6 +4,7 @@ import (
 	"API/controllers"
 	"API/models"
 	"API/security"
+	"github.com/gin-contrib/gzip"
 	"log"
 	"os"
 
@@ -48,6 +49,9 @@ func main() {
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	r := gin.Default()
+
+	r.Use(gzip.Gzip(gzip.BestCompression))
+
 	models.ConnectDatabase()
 	models.ConnectMeili()
 	if err := controllers.PopulateMeili(); err != nil {
