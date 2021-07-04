@@ -37,7 +37,7 @@ func TestPasswordMatches(t *testing.T) {
 		{name: "password manager (firefox)", password: "?Zw!swRv_v<]8GP-"},
 		{name: "password manager (safari)", password: "Qswmxs-wlrkxq-2rwlrt"},
 
-		// especial cases
+		// special cases
 		{name: "especial case (uft face)", password: "・(￣∀￣)・:*:"},
 		{name: "especial case (japan chars)", password: "田中さんにあげて下さい"},
 		{name: "especial case (emojis)", password: "🐵 🙈 🙉 🙊"},
