@@ -4,6 +4,7 @@ import (
 	"API/controllers"
 	"API/models"
 	"API/security"
+	"github.com/gin-contrib/gzip"
 	"log"
 	"os"
 
@@ -48,6 +49,9 @@ func main() {
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	r := gin.Default()
+
+	r.Use(gzip.Gzip(gzip.BestCompression))
+
 	models.ConnectDatabase()
 	models.ConnectMeili()
 	if err := controllers.PopulateMeili(); err != nil {
@@ -136,7 +140,6 @@ func main() {
 	r.POST("/v1/login", controllers.Login)
 	//r.GET("/v1/user/:ID", controllers.FindUser)
 	//r.PATCH("/v1/user/:ID", controllers.PatchUser)
-	//r.PUT("/v1/user/:ID", controllers.PutUser)
 	r.DELETE("/v1/user/:ID", controllers.CsrfMiddleware, controllers.DeleteUser)
 
 	// Routes for locales

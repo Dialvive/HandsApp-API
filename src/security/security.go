@@ -2,7 +2,6 @@ package security
 
 import (
 	"API/models"
-	"encoding/base64"
 	"errors"
 	"github.com/dgrijalva/jwt-go"
 	"log"
@@ -120,17 +119,12 @@ func HashPassword(password string) (string, error) {
 		log.Println(err)
 		return "", err
 	}
-	var base64EncodedPasswordHash = base64.URLEncoding.EncodeToString(hashedPasswordBytes)
-	return base64EncodedPasswordHash, nil
+	return string(hashedPasswordBytes), nil
 }
 
 // PasswordMatches checks if a passed password matches the original hashed password
 func PasswordMatches(hashedPassword, passedPassword string) bool {
-	decodedPassword, err := base64.URLEncoding.DecodeString(hashedPassword)
-	if err != nil {
-		return false
-	}
-	err = bcrypt.CompareHashAndPassword(decodedPassword, []byte(passedPassword))
+	err := bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(passedPassword))
 	return err == nil
 }
 
