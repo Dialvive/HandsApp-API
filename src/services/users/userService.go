@@ -5,6 +5,7 @@ import (
 	"API/security"
 	"errors"
 	"gorm.io/gorm"
+	"reflect"
 	"time"
 )
 
@@ -81,6 +82,87 @@ func (usrService UserService) save(receiver models.User, omitColumns ...string) 
 	}
 
 	return security.CreateJWT(user)
+}
+
+// Update a user by his id using input.
+// If input has a nil filed, that field is not considered updating.
+// Returns a new user with backticks.
+//
+// TODO: move the example to a single file.
+// Example
+//    // suppose a user with ID = 3, Biography = "boring", FirstName = "Bob"
+//
+//    newBio := "hello world"
+//    usr, _ := Update(4, UpdateUserInput{Mail: &newBio})
+//    usr.Bio // "hello world"
+//    usr.FirstName // "Bob", since it's nil in the input
+func (usrService UserService) Update(id uint64, input models.UpdateUserInput) (models.User, error) {
+	user := models.User{ID: uint(id)}
+
+	if err := models.DB.First(&user).Error; err != nil {
+		return models.User{}, err
+	}
+
+	user = Unsafe(user)
+
+	if input.Password != nil {
+		p, err := security.HashPassword(*input.Password)
+		if err != nil {
+			return models.User{}, err
+		}
+		input.Password = &p
+	}
+	newUser := models.User{
+		FirstName:   getOrDefault(input.FirstName, user.FirstName).(string),
+		LocaleID:    getOrDefault(input.LocaleID, user.LocaleID).(uint),
+		LastName:    getOrDefault(input.LastName, user.LastName).(string),
+		UserName:    getOrDefault(input.UserName, user.UserName).(string),
+		Mail:        getOrDefault(input.Mail, user.Mail).(string),
+		Password:    getOrDefault(input.Password, user.Password).(string),
+		Biography:   getOrDefault(input.Biography, user.Biography).(string),
+		Mailing:     getOrDefault(input.Mailing, user.Mailing).(string),
+		GoogleSub:   getOrDefault(input.GoogleSub, user.GoogleSub).(string),
+		AppleSub:    getOrDefault(input.AppleSub, user.AppleSub).(string),
+		FacebookSub: getOrDefault(input.FacebookSub, user.FacebookSub).(string),
+		Picture:     getOrDefault(input.Picture, user.Picture).(string),
+		Modified:    time.Now().UTC().Format("2006-01-02 15:04:05"),
+	}
+
+	tx := models.DB.
+		Model(&user).
+		Select("Modified", models.UserInputFields...).
+		Updates(Safe(newUser))
+
+	if tx.Error != nil {
+		return models.User{}, tx.Error
+	}
+	return user, nil
+}
+
+// getOrDefault returns v and defaultValue and v are the same type or if v is nil,
+// in other case returns defaultValue.
+//
+// TODO: move the example to a single file.
+// Examples
+//     getOrDefault(nil, 23) -> 23
+//     getOrDefault(12, 23) -> 12
+//     getOrDefault(nil, nil) -> nil
+//     getOrDefault('dfs', nil) -> 'dfs'
+func getOrDefault(v, defaultValue interface{}) interface{} {
+	newValue := reflect.ValueOf(v)
+	defaultType := reflect.TypeOf(defaultValue)
+
+	if newValue.Kind() == reflect.Ptr {
+		newValue = newValue.Elem()
+	}
+
+	// if new value is not nil
+	// is better than == because the pointer effects
+	if newValue.IsValid() && defaultType == newValue.Type() {
+		return newValue.Interface()
+	}
+
+	return defaultValue
 }
 
 // Unsafe returns a copy for u with all his strings fields without backticks.
