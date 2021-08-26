@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "264a26ac-c191-49b3-b75a-10e2e1beb299",
+		"_postman_id": "c94dc261-b550-4f42-894f-da54e2753333",
 		"name": "signa_mundi_v1",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -1556,16 +1556,10 @@
 							"name": "POST User",
 							"request": {
 								"method": "POST",
-								"header": [
-									{
-										"key": "x-api-key",
-										"value": "{{KEY}}",
-										"type": "text"
-									}
-								],
+								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"first_name\": \"Juan\",\n    \"last_name\": \"Poco\",\n    \"user_name\": \"juan.poco\", // required\n    \"mail\": \"example@juan.com\", // required\n    \"password\": \"password\", // required\n    \"biography\": \"Bio bla bla bla\",\n    \"mailing\": \"notification,promotion\", // default: notification\n    \"privilege\": \"child\", // default: adult\n    \"points\": 10, // default: 0\n    \"credits\": 5, // default: 0\n    \"locale_ID\": 2, // required\n    \"picture\": \"https://cutt.ly/TnvfytC\",\n    \"subscriber_type\": \"premium\" // default: free\n}",
+									"raw": "{\n    \"first_name\": \"Juan\",\n    \"last_name\": \"Poco\",\n    \"user_name\": \"juan.poco\",\n    \"mail\": \"example@juan.com\",\n    \"password\": \"password\",\n    \"biography\": \"Bio bla bla bla\",\n    \"mailing\": \"notification,promotion\",\n    \"points\": 10,\n    \"credits\": 5,\n    \"locale_ID\": 1,\n    \"picture\": \"https://cutt.ly/TnvfytC\",\n    \"subscriber_type\": \"premium\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1586,19 +1580,13 @@
 							},
 							"response": [
 								{
-									"name": "200 Ok creation",
+									"name": "Success",
 									"originalRequest": {
 										"method": "POST",
-										"header": [
-											{
-												"key": "x-api-key",
-												"value": "{{KEY}}",
-												"type": "text"
-											}
-										],
+										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"id\": 34432,\n    \"first_name\": \"Juan\",\n    \"last_name\": \"Poco\",\n    \"user_name\": \"juan.poco\",\n    \"mail\": \"example@juan.com\",\n    \"password\": \"password\",\n    \"biography\": \"Bio bla bla bla\",\n    \"mailing\": \"notification,promotion\",\n    \"privilege\": \"adult\",\n    \"points\": 10,\n    \"credits\": 5,\n    \"locale_ID\": 1,\n    \"picture\": \"https://cutt.ly/TnvfytC\",\n    \"subscriber_type\": \"free\"\n}",
+											"raw": "{\n    \"first_name\": \"Juan\",\n    \"last_name\": \"Poco\",\n    \"user_name\": \"juan.poco\",\n    \"mail\": \"example@juan.com\",\n    \"password\": \"password\",\n    \"biography\": \"Bio bla bla bla\",\n    \"mailing\": \"notification,promotion\",\n    \"privilege\": \"child\",\n    \"points\": 10,\n    \"credits\": 5,\n    \"locale_ID\": 1,\n    \"picture\": \"https://cutt.ly/TnvfytC\",\n    \"subscriber_type\": \"premium\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -1621,20 +1609,36 @@
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
 											"key": "Content-Type",
 											"value": "application/json; charset=utf-8"
 										},
 										{
+											"key": "Handsapp-Csrf-Token",
+											"value": "s2j?9\"|R=~6@qfzCv.0LWp%GduAYI/:g{-&Fb*N<+]y,ke(47m1K\\`3x5ZMUw[S8"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "__Host-ha-session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJqdWFuLnBvY28iLCJtYWlsIjoiZXhhbXBsZUBqdWFuLmNvbSIsInByaXZpbGVnZSI6ImFkdWx0IiwiQ3NyZlRva2VuIjoiczJqPzlcInxSPX42QHFmekN2LjBMV3AlR2R1QVlJLzpney1cdTAwMjZGYipOXHUwMDNjK115LGtlKDQ3bTFLXFxgM3g1Wk1Vd1tTOCIsImV4cCI6MTYzMDE1NzE4OSwiaWF0IjoxNjI5NTUyMzg5LCJpc3MiOiJIYW5kc0FwcCIsIm5iZiI6MTYyOTU1MjA4OSwic3ViIjoiMzQzIn0.cAPewPp0foYHUhYL2wdoyCqKdXlCJST_WZBi8zUCD_0; Path=/; Max-Age=604800; HttpOnly; Secure; SameSite=Strict"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
 											"key": "Date",
-											"value": "Fri, 04 Jun 2021 23:17:02 GMT"
+											"value": "Sat, 21 Aug 2021 13:26:29 GMT"
 										},
 										{
 											"key": "Content-Length",
-											"value": "294"
+											"value": "43"
 										}
 									],
 									"cookie": [],
-									"body": "{\n    \"data\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJqdWFuLnBvY28iLCJtYWlsIjoiZXhhbXBsZUBqdWFuLmNvbSIsInByaXZpbGVnZSI6ImFkdWx0IiwiZXhwIjoxNjIzNDUzNDE2LCJpYXQiOjE2MjI4NDg2MTYsImlzcyI6IkhhbmRzQXBwIiwibmJmIjoxNjIyODQ4MzE2LCJzdWIiOiIxNTMifQ.aNJoH784PKoCQ6UkAt4sZIUQr7gTAPYhhbj_K7bkwTc\"\n}"
+									"body": "{\n    \"data\": 1630157189\n}"
 								}
 							]
 						},
@@ -1718,16 +1722,10 @@
 							"name": "POST Login",
 							"request": {
 								"method": "POST",
-								"header": [
-									{
-										"key": "x-api-key",
-										"value": "{{KEY}}",
-										"type": "text"
-									}
-								],
+								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"credential\": \"juan.poco\",\n    \"password\": \"password\"\n}",
+									"raw": "{\n    \"credential\": \"example@juan.com\",\n    \"password\": \"password\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1748,19 +1746,13 @@
 							},
 							"response": [
 								{
-									"name": "POST Login",
+									"name": "Success",
 									"originalRequest": {
 										"method": "POST",
-										"header": [
-											{
-												"key": "x-api-key",
-												"value": "{{KEY}}",
-												"type": "text"
-											}
-										],
+										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"credential\": \"juan.poco\",\n    \"password\": \"password\"\n}",
+											"raw": "{\n    \"credential\": \"example@juan.com\",\n    \"password\": \"password\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -1783,23 +1775,39 @@
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
 											"key": "Content-Type",
 											"value": "application/json; charset=utf-8"
 										},
 										{
+											"key": "Handsapp-Csrf-Token",
+											"value": "/aD46kJw{\":iyY2.<e1,%8MB>E@!lsIA_9|c5~\\Xm)oPtu+}Z&vf7z3R0jp[`G-g"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "__Host-ha-session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJqdWFuLnBvY28iLCJtYWlsIjoiZXhhbXBsZUBqdWFuLmNvbSIsInByaXZpbGVnZSI6ImFkdWx0IiwiQ3NyZlRva2VuIjoiL2FENDZrSnd7XCI6aXlZMi5cdTAwM2NlMSwlOE1CXHUwMDNlRUAhbHNJQV85fGM1flxcWG0pb1B0dSt9Wlx1MDAyNnZmN3ozUjBqcFtgRy1nIiwiZXhwIjoxNjMwMTU4NzUwLCJpYXQiOjE2Mjk1NTM5NTAsImlzcyI6IkhhbmRzQXBwIiwibmJmIjoxNjI5NTUzNjUwLCJzdWIiOiIzNDMifQ.TAFgS7Fpm3F3m9v7lsp1LnJ9Q3VCW_9GfQdshuW-dK8; Path=/; Max-Age=604800; HttpOnly; Secure; SameSite=Strict"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
 											"key": "Date",
-											"value": "Sat, 05 Jun 2021 00:25:24 GMT"
+											"value": "Sat, 21 Aug 2021 13:52:30 GMT"
 										},
 										{
 											"key": "Content-Length",
-											"value": "294"
+											"value": "43"
 										}
 									],
 									"cookie": [],
-									"body": "{\n    \"data\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJqdWFuLnBvY28iLCJtYWlsIjoiZXhhbXBsZUBqdWFuLmNvbSIsInByaXZpbGVnZSI6ImFkdWx0IiwiZXhwIjoxNjIzNDU3NTI0LCJpYXQiOjE2MjI4NTI3MjQsImlzcyI6IkhhbmRzQXBwIiwibmJmIjoxNjIyODUyNDI0LCJzdWIiOiIxNTMifQ.zd5F1OzibfDngLq5p674f7RhLdS-qliEeDFHpZLExyY\"\n}"
+									"body": "{\n    \"data\": 1630158750\n}"
 								},
 								{
-									"name": "POST Login",
+									"name": "Failure",
 									"originalRequest": {
 										"method": "POST",
 										"header": [
@@ -1811,7 +1819,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"credential\": \"juan.poco.not.found\",\n    \"password\": \"password.-dsadsadblablabla\"\n}",
+											"raw": "{\n    \"credential\": \"example@juan.com\",\n    \"password\": \"password\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -1834,16 +1842,24 @@
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
 											"key": "Content-Type",
 											"value": "application/json; charset=utf-8"
 										},
 										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
 											"key": "Date",
-											"value": "Sat, 05 Jun 2021 00:26:07 GMT"
+											"value": "Sat, 21 Aug 2021 13:53:53 GMT"
 										},
 										{
 											"key": "Content-Length",
-											"value": "41"
+											"value": "65"
 										}
 									],
 									"cookie": [],
@@ -1957,31 +1973,7 @@
 								},
 								"description": "Gets a User in particular with a given ID"
 							},
-							"response": [
-								{
-									"name": "GET Country",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "localhost:8080/v1/country/0",
-											"host": [
-												"localhost"
-											],
-											"port": "8080",
-											"path": [
-												"v1",
-												"country",
-												"0"
-											]
-										}
-									},
-									"_postman_previewlanguage": "Text",
-									"header": [],
-									"cookie": [],
-									"body": ""
-								}
-							]
+							"response": []
 						},
 						{
 							"name": "PATCH User",
@@ -2024,25 +2016,199 @@
 								"method": "DELETE",
 								"header": [
 									{
-										"key": "x-api-key",
-										"value": "{{KEY}}",
+										"key": "{{CSRF_TOKEN_KEY}}",
+										"value": "{{CSRF_TOKEN_VALUE}}",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "{{COOKIE}}",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "{{URI}}/v1/user/0",
+									"raw": "{{URI}}/v1/user/348",
 									"host": [
 										"{{URI}}"
 									],
 									"path": [
 										"v1",
 										"user",
-										"0"
+										"348"
 									]
 								},
 								"description": "Deletes the User with the given ID"
 							},
-							"response": []
+							"response": [
+								{
+									"name": "Not allowed",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "{{CSRF_TOKEN_KEY}}",
+												"value": "{{CSRF_TOKEN_VALUE}}",
+												"type": "text"
+											},
+											{
+												"key": "Cookie",
+												"value": "{{COOKIE}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{URI}}/v1/user/343",
+											"host": [
+												"{{URI}}"
+											],
+											"path": [
+												"v1",
+												"user",
+												"343"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 21 Aug 2021 14:23:51 GMT"
+										},
+										{
+											"key": "Content-Length",
+											"value": "62"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"error\": \"You can't delete this user\"\n}"
+								},
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "{{CSRF_TOKEN_KEY}}",
+												"value": "{{CSRF_TOKEN_VALUE}}",
+												"type": "text"
+											},
+											{
+												"key": "Cookie",
+												"value": "{{COOKIE}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{URI}}/v1/user/348",
+											"host": [
+												"{{URI}}"
+											],
+											"path": [
+												"v1",
+												"user",
+												"348"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 21 Aug 2021 14:26:25 GMT"
+										},
+										{
+											"key": "Content-Length",
+											"value": "37"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": true\n}"
+								},
+								{
+									"name": "Not found",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "{{CSRF_TOKEN_KEY}}",
+												"value": "{{CSRF_TOKEN_VALUE}}",
+												"type": "text"
+											},
+											{
+												"key": "Cookie",
+												"value": "{{COOKIE}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{URI}}/v1/user/348",
+											"host": [
+												"{{URI}}"
+											],
+											"path": [
+												"v1",
+												"user",
+												"348"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 21 Aug 2021 14:27:21 GMT"
+										},
+										{
+											"key": "Content-Length",
+											"value": "53"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": \"user doesn't exist\"\n}"
+								}
+							]
 						}
 					],
 					"event": [
@@ -3623,6 +3789,44 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URI",
+			"value": "http://localhost:8080"
+		},
+		{
+			"key": "CSRF_TOKEN_VALUE",
+			"value": "/aD46kJw{\":iyY2.<e1,%8MB>E@!lsIA_9|c5~\\Xm)oPtu+}Z&vf7z3R0jp[`G-g"
+		},
+		{
+			"key": "COOKIE",
+			"value": "__Host-ha-session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJqdWFuLnBvY28iLCJtYWlsIjoiZXhhbXBsZUBqdWFuLmNvbSIsInByaXZpbGVnZSI6ImFkdWx0IiwiQ3NyZlRva2VuIjoiSngyYFc1JVN0XFw6XVJ-VSs2Iz8hfDBWTUcxM15kQml1QWhnRnE0RDhcIlBYKCxZKVx1MDAyNlx1MDAzY2ZtUTlDJGNzTzdqcns9fSIsImV4cCI6MTYzMDE1OTA0OSwiaWF0IjoxNjI5NTU0MjQ5LCJpc3MiOiJIYW5kc0FwcCIsIm5iZiI6MTYyOTU1Mzk0OSwic3ViIjoiMzQzIn0.bdgs_tu_HUzRutj_SFZ-Wfxl1EzaeMxKcQb-qeOKb-k; Path=/; Max-Age=604800; HttpOnly; Secure; SameSite=Strict"
+		},
+		{
+			"key": "CSRF_TOKEN_KEY",
+			"value": "Handsapp-Csrf-Token"
 		}
 	]
 }
