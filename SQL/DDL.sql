@@ -259,52 +259,75 @@ ALTER TABLE `signa_mundi`.`locale` ADD FOREIGN KEY (`sign_language_ID`) REFERENC
 ALTER TABLE `signa_mundi`.`phrase` ADD FOREIGN KEY (`phrase_category_ID`) REFERENCES `signa_mundi`.`phrase_category`(`ID`);
 ALTER TABLE `signa_mundi`.`word` ADD FOREIGN KEY (`word_category_ID`) REFERENCES `signa_mundi`.`word_category`(`ID`);
 ALTER TABLE `signa_mundi`.`word_sign` ADD FOREIGN KEY (`word_ID`) REFERENCES `signa_mundi`.`word`(`ID`);
-ALTER TABLE `signa_mundi`.`word_sign` ADD FOREIGN KEY (`locale_ID`) REFERENCES `signa_mundi`.`locale`(`ID`);
-ALTER TABLE `signa_mundi`.`word_sign` ADD FOREIGN KEY (`region_ID`) REFERENCES `signa_mundi`.`region`(`ID`);
-ALTER TABLE `signa_mundi`.`phrase_sign` ADD FOREIGN KEY (`phrase_ID`) REFERENCES `signa_mundi`.`phrase`(`ID`);
-ALTER TABLE `signa_mundi`.`phrase_sign` ADD FOREIGN KEY (`locale_ID`) REFERENCES `signa_mundi`.`locale`(`ID`);
-ALTER TABLE `signa_mundi`.`phrase_sign` ADD FOREIGN KEY (`region_ID`) REFERENCES `signa_mundi`.`region`(`ID`);
-ALTER TABLE `signa_mundi`.`favorite_phrase` ADD FOREIGN KEY (`phrase_ID`) REFERENCES `signa_mundi`.`phrase`(`ID`);
-ALTER TABLE `signa_mundi`.`favorite_phrase` ADD FOREIGN KEY (`user_ID`) REFERENCES `signa_mundi`.`user`(`ID`);
-ALTER TABLE `signa_mundi`.`favorite_word` ADD FOREIGN KEY (`word_ID`) REFERENCES `signa_mundi`.`word`(`ID`);
-ALTER TABLE `signa_mundi`.`favorite_word` ADD FOREIGN KEY (`user_ID`) REFERENCES `signa_mundi`.`user`(`ID`);
+ALTER TABLE `signa_mundi`.`word_sign`
+    ADD FOREIGN KEY (`locale_ID`) REFERENCES `signa_mundi`.`locale` (`ID`);
+ALTER TABLE `signa_mundi`.`word_sign`
+    ADD FOREIGN KEY (`region_ID`) REFERENCES `signa_mundi`.`region` (`ID`);
+ALTER TABLE `signa_mundi`.`phrase_sign`
+    ADD FOREIGN KEY (`phrase_ID`) REFERENCES `signa_mundi`.`phrase` (`ID`);
+ALTER TABLE `signa_mundi`.`phrase_sign`
+    ADD FOREIGN KEY (`locale_ID`) REFERENCES `signa_mundi`.`locale` (`ID`);
+ALTER TABLE `signa_mundi`.`phrase_sign`
+    ADD FOREIGN KEY (`region_ID`) REFERENCES `signa_mundi`.`region` (`ID`);
+ALTER TABLE `signa_mundi`.`favorite_phrase`
+    ADD FOREIGN KEY (`phrase_ID`) REFERENCES `signa_mundi`.`phrase` (`ID`);
+ALTER TABLE `signa_mundi`.`favorite_phrase`
+    ADD FOREIGN KEY (`user_ID`) REFERENCES `signa_mundi`.`user` (`ID`);
+ALTER TABLE `signa_mundi`.`favorite_word`
+    ADD FOREIGN KEY (`word_ID`) REFERENCES `signa_mundi`.`word` (`ID`);
+ALTER TABLE `signa_mundi`.`favorite_word`
+    ADD FOREIGN KEY (`user_ID`) REFERENCES `signa_mundi`.`user` (`ID`);
 
-ALTER TABLE `signa_mundi`.`word_sign` ADD PRIMARY KEY(`word_ID`,`locale_ID`,`version`);
-ALTER TABLE `signa_mundi`.`phrase_sign` ADD PRIMARY KEY(`phrase_ID`,`locale_ID`);
-ALTER TABLE `signa_mundi`.`friend` ADD PRIMARY KEY(`user1_ID`,`user2_ID`);
-ALTER TABLE `signa_mundi`.`favorite_phrase` ADD PRIMARY KEY(`phrase_ID`,`user_ID`);
-ALTER TABLE `signa_mundi`.`favorite_word` ADD PRIMARY KEY(`word_ID`,`user_ID`);
+ALTER TABLE `signa_mundi`.`word_sign`
+    ADD PRIMARY KEY (`word_ID`, `locale_ID`, `version`);
+ALTER TABLE `signa_mundi`.`phrase_sign`
+    ADD PRIMARY KEY (`phrase_ID`, `locale_ID`);
+ALTER TABLE `signa_mundi`.`friend`
+    ADD PRIMARY KEY (`user1_ID`, `user2_ID`);
+ALTER TABLE `signa_mundi`.`favorite_phrase`
+    ADD PRIMARY KEY (`phrase_ID`, `user_ID`);
+ALTER TABLE `signa_mundi`.`favorite_word`
+    ADD PRIMARY KEY (`word_ID`, `user_ID`);
 
 CREATE UNIQUE INDEX `user_mail_uindex` ON `signa_mundi`.`user` (`mail`);
 CREATE UNIQUE INDEX `user_name_uindex` ON `signa_mundi`.`user` (`user_name`);
 
-alter table user add google_sub varchar(64) null;
-alter table user add apple_sub varchar(64) null;
-alter table user add facebook_sub varchar(64) null;
-create unique index user_google_sub_uindex on user (google_sub);
-create unique index user_apple_sub_uindex on user (apple_sub);
-create unique index user_facebook_sub_uindex on user (facebook_sub);
-alter table user modify password text null;
-alter table user ADD check (
-    NOT (ISNULL(password)) OR
-    NOT (ISNULL(google_sub) AND ISNULL(facebook_sub) AND ISNULL(apple_sub))
-);
-alter table user add picture varchar(128) null;
-alter table user add check ( apple_sub is null or LENGTH(apple_sub) > 0 );
-alter table user add check ( facebook_sub is null or LENGTH(facebook_sub) > 0 );
-alter table user add check ( google_sub is null or LENGTH(google_sub) > 0 );
-alter table user add check ( password is null or LENGTH(password) > 0 );
-create trigger prevent_multiple_sign_up_on_insert
-    BEFORE insert
-    on user
-    for each row
-begin
+
+-- User changes
+ALTER TABLE user
+    ADD google_sub   varchar(64),
+    ADD apple_sub    varchar(64),
+    ADD facebook_sub varchar(64);
+
+ALTER TABLE user
+    MODIFY password text;
+
+ALTER TABLE user
+    ADD CONSTRAINT at_least_one_auth_method CHECK (
+            NOT (ISNULL(password)) OR
+            NOT (ISNULL(google_sub) AND ISNULL(facebook_sub) AND ISNULL(apple_sub))
+        );
+ALTER TABLE user
+    ADD picture varchar(128);
+
+CREATE TRIGGER prevent_multiple_sign_up_on_insert
+    BEFORE INSERT
+    ON user
+    FOR EACH ROW
+BEGIN
     -- only 1 out of 4 sign up method has to be not null
-    if ISNULL(NEW.password) + ISNULL(NEW.google_sub) + ISNULL(NEW.apple_sub) + ISNULL(NEW.facebook_sub) <> 3 then
-        signal sqlstate '45000'
-            SET MESSAGE_TEXT = 'Only one sign up method is available (password, google_sub, apple_sub, facebook_sub) and is mandatory';
-    end if;
-end;
-alter table user modify privilege ENUM('child', 'adult', 'editor', 'super user') default 'adult' not null;
-alter table user modify mailing SET('notification', 'promotion', 'advertising') default 'notification' not null;
-alter table user add subscriber_type enum('free', 'premium') default 'free' not null;
+    IF ISNULL(NEW.password) + ISNULL(NEW.google_sub) + ISNULL(NEW.apple_sub) + ISNULL(NEW.facebook_sub) <> 3 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT =
+                    'Only one sign up method is available (password, google_sub, apple_sub, facebook_sub) and is mandatory';
+    END IF;
+END;
+
+ALTER TABLE user
+    MODIFY privilege ENUM ('child', 'adult', 'editor', 'super user') DEFAULT 'adult' NOT NULL;
+
+ALTER TABLE user
+    MODIFY mailing SET ('notification', 'promotion', 'advertising') DEFAULT 'notification' NOT NULL;
+
+ALTER TABLE user
+    ADD subscriber_type enum ('free', 'premium') DEFAULT 'free' NOT NULL;
