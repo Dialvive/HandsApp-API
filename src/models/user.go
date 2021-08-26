@@ -15,10 +15,10 @@ type User struct {
 	Credits        uint   `json:"credits" gorm:"column:credits;type:INT; default:0"`
 	LocaleID       uint   `json:"locale_id" gorm:"column:locale_ID;type:INT NOT NULL"`
 	Modified       string `json:"modified" gorm:"column:modified;type:TIMESTAMP"`
-	GoogleSub      string `json:"google_sub,omitempty"`
-	FacebookSub    string `json:"facebook_sub,omitempty"`
-	AppleSub       string `json:"apple_sub,omitempty"`
-	Picture        string `json:"picture"`
+	GoogleSub      string `json:"google_sub,omitempty" gorm:"type:VARCHAR(64)"`
+	FacebookSub    string `json:"facebook_sub,omitempty" gorm:"type:VARCHAR(64)"`
+	AppleSub       string `json:"apple_sub,omitempty" gorm:"type:VARCHAR(64)"`
+	Picture        string `json:"picture" gorm:"type:VARCHAR(128)"`
 	SubscriberType string `json:"subscriber_type" gorm:"type:enum('free', 'premium');default:'free'"`
 }
 
