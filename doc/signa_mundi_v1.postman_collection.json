@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "c94dc261-b550-4f42-894f-da54e2753333",
+		"_postman_id": "3b30af09-21be-4df8-a25e-c9aa6f810583",
 		"name": "signa_mundi_v1",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -1981,14 +1981,19 @@
 								"method": "PATCH",
 								"header": [
 									{
-										"key": "x-api-key",
-										"value": "{{KEY}}",
+										"key": "{{CSRF_TOKEN_KEY}}",
+										"value": "{{CSRF_TOKEN_VALUE}}",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "{{COOKIE}}",
 										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"locale_ID\": 0,\n    \"first_name\": \"\",\n    \"last_name\": \"\",\n    \"user_name\": \"\",\n    \"mail\": \"\",\n    \"password\": \"\",\n    \"biography\": \"\",\n    \"mailing\": \"\",\n    \"privilege\": \"\",\n    \"points\": 0,\n    \"credits\": 0\n}",
+									"raw": "{\n    \"first_name\": \"Cool\",\n    \"last_name\": \"Cool Last\",\n    \"user_name\": \"newcool-username\",\n    \"mail\": \"cool@example.com\",\n    \"password\": \"secr3t\",\n    \"biography\": \"cool biu\",\n    \"mailing\": \"notification\",\n    \"locale_ID\": 1,\n    \"google_sub\": \"1111\",\n    \"facebook_sub\": \"2222\",\n    \"apple_sub\": \"3333\",\n\t\"picture\": \"https://www.example.com\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1996,19 +2001,215 @@
 									}
 								},
 								"url": {
-									"raw": "{{URI}}/v1/user/0",
+									"raw": "{{URI}}/v1/user/174",
 									"host": [
 										"{{URI}}"
 									],
 									"path": [
 										"v1",
 										"user",
-										"0"
+										"174"
 									]
 								},
-								"description": "Patches a User with all parameters except for ID and modified."
+								"description": "Patches a User with all parameters, the fields allowed modifying are:\n \n```json\n{\n    \"first_name\": \"Cool\",\n    \"last_name\": \"Cool Last\",\n    \"user_name\": \"cool-username\",\n    \"mail\": \"cool@example.com\",\n    \"password\": \"secr3t\",\n    \"biography\": \"cool biu\",\n    \"mailing\": \"notification\",\n    \"locale_ID\": 1,\n    \"google_sub\": \"1111\",\n    \"facebook_sub\": \"2222\",\n    \"apple_sub\": \"3333\",\n    \"picture\": \"https://www.example.com\"\n}\n```\n\nIf a field F is not present, F will be untouched, otherwise modifies the database with F value"
 							},
-							"response": []
+							"response": [
+								{
+									"name": "Not allowed",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "{{CSRF_TOKEN_KEY}}",
+												"value": "{{CSRF_TOKEN_VALUE}}",
+												"type": "text"
+											},
+											{
+												"key": "Cookie",
+												"value": "{{COOKIE}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"first_name\": \"Cool\",\n    \"last_name\": \"Cool Last\",\n    \"user_name\": \"cool-username\",\n    \"mail\": \"cool@example.com\",\n    \"password\": \"secr3t\",\n    \"biography\": \"cool biu\",\n    \"mailing\": \"notification\",\n    \"locale_ID\": 1,\n    \"google_sub\": \"1111\",\n    \"facebook_sub\": \"2222\",\n    \"apple_sub\": \"3333\",\n\t\"picture\": \"https://www.example.com\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URI}}/v1/user/0",
+											"host": [
+												"{{URI}}"
+											],
+											"path": [
+												"v1",
+												"user",
+												"0"
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 26 Aug 2021 16:56:50 GMT"
+										},
+										{
+											"key": "Content-Length",
+											"value": "60"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"error\": \"You can't edit this user\"\n}"
+								},
+								{
+									"name": "Sucess",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "{{CSRF_TOKEN_KEY}}",
+												"value": "{{CSRF_TOKEN_VALUE}}",
+												"type": "text"
+											},
+											{
+												"key": "Cookie",
+												"value": "{{COOKIE}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"first_name\": \"Cool\",\n    \"last_name\": \"Cool Last\",\n    \"user_name\": \"newcool-username\",\n    \"mail\": \"newcool@example.com\",\n    \"password\": \"secr3t\",\n    \"biography\": \"cool biu\",\n    \"mailing\": \"notification\",\n    \"locale_ID\": 1,\n    \"google_sub\": \"1111\",\n    \"facebook_sub\": \"2222\",\n    \"apple_sub\": \"3333\",\n\t\"picture\": \"https://www.example.com\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URI}}/v1/user/174",
+											"host": [
+												"{{URI}}"
+											],
+											"path": [
+												"v1",
+												"user",
+												"174"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 26 Aug 2021 16:59:12 GMT"
+										},
+										{
+											"key": "Content-Length",
+											"value": "278"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": {\n        \"ID\": 174,\n        \"first_name\": \"Cool\",\n        \"last_name\": \"Cool Last\",\n        \"user_name\": \"newcool-username\",\n        \"mail\": \"newcool@example.com\",\n        \"password\": \"\",\n        \"biography\": \"cool biu\",\n        \"mailing\": \"notification\",\n        \"privilege\": \"adult\",\n        \"points\": 0,\n        \"credits\": 0,\n        \"locale_id\": 1,\n        \"modified\": \"2021-08-26 16:59:12\",\n        \"google_sub\": \"1111\",\n        \"facebook_sub\": \"2222\",\n        \"apple_sub\": \"3333\",\n        \"picture\": \"https://www.example.com\",\n        \"subscriber_type\": \"free\"\n    }\n}"
+								},
+								{
+									"name": "Duplicate fields",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "{{CSRF_TOKEN_KEY}}",
+												"value": "{{CSRF_TOKEN_VALUE}}",
+												"type": "text"
+											},
+											{
+												"key": "Cookie",
+												"value": "{{COOKIE}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"first_name\": \"Cool\",\n    \"last_name\": \"Cool Last\",\n    \"user_name\": \"newcool-username\",\n    \"mail\": \"cool@example.com\",\n    \"password\": \"secr3t\",\n    \"biography\": \"cool biu\",\n    \"mailing\": \"notification\",\n    \"locale_ID\": 1,\n    \"google_sub\": \"1111\",\n    \"facebook_sub\": \"2222\",\n    \"apple_sub\": \"3333\",\n\t\"picture\": \"https://www.example.com\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URI}}/v1/user/174",
+											"host": [
+												"{{URI}}"
+											],
+											"path": [
+												"v1",
+												"user",
+												"174"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 26 Aug 2021 16:59:47 GMT"
+										},
+										{
+											"key": "Content-Length",
+											"value": "111"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"error\": \"Error 1062: Duplicate entry '`cool@example.com`' for key 'user.user_mail_uindex'\"\n}"
+								}
+							]
 						},
 						{
 							"name": "DELETE User",
