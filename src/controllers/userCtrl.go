@@ -5,7 +5,6 @@ import (
 	"API/security"
 	services "API/services/users"
 	"context"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/huandu/facebook/v2"
 	"google.golang.org/api/idtoken"
@@ -249,27 +248,4 @@ func DeleteUser(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"data": true})
-}
-
-func CsrfMiddleware(c *gin.Context) {
-	csrfToken := c.Request.Header.Get(HandsAppCsrfToken)
-	jwtCookie, cookieErr := c.Request.Cookie(HandsAppSession)
-
-	if cookieErr != nil {
-		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": fmt.Sprint("Cookie: ", HandsAppSession, " is not present")})
-		return
-	}
-
-	var jwtClaims models.UserClaim
-	if jwtErr := security.ParseJWT(jwtCookie.Value, &jwtClaims); jwtErr != nil {
-		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": fmt.Sprint("Header: ", HandsAppCsrfToken, " is not present")})
-		return
-	}
-
-	if csrfToken != jwtClaims.CsrfToken {
-		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "Failed to verify double submit cookie"})
-		return
-	}
-
-	c.Set(GinKeyUser, jwtClaims)
 }
