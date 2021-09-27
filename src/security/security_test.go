@@ -1,6 +1,12 @@
 package security
 
 import (
+	"API/controllers"
+	"API/models"
+	"fmt"
+	"github.com/gin-gonic/gin"
+	"net/http"
+	"net/http/httptest"
 	"testing"
 )
 
@@ -69,6 +75,78 @@ func TestPasswordMatches(t *testing.T) {
 						t.Fatalf("PasswordMatches() = %v, want %v, (p: %v)", c.shouldMatch, matches, c.passedPassword)
 					}
 				})
+			}
+		})
+	}
+}
+
+func TestCsrfMiddleware(t *testing.T) {
+	r := gin.New()
+	r.GET("/csrf", CsrfMiddleware)
+	dummyJWT, _ := CreateJWT(models.User{})
+
+	emptyRequest := httptest.NewRequest(http.MethodGet, "/csrf", nil)
+
+	justHeader := emptyRequest.Clone(emptyRequest.Context())
+	justHeader.Header.Set(controllers.HandsAppCsrfToken, dummyJWT.CsrfToken)
+
+	justCookie := emptyRequest.Clone(emptyRequest.Context())
+	justCookie.Header.Set("Cookie", fmt.Sprint(controllers.HandsAppSession, "=", dummyJWT.Token))
+
+	headerAndCookie := justHeader.Clone(justHeader.Context())
+	headerAndCookie.Header.Set("Cookie", fmt.Sprint(controllers.HandsAppSession, "=", dummyJWT.Token))
+
+	testCases := []struct {
+		Name     string
+		Expected int
+		*http.Request
+	}{
+		{"without authentication", http.StatusBadRequest, emptyRequest},
+		{"header is not present", http.StatusBadRequest, justCookie},
+		{"cookie is not present", http.StatusBadRequest, justHeader},
+		{"should pass when cookie and header are set", http.StatusOK, headerAndCookie},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.Name, func(t *testing.T) {
+			w := httptest.NewRecorder()
+
+			r.ServeHTTP(w, tc.Request)
+			if w.Code != tc.Expected {
+				t.Fatal("Expected: ", tc.Expected, "got: ", w.Code)
+			}
+		})
+	}
+}
+
+func TestApiKeyMiddleware(t *testing.T) {
+	r := gin.New()
+	r.GET("", ApiKeyMiddleware)
+
+	emptyRequest := httptest.NewRequest(http.MethodGet, "/", nil)
+
+	wrongApiKey := emptyRequest.Clone(emptyRequest.Context())
+	wrongApiKey.Header.Set("x-api-key", "not s3cret")
+
+	correctApiKey := emptyRequest.Clone(emptyRequest.Context())
+	correctApiKey.Header.Set("x-api-key", KEY)
+
+	testCases := []struct {
+		Name     string
+		Expected int
+		*http.Request
+	}{
+		{"without api key", http.StatusNotFound, emptyRequest},
+		{"wrong api key", http.StatusNotFound, wrongApiKey},
+		{"correct api key", http.StatusOK, correctApiKey},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.Name, func(t *testing.T) {
+			w := httptest.NewRecorder()
+			r.ServeHTTP(w, tc.Request)
+			if w.Code != tc.Expected {
+				t.Fatal("Expected: ", tc.Expected, "got: ", w.Code)
 			}
 		})
 	}

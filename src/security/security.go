@@ -1,10 +1,13 @@
 package security
 
 import (
+	"API/controllers"
 	"API/models"
 	"errors"
+	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"log"
+	"net/http"
 	"os"
 	"strconv"
 	"strings"
@@ -206,4 +209,37 @@ func ParseJWT(tokenFromHeader string, claims *models.UserClaim) error {
 		},
 	)
 	return err
+}
+
+func CsrfMiddleware(c *gin.Context) {
+	csrfToken := c.Request.Header.Get(controllers.HandsAppCsrfToken)
+	jwtCookie, cookieErr := c.Request.Cookie(controllers.HandsAppSession)
+
+	if cookieErr != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": fmt.Sprint("Cookie: ", controllers.HandsAppSession, " is not present")})
+		return
+	}
+
+	var jwtClaims models.UserClaim
+	if jwtErr := ParseJWT(jwtCookie.Value, &jwtClaims); jwtErr != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": fmt.Sprint("Header: ", controllers.HandsAppCsrfToken, " is not present")})
+		return
+	}
+
+	if csrfToken != jwtClaims.CsrfToken {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "Failed to verify double submit cookie"})
+		return
+	}
+
+	c.Set(controllers.GinKeyUser, jwtClaims)
+}
+
+// ApiKeyMiddleware verifies that a given string matches an API key
+// the key must be a header "x-api-key" as a key.
+// if the Key is not present the request is requested with 404 not found status
+func ApiKeyMiddleware(c *gin.Context) {
+	isValidKey := c.GetHeader("x-api-key") == KEY
+	if !isValidKey {
+		c.AbortWithStatus(http.StatusNotFound)
+	}
 }

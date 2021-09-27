@@ -139,8 +139,8 @@ func main() {
 	r.POST("/v1/user/f", controllers.CreateUserWithFacebook)
 	r.POST("/v1/login", controllers.Login)
 	//r.GET("/v1/user/:ID", controllers.FindUser)
-	r.PATCH("/v1/user/:ID", controllers.CsrfMiddleware, controllers.PatchUser)
-	r.DELETE("/v1/user/:ID", controllers.CsrfMiddleware, controllers.DeleteUser)
+	r.PATCH("/v1/user/:ID", security.CsrfMiddleware, controllers.PatchUser)
+	r.DELETE("/v1/user/:ID", security.CsrfMiddleware, controllers.DeleteUser)
 
 	// Routes for locales
 	r.GET("/v1/locales", controllers.GetLocales)
