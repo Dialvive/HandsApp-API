@@ -37,7 +37,7 @@ func main() {
 
 	m := autocert.Manager{
 		Prompt:     autocert.AcceptTOS,
-		Cache:      autocert.DirCache("/var/www/.cache"),
+		Cache:      autocert.DirCache("/etc/letsencrypt/live/api.handsapp.org/"),
 		HostPolicy: autocert.HostWhitelist("api.handsapp.org"),
 		Email:      "haikode@protonmail.com",
 	}
